@@ -1,9 +1,59 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require_once __DIR__ . '/../../config/conexion.php';
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
+
+    try {
+        // Buscar usuario en la base de datos
+        $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE email = ?");
+        $stmt->execute([$email]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($usuario && password_verify($password, $usuario['password'])) {
+            $_SESSION['usuario'] = [
+                'id' => $usuario['id'],
+                'nombre' => $usuario['nombre'],
+                'email' => $usuario['email'],
+                'rol' => $usuario['rol']
+            ];
+
+            // Redirección según rol
+            switch ($usuario['rol']) {
+                case 'admin':
+                    header('Location: /views/administrador/filtro.php');
+                    exit();
+                case 'tutor':
+                    header('Location: /views/tutor/dashboard.php');
+                    exit();
+                case 'estudiante':
+                    header('Location: /views/estudiante/dashboard.php');
+                    exit();
+                default:
+                    header('Location: /');
+                    exit();
+            }
+        } else {
+            $error = "Credenciales incorrectas";
+        }
+    } catch (PDOException $e) {
+        $error = "Error al conectar con la base de datos: " . $e->getMessage();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro FET</title>
+    <title>Inicio de Sesión FET</title>
     <link rel="stylesheet" href="/assets/css/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -15,6 +65,10 @@
             </div>
             
             <form method="POST" action="">
+                <?php if ($error): ?>
+                    <div class="mensaje-error"><?= $error ?></div>
+                <?php endif; ?>
+                
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
@@ -25,11 +79,6 @@
                     <input type="password" id="password" name="password" required>
                 </div>
                 
-                <div class="form-group">
-                    <label for="carrera">Carrera</label>
-                    <input type="text" id="carrera" name="carrera" required>
-                </div>
-                
                 <div class="forgot-password">
                     <a href="#" class="forgot-password-link">¿Olvidaste tu contraseña?</a>
                 </div>
@@ -38,7 +87,7 @@
                     <a href="/views/general/registro.php" class="forgot-password-link">Registrarse</a>
                 </div>
                 
-                <button type="submit" class="register-btn">Iniciar Sesion</button>
+                <button type="submit" class="register-btn">Iniciar Sesión</button>
             </form>
         </div>
         
@@ -48,4 +97,3 @@
     </div>
 </body>
 </html>
-

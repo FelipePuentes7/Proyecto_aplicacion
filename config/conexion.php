@@ -1,16 +1,26 @@
 <?php
+// database.php - Archivo de conexión a la base de datos
+
 // Configuración de la base de datos
 $host = 'localhost';
-$dbname = 'fet_db';
-$username = 'root';
-$password = '';
+$dbname = 'grados_fet';
+$username = 'root';     // Cambiar por tu usuario de MySQL
+$password = '';  // Cambiar por tu contraseña de MySQL
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Si la conexión es exitosa, no mostraremos nada
+    // Crear conexión PDO
+    $conexion = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+        $username,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+    );
+    
+    // echo "¡Conexión exitosa!"; // (Comentar en producción)
+
 } catch(PDOException $e) {
-    // En caso de error, mostrar mensaje
     die("Error de conexión: " . $e->getMessage());
 }
-?>
