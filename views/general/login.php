@@ -49,8 +49,3 @@
 </body>
 </html>
 
-
-
-<section>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni, error. Nemo porro et quod eveniet id voluptate, perspiciatis aspernatur tempora! Eos perferendis consequuntur deserunt fugit corporis provident nesciunt laboriosam molestiae.
-</section>
