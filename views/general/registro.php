@@ -94,8 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <option value="">Selecciona tu rol</option>
                         <option value="estudiante" <?= ($_POST['rol'] ?? '') === 'estudiante' ? 'selected' : '' ?>>Estudiante</option>
                         <option value="tutor" <?= ($_POST['rol'] ?? '') === 'tutor' ? 'selected' : '' ?>>Tutor</option>
+                        <option value="admin" hidden <?= ($_POST['rol'] ?? '') === 'admin' ? 'selected' : '' ?>>Administrador</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
                     <label for="nombre">Nombre completo:</label>
                     <input type="text" id="nombre" name="nombre" value="<?= $_POST['nombre'] ?? '' ?>" required>

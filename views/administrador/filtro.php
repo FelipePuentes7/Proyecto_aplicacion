@@ -2,12 +2,6 @@
 // views/administrador/filtro.php
 session_start();
 
-// Verificar autenticación y rol de administrador
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
-    header("Location: /views/general/login.php");
-    exit();
-}
-
 // Incluir conexión a la base de datos
 require_once __DIR__ . '/../../config/conexion.php';
 
