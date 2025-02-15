@@ -1,0 +1,207 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/assets/images/fondologin.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+}
+
+/* Contenedor principal */
+.container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+/* Formulario */
+.form-container {
+  width: 400px;
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo img {
+  max-width: 180px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Campos del formulario */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: white;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input:focus {
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.2);
+}
+
+/* Botón de registro */
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #006400 0%, #008000 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.register-btn:hover {
+  background: linear-gradient(135deg, #008000 0%, #006400 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Enlace de olvidé contraseña */
+.forgot-password {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.forgot-password-link {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: color 0.3s;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.forgot-password-link:hover {
+  color: #00ff44;
+}
+
+/* Imagen promocional */
+.promo-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Ajusta al ancho del contenedor padre */
+  height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+  overflow: hidden;
+  margin: 0; /* Elimina márgenes */
+  padding: 0; /* Elimina rellenos */
+  box-sizing: border-box; /* Asegura que el padding y el borde no afecten el tamaño */
+}
+
+/* Imagen dentro del contenedor */
+.promo-image img {
+  width: 100%; /* Hace que la imagen ocupe todo el ancho */
+  height: 100%; /* Hace que la imagen ocupe toda la altura */
+  object-fit: cover; /* Hace que la imagen cubra todo el contenedor sin distorsionarse */
+  margin: 0; /* Elimina márgenes */
+  padding: 0; /* Elimina rellenos */
+  transition: transform 0.3s ease;
+}
+
+.promo-image img:hover {
+  transform: scale(1.05);
+}
+
+.container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  gap: 40px;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  flex-wrap: wrap; /* Permite que los elementos se acomoden en varias filas si es necesario */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .promo-image {
+      max-width: 100%;
+      height: 400px;
+      margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+  }
+  
+  .promo-image {
+      display: none;
+  }
+  
+  .form-container {
+      width: 100%;
+      max-width: 400px;
+      padding: 30px;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.form-container {
+  animation: fadeIn 0.5s ease-out;
+}
