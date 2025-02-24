@@ -1,0 +1,160 @@
+/* Estilos generales y reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Header y Navegación */
+header {
+    position: relative;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    height: 50px;
+}
+
+#logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    border: 1px solid #000;
+    padding: 5px;
+    z-index: 1000;
+    background: white;
+}
+
+#navbar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #fff;
+    border-right: 1px solid #000;
+    padding: 20px;
+    transition: left 0.3s ease;
+    padding-top: 50px;
+}
+
+#navbar.active {
+    display: block;
+    left: 0;
+}
+
+#navbar ul {
+    list-style-type: none;
+    padding-top: 10px;
+}
+
+#navbar ul li {
+    margin-bottom: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    padding-left: 20px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Contenido principal */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filter select, .search input, .search button {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.tabs {
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: none;
+    outline: none;
+}
+
+.tabs button.active {
+    background-color: #ddd;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.user-table th, .user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #f2f2f2;
+}
+
+.aprobar, .rechazar {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.aprobar {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.rechazar {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+.bulk-actions {
+    margin-top: 10px;
+}
+
+.bulk-actions button {
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

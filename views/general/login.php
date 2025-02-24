@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Redirección según rol
             switch ($usuario['rol']) {
                 case 'admin':
-                    header('Location: /views/administrador/filtro.php');
+                    header('Location: /views/administrador/inicio.php');
                     exit();
                 case 'tutor':
                     header('Location: /views/tutor/dashboard.php');
