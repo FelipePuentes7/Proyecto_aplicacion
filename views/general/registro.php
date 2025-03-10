@@ -12,23 +12,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('Las contraseñas no coinciden');
         }
 
-        // Sanitizar entradas
-        $rol = htmlspecialchars($_POST['rol']);
-        $nombre = htmlspecialchars($_POST['nombre']);
+        // Validar formato de correo
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $documento = htmlspecialchars($_POST['documento']);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Formato de correo electrónico inválido');
+        }
+
+        // Validar que el correo termine en @fet.edu.co
+        if (!preg_match('/@fet\.edu\.co$/i', $email)) {
+            throw new Exception('El correo debe ser institucional (@fet.edu.co)');
+        }
+
+        // Sanitizar entradas
+        $rol = filter_var($_POST['rol'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $documento = filter_var($_POST['documento'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        
+        // Validar documento (solo números)
+        if (!preg_match('/^[0-9]+$/', $documento)) {
+            throw new Exception('El documento debe contener solo números');
+        }
         
         // Campos específicos por rol
         if ($rol === 'estudiante') {
-            $codigo = htmlspecialchars($_POST['codigo_estudiante']);
-            $carrera = htmlspecialchars($_POST['carrera']);
-            $semestre = htmlspecialchars($_POST['semestre']);
-            $telefono = htmlspecialchars($_POST['telefono']);
+            $codigo = filter_var($_POST['codigo_estudiante'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $opcion_grado = filter_var($_POST['opcion_grado'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $ciclo = filter_var($_POST['ciclo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         } else {
-            $codigo = htmlspecialchars($_POST['codigo_institucional']);
-            $telefono = htmlspecialchars($_POST['telefono_tutor']);
-            $carrera = null;
-            $semestre = null;
+            $codigo = filter_var($_POST['codigo_institucional'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $telefono = filter_var($_POST['telefono_tutor'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $opcion_grado = null;
+            $ciclo = null;
+        }
+
+        // Validar teléfono (solo números)
+        if (!preg_match('/^[0-9]+$/', $telefono)) {
+            throw new Exception('El teléfono debe contener solo números');
         }
 
         // Verificar email único
@@ -38,6 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('El correo ya está registrado');
         }
 
+        // Verificar documento único
+        $stmt = $conexion->prepare("SELECT documento FROM solicitudes_registro WHERE documento = ? UNION SELECT documento FROM usuarios WHERE documento = ?");
+        $stmt->execute([$documento, $documento]);
+        if ($stmt->fetch()) {
+            throw new Exception('El documento ya está registrado');
+        }
+
         // Hash de contraseña
         $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -45,16 +72,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conexion->prepare("INSERT INTO solicitudes_registro (
             nombre, email, password, rol, documento,
             codigo_estudiante, codigo_institucional,
-            telefono, telefono_tutor, carrera, semestre
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            telefono, opcion_grado, ciclo
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         $stmt->execute([
             $nombre, $email, $hashedPassword, $rol, $documento,
             ($rol === 'estudiante') ? $codigo : null,
             ($rol === 'tutor') ? $codigo : null,
-            ($rol === 'estudiante') ? $telefono : null,
-            ($rol === 'tutor') ? $telefono : null,
-            $carrera, $semestre
+            $telefono, // Usar un único campo de teléfono para todos los roles
+            $opcion_grado, $ciclo
         ]);
 
         $mensaje = "Registro exitoso. Espera la aprobación del administrador.";
@@ -84,15 +110,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <?php if ($error): ?>
-                <div class="mensaje" style="background-color: rgba(255,0,0,0.2)"><?= $error ?></div>
+                <div class="mensaje error"><?= $error ?></div>
             <?php endif; ?>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="rol">Rol:</label>
                     <select id="rol" name="rol" required>
-                        <option value="">Selecciona tu rol</option>
-                        <option value="estudiante" <?= ($_POST['rol'] ?? '') === 'estudiante' ? 'selected' : '' ?>>Estudiante</option>
+                        <option value="estudiante" <?= ($_POST['rol'] ?? 'estudiante') === 'estudiante' ? 'selected' : '' ?>>Estudiante</option>
                         <option value="tutor" <?= ($_POST['rol'] ?? '') === 'tutor' ? 'selected' : '' ?>>Tutor</option>
                         <option value="admin" hidden <?= ($_POST['rol'] ?? '') === 'admin' ? 'selected' : '' ?>>Administrador</option>
                     </select>
@@ -100,82 +125,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 <div class="form-group">
                     <label for="nombre">Nombre completo:</label>
-                    <input type="text" id="nombre" name="nombre" value="<?= $_POST['nombre'] ?? '' ?>" required>
+                    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>" required>
                 </div>
             </div>
 
             <div class="form-row">
-    <div class="form-group">
-        <label for="email">Correo institucional:</label>
-        <input type="email" id="email" name="email" 
-               value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
-    </div>
-    <div class="form-group">
-        <label for="documento">Número de documento:</label>
-        <input type="text" id="documento" name="documento" 
-               value="<?= htmlspecialchars($_POST['documento'] ?? '') ?>" required>
-    </div>
-</div>
+                <div class="form-group">
+                    <label for="email">Correo institucional:</label>
+                    <input type="email" id="email" name="email" 
+                           value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" 
+                           placeholder="ejemplo@fet.edu.co" required>
+                    <small class="email-hint">El correo debe terminar en @fet.edu.co</small>
+                </div>
+                <div class="form-group">
+                    <label for="documento">Número de documento:</label>
+                    <input type="text" id="documento" name="documento" 
+                           value="<?= htmlspecialchars($_POST['documento'] ?? '') ?>" required>
+                </div>
+            </div>
 
-<div class="form-row estudiante-only" style="display: none;">
-    <div class="form-group">
-        <label for="codigo_estudiante">Código de estudiante:</label>
-        <input type="text" id="codigo_estudiante" name="codigo_estudiante" 
-               value="<?= htmlspecialchars($_POST['codigo_estudiante'] ?? '') ?>">
-    </div>
-    <div class="form-group">
-        <label for="carrera">Carrera:</label>
-        <select id="carrera" name="carrera" required>
-            <option value="">Seleccione una carrera</option>
-            <option value="ingenieria_software" <?= ($_POST['carrera'] ?? '') === 'ingenieria_software' ? 'selected' : '' ?>>Ingeniería de Software</option>
-            <option value="ingenieria_sistemas" <?= ($_POST['carrera'] ?? '') === 'ingenieria_sistemas' ? 'selected' : '' ?>>Ingeniería de Sistemas</option>
-            <option value="ingenieria_industrial" <?= ($_POST['carrera'] ?? '') === 'ingenieria_industrial' ? 'selected' : '' ?>>Ingeniería Industrial</option>
-        </select>
-    </div>
-</div>
+            <div class="form-row estudiante-fields">
+                <div class="form-group">
+                    <label for="codigo_estudiante">Código de estudiante:</label>
+                    <input type="text" id="codigo_estudiante" name="codigo_estudiante" 
+                           value="<?= htmlspecialchars($_POST['codigo_estudiante'] ?? '') ?>">
+                </div>
+                <div class="form-group">
+                    <label for="opcion_grado">Opción de grado:</label>
+                    <select id="opcion_grado" name="opcion_grado">
+                        <option value="">Seleccione una opción</option>
+                        <option value="seminario" <?= ($_POST['opcion_grado'] ?? '') === 'seminario' ? 'selected' : '' ?>>Seminario</option>
+                        <option value="proyecto" <?= ($_POST['opcion_grado'] ?? '') === 'proyecto' ? 'selected' : '' ?>>Proyecto de Aplicación</option>
+                        <option value="pasantia" <?= ($_POST['opcion_grado'] ?? '') === 'pasantia' ? 'selected' : '' ?>>Pasantías</option>
+                    </select>
+                </div>
+            </div>
 
-<div class="form-row estudiante-only" style="display: none;">
-    <div class="form-group">
-        <label for="semestre">Semestre:</label>
-        <select id="semestre" name="semestre">
-            <option value="">Seleccione un semestre</option>
-            <?php for ($i = 1; $i <= 10; $i++): ?>
-                <option value="<?= $i ?>" <?= ($_POST['semestre'] ?? '') == $i ? 'selected' : '' ?>>
-                    <?= $i ?>
-                </option>
-            <?php endfor; ?>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" 
-               value="<?= htmlspecialchars($_POST['telefono'] ?? '') ?>" required>
-    </div>
-</div>
+            <div class="form-row estudiante-fields">
+                <div class="form-group">
+                    <label for="ciclo">Ciclo:</label>
+                    <select id="ciclo" name="ciclo">
+                        <option value="">Seleccione un ciclo</option>
+                        <option value="tecnico" <?= ($_POST['ciclo'] ?? '') === 'tecnico' ? 'selected' : '' ?>>Técnico</option>
+                        <option value="tecnologo" <?= ($_POST['ciclo'] ?? '') === 'tecnologo' ? 'selected' : '' ?>>Tecnólogo</option>
+                        <option value="profesional" <?= ($_POST['ciclo'] ?? '') === 'profesional' ? 'selected' : '' ?>>Profesional</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" 
+                           value="<?= htmlspecialchars($_POST['telefono'] ?? '') ?>">
+                </div>
+            </div>
 
-<div class="form-row tutor-only" style="display: none;">
-    <div class="form-group">
-        <label for="codigo_institucional">Código institucional:</label>
-        <input type="text" id="codigo_institucional" name="codigo_institucional" 
-               value="<?= htmlspecialchars($_POST['codigo_institucional'] ?? '') ?>">
-    </div>
-    <div class="form-group">
-        <label for="telefono_tutor">Teléfono:</label>
-        <input type="tel" id="telefono_tutor" name="telefono_tutor" 
-               value="<?= htmlspecialchars($_POST['telefono_tutor'] ?? '') ?>" required>
-    </div>
-</div>
+            <div class="form-row tutor-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="codigo_institucional">Código institucional:</label>
+                    <input type="text" id="codigo_institucional" name="codigo_institucional" 
+                           value="<?= htmlspecialchars($_POST['codigo_institucional'] ?? '') ?>">
+                </div>
+                <div class="form-group">
+                    <label for="telefono_tutor">Teléfono:</label>
+                    <input type="tel" id="telefono_tutor" name="telefono_tutor" 
+                           value="<?= htmlspecialchars($_POST['telefono_tutor'] ?? '') ?>">
+                </div>
+            </div>
 
-<div class="form-row">
-    <div class="form-group">
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <div class="form-group">
-        <label for="confirm_password">Confirmar contraseña:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
-    </div>
-</div>
+            <div class="form-row">
+                <div class="form-group password-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="password-strength">
+                        <div class="strength-bar"></div>
+                        <span class="strength-text">Seguridad: No ingresada</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirmar contraseña:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                    <span class="password-match"></span>
+                </div>
+            </div>
             
             <div class="form-terms">
                 <input type="checkbox" id="terms" name="terms" required>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-01-2025 a las 01:01:53
+-- Tiempo de generación: 09-03-2025 a las 22:43:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -34,10 +34,10 @@ CREATE TABLE `usuarios` (
   `password` varchar(255) NOT NULL,
   `rol` enum('estudiante','tutor','admin') NOT NULL,
   `documento` varchar(20) NOT NULL,
-  `codigo` varchar(20) NOT NULL,
-  `telefono` varchar(15) NOT NULL,
-  `carrera` varchar(50) DEFAULT NULL,
-  `semestre` int(11) DEFAULT NULL,
+  `codigo_estudiante` varchar(20) DEFAULT NULL,
+  `telefono` varchar(15) DEFAULT NULL,
+  `opcion_grado` enum('seminario','proyecto','pasantia') DEFAULT NULL,
+  `ciclo` enum('tecnico','tecnologo','profesional') DEFAULT NULL,
   `estado` enum('activo','inactivo') DEFAULT 'activo',
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -46,10 +46,10 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`, `documento`, `codigo`, `telefono`, `carrera`, `semestre`, `estado`, `fecha_registro`) VALUES
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`, `documento`, `codigo_estudiante`, `telefono`, `opcion_grado`, `ciclo`, `estado`, `fecha_registro`) VALUES
 (1, 'Administrador FET', 'admin@universidad.edu', '$2y$10$5tRz4W.8xNoLbBq3kFvJPeu1dM7sTpQYH6gZcVn2XrKl0oAy1DmS', 'admin', '1122334455', 'ADMIN-001', '3001234567', NULL, NULL, 'activo', '2025-01-26 22:29:05'),
-(2, 'felipe', 'andres@fet.edu.co', '$2y$10$bLqK9HofLvjrsxlfCxy4mOUnG9ebYwZ.9uhrrBm1yrARu6.K9atuO', 'admin', '10225', 'Sof114', '77878', 'ingenieria_software', 4, 'activo', '2025-01-26 23:42:12'),
-(3, 'Usuario de Prueba', 'prueba@universidad.edu', '$2y$10$Ej3mPL0PaSsLxW.9sS5uE.0RjK7uZ1JqYVn2TgHkI1bNQrVcXhW6', '', '987654321', 'FET2024001', '3009876543', 'Ingeniería de Software', 6, 'activo', '2025-01-26 23:48:34');
+(2, 'felipe', 'andres@fet.edu.co', '$2y$10$bLqK9HofLvjrsxlfCxy4mOUnG9ebYwZ.9uhrrBm1yrARu6.K9atuO', 'admin', '10225', 'Sof114', '77878', '', '', 'activo', '2025-01-26 23:42:12'),
+(3, 'Usuario de Prueba', 'prueba@universidad.edu', '$2y$10$Ej3mPL0PaSsLxW.9sS5uE.0RjK7uZ1JqYVn2TgHkI1bNQrVcXhW6', '', '987654321', 'FET2024001', '3009876543', '', '', 'activo', '2025-01-26 23:48:34');
 
 --
 -- Índices para tablas volcadas

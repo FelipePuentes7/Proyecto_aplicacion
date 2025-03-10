@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-01-2025 a las 01:01:23
+-- Tiempo de generación: 09-03-2025 a las 22:43:03
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -35,11 +35,9 @@ CREATE TABLE `solicitudes_registro` (
   `rol` enum('estudiante','tutor') NOT NULL,
   `documento` varchar(20) NOT NULL,
   `codigo_estudiante` varchar(20) DEFAULT NULL,
-  `codigo_institucional` varchar(20) DEFAULT NULL,
   `telefono` varchar(15) DEFAULT NULL,
-  `telefono_tutor` varchar(15) DEFAULT NULL,
-  `carrera` varchar(50) DEFAULT NULL,
-  `semestre` int(11) DEFAULT NULL,
+  `opcion_grado` enum('seminario','proyecto','pasantia') DEFAULT NULL,
+  `ciclo` enum('tecnico','tecnologo','profesional') DEFAULT NULL,
   `estado` enum('pendiente','aprobado','rechazado') DEFAULT 'pendiente',
   `fecha_solicitud` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -48,9 +46,9 @@ CREATE TABLE `solicitudes_registro` (
 -- Volcado de datos para la tabla `solicitudes_registro`
 --
 
-INSERT INTO `solicitudes_registro` (`id`, `nombre`, `email`, `password`, `rol`, `documento`, `codigo_estudiante`, `codigo_institucional`, `telefono`, `telefono_tutor`, `carrera`, `semestre`, `estado`, `fecha_solicitud`) VALUES
-(1, 'felipe', 'andres@fet.edu.co', '$2y$10$bLqK9HofLvjrsxlfCxy4mOUnG9ebYwZ.9uhrrBm1yrARu6.K9atuO', 'estudiante', '10225', 'Sof114', NULL, '77878', NULL, 'ingenieria_software', 4, 'aprobado', '2025-01-26 23:21:13'),
-(2, 'Usuario de Prueba', 'prueba@universidad.edu', '$2y$10$Ej3mPL0PaSsLxW.9sS5uE.0RjK7uZ1JqYVn2TgHkI1bNQrVcXhW6', '', '987654321', 'FET2024001', NULL, '3009876543', NULL, 'Ingeniería de Software', 6, 'aprobado', '2025-01-26 23:48:13');
+INSERT INTO `solicitudes_registro` (`id`, `nombre`, `email`, `password`, `rol`, `documento`, `codigo_estudiante`, `telefono`, `opcion_grado`, `ciclo`, `estado`, `fecha_solicitud`) VALUES
+(1, 'felipe', 'andres@fet.edu.co', '$2y$10$bLqK9HofLvjrsxlfCxy4mOUnG9ebYwZ.9uhrrBm1yrARu6.K9atuO', 'estudiante', '10225', 'Sof114', '77878', '', '', 'aprobado', '2025-01-26 23:21:13'),
+(2, 'Usuario de Prueba', 'prueba@universidad.edu', '$2y$10$Ej3mPL0PaSsLxW.9sS5uE.0RjK7uZ1JqYVn2TgHkI1bNQrVcXhW6', '', '987654321', 'FET2024001', '3009876543', '', '', 'aprobado', '2025-01-26 23:48:13');
 
 --
 -- Índices para tablas volcadas
