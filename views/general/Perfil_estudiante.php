@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/Inicio_Estu.css">
+    <link rel="stylesheet" href="/assets/css/Perfil_Estu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>MissionFet - Perfil Estudiante</title>
+    <title>MissionFet - Inicio Estudiante</title>
 </head>
 
 <body>
@@ -38,9 +38,46 @@
         </div>
 </nav>
 
+    <div class="profile-container">
 
+        <div class="perfil_izquierda">
 
+                <div class="Titulo-izquierda">
+                    <h2>¡Bienvenido, [Nombre del Estudiante]!</h2>
+                    <img src="/assets/images/IMAGEN_USUARIO.png" alt="Imagen_usuario" width="300" height="300" center>
+                </div>
 
+                <div class="profile-info">
+                    <div>
+                        <p ><strong>Email:</strong> estudiante@fet.edu.co</p>
+                        <p ><strong>Ubicación:</strong> Rivera - Huila</p>
+                        <p ><strong>Teléfono:</strong> +57 3236164432</p>
+                    </div>
+
+                </div>
+
+        </div>
+
+    </div>
+
+    <div class="projects">
+
+        <h3>Tus Proyectos:</h3>
+            <div class="project-item">
+                <p><strong>Proyecto 1:</strong></p>
+                <p>Avance: 50%</p>
+                <p>Estado: Aprobado</p>
+                <p>Tutor: Pepe Rojas</p>
+            </div>
+
+        <div class="project-item">
+            <p><strong>Proyecto 2:</strong></p>
+            <p>Avance: 30%</p>
+            <p>Estado: En Revisión</p>
+            <p>Tutor: Juan Pablo Vega</p>
+        </div>
+
+    </div>
 
 
 
@@ -91,8 +128,6 @@
             </div>
         </div>
     </footer>
-
-
 
 
     <script src="https://kit.fontawesome.com/4fac1b523f.js" crossorigin="anonymous"></script>
