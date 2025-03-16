@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($solicitud) {
                     if (isset($_POST['aprobar'])) {
-                        // Insertar en usuarios
+                        // Insertar en usuarios - Ahora incluye nombre_proyecto y nombre_empresa
                         $sqlUsuario = "INSERT INTO usuarios (
                             nombre, email, password, rol, documento, 
-                            codigo_estudiante, telefono, opcion_grado, ciclo, estado
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo')";
+                            codigo_estudiante, telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo, estado
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo')";
                         
                         $stmtUsuario = $conexion->prepare($sqlUsuario);
                         $stmtUsuario->execute([
@@ -34,16 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $solicitud['codigo_estudiante'],
                             $solicitud['telefono'],
                             $solicitud['opcion_grado'],
+                            $solicitud['nombre_proyecto'],
+                            $solicitud['nombre_empresa'],
                             $solicitud['ciclo']
                         ]);
                         
                         $nuevoUsuarioId = $conexion->lastInsertId();
 
-                        // Registrar en historial
+                        // Registrar en historial - Ahora incluye nombre_proyecto y nombre_empresa
                         $sqlHistorial = "INSERT INTO historial_solicitudes (
                             usuario_id, nombre, email, rol, documento, 
-                            codigo_estudiante, telefono, opcion_grado, ciclo, estado
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'aprobado')";
+                            codigo_estudiante, telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo, estado
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'aprobado')";
                         
                         $stmtHistorial = $conexion->prepare($sqlHistorial);
                         $stmtHistorial->execute([
@@ -55,15 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $solicitud['codigo_estudiante'],
                             $solicitud['telefono'],
                             $solicitud['opcion_grado'],
+                            $solicitud['nombre_proyecto'],
+                            $solicitud['nombre_empresa'],
                             $solicitud['ciclo']
                         ]);
 
                     } elseif (isset($_POST['rechazar'])) {
-                        // Registrar en historial sin usuario_id
+                        // Registrar en historial sin usuario_id - Ahora incluye nombre_proyecto y nombre_empresa
                         $sqlHistorial = "INSERT INTO historial_solicitudes (
                             nombre, email, rol, documento, 
-                            codigo_estudiante, telefono, opcion_grado, ciclo, estado
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'rechazado')";
+                            codigo_estudiante, telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo, estado
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'rechazado')";
                         
                         $stmtHistorial = $conexion->prepare($sqlHistorial);
                         $stmtHistorial->execute([
@@ -74,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $solicitud['codigo_estudiante'],
                             $solicitud['telefono'],
                             $solicitud['opcion_grado'],
+                            $solicitud['nombre_proyecto'],
+                            $solicitud['nombre_empresa'],
                             $solicitud['ciclo']
                         ]);
                     }

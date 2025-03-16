@@ -39,11 +39,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $opcion_grado = filter_var($_POST['opcion_grado'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $ciclo = filter_var($_POST['ciclo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            // Campos adicionales según la opción de grado
+            $nombre_proyecto = null;
+            $nombre_empresa = null;
+            
+            if ($opcion_grado === 'proyecto') {
+                $nombre_proyecto = filter_var($_POST['nombre_proyecto'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                if (empty($nombre_proyecto)) {
+                    throw new Exception('Debe ingresar el nombre del proyecto');
+                }
+            } elseif ($opcion_grado === 'pasantia') {
+                $nombre_empresa = filter_var($_POST['nombre_empresa'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                if (empty($nombre_empresa)) {
+                    throw new Exception('Debe ingresar el nombre de la empresa');
+                }
+            }
         } else {
             $codigo = filter_var($_POST['codigo_institucional'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $telefono = filter_var($_POST['telefono_tutor'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $opcion_grado = null;
             $ciclo = null;
+            $nombre_proyecto = null;
+            $nombre_empresa = null;
         }
 
         // Validar teléfono (solo números)
@@ -72,15 +90,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conexion->prepare("INSERT INTO solicitudes_registro (
             nombre, email, password, rol, documento,
             codigo_estudiante, codigo_institucional,
-            telefono, opcion_grado, ciclo
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         $stmt->execute([
             $nombre, $email, $hashedPassword, $rol, $documento,
             ($rol === 'estudiante') ? $codigo : null,
             ($rol === 'tutor') ? $codigo : null,
-            $telefono, // Usar un único campo de teléfono para todos los roles
-            $opcion_grado, $ciclo
+            $telefono,
+            $opcion_grado, $nombre_proyecto, $nombre_empresa, $ciclo
         ]);
 
         $mensaje = "Registro exitoso. Espera la aprobación del administrador.";
@@ -158,6 +176,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <option value="proyecto" <?= ($_POST['opcion_grado'] ?? '') === 'proyecto' ? 'selected' : '' ?>>Proyecto de Aplicación</option>
                         <option value="pasantia" <?= ($_POST['opcion_grado'] ?? '') === 'pasantia' ? 'selected' : '' ?>>Pasantías</option>
                     </select>
+                </div>
+            </div>
+
+            <!-- Campos adicionales según la opción de grado -->
+            <div class="form-row proyecto-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="nombre_proyecto">Nombre del proyecto:</label>
+                    <input type="text" id="nombre_proyecto" name="nombre_proyecto" 
+                           value="<?= htmlspecialchars($_POST['nombre_proyecto'] ?? '') ?>">
+                </div>
+            </div>
+
+            <div class="form-row pasantia-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="nombre_empresa">Nombre de la empresa:</label>
+                    <input type="text" id="nombre_empresa" name="nombre_empresa" 
+                           value="<?= htmlspecialchars($_POST['nombre_empresa'] ?? '') ?>">
                 </div>
             </div>
 

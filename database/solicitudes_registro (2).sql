@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-03-2025 a las 22:43:03
+-- Tiempo de generación: 16-03-2025 a las 04:12:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -37,6 +37,8 @@ CREATE TABLE `solicitudes_registro` (
   `codigo_estudiante` varchar(20) DEFAULT NULL,
   `telefono` varchar(15) DEFAULT NULL,
   `opcion_grado` enum('seminario','proyecto','pasantia') DEFAULT NULL,
+  `nombre_proyecto` varchar(100) DEFAULT NULL,
+  `nombre_empresa` varchar(100) DEFAULT NULL,
   `ciclo` enum('tecnico','tecnologo','profesional') DEFAULT NULL,
   `estado` enum('pendiente','aprobado','rechazado') DEFAULT 'pendiente',
   `fecha_solicitud` timestamp NOT NULL DEFAULT current_timestamp()
@@ -46,9 +48,9 @@ CREATE TABLE `solicitudes_registro` (
 -- Volcado de datos para la tabla `solicitudes_registro`
 --
 
-INSERT INTO `solicitudes_registro` (`id`, `nombre`, `email`, `password`, `rol`, `documento`, `codigo_estudiante`, `telefono`, `opcion_grado`, `ciclo`, `estado`, `fecha_solicitud`) VALUES
-(1, 'felipe', 'andres@fet.edu.co', '$2y$10$bLqK9HofLvjrsxlfCxy4mOUnG9ebYwZ.9uhrrBm1yrARu6.K9atuO', 'estudiante', '10225', 'Sof114', '77878', '', '', 'aprobado', '2025-01-26 23:21:13'),
-(2, 'Usuario de Prueba', 'prueba@universidad.edu', '$2y$10$Ej3mPL0PaSsLxW.9sS5uE.0RjK7uZ1JqYVn2TgHkI1bNQrVcXhW6', '', '987654321', 'FET2024001', '3009876543', '', '', 'aprobado', '2025-01-26 23:48:13');
+INSERT INTO `solicitudes_registro` (`id`, `nombre`, `email`, `password`, `rol`, `documento`, `codigo_estudiante`, `telefono`, `opcion_grado`, `nombre_proyecto`, `nombre_empresa`, `ciclo`, `estado`, `fecha_solicitud`) VALUES
+(56, 'Luis Fernández', 'luis.fernandez@email.com', '*23AE809DDACAF96AF0FD78ED04B6A265E05AA257', 'tutor', '1005234571', NULL, '3005234571', NULL, NULL, NULL, NULL, 'pendiente', '2025-03-09 23:07:53'),
+(57, 'Sofía Herrera', 'sofia.herrera@email.com', '*23AE809DDACAF96AF0FD78ED04B6A265E05AA257', 'estudiante', '1006234572', 'E2024004', '3006234572', 'proyecto', NULL, NULL, 'tecnico', 'pendiente', '2025-03-09 23:07:53');
 
 --
 -- Índices para tablas volcadas
@@ -69,7 +71,7 @@ ALTER TABLE `solicitudes_registro`
 -- AUTO_INCREMENT de la tabla `solicitudes_registro`
 --
 ALTER TABLE `solicitudes_registro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

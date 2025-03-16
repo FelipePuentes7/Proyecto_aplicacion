@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $conexion->prepare("UPDATE usuarios SET 
                         nombre = ?, 
                         email = ?, 
-                        rol = ?, 
+                        rol = ?,
                         documento = ?, 
                         codigo_estudiante = ?, 
                         telefono = ?, 

@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const rolSelect = document.getElementById('rol');
     const estudianteFields = document.querySelectorAll('.estudiante-fields');
     const tutorFields = document.querySelectorAll('.tutor-fields');
+    const opcionGradoSelect = document.getElementById('opcion_grado');
+    const proyectoFields = document.querySelectorAll('.proyecto-fields');
+    const pasantiaFields = document.querySelectorAll('.pasantia-fields');
     const form = document.getElementById('registroForm');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirm_password');
@@ -93,6 +96,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     isValid = false;
                 }
             });
+            
+            // Verificar campos específicos por opción de grado
+            if (opcionGradoSelect.value === 'proyecto') {
+                const nombreProyecto = document.getElementById('nombre_proyecto');
+                if (!nombreProyecto.value) {
+                    isValid = false;
+                }
+            } else if (opcionGradoSelect.value === 'pasantia') {
+                const nombreEmpresa = document.getElementById('nombre_empresa');
+                if (!nombreEmpresa.value) {
+                    isValid = false;
+                }
+            }
         } else {
             const tutorRequiredFields = document.querySelectorAll('.tutor-fields input:not(#codigo_institucional)');
             tutorRequiredFields.forEach(field => {
@@ -121,6 +137,50 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.disabled = !isValid;
         submitButton.style.opacity = isValid ? '1' : '0.5';
         submitButton.style.cursor = isValid ? 'pointer' : 'not-allowed';
+    };
+
+    // Toggle campos según opción de grado
+    const toggleGradoFields = () => {
+        const opcionGrado = opcionGradoSelect.value;
+        
+        // Ocultar todos los campos específicos primero
+        proyectoFields.forEach(field => {
+            field.style.display = 'none';
+            field.querySelectorAll('input').forEach(input => {
+                input.required = false;
+            });
+        });
+        
+        pasantiaFields.forEach(field => {
+            field.style.display = 'none';
+            field.querySelectorAll('input').forEach(input => {
+                input.required = false;
+            });
+        });
+        
+        // Mostrar campos según la opción seleccionada
+        if (opcionGrado === 'proyecto') {
+            proyectoFields.forEach(field => {
+                field.style.display = 'flex';
+                field.style.opacity = 1; // Establecer opacidad directamente a 1
+                
+                field.querySelectorAll('input').forEach(input => {
+                    input.required = true;
+                });
+            });
+        } else if (opcionGrado === 'pasantia') {
+            pasantiaFields.forEach(field => {
+                field.style.display = 'flex';
+                field.style.opacity = 1; // Establecer opacidad directamente a 1
+                
+                field.querySelectorAll('input').forEach(input => {
+                    input.required = true;
+                });
+            });
+        }
+        
+        // Actualizar validez del formulario
+        checkFormValidity();
     };
 
     // Toggle campos según rol con animación
@@ -166,6 +226,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 input.required = !isEstudiante;
             });
         });
+        
+        // Si no es estudiante, ocultar campos de proyecto y pasantía
+        if (!isEstudiante) {
+            proyectoFields.forEach(field => {
+                field.style.display = 'none';
+            });
+            
+            pasantiaFields.forEach(field => {
+                field.style.display = 'none';
+            });
+        } else {
+            // Si es estudiante, verificar la opción de grado actual
+            setTimeout(toggleGradoFields, 350); // Esperar a que termine la animación de los campos de estudiante
+        }
         
         // Actualizar validez del formulario después de cambiar los campos
         setTimeout(checkFormValidity, 400);
@@ -300,6 +374,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event listeners
     rolSelect.addEventListener('change', toggleFields);
+    
+    // Importante: usar un evento que no se dispare automáticamente
+    opcionGradoSelect.addEventListener('change', function() {
+        // Usar setTimeout para asegurar que el cambio persista
+        setTimeout(toggleGradoFields, 50);
+    });
+    
     form.addEventListener('submit', function(e) {
         if (password.value !== confirmPassword.value) {
             e.preventDefault();
@@ -310,6 +391,23 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             alert('El correo debe terminar en @fet.edu.co');
         }
+        
+        // Validar campos específicos según opción de grado
+        if (rolSelect.value === 'estudiante') {
+            if (opcionGradoSelect.value === 'proyecto') {
+                const nombreProyecto = document.getElementById('nombre_proyecto');
+                if (!nombreProyecto.value) {
+                    e.preventDefault();
+                    alert('Debe ingresar el nombre del proyecto');
+                }
+            } else if (opcionGradoSelect.value === 'pasantia') {
+                const nombreEmpresa = document.getElementById('nombre_empresa');
+                if (!nombreEmpresa.value) {
+                    e.preventDefault();
+                    alert('Debe ingresar el nombre de la empresa');
+                }
+            }
+        }
     });
 
     // Inicializar campos al cargar
@@ -319,5 +417,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const codigoInstitucionalField = document.getElementById('codigo_institucional');
     if (codigoInstitucionalField) {
         codigoInstitucionalField.parentElement.style.display = 'none';
+    }
+    
+    // Inicializar campos de opción de grado si ya hay un valor seleccionado
+    if (opcionGradoSelect.value) {
+        // Usar setTimeout para asegurar que se ejecute después de que el DOM esté completamente cargado
+        setTimeout(toggleGradoFields, 500);
     }
 });
