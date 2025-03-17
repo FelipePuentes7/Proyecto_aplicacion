@@ -38,7 +38,18 @@
         </div>
 </nav>
 
+<section class="Bienvenido">
 
+    <div class="mensaje">
+        <h3><strong>¡BIENVENIDO, [NOMBRE DEL ESTUDIANTE]!</strong></h3>
+            <p>Organiza y Gestiona tu proyecto de manera eficiente. <br>Aqui Encontraras todo lo que necesitas para avanzar.</p>
+    </div>
+
+    <img src="/assets/images/Imagen_principal.png" alt="Imagen_inicio">
+
+
+
+</section>
 
 
 

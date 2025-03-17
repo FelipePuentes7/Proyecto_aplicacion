@@ -85,6 +85,39 @@ body {
     background-color: #f0f0f0;
 }
 
+/*--------------------------------------------------------------*/
+
+.Bienvenido{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+    border: 1px solid rgb(8, 15, 161); /* Borde azul para identificar */
+}
+
+.Bienvenido h3{
+    font-size: 3rem;
+    font-weight: bold;
+    border: 1px solid rgb(180, 22, 90); /* Borde azul para identificar */
+}
+
+.Bienvenido img{
+    width: 35%;
+    
+}
+
+.Bienvenido p{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem;
+    border: 1px solid rgb(8, 15, 161); /* Borde azul para identificar */
+}
+
+
+
+/*--------------------------------------------------------------*/
+
 .footer {
     display: flex;
     flex-direction: column;

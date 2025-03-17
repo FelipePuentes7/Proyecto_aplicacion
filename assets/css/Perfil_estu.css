@@ -97,46 +97,42 @@ body {
     border: 2px solid red; /* Borde rojo para identificar */
     
 }
-.perfil_izquierda{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+.Titulo_perfil {
+    justify-items: center;
     border: 2px solid blue;
     padding: 1rem;
-    width: 100%;
+    width: 120%;
 }
 
-.Titulo-izquierda {
-    display: flex;
-    flex-direction: column;|
-    text-align: center;
-    border: 2px solid blue;
-    padding: 1rem;
-    width: 100%;
-}
-
-.profile-info {
-    padding-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    border: 2px solid green;
-    padding: 1rem;
-    width: 100%;
-}
-
-.profile-info div  p{
-    font-size: 1.2rem;
+.Titulo_perfil h2 {
+    font-size: 2rem;
     padding: 6px;
 }
 
-.profile-info div {
-    flex: 1;
-    min-width: 250px;
+.profile_info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    border: 2px solid green;
+    margin: 1rem;
     padding: 1rem;
-    border: 2px solid orange; /* Para diferenciar las secciones */
+    width: 100%;
 }
 
+.profile_info p{
+    font-size: 1.2rem;
+    gap: 1.2rem;
+    padding: 6px;
+    padding: 1rem;
+   
+}
+
+.profile_info p i{
+    margin-right: 10px;
+    font-size: 2rem;
+}
 /*---------------------------------------------------*/
 
 .projects {
@@ -146,7 +142,7 @@ body {
     gap: 1rem;
     border: 2px solid purple;
     padding: 1rem;
-    width: 100%;
+    
 }
 
 .project-item {
@@ -155,6 +151,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    font-size: 20px;
+}
+
+.projects h3 {
+    font-size: 2rem;
+    font-weight: bold;
+
 }
 
 
