@@ -91,8 +91,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    
     border: 1px solid rgb(8, 15, 161); /* Borde azul para identificar */
 }
 
@@ -103,7 +101,8 @@ body {
 }
 
 .Bienvenido img{
-    width: 35%;
+    margin: 30px;
+    width: 30%;
     
 }
 
@@ -113,6 +112,28 @@ body {
     padding: 1rem;
     border: 1px solid rgb(8, 15, 161); /* Borde azul para identificar */
 }
+
+.mensaje{
+    border: 1px solid rgb(8, 15, 161); /* Borde azul para identificar */
+}
+
+.mensaje h3{
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgb(180, 22, 90); /* Borde azul para identificar */
+}
+
+/*--------------------------------------------------------------*/
+
+
+.calendario {
+    margin: 30px;
+    border-radius: 5px;   
+    border: 1px solid rgb(39, 220, 7); /* Borde verde para identificar */
+
+}
+
+
 
 
 
