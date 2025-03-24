@@ -1,0 +1,133 @@
+/* estilos.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Header y Navegación */
+header {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #000;
+    height: 50px; /* Ajusta esto según el tamaño que quieras para tu header */
+}
+
+#logo {
+    position: fixed; /* Cambiado de absolute a fixed */
+    top: 10px;
+    left: 10px; /* Cambiado de right a left */
+    cursor: pointer;
+    border: 1px solid #000;
+    padding: 5px;
+    z-index: 1000;
+    background: white; /* Para que sea visible sobre la barra de navegación */
+}
+
+#navbar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #fff;
+    border-right: 1px solid #000;
+    padding: 20px;
+    transition: left 0.3s ease;
+    padding-top: 50px; /* Espacio para el logo */
+}
+
+#navbar.active {
+    display: block;
+    left: 0;
+}
+
+#navbar ul {
+    list-style-type: none;
+    padding-top: 10px; /* Reducido el espacio superior */
+}
+
+#navbar ul li {
+    margin-bottom: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    padding-left: 20px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#navbar #logo-nav {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    border: 1px solid #000;
+    padding: 5px;
+}
+
+/* Main Content */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+section {
+    border: 1px solid #000;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+}
+
+#resumen-aprobaciones {
+    width: 100%;
+}
+
+#accesos-rapidos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tarjeta {
+    border: 1px solid #000;
+    padding: 10px;
+    width: 30%;
+}
+
+#estadisticas {
+    display: flex;
+    justify-content: space-between;
+}
+
+.estadistica {
+    border: 1px solid #000;
+    padding: 10px;
+    width: 48%;
+}
+
+/* Footer */
+footer {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Botones */
+button {
+    background-color: #f0f0f0;
+    border: 1px solid #000;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
