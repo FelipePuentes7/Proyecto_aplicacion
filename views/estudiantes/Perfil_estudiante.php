@@ -1,3 +1,22 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+session_start();
+
+require_once realpath(__DIR__ . '/../../config/conexion.php');
+
+echo "✅ Archivo cargado correctamente.<br>";
+
+if (!isset($_SESSION['user_id'])) {
+    die("❌ ERROR: No hay un usuario en sesión. <a href='/login.php'>Inicia sesión</a>");
+}
+
+echo "🔍 ID del usuario en sesión: " . $_SESSION['user_id'] . "<br>";
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/Perfil_Estu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>MissionFet - Inicio Estudiante</title>
+    <title>MissionFet - Perfil Estudiante</title>
 </head>
 
 <body>
@@ -41,15 +60,18 @@
     <div class="profile-container">
 
             <div class="Titulo_perfil">
-                <h2>¡Bienvenido, [Nombre del Estudiante]!</h2>
+                <h2>¡Bienvenido, <?php echo htmlspecialchars($user['nombre']); ?>!</h2>
                         <img src="/assets/images/IMAGEN_USUARIO.png" alt="Imagen_usuario" width="300" height="300" center>
              </div>
 
                     <div class="profile_info">
                         
-                        <p><strong><i class="fa-solid fa-envelope"></i>Email:</strong> estudiante@fet.edu.co</p>
-                        <p><strong><i class="fa-solid fa-location-dot"></i>Ubicación:</strong> Rivera - Huila</p>
-                        <p><strong><i class="fa-solid fa-phone"></i>Teléfono:</strong> +57 3236164432</p>
+                        <p><strong><i class="fa-solid fa-envelope"></i>Email:</strong> <?php echo htmlspecialchars($user['email']); ?> </p>
+                        <p><strong><i class="fa-solid fa-phone"></i>Teléfono:</strong><?php echo htmlspecialchars($user['telefono']); ?> </p>
+                        <p><strong><i class="fa-solid fa-location-dot"></i>Rol:</strong> <?php echo ucfirst($user['rol']); ?> </p>
+                        <p><strong><i class="fa-solid fa-fingerprint"></i>Documento:</strong>  <?php echo ucfirst($user['documento']); ?> </p>
+                        <p><strong><i class="fa-solid fa-id-card"></i>Codigo Institucional:</strong> <?php echo htmlspecialchars($user['codigo_estudiante']); ?> </p>
+                        <p><strong><i class="fa-solid fa-graduation-cap"></i>Opcion De Grado:</strong> <?php echo htmlspecialchars($user['opcion_grado']); ?> </p>
                 
                       </div>
 

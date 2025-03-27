@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../../config/conexion.php';
+require_once __DIR__ . '/../../general/Inicio_Estudiante.php';
 
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Invitado';
 

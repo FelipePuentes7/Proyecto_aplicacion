@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); 
 require_once __DIR__ . '/../../config/conexion.php';
 
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Invitado';
@@ -224,7 +224,7 @@ $conexion = null;
     </main>
 
     <footer>
-        <p>&copy; 2023 Sistema de Gestión Académica. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Sistema de Gestión Académica. Todos los derechos reservados.</p>
     </footer>
 
     <script>
