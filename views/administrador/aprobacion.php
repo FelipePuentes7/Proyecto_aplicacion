@@ -73,8 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             
                             // ============ ENVÍO DE WHATSAPP ============
                             try {
-                                $twilioSid = ''; 
-                                $twilioToken = '';
+                                //agregar token 
                                 
                                 // Formatear teléfono
                                 $telefono = $solicitud['telefono'] ?? '';
