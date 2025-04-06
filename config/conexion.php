@@ -19,6 +19,9 @@ try {
         ]
     );
     
+    // Configuración adicional para UTF-8
+    $conexion->exec("SET CHARACTER SET utf8mb4");
+    $conexion->exec("SET COLLATION_CONNECTION = utf8mb4_unicode_ci");
     // echo "¡Conexión exitosa!"; // (Comentar en producción)
 
 } catch(PDOException $e) {
