@@ -1,2 +1,15 @@
 
 .codegpt
+
+
+
+# Archivos de configuración con credenciales
+config/twilio_config.php
+
+# Otros archivos sensibles
+.env
+*.key
+*.pem
+
+# Archivos de configuración con credenciales
+config/twilio_config.php

@@ -11,6 +11,8 @@ use Twilio\Rest\Client;
 
 require_once __DIR__ . '/../../config/conexion.php';
 
+$twilioConfig = require_once __DIR__ . '/../../config/twilio_config.php';
+
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Invitado';
 $mensaje = ''; // Variable para mensajes de estado
 
@@ -73,8 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             
                             // ============ ENVÍO DE WHATSAPP ============
                             try {
-                                $twilioSid = 'ACe617ae26a205ab05e9ab16cafeb14116'; 
-                                $twilioToken = '6dec66c599615390e98bf11a113abaee';
+                                // Usar configuración desde archivo externo
+                                $twilioSid = $twilioConfig['account_sid'];
+                                $twilioToken = $twilioConfig['auth_token'];
+                                $twilioFrom = $twilioConfig['whatsapp_from'];
                                 
                                 // Formatear teléfono
                                 $telefono = $solicitud['telefono'] ?? '';
@@ -82,14 +86,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     $telefono = preg_replace('/^\+/', '', $telefono); // Eliminar + existente
                                     $telefono = '+57' . ltrim($telefono, '0'); 
                                 }
-
+                            
                                 if ($telefono) {
                                     $client = new Client($twilioSid, $twilioToken);
                                     
                                     $message = $client->messages->create(
                                         "whatsapp:$telefono", 
                                         [
-                                            'from' => 'whatsapp:+14155238886',
+                                            'from' => $twilioFrom,
                                             'body' => "¡Hola {$solicitud['nombre']}! 🎉\nTu cuenta en la plataforma Mision FET fue aprobada.\nUsuario: {$solicitud['email']}"
                                         ]
                                     );
