@@ -1,3 +1,3 @@
 <?php
-echo "📂 Ruta actual: " . __DIR__;
+phpinfo();
 ?>

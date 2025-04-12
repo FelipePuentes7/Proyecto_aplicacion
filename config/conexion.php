@@ -1,15 +1,26 @@
 <?php
-$host = '127.0.0.1'; // Asegurar que es 127.0.0.1
+// database.php - Archivo de conexión a la base de datos
+
+// Configuración de la base de datos
+$host = 'localhost';
 $dbname = 'grados_fet';
-$username = 'root';
-$password = '';
+$username = 'root';     // Cambiar por tu usuario de MySQL
+$password = '';  // Cambiar por tu contraseña de MySQL
 
 try {
-    $conexion = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "✅ Conexión a la base de datos establecida correctamente.";
-} catch (PDOException $e) {
-    die("❌ Error de conexión en conexion.php: " . $e->getMessage());
-}
+    // Crear conexión PDO
+    $conexion = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+        $username,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+    );
+    
+    // echo "¡Conexión exitosa!"; // (Comentar en producción)
 
-?>
+} catch(PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
+}

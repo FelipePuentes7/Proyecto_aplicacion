@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../../general/Inicio_Estudiante.php';
+require_once __DIR__ . '/../../config/conexion.php'; // si config.php está un nivel arriba de la carpeta administrador
 
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Invitado';
 

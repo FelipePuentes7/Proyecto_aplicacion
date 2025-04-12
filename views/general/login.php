@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: /views/tutor/dashboard.php');
                     exit();
                 case 'estudiante':
-                    header('Location: /views/estudiante/dashboard.php');
+                    header('Location: /views/estudiantes/Perfil_estudiante.php');
                     exit();
                 default:
                     header('Location: /');
