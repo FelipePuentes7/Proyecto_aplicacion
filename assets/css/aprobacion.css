@@ -1,0 +1,344 @@
+/* Estilos generales y reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+}
+
+/* Header y Navegación */
+header {
+    position: relative;
+    padding: 10px;
+    height: 60px;
+    background: #1a4d2e;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    padding: 10px 20px;
+    z-index: 1000;
+    background: #1a4d2e;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background: #1a4d2e;
+    padding: 80px 20px 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+
+#navbar.active {
+    left: 0;
+}
+
+#navbar ul {
+    list-style-type: none;
+}
+
+#navbar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    display: block;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+#navbar ul li a:hover {
+    background: #245f3a;
+}
+
+.dropdown-content {
+    display: none;
+    padding-left: 15px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Contenido principal */
+main {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 40px auto 80px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1a4d2e;
+    font-size: 2.2em;
+}
+
+/* Controles - Filtro y Búsqueda */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.filter select {
+    padding: 8px 12px;
+    border: 2px solid #1a4d2e;
+    border-radius: 5px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.search input {
+    padding: 8px 12px;
+    border: 2px solid #1a4d2e;
+    border-radius: 5px;
+    width: 250px;
+    font-size: 14px;
+}
+
+.search button {
+    padding: 8px 15px;
+    background-color: #1a4d2e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search button:hover {
+    background-color: #245f3a;
+}
+
+/* Tablas */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.user-table th {
+    background: #1a4d2e;
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.user-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+
+.user-table tr:hover {
+    background-color: #f8fff8;
+}
+
+/* Botones de acción */
+.aprobar, .rechazar {
+    padding: 6px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.aprobar {
+    background-color: #1a4d2e;
+    color: white;
+}
+
+.aprobar:hover {
+    background-color: #245f3a;
+}
+
+.rechazar {
+    background-color: #c44d3c;
+    color: white;
+}
+
+.rechazar:hover {
+    background-color: #b34434;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #1a4d2e;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+/* Controles - Filtro y Búsqueda */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 25px; /* Más espacio entre elementos */
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto; /* Separa del search */
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Más espacio entre input y botón */
+}
+
+/* Tabs mejorados */
+.tabs {
+    margin-bottom: 25px;
+    display: flex;
+    gap: 15px; /* Más espacio entre botones */
+}
+
+.tabs button {
+    padding: 12px 30px;
+    cursor: pointer;
+    background-color: #ecf0f1;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #1a4d2e;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid transparent;
+}
+
+.tabs button.active {
+    background-color: #1a4d2e;
+    color: white;
+    box-shadow: 0 2px 5px rgba(26,77,46,0.3);
+    border-color: #143b25;
+}
+
+.tabs button:hover:not(.active) {
+    background-color: #d6e3d6;
+    transform: translateY(-2px);
+}
+
+/* Botones de acción en tablas */
+.aprobar, .rechazar {
+    padding: 8px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.aprobar {
+    background-color: #1a4d2e;
+    color: white;
+    border: 2px solid #143b25;
+}
+
+.aprobar:hover {
+    background-color: #143b25;
+    transform: translateY(-1px);
+}
+
+.rechazar {
+    background-color: #c44d3c;
+    color: white;
+    border: 2px solid #a34132;
+}
+
+.rechazar:hover {
+    background-color: #a34132;
+    transform: translateY(-1px);
+}
+
+/* Ajustes específicos para inputs */
+.filter select {
+    padding: 10px 15px;
+    min-width: 180px;
+}
+
+.search input {
+    padding: 10px 15px;
+    width: 300px;
+}
+
+.search button {
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .controls {
+        flex-wrap: wrap;
+    }
+    
+    .filter, .search {
+        width: 100%;
+    }
+    
+    .search input {
+        width: 100%;
+    }
+    
+    #navbar {
+        width: 250px;
+        left: -250px;
+    }
+}
