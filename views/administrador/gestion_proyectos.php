@@ -7,11 +7,21 @@ $mensaje = '';
 $error = '';
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Administrador';
 
-// Obtener estudiantes con proyectos
+// Obtener estudiantes con opción de grado "proyecto" que NO están asignados a ningún grupo
 $estudiantes = $conexion->query("
     SELECT u.id, u.nombre, u.email, u.codigo_estudiante, u.opcion_grado, u.nombre_proyecto 
     FROM usuarios u 
-    WHERE u.rol = 'estudiante' 
+    LEFT JOIN grupos_proyectos gp ON u.id = gp.estudiante_id
+    WHERE u.rol = 'estudiante' AND u.opcion_grado = 'proyecto' AND gp.id IS NULL
+    ORDER BY u.nombre
+")->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener todos los estudiantes para el modal de edición
+$todosEstudiantes = $conexion->query("
+    SELECT u.id, u.nombre, u.email, u.codigo_estudiante, u.opcion_grado, u.nombre_proyecto,
+    (SELECT p.id FROM grupos_proyectos gp JOIN proyectos p ON gp.proyecto_id = p.id WHERE gp.estudiante_id = u.id LIMIT 1) as proyecto_asignado_id
+    FROM usuarios u 
+    WHERE u.rol = 'estudiante' AND u.opcion_grado = 'proyecto'
     ORDER BY u.nombre
 ")->fetchAll(PDO::FETCH_ASSOC);
 
@@ -26,11 +36,27 @@ $tutores = $conexion->query("
 // Obtener proyectos existentes
 $proyectos = $conexion->query("
     SELECT p.*, u.nombre as tutor_nombre,
-    (SELECT COUNT(*) FROM proyecto_estudiante pe WHERE pe.proyecto_id = p.id) as num_estudiantes
+    (SELECT COUNT(*) FROM grupos_proyectos gp WHERE gp.proyecto_id = p.id) as num_estudiantes
     FROM proyectos p
     LEFT JOIN usuarios u ON p.tutor_id = u.id
     ORDER BY p.fecha_creacion DESC
 ")->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener asignaciones de estudiantes a proyectos
+$asignacionesEstudiantes = [];
+$asignacionesQuery = $conexion->query("
+    SELECT gp.proyecto_id, gp.estudiante_id, u.nombre as estudiante_nombre, u.email as estudiante_email
+    FROM grupos_proyectos gp
+    JOIN usuarios u ON gp.estudiante_id = u.id
+    ORDER BY gp.proyecto_id, u.nombre
+");
+
+while ($asignacion = $asignacionesQuery->fetch(PDO::FETCH_ASSOC)) {
+    if (!isset($asignacionesEstudiantes[$asignacion['proyecto_id']])) {
+        $asignacionesEstudiantes[$asignacion['proyecto_id']] = [];
+    }
+    $asignacionesEstudiantes[$asignacion['proyecto_id']][] = $asignacion;
+}
 
 // Obtener nombres de proyectos de la tabla usuarios para filtrado
 $nombresProyectos = $conexion->query("
@@ -93,8 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
             
             // Insertar proyecto
             $stmt = $conexion->prepare("
-                INSERT INTO proyectos (titulo, descripcion, archivo_proyecto, tutor_id, estado) 
-                VALUES (?, ?, ?, ?, 'propuesto')
+                INSERT INTO proyectos (titulo, descripcion, archivo_proyecto, tutor_id, estado, tipo) 
+                VALUES (?, ?, ?, ?, 'propuesto', 'proyecto')
             ");
             
             $stmt->execute([
@@ -107,13 +133,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
             $proyectoId = $conexion->lastInsertId();
             
             // Asignar estudiantes al proyecto
-            foreach ($_POST['estudiantes'] as $index => $estudianteId) {
-                $rol = ($index === 0) ? 'lider' : 'miembro'; // El primer estudiante es el líder
+            foreach ($_POST['estudiantes'] as $estudianteId) {
                 $stmt = $conexion->prepare("
-                    INSERT INTO proyecto_estudiante (proyecto_id, estudiante_id, rol_en_proyecto) 
-                    VALUES (?, ?, ?)
+                    INSERT INTO grupos_proyectos (proyecto_id, estudiante_id) 
+                    VALUES (?, ?)
                 ");
-                $stmt->execute([$proyectoId, $estudianteId, $rol]);
+                $stmt->execute([$proyectoId, $estudianteId]);
             }
             
             // Confirmar transacción
@@ -128,6 +153,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
             // Validar datos
             if (empty($_POST['proyecto_id']) || empty($_POST['titulo']) || empty($_POST['descripcion'])) {
                 throw new Exception("Todos los campos marcados con * son obligatorios");
+            }
+            
+            // Validar estudiantes si se han enviado
+            if (isset($_POST['edit_estudiantes'])) {
+                // Validar que se haya seleccionado al menos un estudiante
+                if (count($_POST['edit_estudiantes']) < 1) {
+                    throw new Exception("Debe seleccionar al menos un estudiante para el proyecto");
+                }
+                
+                // Validar máximo 3 estudiantes
+                if (count($_POST['edit_estudiantes']) > 3) {
+                    throw new Exception("No puede asignar más de 3 estudiantes a un proyecto");
+                }
             }
             
             // Procesar archivo si se ha subido
@@ -197,9 +235,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
                 ]);
             }
             
+            // Actualizar estudiantes si se han enviado
+            if (isset($_POST['edit_estudiantes'])) {
+                // Obtener estudiantes actuales para liberarlos si no están en la nueva selección
+                $stmt = $conexion->prepare("SELECT estudiante_id FROM grupos_proyectos WHERE proyecto_id = ?");
+                $stmt->execute([$_POST['proyecto_id']]);
+                $estudiantesActuales = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                
+                // Eliminar asignaciones actuales
+                $stmt = $conexion->prepare("DELETE FROM grupos_proyectos WHERE proyecto_id = ?");
+                $stmt->execute([$_POST['proyecto_id']]);
+                
+                // Asignar nuevos estudiantes
+                foreach ($_POST['edit_estudiantes'] as $estudianteId) {
+                    $stmt = $conexion->prepare("
+                        INSERT INTO grupos_proyectos (proyecto_id, estudiante_id) 
+                        VALUES (?, ?)
+                    ");
+                    $stmt->execute([$_POST['proyecto_id'], $estudianteId]);
+                }
+            }
+            
             // Confirmar transacción
             $conexion->commit();
             $mensaje = "Proyecto actualizado exitosamente";
+            
+            // Recargar la página para mostrar los cambios
+            header("Location: " . $_SERVER['PHP_SELF'] . "?mensaje=" . urlencode($mensaje));
+            exit;
+        } elseif ($_POST['accion'] === 'eliminar_proyecto') {
+            // Validar que se haya proporcionado un ID de proyecto
+            if (empty($_POST['proyecto_id'])) {
+                throw new Exception("ID de proyecto no válido");
+            }
+            
+            // Iniciar transacción
+            $conexion->beginTransaction();
+            
+            // Eliminar relaciones con estudiantes
+            $stmt = $conexion->prepare("DELETE FROM grupos_proyectos WHERE proyecto_id = ?");
+            $stmt->execute([$_POST['proyecto_id']]);
+            
+            // Eliminar proyecto
+            $stmt = $conexion->prepare("DELETE FROM proyectos WHERE id = ?");
+            $stmt->execute([$_POST['proyecto_id']]);
+            
+            // Confirmar transacción
+            $conexion->commit();
+            $mensaje = "Proyecto eliminado exitosamente";
             
             // Recargar la página para mostrar los cambios
             header("Location: " . $_SERVER['PHP_SELF'] . "?mensaje=" . urlencode($mensaje));
@@ -219,6 +302,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
 if (isset($_GET['mensaje'])) {
     $mensaje = $_GET['mensaje'];
 }
+
+// Obtener títulos de proyectos existentes para autocompletado
+$titulosProyectos = $conexion->query("
+    SELECT DISTINCT titulo FROM proyectos ORDER BY titulo
+")->fetchAll(PDO::FETCH_COLUMN);
+
+// Convertir datos a JSON para usar en JavaScript
+$asignacionesJSON = json_encode($asignacionesEstudiantes);
+$todosEstudiantesJSON = json_encode($todosEstudiantes);
+$proyectosJSON = json_encode($proyectos);
 
 // Cerrar conexión
 $conexion = null;
@@ -284,7 +377,10 @@ $conexion = null;
                     <div class="form-row">
                         <div class="form-field full-width">
                             <label for="titulo">Título del Proyecto *</label>
-                            <input type="text" id="titulo" name="titulo" required>
+                            <div class="autocomplete-container">
+                                <input type="text" id="titulo" name="titulo" required autocomplete="off">
+                                <div id="tituloSugerencias" class="autocomplete-items"></div>
+                            </div>
                         </div>
                     </div>
                     
@@ -310,12 +406,6 @@ $conexion = null;
                     
                     <div class="search-filter">
                         <input type="text" id="searchEstudiantes" placeholder="Buscar estudiantes...">
-                        <select id="filterOpcionGrado">
-                            <option value="">Todas las opciones de grado</option>
-                            <option value="proyecto">Proyecto</option>
-                            <option value="pasantia">Pasantía</option>
-                            <option value="seminario">Seminario</option>
-                        </select>
                     </div>
                     
                     <div class="search-filter">
@@ -405,6 +495,7 @@ $conexion = null;
             <div class="proyectos-grid">
                 <?php foreach ($proyectos as $proyecto): ?>
                     <div class="proyecto-card" 
+                         data-id="<?= $proyecto['id'] ?>"
                          data-titulo="<?= strtolower(htmlspecialchars($proyecto['titulo'])) ?>"
                          data-estado="<?= htmlspecialchars($proyecto['estado']) ?>">
                         <div class="proyecto-header estado-<?= htmlspecialchars($proyecto['estado']) ?>">
@@ -460,7 +551,10 @@ $conexion = null;
                 <div class="form-row">
                     <div class="form-field full-width">
                         <label for="edit_titulo">Título del Proyecto *</label>
-                        <input type="text" id="edit_titulo" name="titulo" required>
+                        <div class="autocomplete-container">
+                            <input type="text" id="edit_titulo" name="titulo" required autocomplete="off">
+                            <div id="editTituloSugerencias" class="autocomplete-items"></div>
+                        </div>
                     </div>
                 </div>
                 
@@ -503,9 +597,46 @@ $conexion = null;
                     </div>
                 </div>
                 
+                <!-- Sección para editar estudiantes asignados -->
+                <div class="form-group">
+                    <h2>Estudiantes Asignados</h2>
+                    <p class="info-text">Seleccione de 1 a 3 estudiantes para el proyecto. El primer estudiante seleccionado será el líder del proyecto.</p>
+                    
+                    <div class="estudiantes-actuales">
+                        <h3>Estudiantes Actuales: <span id="contadorEstudiantesEdit">0/3</span></h3>
+                        <ul id="listaEstudiantesActuales"></ul>
+                    </div>
+                    
+                    <div class="search-filter">
+                        <input type="text" id="searchEstudiantesEdit" placeholder="Buscar estudiantes...">
+                    </div>
+                    
+                    <div class="estudiantes-container" id="estudiantesEditContainer">
+                        <!-- Los estudiantes se cargarán dinámicamente aquí -->
+                    </div>
+                </div>
+                
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">Guardar Cambios</button>
                     <button type="button" class="btn-secondary" onclick="cerrarModal('modalEditarProyecto')">Cancelar</button>
+                    <button type="button" class="btn-danger" onclick="confirmarEliminarProyecto()">Eliminar Proyecto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal para confirmar eliminación de proyecto -->
+    <div id="modalConfirmarEliminar" class="modal">
+        <div class="modal-content modal-small">
+            <span class="close" onclick="cerrarModal('modalConfirmarEliminar')">&times;</span>
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Está seguro que desea eliminar este proyecto? Esta acción no se puede deshacer.</p>
+            <form id="formEliminarProyecto" method="POST" action="">
+                <input type="hidden" name="accion" value="eliminar_proyecto">
+                <input type="hidden" name="proyecto_id" id="eliminar_proyecto_id">
+                <div class="form-actions">
+                    <button type="submit" class="btn-danger">Eliminar</button>
+                    <button type="button" class="btn-secondary" onclick="cerrarModal('modalConfirmarEliminar')">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -516,6 +647,11 @@ $conexion = null;
     </footer>
 
     <script>
+        // Datos de proyectos y estudiantes cargados desde PHP
+        const proyectos = <?= $proyectosJSON ?>;
+        const asignacionesEstudiantes = <?= $asignacionesJSON ?>;
+        const todosEstudiantes = <?= $todosEstudiantesJSON ?>;
+        
         // Funciones de navegación
         function toggleNav() {
             document.getElementById("navbar").classList.toggle("active");
@@ -546,34 +682,42 @@ $conexion = null;
         // Búsqueda y filtrado de estudiantes
         const searchEstudiantes = document.getElementById('searchEstudiantes');
         const searchProyectosEstudiantes = document.getElementById('searchProyectosEstudiantes');
-        const filterOpcionGrado = document.getElementById('filterOpcionGrado');
         const filterNombreProyecto = document.getElementById('filterNombreProyecto');
         const estudianteCards = document.querySelectorAll('.estudiante-card');
         
         searchEstudiantes.addEventListener('input', filtrarEstudiantes);
         searchProyectosEstudiantes.addEventListener('input', filtrarEstudiantes);
-        filterOpcionGrado.addEventListener('change', filtrarEstudiantes);
         filterNombreProyecto.addEventListener('change', filtrarEstudiantes);
         
         function filtrarEstudiantes() {
             const searchTerm = searchEstudiantes.value.toLowerCase();
             const searchProyectoTerm = searchProyectosEstudiantes.value.toLowerCase();
-            const opcionGrado = filterOpcionGrado.value.toLowerCase();
             const nombreProyecto = filterNombreProyecto.value.toLowerCase();
             
             estudianteCards.forEach(card => {
                 const nombre = card.dataset.nombre;
-                const opcion = card.dataset.opcion;
                 const proyecto = card.dataset.proyecto;
                 
                 const matchSearch = nombre.includes(searchTerm);
                 const matchProyectoSearch = proyecto.includes(searchProyectoTerm);
-                const matchOpcion = opcionGrado === '' || opcion === opcionGrado;
                 const matchProyecto = nombreProyecto === '' || proyecto === nombreProyecto;
                 
-                card.style.display = (matchSearch && matchOpcion && matchProyecto && matchProyectoSearch) ? 'flex' : 'none';
+                card.style.display = (matchSearch && matchProyecto && matchProyectoSearch) ? 'flex' : 'none';
             });
         }
+        
+        // Búsqueda de estudiantes en el modal de edición
+        const searchEstudiantesEdit = document.getElementById('searchEstudiantesEdit');
+        
+        searchEstudiantesEdit.addEventListener('input', () => {
+            const searchTerm = searchEstudiantesEdit.value.toLowerCase();
+            const estudianteCardsEdit = document.querySelectorAll('#estudiantesEditContainer .estudiante-card');
+            
+            estudianteCardsEdit.forEach(card => {
+                const nombre = card.dataset.nombre;
+                card.style.display = nombre.includes(searchTerm) ? 'flex' : 'none';
+            });
+        });
         
         // Búsqueda de tutores
         const searchTutores = document.getElementById('searchTutores');
@@ -648,149 +792,223 @@ $conexion = null;
             });
         }
         
-        // Funciones para modales
-        function verProyecto(proyectoId) {
-            // Aquí normalmente harías una petición AJAX para obtener los detalles del proyecto
-            // Por simplicidad, simulamos que ya tenemos los datos
-            fetch(`/api/proyectos/${proyectoId}`)
-                .then(response => response.json())
-                .then(proyecto => {
-                    const detallesProyecto = document.getElementById('detallesProyecto');
-                    
-                    // Construir HTML con los detalles del proyecto
-                    let html = `
-                        <div class="proyecto-detalle">
-                            <div class="proyecto-header estado-${proyecto.estado}">
-                                <h3>${proyecto.titulo}</h3>
-                                <span class="proyecto-estado">${proyecto.estado.replace('_', ' ')}</span>
-                            </div>
-                            <div class="proyecto-info">
-                                <p><strong>Fecha de creación:</strong> ${new Date(proyecto.fecha_creacion).toLocaleDateString()}</p>
-                                <p><strong>Última actualización:</strong> ${proyecto.fecha_actualizacion ? new Date(proyecto.fecha_actualizacion).toLocaleDateString() : 'Sin actualizar'}</p>
-                                <p><strong>Tutor asignado:</strong> ${proyecto.tutor_nombre || 'No asignado'}</p>
-                                
-                                ${proyecto.archivo_proyecto ? 
-                                    `<p><strong>Archivo del proyecto:</strong> <a href="/uploads/proyectos/${proyecto.archivo_proyecto}" target="_blank" class="archivo-link">Descargar archivo</a></p>` : 
-                                    '<p><strong>Archivo del proyecto:</strong> No hay archivo adjunto</p>'
-                                }
-                                
-                                <h4>Descripción:</h4>
-                                <div class="descripcion-completa">${proyecto.descripcion.replace(/\n/g, '<br>')}</div>
-                                
-                                <h4>Estudiantes asignados:</h4>
-                                <ul class="estudiantes-lista">
-                                    ${proyecto.estudiantes.map(est => `<li>${est.rol_en_proyecto === 'lider' ? '👑 ' : ''}${est.nombre} (${est.email})</li>`).join('')}
-                                </ul>
-                                
-                                <h4>Avances del proyecto:</h4>
-                                ${proyecto.avances.length > 0 ? 
-                                    `<ul class="avances-lista">
-                                        ${proyecto.avances.map(av => `
-                                            <li>
-                                                <strong>${av.titulo}</strong> - ${new Date(av.fecha_registro).toLocaleDateString()}
-                                                <div>${av.descripcion}</div>
-                                                <div class="progreso-barra">
-                                                    <div class="progreso" style="width: ${av.porcentaje_avance}%"></div>
-                                                    <span>${av.porcentaje_avance}%</span>
-                                                </div>
-                                            </li>
-                                        `).join('')}
-                                    </ul>` : 
-                                    '<p>No hay avances registrados</p>'
-                                }
-                                
-                                <h4>Comentarios:</h4>
-                                ${proyecto.comentarios.length > 0 ? 
-                                    `<ul class="comentarios-lista">
-                                        ${proyecto.comentarios.map(com => `
-                                            <li>
-                                                <strong>${com.nombre_usuario}</strong> - ${new Date(com.fecha_comentario).toLocaleDateString()}
-                                                <div>${com.comentario}</div>
-                                            </li>
-                                        `).join('')}
-                                    </ul>` : 
-                                    '<p>No hay comentarios</p>'
-                                }
-                            </div>
-                        </div>
-                    `;
-                    
-                    detallesProyecto.innerHTML = html;
-                    abrirModal('modalVerProyecto');
-                })
-                .catch(error => {
-                    console.error('Error al obtener detalles del proyecto:', error);
-                    // Para fines de demostración, mostrar datos de ejemplo si falla la petición
-                    mostrarDatosEjemplo(proyectoId);
-                });
+        // Control de selección de estudiantes en el modal de edición
+        function actualizarEstudiantesSeleccionadosEdit() {
+            const seleccionados = document.querySelectorAll('.estudiante-checkbox-edit:checked');
+            const numSeleccionados = seleccionados.length;
+            
+            // Actualizar contador
+            const contadorEstudiantesEdit = document.getElementById('contadorEstudiantesEdit');
+            contadorEstudiantesEdit.textContent = `${numSeleccionados}/3`;
+            
+            // Limitar a 3 estudiantes
+            if (numSeleccionados > 3) {
+                alert('No puede seleccionar más de 3 estudiantes para un proyecto');
+                this.checked = false;
+                actualizarEstudiantesSeleccionadosEdit();
+                return;
+            }
+            
+            // Actualizar lista de estudiantes seleccionados
+            const listaEstudiantesActuales = document.getElementById('listaEstudiantesActuales');
+            listaEstudiantesActuales.innerHTML = '';
+            
+            seleccionados.forEach((checkbox, index) => {
+                const estudianteCard = checkbox.closest('.estudiante-card');
+                const nombreEstudiante = estudianteCard.querySelector('h3').textContent;
+                
+                const li = document.createElement('li');
+                li.textContent = `${index === 0 ? '👑 ' : ''}${nombreEstudiante}${index === 0 ? ' (Líder)' : ''}`;
+                listaEstudiantesActuales.appendChild(li);
+            });
         }
         
-        // Función para mostrar datos de ejemplo (solo para demostración)
-        function mostrarDatosEjemplo(proyectoId) {
-            const proyectoCard = document.querySelector(`.proyecto-card[data-id="${proyectoId}"]`);
-            if (!proyectoCard) return;
+        // Funciones para modales
+        function verProyecto(proyectoId) {
+            // Buscar el proyecto en los datos cargados
+            const proyecto = proyectos.find(p => p.id == proyectoId);
             
-            const titulo = proyectoCard.querySelector('h3').textContent;
-            const estado = proyectoCard.dataset.estado;
+            if (!proyecto) {
+                alert('No se pudo encontrar información del proyecto');
+                return;
+            }
             
+            // Obtener estudiantes asignados a este proyecto
+            const estudiantes = asignacionesEstudiantes[proyectoId] || [];
+            
+            // Crear objeto con los datos disponibles
+            const proyectoCompleto = {
+                ...proyecto,
+                estudiantes: estudiantes.map((est, index) => ({
+                    ...est,
+                    rol_en_proyecto: index === 0 ? 'lider' : 'miembro'
+                })),
+                avances: [],
+                comentarios: []
+            };
+            
+            // Mostrar detalles con la información disponible
+            mostrarDetallesProyecto(proyectoCompleto);
+        }
+        
+        function mostrarDetallesProyecto(proyecto) {
             const detallesProyecto = document.getElementById('detallesProyecto');
-            detallesProyecto.innerHTML = `
+            
+            // Construir HTML con los detalles del proyecto
+            let html = `
                 <div class="proyecto-detalle">
-                    <div class="proyecto-header estado-${estado}">
-                        <h3>${titulo}</h3>
-                        <span class="proyecto-estado">${estado.replace('_', ' ')}</span>
+                    <div class="proyecto-header estado-${proyecto.estado}">
+                        <h3>${proyecto.titulo}</h3>
+                        <span class="proyecto-estado">${proyecto.estado.replace('_', ' ')}</span>
                     </div>
                     <div class="proyecto-info">
-                        <p><strong>Fecha de creación:</strong> ${new Date().toLocaleDateString()}</p>
-                        <p><strong>Tutor asignado:</strong> No disponible en modo demo</p>
+                        <p><strong>Fecha de creación:</strong> ${proyecto.fecha_creacion}</p>
+                        <p><strong>Última actualización:</strong> ${proyecto.fecha_actualizacion || 'Sin actualizar'}</p>
+                        <p><strong>Tutor asignado:</strong> ${proyecto.tutor_nombre || 'No asignado'}</p>
+                        
+                        ${proyecto.archivo_proyecto ? 
+                            `<p><strong>Archivo del proyecto:</strong> <a href="/uploads/proyectos/${proyecto.archivo_proyecto}" target="_blank" class="archivo-link">Descargar archivo</a></p>` : 
+                            '<p><strong>Archivo del proyecto:</strong> No hay archivo adjunto</p>'
+                        }
                         
                         <h4>Descripción:</h4>
-                        <div class="descripcion-completa">Información no disponible en modo demo</div>
+                        <div class="descripcion-completa">${proyecto.descripcion.replace(/\n/g, '<br>')}</div>
                         
                         <h4>Estudiantes asignados:</h4>
-                        <p>Información no disponible en modo demo</p>
+                        ${proyecto.estudiantes && proyecto.estudiantes.length > 0 ? 
+                            `<ul class="estudiantes-lista">
+                                ${proyecto.estudiantes.map((est, index) => `<li>${index === 0 ? '👑 ' : ''}${est.estudiante_nombre} (${est.estudiante_email})${index === 0 ? ' (Líder)' : ''}</li>`).join('')}
+                            </ul>` : 
+                            '<p>No hay estudiantes asignados</p>'
+                        }
                         
                         <h4>Avances del proyecto:</h4>
-                        <p>Información no disponible en modo demo</p>
+                        ${proyecto.avances && proyecto.avances.length > 0 ? 
+                            `<ul class="avances-lista">
+                                ${proyecto.avances.map(av => `
+                                    <li>
+                                        <strong>${av.titulo}</strong> - ${new Date(av.fecha_registro).toLocaleDateString()}
+                                        <div>${av.descripcion}</div>
+                                        <div class="progreso-barra">
+                                            <div class="progreso" style="width: ${av.porcentaje_avance}%"></div>
+                                            <span>${av.porcentaje_avance}%</span>
+                                        </div>
+                                    </li>
+                                `).join('')}
+                            </ul>` : 
+                            '<p>No hay avances registrados</p>'
+                        }
                         
                         <h4>Comentarios:</h4>
-                        <p>Información no disponible en modo demo</p>
+                        ${proyecto.comentarios && proyecto.comentarios.length > 0 ? 
+                            `<ul class="comentarios-lista">
+                                ${proyecto.comentarios.map(com => `
+                                    <li>
+                                        <strong>${com.nombre_usuario}</strong> - ${new Date(com.fecha_comentario).toLocaleDateString()}
+                                        <div>${com.comentario}</div>
+                                    </li>
+                                `).join('')}
+                            </ul>` : 
+                            '<p>No hay comentarios</p>'
+                        }
                     </div>
                 </div>
             `;
             
+            detallesProyecto.innerHTML = html;
             abrirModal('modalVerProyecto');
         }
         
         function editarProyecto(proyectoId) {
-            // Aquí normalmente harías una petición AJAX para obtener los datos del proyecto
-            // Por simplicidad, simulamos que ya tenemos los datos
-            fetch(`/api/proyectos/${proyectoId}`)
-                .then(response => response.json())
-                .then(proyecto => {
-                    document.getElementById('edit_proyecto_id').value = proyecto.id;
-                    document.getElementById('edit_titulo').value = proyecto.titulo;
-                    document.getElementById('edit_descripcion').value = proyecto.descripcion;
-                    document.getElementById('edit_estado').value = proyecto.estado;
-                    document.getElementById('edit_tutor_id').value = proyecto.tutor_id || '';
-                    
-                    // Mostrar información del archivo actual si existe
-                    const archivoActualDiv = document.getElementById('archivo_actual');
-                    if (proyecto.archivo_proyecto) {
-                        archivoActualDiv.innerHTML = `
-                            <p>Archivo actual: <a href="/uploads/proyectos/${proyecto.archivo_proyecto}" target="_blank">${proyecto.archivo_proyecto}</a></p>
-                            <p>Si sube un nuevo archivo, reemplazará al actual.</p>
-                        `;
-                    } else {
-                        archivoActualDiv.innerHTML = '<p>No hay archivo adjunto actualmente.</p>';
-                    }
-                    
-                    abrirModal('modalEditarProyecto');
-                })
-                .catch(error => {
-                    console.error('Error al obtener datos del proyecto:', error);
-                    alert('Error al cargar los datos del proyecto. Intente nuevamente.');
-                });
+            // Buscar el proyecto en los datos cargados
+            const proyecto = proyectos.find(p => p.id == proyectoId);
+            
+            if (!proyecto) {
+                alert('No se pudo encontrar información del proyecto');
+                return;
+            }
+            
+            // Llenar el formulario con los datos del proyecto
+            document.getElementById('edit_proyecto_id').value = proyecto.id;
+            document.getElementById('eliminar_proyecto_id').value = proyecto.id;
+            document.getElementById('edit_titulo').value = proyecto.titulo;
+            document.getElementById('edit_descripcion').value = proyecto.descripcion;
+            document.getElementById('edit_estado').value = proyecto.estado;
+            
+            // Preseleccionar el tutor
+            if (proyecto.tutor_id) {
+                document.getElementById('edit_tutor_id').value = proyecto.tutor_id;
+            } else {
+                document.getElementById('edit_tutor_id').value = '';
+            }
+            
+            // Mostrar información del archivo actual si existe
+            const archivoActualDiv = document.getElementById('archivo_actual');
+            if (proyecto.archivo_proyecto) {
+                archivoActualDiv.innerHTML = `
+                    <p>Archivo actual: <a href="/uploads/proyectos/${proyecto.archivo_proyecto}" target="_blank">${proyecto.archivo_proyecto}</a></p>
+                    <p>Si sube un nuevo archivo, reemplazará al actual.</p>
+                `;
+            } else {
+                archivoActualDiv.innerHTML = '<p>No hay archivo adjunto actualmente.</p>';
+            }
+            
+            // Cargar estudiantes para edición
+            cargarEstudiantesParaEdicion(proyectoId);
+            
+            abrirModal('modalEditarProyecto');
+        }
+        
+        function cargarEstudiantesParaEdicion(proyectoId) {
+            // Obtener estudiantes asignados a este proyecto
+            const estudiantesAsignados = asignacionesEstudiantes[proyectoId] || [];
+            const estudiantesAsignadosIds = estudiantesAsignados.map(est => est.estudiante_id);
+            
+            // Filtrar estudiantes disponibles (no asignados a otros proyectos o asignados a este proyecto)
+            const estudiantesDisponibles = todosEstudiantes.filter(est => 
+                !est.proyecto_asignado_id || est.proyecto_asignado_id == proyectoId
+            );
+            
+            // Mostrar estudiantes en el contenedor
+            const contenedor = document.getElementById('estudiantesEditContainer');
+            contenedor.innerHTML = '';
+            
+            estudiantesDisponibles.forEach(estudiante => {
+                const isAsignado = estudiantesAsignadosIds.includes(estudiante.id);
+                
+                const div = document.createElement('div');
+                div.className = 'estudiante-card';
+                div.dataset.id = estudiante.id;
+                div.dataset.nombre = estudiante.nombre.toLowerCase();
+                
+                div.innerHTML = `
+                    <div class="estudiante-info">
+                        <h3>${estudiante.nombre}</h3>
+                        <p><strong>Código:</strong> ${estudiante.codigo_estudiante || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${estudiante.email}</p>
+                        <p><strong>Opción de Grado:</strong> ${estudiante.opcion_grado || 'No asignada'}</p>
+                        ${estudiante.nombre_proyecto ? `<p><strong>Proyecto:</strong> ${estudiante.nombre_proyecto}</p>` : ''}
+                    </div>
+                    <div class="estudiante-select">
+                        <input type="checkbox" name="edit_estudiantes[]" value="${estudiante.id}" class="estudiante-checkbox-edit" ${isAsignado ? 'checked' : ''}>
+                    </div>
+                `;
+                
+                contenedor.appendChild(div);
+            });
+            
+            // Agregar eventos a los checkboxes
+            document.querySelectorAll('.estudiante-checkbox-edit').forEach(checkbox => {
+                checkbox.addEventListener('change', actualizarEstudiantesSeleccionadosEdit);
+            });
+            
+            // Actualizar la lista de estudiantes seleccionados
+            actualizarEstudiantesSeleccionadosEdit();
+        }
+        
+        function confirmarEliminarProyecto() {
+            cerrarModal('modalEditarProyecto');
+            abrirModal('modalConfirmarEliminar');
         }
         
         function abrirModal(modalId) {
@@ -810,6 +1028,70 @@ $conexion = null;
                 document.body.style.overflow = 'auto';
             }
         }
+        
+        // Autocompletado para el título del proyecto
+        const tituloInput = document.getElementById('titulo');
+        const tituloSugerencias = document.getElementById('tituloSugerencias');
+        const editTituloInput = document.getElementById('edit_titulo');
+        const editTituloSugerencias = document.getElementById('editTituloSugerencias');
+        
+        // Obtener títulos de proyectos existentes
+        const titulosProyectos = <?= json_encode($titulosProyectos) ?>;
+        
+        // Función para mostrar sugerencias
+        function mostrarSugerencias(input, sugerenciasDiv) {
+            const valor = input.value.toLowerCase();
+            sugerenciasDiv.innerHTML = '';
+            
+            if (valor.length < 2) {
+                sugerenciasDiv.style.display = 'none';
+                return;
+            }
+            
+            const coincidencias = titulosProyectos.filter(titulo => 
+                titulo.toLowerCase().includes(valor)
+            );
+            
+            if (coincidencias.length === 0) {
+                sugerenciasDiv.style.display = 'none';
+                return;
+            }
+            
+            coincidencias.forEach(titulo => {
+                const div = document.createElement('div');
+                div.innerHTML = titulo;
+                div.addEventListener('click', function() {
+                    input.value = titulo;
+                    sugerenciasDiv.style.display = 'none';
+                });
+                sugerenciasDiv.appendChild(div);
+            });
+            
+            sugerenciasDiv.style.display = 'block';
+        }
+        
+        // Configurar autocompletado para el formulario de creación
+        tituloInput.addEventListener('input', function() {
+            mostrarSugerencias(tituloInput, tituloSugerencias);
+        });
+        
+        tituloInput.addEventListener('blur', function() {
+            // Pequeño retraso para permitir que el clic en la sugerencia funcione
+            setTimeout(() => {
+                tituloSugerencias.style.display = 'none';
+            }, 200);
+        });
+        
+        // Configurar autocompletado para el formulario de edición
+        editTituloInput.addEventListener('input', function() {
+            mostrarSugerencias(editTituloInput, editTituloSugerencias);
+        });
+        
+        editTituloInput.addEventListener('blur', function() {
+            setTimeout(() => {
+                editTituloSugerencias.style.display = 'none';
+            }, 200);
+        });
         
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {

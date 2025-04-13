@@ -718,6 +718,319 @@ input[type="file"] {
     min-width: 200px;
 }
 
+/* Estilos para modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 800px;
+    animation: slideDown 0.3s ease;
+}
+
+.modal-small {
+    max-width: 500px;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Estilos para detalles del proyecto */
+.proyecto-detalle {
+    margin-top: 15px;
+}
+
+.proyecto-detalle .proyecto-header {
+    padding: 15px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.proyecto-detalle .proyecto-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.proyecto-detalle .proyecto-estado {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.proyecto-detalle .proyecto-info {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+}
+
+.proyecto-detalle h4 {
+    margin: 20px 0 10px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.descripcion-completa {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.estudiantes-lista, .avances-lista, .comentarios-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.estudiantes-lista li, .comentarios-lista li {
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    border: 1px solid #eee;
+}
+
+.avances-lista li {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+
+.progreso-barra {
+    height: 20px;
+    background-color: #eee;
+    border-radius: 10px;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progreso {
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 10px;
+}
+
+.progreso-barra span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 20px;
+    color: #333;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.archivo-link {
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.archivo-link:hover {
+    color: #0b7dda;
+    text-decoration: underline;
+}
+
+.archivo-actual {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+/* Estados de proyectos */
+.estado-propuesto {
+    background-color: #2196F3;
+}
+
+.estado-en_revision {
+    background-color: #FF9800;
+}
+
+.estado-aprobado {
+    background-color: #4CAF50;
+}
+
+.estado-rechazado {
+    background-color: #F44336;
+}
+
+.estado-en_proceso {
+    background-color: #9C27B0;
+}
+
+.estado-finalizado {
+    background-color: #607D8B;
+}
+
+/* Botones */
+.btn-primary, .btn-secondary, .btn-danger {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary {
+    background-color: #2196F3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0b7dda;
+}
+
+.btn-secondary {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background-color: #e9e9e9;
+}
+
+.btn-danger {
+    background-color: #F44336;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #d32f2f;
+}
+
+.btn-primary:active, .btn-secondary:active, .btn-danger:active {
+    transform: scale(0.98);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.autocomplete-container {
+    position: relative;
+    width: 100%;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    display: none;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+/* Estilos para la sección de estudiantes en edición */
+.estudiantes-actuales {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.estudiantes-actuales h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.estudiantes-actuales ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.estudiantes-actuales li {
+    padding: 8px 12px;
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+}
+
+.error-text {
+    color: #f44336;
+    padding: 10px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    margin: 10px 0;
+}
 /* Responsive */
 @media (max-width: 768px) {
     .form-row {
