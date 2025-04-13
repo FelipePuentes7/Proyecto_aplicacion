@@ -156,7 +156,7 @@ $motivationalVideos = [
         </div>
     </main>
 
-    <footer class="bg-green-600 text-white p-4 mt-8">
+    <footer class="bg-green-600 text-white p-4 mt-8 ">
     <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="text-center md:text-left">
             <h4 class="font-bold">Fundacion Escuela Tecnologica de Neiva</h4>
