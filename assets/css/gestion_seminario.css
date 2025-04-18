@@ -575,6 +575,202 @@ input[type="file"] {
     border-radius: 4px;
     font-size: 0.9rem;
 }
+/* Estilos adicionales para la gestión de estudiantes */
+.estudiantes-container {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.estudiantes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.estudiantes-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.estudiante-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 12px;
+    position: relative;
+}
+
+.estudiante-item .btn-eliminar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.estudiante-item .btn-eliminar:hover {
+    background-color: #e60000;
+}
+
+.estudiante-info {
+    margin-bottom: 10px;
+}
+
+.estudiante-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.estudiante-acciones select,
+.estudiante-acciones input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.estudiante-acciones button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.estudiante-acciones button:hover {
+    background-color: #45a049;
+}
+
+.estudiantes-disponibles {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.estudiante-disponible {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.estudiante-disponible:last-child {
+    border-bottom: none;
+}
+
+.estudiante-disponible button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.estudiante-disponible button:hover {
+    background-color: #45a049;
+}
+
+.search-estudiantes {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.no-estudiantes {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.badge-inscrito {
+    background-color: #e7f3ff;
+    color: #0066cc;
+}
+
+.badge-aprobado {
+    background-color: #e6f7e6;
+    color: #2e7d32;
+}
+
+.badge-rechazado {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.badge-finalizado {
+    background-color: #e8eaf6;
+    color: #3f51b5;
+}
+
+.asistencia-check {
+    margin-right: 5px;
+}
+
+.nota-input {
+    width: 60px;
+    text-align: center;
+}
+
+.btn-guardar-cambios {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-guardar-cambios:hover {
+    background-color: #45a049;
+}
+
+.btn-agregar-estudiantes {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-agregar-estudiantes:hover {
+    background-color: #45a049;
+}
+
+.btn-agregar-estudiantes i {
+    font-size: 16px;
+}
 
 /* Responsive */
 @media (max-width: 768px) {

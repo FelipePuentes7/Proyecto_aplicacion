@@ -117,21 +117,22 @@ $conexion = null;
     <header>
         <div id="logo" onclick="toggleNav()">Logo</div>
         <nav id="navbar">
-            <ul>
-                <li><a href="#">Aprobación de Usuarios</a></li>
-                <li><a href="#">Gestión de Usuarios</a></li>
-                <li class="dropdown">
-                    <a href="#">Gestión de Modalidades de Grado</a>
-                    <ul class="dropdown-content">
-                        <li><a href="#">Seminario</a></li>
-                        <li><a href="#">Proyectos</a></li>
-                        <li><a href="#">Pasantías</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Reportes y Estadísticas</a></li>
-                <li><a href="#">Usuario: <?php echo $nombreUsuario; ?></a></li>
-                <li><a href="#">Cerrar Sesión</a></li>
-            </ul>
+        <ul>
+            <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
+            <li><a href="/views/administrador/aprobacion.php">Aprobación de Usuarios</a></li>
+            <li><a href="/views/administrador/usuarios.php">Gestión de Usuarios</a></li>
+            <li class="dropdown">
+                <a href="#">Gestión de Modalidades de Grado</a>
+                <ul class="dropdown-content">
+                    <li><a href="/views/administrador/gestion_seminario.php">Seminario</a></li>
+                    <li><a href="/views/administrador/gestion_proyectos.php">Proyectos</a></li>
+                    <li><a href="/views/administrador/gestion_pasantias.php">Pasantías</a></li>
+                </ul>
+            </li>
+            <li><a href="/views/administrador/reportes.php">Reportes y Estadísticas</a></li>
+            <li><a href="#">Rol: <?php echo htmlspecialchars($nombreUsuario); ?></a></li>
+            <li><a href="/views/general/login.php">Cerrar Sesión</a></li>
+        </ul>
         </nav>
     </header>
 

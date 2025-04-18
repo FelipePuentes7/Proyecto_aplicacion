@@ -59,6 +59,7 @@ if (isset($_GET['api'])) {
                 'fecha_creacion' => $seminario['fecha_creacion'],
                 'estudiantes' => array_map(function($est) {
                     return [
+                        'id' => $est['estudiante_id'],
                         'nombre' => $est['nombre'],
                         'email' => $est['email'],
                         'codigo' => $est['codigo_estudiante'],
@@ -104,6 +105,202 @@ if (isset($_GET['api'])) {
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode(['error' => 'Error al obtener los datos del seminario']);
+        }
+        exit;
+    }
+    
+    // API para obtener estudiantes disponibles para inscribir
+    if ($_GET['api'] === 'estudiantes_disponibles' && isset($_GET['seminario_id'])) {
+        try {
+            // Obtener estudiantes que tienen opción de grado "seminario" y no están inscritos en este seminario
+            $stmt = $conexion->prepare("
+                SELECT id, nombre, email, codigo_estudiante, documento
+                FROM usuarios
+                WHERE rol = 'estudiante' 
+                AND opcion_grado = 'seminario'
+                AND estado = 'activo'
+                AND id NOT IN (
+                    SELECT estudiante_id 
+                    FROM inscripciones_seminario 
+                    WHERE seminario_id = ?
+                )
+                ORDER BY nombre
+            ");
+            $stmt->execute([$_GET['seminario_id']]);
+            $estudiantes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            echo json_encode($estudiantes);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al obtener los estudiantes disponibles']);
+        }
+        exit;
+    }
+    
+    // API para inscribir estudiante
+    if ($_GET['api'] === 'inscribir_estudiante' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            
+            if (!isset($data['seminario_id']) || !isset($data['estudiante_id'])) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Datos incompletos']);
+                exit;
+            }
+            
+            // Verificar si hay cupos disponibles
+            $stmt = $conexion->prepare("
+                SELECT cupos, (SELECT COUNT(*) FROM inscripciones_seminario WHERE seminario_id = ?) as inscritos
+                FROM seminarios WHERE id = ?
+            ");
+            $stmt->execute([$data['seminario_id'], $data['seminario_id']]);
+            $seminario = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($seminario['inscritos'] >= $seminario['cupos']) {
+                http_response_code(400);
+                echo json_encode(['error' => 'No hay cupos disponibles en este seminario']);
+                exit;
+            }
+            
+            // Verificar que el estudiante no esté ya inscrito
+            $stmt = $conexion->prepare("
+                SELECT COUNT(*) as existe FROM inscripciones_seminario 
+                WHERE seminario_id = ? AND estudiante_id = ?
+            ");
+            $stmt->execute([$data['seminario_id'], $data['estudiante_id']]);
+            $existe = $stmt->fetch(PDO::FETCH_ASSOC)['existe'];
+            
+            if ($existe > 0) {
+                http_response_code(400);
+                echo json_encode(['error' => 'El estudiante ya está inscrito en este seminario']);
+                exit;
+            }
+            
+            // Inscribir al estudiante
+            $stmt = $conexion->prepare("
+                INSERT INTO inscripciones_seminario (seminario_id, estudiante_id, estado)
+                VALUES (?, ?, 'inscrito')
+            ");
+            $stmt->execute([$data['seminario_id'], $data['estudiante_id']]);
+            
+            // Obtener datos del estudiante para la respuesta
+            $stmt = $conexion->prepare("
+                SELECT u.nombre, u.email, u.codigo_estudiante, i.estado
+                FROM inscripciones_seminario i
+                JOIN usuarios u ON i.estudiante_id = u.id
+                WHERE i.seminario_id = ? AND i.estudiante_id = ?
+            ");
+            $stmt->execute([$data['seminario_id'], $data['estudiante_id']]);
+            $estudiante = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            echo json_encode([
+                'success' => true,
+                'mensaje' => 'Estudiante inscrito correctamente',
+                'estudiante' => [
+                    'id' => $data['estudiante_id'],
+                    'nombre' => $estudiante['nombre'],
+                    'email' => $estudiante['email'],
+                    'codigo' => $estudiante['codigo_estudiante'],
+                    'estado' => ucfirst($estudiante['estado']),
+                    'asistencia' => 0,
+                    'nota' => null
+                ]
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al inscribir al estudiante: ' . $e->getMessage()]);
+        }
+        exit;
+    }
+    
+    // API para eliminar inscripción
+    if ($_GET['api'] === 'eliminar_inscripcion' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            
+            if (!isset($data['seminario_id']) || !isset($data['estudiante_id'])) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Datos incompletos']);
+                exit;
+            }
+            
+            // Eliminar inscripción
+            $stmt = $conexion->prepare("
+                DELETE FROM inscripciones_seminario 
+                WHERE seminario_id = ? AND estudiante_id = ?
+            ");
+            $stmt->execute([$data['seminario_id'], $data['estudiante_id']]);
+            
+            if ($stmt->rowCount() === 0) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Inscripción no encontrada']);
+                exit;
+            }
+            
+            echo json_encode([
+                'success' => true,
+                'mensaje' => 'Inscripción eliminada correctamente'
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al eliminar la inscripción: ' . $e->getMessage()]);
+        }
+        exit;
+    }
+    
+    // API para actualizar estado, asistencia o nota de estudiante
+    if ($_GET['api'] === 'actualizar_inscripcion' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            
+            if (!isset($data['seminario_id']) || !isset($data['estudiante_id']) || 
+                (!isset($data['estado']) && !isset($data['asistencia']) && !isset($data['nota']))) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Datos incompletos']);
+                exit;
+            }
+            
+            // Construir la consulta según los campos a actualizar
+            $campos = [];
+            $valores = [];
+            
+            if (isset($data['estado'])) {
+                $campos[] = "estado = ?";
+                $valores[] = $data['estado'];
+            }
+            
+            if (isset($data['asistencia'])) {
+                $campos[] = "asistencia = ?";
+                $valores[] = $data['asistencia'] ? 1 : 0;
+            }
+            
+            if (isset($data['nota'])) {
+                $campos[] = "nota = ?";
+                $valores[] = $data['nota'];
+            }
+            
+            $valores[] = $data['seminario_id'];
+            $valores[] = $data['estudiante_id'];
+            
+            $sql = "UPDATE inscripciones_seminario SET " . implode(", ", $campos) . 
+                   " WHERE seminario_id = ? AND estudiante_id = ?";
+            
+            $stmt = $conexion->prepare($sql);
+            $stmt->execute($valores);
+            
+            if ($stmt->rowCount() === 0) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Inscripción no encontrada o sin cambios']);
+                exit;
+            }
+            
+            echo json_encode([
+                'success' => true,
+                'mensaje' => 'Inscripción actualizada correctamente'
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al actualizar la inscripción: ' . $e->getMessage()]);
         }
         exit;
     }
@@ -313,6 +510,7 @@ $conexion = null;
     <title>Gestión de Seminarios - FET</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/gestion_seminario.css">
+   
 </head>
 <body>
     <div id="logo" onclick="toggleNav()">Logo</div>
@@ -322,20 +520,20 @@ $conexion = null;
             <div id="nav-logo" onclick="toggleNav()">Logo</div>
         </div>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Aprobación de Usuarios</a></li>
-            <li><a href="#">Gestión de Usuarios</a></li>
+            <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
+            <li><a href="/views/administrador/aprobacion.php">Aprobación de Usuarios</a></li>
+            <li><a href="/views/administrador/usuarios.php">Gestión de Usuarios</a></li>
             <li class="dropdown">
-                <a href="#" class="active">Gestión de Modalidades de Grado</a>
+                <a href="#">Gestión de Modalidades de Grado</a>
                 <ul class="dropdown-content">
-                    <li><a href="#" class="active">Seminario</a></li>
-                    <li><a href="#">Proyectos</a></li>
-                    <li><a href="#">Pasantías</a></li>
+                    <li><a href="/views/administrador/gestion_seminario.php">Seminario</a></li>
+                    <li><a href="/views/administrador/gestion_proyectos.php">Proyectos</a></li>
+                    <li><a href="/views/administrador/gestion_pasantias.php">Pasantías</a></li>
                 </ul>
             </li>
-            <li><a href="#">Reportes y Estadísticas</a></li>
-            <li><a href="#">Usuario: <?php echo htmlspecialchars($nombreUsuario); ?></a></li>
-            <li><a href="#">Cerrar Sesión</a></li>
+            <li><a href="/views/administrador/reportes.php">Reportes y Estadísticas</a></li>
+            <li><a href="#">Rol: <?php echo htmlspecialchars($nombreUsuario); ?></a></li>
+            <li><a href="/views/general/login.php">Cerrar Sesión</a></li>
         </ul>
     </nav>
 
@@ -496,6 +694,28 @@ $conexion = null;
             <span class="close" onclick="cerrarModal('modalVerSeminario')">&times;</span>
             <h2>Detalles del Seminario</h2>
             <div id="detallesSeminario"></div>
+            
+            <!-- Sección para gestionar estudiantes -->
+            <div class="estudiantes-container">
+                <div class="estudiantes-header">
+                    <h3>Estudiantes Inscritos</h3>
+                    <button id="btnAgregarEstudiantes" class="btn-agregar-estudiantes" onclick="mostrarEstudiantesDisponibles()">
+                        <i>+</i> Agregar Estudiantes
+                    </button>
+                </div>
+                
+                <div id="estudiantesInscritos" class="estudiantes-lista">
+                    <!-- Aquí se cargarán los estudiantes inscritos -->
+                </div>
+                
+                <div id="estudiantesDisponiblesContainer" style="display: none;">
+                    <h3>Estudiantes Disponibles</h3>
+                    <input type="text" id="searchEstudiantes" class="search-estudiantes" placeholder="Buscar estudiantes...">
+                    <div id="estudiantesDisponibles" class="estudiantes-disponibles">
+                        <!-- Aquí se cargarán los estudiantes disponibles -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -614,6 +834,9 @@ $conexion = null;
     </footer>
 
     <script>
+        // Variables globales
+        let seminarioActualId = null;
+        
         // Funciones de navegación
         function toggleNav() {
             document.getElementById("navbar").classList.toggle("active");
@@ -635,10 +858,10 @@ $conexion = null;
         });
         
         listarSeminariosTab.addEventListener('click', () => {
-        listarSeminariosTab.classList.add('active');
-        crearSeminarioTab.classList.remove('active');
-        listarSeminariosSection.style.display = 'block';
-        crearSeminarioSection.style.display = 'none';
+            listarSeminariosTab.classList.add('active');
+            crearSeminarioTab.classList.remove('active');
+            listarSeminariosSection.style.display = 'block';
+            crearSeminarioSection.style.display = 'none';
         });
         
         // Búsqueda y filtrado de seminarios
@@ -671,6 +894,8 @@ $conexion = null;
         
         // Funciones para modales
         function verSeminario(seminarioId) {
+            seminarioActualId = seminarioId;
+            
             // Hacer una petición AJAX para obtener los detalles del seminario
             fetch(`?api=details&id=${seminarioId}`)
                 .then(response => response.json())
@@ -693,30 +918,322 @@ $conexion = null;
                                 <h4>Descripción:</h4>
                                 <div class="descripcion-completa">${data.descripcion}</div>
                                 
-                                <h4>Estudiantes Inscritos:</h4>
-                                ${data.estudiantes.length > 0 ? 
-                                    `<ul class="estudiantes-lista">
-                                        ${data.estudiantes.map(est => `
-                                            <li>
-                                                <strong>${est.nombre}</strong>
-                                                <br>Estado: ${est.estado}
-                                                ${est.asistencia ? '<br>✓ Asistió' : ''}
-                                                ${est.nota ? `<br>Nota: ${est.nota}` : ''}
-                                            </li>
-                                        `).join('')}
-                                    </ul>` : 
-                                    '<p>No hay estudiantes inscritos</p>'
+                                ${data.archivo_guia ? 
+                                    `<p><strong>Material:</strong> <a href="/uploads/seminarios/${data.archivo_guia}" target="_blank" class="archivo-link">Ver material</a></p>` : 
+                                    ''
                                 }
                             </div>
                         </div>
                     `;
                     
                     detallesSeminario.innerHTML = html;
+                    
+                    // Cargar estudiantes inscritos
+                    cargarEstudiantesInscritos(data.estudiantes);
+                    
                     abrirModal('modalVerSeminario');
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Error al cargar los detalles del seminario');
+                });
+        }
+        
+        function cargarEstudiantesInscritos(estudiantes) {
+            const estudiantesContainer = document.getElementById('estudiantesInscritos');
+            
+            if (estudiantes.length === 0) {
+                estudiantesContainer.innerHTML = '<div class="no-estudiantes">No hay estudiantes inscritos en este seminario.</div>';
+                return;
+            }
+            
+            let html = '';
+            estudiantes.forEach(est => {
+                html += `
+                    <div class="estudiante-item" data-id="${est.id}">
+                        <button class="btn-eliminar" onclick="eliminarInscripcion(${est.id})">×</button>
+                        <div class="estudiante-info">
+                            <h4>${est.nombre} <span class="badge badge-${est.estado.toLowerCase()}">${est.estado}</span></h4>
+                            <p><strong>Código:</strong> ${est.codigo || 'N/A'}</p>
+                            <p><strong>Email:</strong> ${est.email}</p>
+                        </div>
+                        <div class="estudiante-acciones">
+                            <div>
+                                <label>
+                                    <input type="checkbox" class="asistencia-check" ${est.asistencia ? 'checked' : ''} 
+                                        onchange="actualizarAsistencia(${est.id}, this.checked)">
+                                    Asistencia
+                                </label>
+                            </div>
+                            <div>
+                                <select onchange="actualizarEstado(${est.id}, this.value)">
+                                    <option value="inscrito" ${est.estado.toLowerCase() === 'inscrito' ? 'selected' : ''}>Inscrito</option>
+                                    <option value="aprobado" ${est.estado.toLowerCase() === 'aprobado' ? 'selected' : ''}>Aprobado</option>
+                                    <option value="rechazado" ${est.estado.toLowerCase() === 'rechazado' ? 'selected' : ''}>Rechazado</option>
+                                    <option value="finalizado" ${est.estado.toLowerCase() === 'finalizado' ? 'selected' : ''}>Finalizado</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="number" class="nota-input" placeholder="Nota" min="0" max="5" step="0.1" 
+                                    value="${est.nota || ''}" onchange="actualizarNota(${est.id}, this.value)">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            estudiantesContainer.innerHTML = html;
+        }
+        
+        function mostrarEstudiantesDisponibles() {
+            if (!seminarioActualId) return;
+            
+            const container = document.getElementById('estudiantesDisponiblesContainer');
+            container.style.display = 'block';
+            
+            // Cargar estudiantes disponibles
+            fetch(`?api=estudiantes_disponibles&seminario_id=${seminarioActualId}`)
+                .then(response => response.json())
+                .then(estudiantes => {
+                    const estudiantesContainer = document.getElementById('estudiantesDisponibles');
+                    
+                    if (estudiantes.length === 0) {
+                        estudiantesContainer.innerHTML = '<div class="no-estudiantes">No hay estudiantes disponibles para inscribir.</div>';
+                        return;
+                    }
+                    
+                    let html = '';
+                    estudiantes.forEach(est => {
+                        html += `
+                            <div class="estudiante-disponible" data-id="${est.id}" data-nombre="${est.nombre.toLowerCase()}">
+                                <div>
+                                    <strong>${est.nombre}</strong>
+                                    <br>Código: ${est.codigo_estudiante || 'N/A'}
+                                    <br>Documento: ${est.documento}
+                                </div>
+                                <button onclick="inscribirEstudiante(${est.id})">Inscribir</button>
+                            </div>
+                        `;
+                    });
+                    
+                    estudiantesContainer.innerHTML = html;
+                    
+                    // Configurar búsqueda de estudiantes
+                    const searchEstudiantes = document.getElementById('searchEstudiantes');
+                    searchEstudiantes.value = '';
+                    searchEstudiantes.addEventListener('input', filtrarEstudiantesDisponibles);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al cargar los estudiantes disponibles');
+                });
+        }
+        
+        function filtrarEstudiantesDisponibles() {
+            const searchTerm = document.getElementById('searchEstudiantes').value.toLowerCase();
+            const estudiantes = document.querySelectorAll('.estudiante-disponible');
+            
+            estudiantes.forEach(est => {
+                const nombre = est.dataset.nombre;
+                est.style.display = nombre.includes(searchTerm) ? 'flex' : 'none';
+            });
+        }
+        
+        function inscribirEstudiante(estudianteId) {
+            if (!seminarioActualId) return;
+            
+            fetch(`?api=inscribir_estudiante`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    seminario_id: seminarioActualId,
+                    estudiante_id: estudianteId
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                
+                // Actualizar la lista de estudiantes inscritos
+                const estudiantesInscritos = document.getElementById('estudiantesInscritos');
+                
+                // Si no hay estudiantes, limpiar el mensaje
+                if (estudiantesInscritos.querySelector('.no-estudiantes')) {
+                    estudiantesInscritos.innerHTML = '';
+                }
+                
+                // Agregar el nuevo estudiante
+                const nuevoEstudiante = document.createElement('div');
+                nuevoEstudiante.className = 'estudiante-item';
+                nuevoEstudiante.dataset.id = data.estudiante.id;
+                nuevoEstudiante.innerHTML = `
+                    <button class="btn-eliminar" onclick="eliminarInscripcion(${data.estudiante.id})">×</button>
+                    <div class="estudiante-info">
+                        <h4>${data.estudiante.nombre} <span class="badge badge-inscrito">Inscrito</span></h4>
+                        <p><strong>Código:</strong> ${data.estudiante.codigo || 'N/A'}</p>
+                        <p><strong>Email:</strong> ${data.estudiante.email}</p>
+                    </div>
+                    <div class="estudiante-acciones">
+                        <div>
+                            <label>
+                                <input type="checkbox" class="asistencia-check" onchange="actualizarAsistencia(${data.estudiante.id}, this.checked)">
+                                Asistencia
+                            </label>
+                        </div>
+                        <div>
+                            <select onchange="actualizarEstado(${data.estudiante.id}, this.value)">
+                                <option value="inscrito" selected>Inscrito</option>
+                                <option value="aprobado">Aprobado</option>
+                                <option value="rechazado">Rechazado</option>
+                                <option value="finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <input type="number" class="nota-input" placeholder="Nota" min="0" max="5" step="0.1" 
+                                onchange="actualizarNota(${data.estudiante.id}, this.value)">
+                        </div>
+                    </div>
+                `;
+                
+                estudiantesInscritos.appendChild(nuevoEstudiante);
+                
+                // Eliminar el estudiante de la lista de disponibles
+                const estudianteDisponible = document.querySelector(`.estudiante-disponible[data-id="${data.estudiante.id}"]`);
+                if (estudianteDisponible) {
+                    estudianteDisponible.remove();
+                }
+                
+                // Actualizar contador de inscritos en los detalles
+                const seminarioDetalle = document.querySelector('.seminario-detalle');
+                if (seminarioDetalle) {
+                    const cuposInfo = seminarioDetalle.querySelector('p:nth-child(5)');
+                    if (cuposInfo) {
+                        const [inscritos, cupos] = cuposInfo.textContent.split(':')[1].trim().split('/');
+                        cuposInfo.innerHTML = `<strong>Cupos:</strong> ${parseInt(inscritos) + 1}/${cupos}`;
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al inscribir al estudiante');
+            });
+        }
+        
+        function eliminarInscripcion(estudianteId) {
+            if (!seminarioActualId) return;
+            
+            if (!confirm('¿Está seguro que desea eliminar a este estudiante del seminario?')) {
+                return;
+            }
+            
+            fetch(`?api=eliminar_inscripcion`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    seminario_id: seminarioActualId,
+                    estudiante_id: estudianteId
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                
+                // Eliminar el estudiante de la lista
+                const estudianteItem = document.querySelector(`.estudiante-item[data-id="${estudianteId}"]`);
+                if (estudianteItem) {
+                    estudianteItem.remove();
+                }
+                
+                // Si no quedan estudiantes, mostrar mensaje
+                const estudiantesInscritos = document.getElementById('estudiantesInscritos');
+                if (estudiantesInscritos.children.length === 0) {
+                    estudiantesInscritos.innerHTML = '<div class="no-estudiantes">No hay estudiantes inscritos en este seminario.</div>';
+                }
+                
+                // Actualizar contador de inscritos en los detalles
+                const seminarioDetalle = document.querySelector('.seminario-detalle');
+                if (seminarioDetalle) {
+                    const cuposInfo = seminarioDetalle.querySelector('p:nth-child(5)');
+                    if (cuposInfo) {
+                        const [inscritos, cupos] = cuposInfo.textContent.split(':')[1].trim().split('/');
+                        cuposInfo.innerHTML = `<strong>Cupos:</strong> ${Math.max(0, parseInt(inscritos) - 1)}/${cupos}`;
+                    }
+                }
+                
+                // Recargar estudiantes disponibles si están visibles
+                if (document.getElementById('estudiantesDisponiblesContainer').style.display !== 'none') {
+                    mostrarEstudiantesDisponibles();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al eliminar la inscripción');
+            });
+        }
+        
+        function actualizarEstado(estudianteId, estado) {
+            actualizarInscripcion(estudianteId, { estado });
+            
+            // Actualizar la badge en la UI
+            const estudianteItem = document.querySelector(`.estudiante-item[data-id="${estudianteId}"]`);
+            if (estudianteItem) {
+                const badge = estudianteItem.querySelector('.badge');
+                if (badge) {
+                    badge.className = `badge badge-${estado}`;
+                    badge.textContent = estado.charAt(0).toUpperCase() + estado.slice(1);
+                }
+            }
+        }
+        
+        function actualizarAsistencia(estudianteId, asistencia) {
+            actualizarInscripcion(estudianteId, { asistencia });
+        }
+        
+        function actualizarNota(estudianteId, nota) {
+            if (nota === '') return;
+            
+            const notaNum = parseFloat(nota);
+            if (isNaN(notaNum) || notaNum < 0 || notaNum > 5) {
+                alert('La nota debe ser un número entre 0 y 5');
+                return;
+            }
+            
+            actualizarInscripcion(estudianteId, { nota: notaNum });
+        }
+        
+        function actualizarInscripcion(estudianteId, datos) {
+                if (!seminarioActualId) return;
+                
+                fetch(`?api=actualizar_inscripcion`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        seminario_id: seminarioActualId,
+                        estudiante_id: estudianteId,
+                        ...datos
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al actualizar la inscripción');
                 });
         }
         
@@ -771,6 +1288,12 @@ $conexion = null;
         function cerrarModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
+            
+            // Si cerramos el modal de ver seminario, ocultamos también la sección de estudiantes disponibles
+            if (modalId === 'modalVerSeminario') {
+                document.getElementById('estudiantesDisponiblesContainer').style.display = 'none';
+                seminarioActualId = null;
+            }
         }
         
         // Cerrar modal al hacer clic fuera del contenido
@@ -778,6 +1301,12 @@ $conexion = null;
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = 'none';
                 document.body.style.overflow = 'auto';
+                
+                // Si cerramos el modal de ver seminario, ocultamos también la sección de estudiantes disponibles
+                if (event.target.id === 'modalVerSeminario') {
+                    document.getElementById('estudiantesDisponiblesContainer').style.display = 'none';
+                    seminarioActualId = null;
+                }
             }
         }
         
