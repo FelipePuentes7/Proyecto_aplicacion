@@ -1,3 +1,35 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+session_start();
+
+require_once realpath(__DIR__ . '/../../config/conexion.php');
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['usuario']['id'])) {
+    header('Location: /views/general/login.php');
+    exit();
+}
+
+// Obtener los datos del usuario desde la base de datos
+try {
+    $userId = $_SESSION['usuario']['id'];
+    $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $stmt->execute([$userId]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if (!$user) {
+        die("Error: No se encontró información del usuario.");
+    }
+    
+} catch (PDOException $e) {
+    die("Error de base de datos: " . $e->getMessage());
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +50,7 @@
 
         <!-- Links de navegación -->
         <div class="nav-links">
-            <a href="#">Inicio</a>
+            <a href="/views/estudiantes/Inicio_Estudiante.php">Inicio</a>
             <a href="#">Material de Apoyo</a>
             <a href="#">Tutorías</a>
         </div>
@@ -31,8 +63,10 @@
             <div class="dropdown">
                 <i class="fa-solid fa-user"></i> <!-- Ícono de perfil -->
                 <div class="dropdown-content">
-                    <a href="#">Editar Perfil</a>
-                    <a href="#">Cerrar Sesión</a>
+                    <a href="/views/estudiantes/Perfil_estudiante.php">Editar Perfil</a>
+                    <a href="/views/general/login.php" class="logout-btn" onclick="cerrarSesion(event)">
+                <i class="fa-solid fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
                 </div>
             </div>
         </div>
@@ -41,7 +75,7 @@
 <section class="Bienvenido">
 
     <div class="mensaje">
-        <h3><strong>¡BIENVENIDO, [NOMBRE DEL ESTUDIANTE]!</strong></h3>
+        <h3><strong>¡BIENVENIDO, <?php echo htmlspecialchars($user['nombre']); ?>!</strong></h3>
 
             <p>Organiza y Gestiona tu proyecto de manera eficiente. <br>Aqui Encontraras todo lo que necesitas para avanzar.</p>
     </div>
@@ -52,6 +86,7 @@
 
 <div class="calendario">
     
+
 
 </div>
 
