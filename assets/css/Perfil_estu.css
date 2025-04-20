@@ -1,0 +1,427 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 2px solid red; /* Borde rojo para identificar */
+}
+
+.navbar .logo {
+    flex: 1;
+    padding-left: 10px;
+    border: 2px solid blue; /* Borde azul para identificar */
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 5rem;
+    flex: 2;
+    justify-content: center;
+    font-size: 18px;
+    border: 2px solid green; /* Borde verde para identificar */
+}
+
+.navbar .nav-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.notifications i{
+    font-size: 25px;
+}
+
+.dropdown i{
+    font-size: 25px;
+    padding-right: 5px;
+}
+
+.navbar .user-actions {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+    border: 2px solid orange; /* Borde naranja para identificar */
+}
+
+.user-actions .dropdown {
+    position: relative;
+}
+
+.user-actions .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid gray;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.user-actions .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+}
+
+
+/*-----------------------------------------*/
+
+.profile-container {
+    margin: 4rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    border: 2px solid red; /* Borde rojo para identificar */
+    
+}
+
+.Titulo_perfil {
+    justify-items: center;
+    border: 2px solid blue;
+    padding: 1rem;
+    width: 120%;
+}
+
+.Titulo_perfil h2 {
+    font-size: 2rem;
+    padding: 6px;
+}
+
+.profile_info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    border: 2px solid green;
+    margin: 1rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.profile_info p{
+    font-size: 1.2rem;
+    gap: 1.2rem;
+    padding: 6px;
+    padding: 1rem;
+   
+}
+
+.profile_info p i{
+    margin-right: 10px;
+    font-size: 2rem;
+}
+/*---------------------------------------------------*/
+
+.projects {
+    margin: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 2px solid purple;
+    padding: 1rem;
+    
+}
+
+.project-item {
+    border: 2px solid gray;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 20px;
+}
+
+.projects h3 {
+    font-size: 2rem;
+    font-weight: bold;
+
+}
+
+
+ /* Estilos adicionales para la sección de proyectos */
+ .projects {
+    margin: 30px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.projects h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.project-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.project-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.project-status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status-propuesto { background-color: #f1c40f; color: #000; }
+.status-en_revision { background-color: #3498db; color: #fff; }
+.status-aprobado { background-color: #2ecc71; color: #fff; }
+.status-rechazado { background-color: #e74c3c; color: #fff; }
+.status-en_proceso { background-color: #9b59b6; color: #fff; }
+.status-finalizado { background-color: #34495e; color: #fff; }
+
+.project-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    margin-bottom: 10px;
+}
+
+.detail-item strong {
+    color: #2c3e50;
+}
+
+.team-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.team-title {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.team-member {
+    background-color: #f8f9fa;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.team-member i {
+    margin-right: 5px;
+    color: #3498db;
+}
+
+.team-member.leader {
+    background-color: #e3f2fd;
+    border: 1px solid #bbdefb;
+}
+
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-action i {
+    margin-right: 5px;
+}
+
+.btn-action:hover {
+    background-color: #2980b9;
+}
+
+.no-projects {
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-projects p {
+    margin-bottom: 20px;
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 5px;
+}
+
+.avance-info {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 0 5px 5px 0;
+}
+
+.avance-info p {
+    margin: 5px 0;
+}
+
+.avance-info .avance-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #7f8c8d;
+    font-size: 0.9em;
+    margin-top: 8px;
+}
+
+/*---------------------ESTILO FOOTER------------------*/
+
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid purple; /* Borde morado para identificar */
+}
+
+.footer .info-section {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid black; /* Línea negra divisoria */
+    border: 2px solid teal; /* Borde teal para identificar */
+    
+}
+
+.footer .info-section .links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 2px solid yellow; /* Borde amarillo para identificar */
+    flex: 1;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.title_footer{
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.footer .info-section .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 2px solid rgb(170, 11, 101); /* Borde amarillo para identificar */
+    flex: 1;
+    padding-top: 2.5rem;
+    font-size: 1.2rem;
+}
+
+.footer .info-section .image {
+    border: 2px solid gray; /* Borde gris para identificar */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .social-section {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid green; /* Borde verde para identificar */
+}
+
+.footer .social-section .social-links {
+    display: flex;
+    gap: 1rem;
+    border: 2px solid orange; /* Borde naranja para identificar */
+}
+
+.footer .social-section .social-links a {
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.footer .social-section .logo {
+    border: 2px solid blue; /* Borde azul para identificar */
+}

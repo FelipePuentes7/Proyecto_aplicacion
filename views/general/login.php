@@ -11,12 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     try {
-        // Buscar usuario en la base de datos
+        // Buscar usuario en la base de datos - la estructura de la tabla usuarios se mantiene similar
         $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE email = ?");
         $stmt->execute([$email]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario && password_verify($password, $usuario['password'])) {
+            // Almacenar información básica del usuario en la sesión
             $_SESSION['usuario'] = [
                 'id' => $usuario['id'],
                 'nombre' => $usuario['nombre'],
@@ -33,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: /views/tutor/dashboard.php');
                     exit();
                 case 'estudiante':
-                    header('Location: /views/estudiante/dashboard.php');
+                    header('Location: /views/estudiantes/Inicio_Estudiante.php');
                     exit();
                 default:
                     header('Location: /');

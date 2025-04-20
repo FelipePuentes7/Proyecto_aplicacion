@@ -2,20 +2,46 @@
 session_start();
 require_once __DIR__ . '/../../config/conexion.php';
 
-// Manejar solicitudes API
+// Habilitar reporte de errores para depuración (¡deshabilitar en producción!)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Función para manejar valores nulos y sanitizar para HTML (o salida JSON)
+function htmlSafe($str) {
+    return $str !== null ? htmlspecialchars((string)$str, ENT_QUOTES, 'UTF-8') : '';
+}
+
+// Función para validar formato de fecha Y-M-D
+function isValidDate($dateString) {
+    $date = DateTime::createFromFormat('Y-m-d', $dateString);
+    return $date && $date->format('Y-m-d') === $dateString;
+}
+
+
+// --- Manejar solicitudes API ---
+// Estas APIs se llaman desde el JavaScript para obtener detalles, editar, etc.
 if (isset($_GET['api'])) {
     header('Content-Type: application/json');
-    
-    // API para obtener detalles completos de la pasantía
+
+    // API para obtener detalles completos de la pasantía (para modal "Ver Detalles" y "Editar")
     if ($_GET['api'] === 'details' && isset($_GET['id'])) {
         try {
+            $pasantiaId = filter_var($_GET['id'], FILTER_VALIDATE_INT); // Sanitizar ID
+             if ($pasantiaId === false) {
+                  http_response_code(400);
+                  echo json_encode(['error' => 'ID de pasantía no válido']);
+                  exit;
+             }
+
             // Obtener detalles de la pasantía
             $stmt = $conexion->prepare("
-                SELECT p.*, 
-                       e.nombre as estudiante_nombre, 
-                       e.codigo_estudiante, 
+                SELECT p.*,
+                       e.nombre as estudiante_nombre,
+                       e.codigo_estudiante,
                        e.email as estudiante_email,
                        e.documento as estudiante_documento,
+                       e.telefono as estudiante_telefono,
                        t.nombre as tutor_nombre,
                        t.email as tutor_email
                 FROM pasantias p
@@ -23,7 +49,7 @@ if (isset($_GET['api'])) {
                 LEFT JOIN usuarios t ON p.tutor_id = t.id
                 WHERE p.id = ?
             ");
-            $stmt->execute([$_GET['id']]);
+            $stmt->execute([$pasantiaId]);
             $pasantia = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$pasantia) {
@@ -32,411 +58,800 @@ if (isset($_GET['api'])) {
                 exit;
             }
 
-            // Formatear fechas
-            if (!empty($pasantia['fecha_inicio'])) {
-                $pasantia['fecha_inicio_formateada'] = date('d/m/Y', strtotime($pasantia['fecha_inicio']));
-                $pasantia['fecha_inicio'] = date('Y-m-d', strtotime($pasantia['fecha_inicio']));
-            } else {
-                $pasantia['fecha_inicio_formateada'] = 'No establecida';
-            }
-            
-            if (!empty($pasantia['fecha_fin'])) {
-                $pasantia['fecha_fin_formateada'] = date('d/m/Y', strtotime($pasantia['fecha_fin']));
-                $pasantia['fecha_fin'] = date('Y-m-d', strtotime($pasantia['fecha_fin']));
-            } else {
-                $pasantia['fecha_fin_formateada'] = 'No establecida';
-            }
-            
-            $pasantia['fecha_creacion_formateada'] = date('d/m/Y H:i', strtotime($pasantia['fecha_creacion']));
+            // Formatear fechas y sanitizar campos para la visualización/edición
+             // Sanitizar campos de texto y fechas antes de enviarlos en JSON
+             $response = [
+                'id' => (int)$pasantia['id'],
+                'titulo' => htmlSafe($pasantia['titulo'] ?? 'Sin título'),
+                'descripcion' => htmlSafe($pasantia['descripcion'] ?? ''),
+                'empresa' => htmlSafe($pasantia['empresa'] ?? 'No especificada'),
+                'direccion_empresa' => htmlSafe($pasantia['direccion_empresa'] ?? ''),
+                'contacto_empresa' => htmlSafe($pasantia['contacto_empresa'] ?? ''),
+                'supervisor_empresa' => htmlSafe($pasantia['supervisor_empresa'] ?? ''),
+                'telefono_supervisor' => htmlSafe($pasantia['telefono_supervisor'] ?? ''),
+                'fecha_inicio' => htmlSafe($pasantia['fecha_inicio']),
+                'fecha_fin' => htmlSafe($pasantia['fecha_fin']),
+                'fecha_inicio_formateada' => !empty($pasantia['fecha_inicio']) ? date('d/m/Y', strtotime($pasantia['fecha_inicio'])) : 'No establecida',
+                'fecha_fin_formateada' => !empty($pasantia['fecha_fin']) ? date('d/m/Y', strtotime($pasantia['fecha_fin'])) : 'No establecida',
+                'estado' => htmlSafe($pasantia['estado'] ?? 'pendiente'),
+                'estado_formateado' => ucfirst(str_replace('_', ' ', htmlSafe($pasantia['estado'] ?? 'pendiente'))),
+                'estudiante_id' => $pasantia['estudiante_id'] !== null ? (int)$pasantia['estudiante_id'] : null,
+                'estudiante_nombre' => htmlSafe($pasantia['estudiante_nombre'] ?? 'No asignado'),
+                'codigo_estudiante' => htmlSafe($pasantia['codigo_estudiante'] ?? 'N/A'),
+                'estudiante_email' => htmlSafe($pasantia['estudiante_email'] ?? 'N/A'),
+                'estudiante_documento' => htmlSafe($pasantia['estudiante_documento'] ?? 'N/A'),
+                'estudiante_telefono' => htmlSafe($pasantia['estudiante_telefono'] ?? 'N/A'),
+                'tutor_id' => $pasantia['tutor_id'] !== null ? (int)$pasantia['tutor_id'] : null,
+                'tutor_nombre' => htmlSafe($pasantia['tutor_nombre'] ?? 'No asignado'),
+                'tutor_email' => htmlSafe($pasantia['tutor_email'] ?? 'N/A'),
+                'archivo_documento' => htmlSafe($pasantia['archivo_documento']),
+                'documento_adicional' => htmlSafe($pasantia['documento_adicional']),
+                'fecha_creacion' => htmlSafe($pasantia['fecha_creacion']),
+                'fecha_creacion_formateada' => date('d/m/Y H:i', strtotime($pasantia['fecha_creacion']))
+            ];
 
-            echo json_encode($pasantia);
+
+            echo json_encode($response);
         } catch (Exception $e) {
             http_response_code(500);
+            error_log("API Error (details): " . $e->getMessage());
             echo json_encode(['error' => 'Error al obtener los detalles de la pasantía: ' . $e->getMessage()]);
         }
-        exit;
+        exit; // Salir después de la respuesta API
     }
-    
+
     // API para obtener tutores disponibles
     if ($_GET['api'] === 'tutores') {
         try {
             $stmt = $conexion->prepare("
-                SELECT id, nombre, email 
-                FROM usuarios 
-                WHERE rol = 'tutor' AND estado = 'activo'
-                ORDER BY nombre
-            ");
+       SELECT id, nombre, email, codigo_estudiante, documento, telefono, nombre_empresa, ciclo
+       FROM usuarios
+       WHERE rol = 'estudiante'
+       AND opcion_grado = 'pasantia'
+       AND estado = 'activo'
+       AND id NOT IN (
+           SELECT estudiante_id
+           FROM pasantias
+           WHERE estado != 'finalizada' AND estado != 'rechazada'
+       )
+       ORDER BY nombre
+   ");
             $stmt->execute();
             $tutores = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
-            echo json_encode($tutores);
+
+             // Sanitizar datos antes de enviar
+             $tutores_sanitized = array_map(function($tutor) {
+                  return [
+                       'id' => (int)$tutor['id'], // Asegurarse que es INT
+                       'nombre' => htmlSafe($tutor['nombre']),
+                       'email' => htmlSafe($tutor['email'])
+                  ];
+             }, $tutores);
+
+
+            echo json_encode($tutores_sanitized);
         } catch (Exception $e) {
             http_response_code(500);
+            error_log("API Error (tutores): " . $e->getMessage());
             echo json_encode(['error' => 'Error al obtener los tutores: ' . $e->getMessage()]);
         }
         exit;
     }
-    
+
     // API para obtener estudiantes disponibles para pasantías
     if ($_GET['api'] === 'estudiantes_disponibles') {
         try {
             $stmt = $conexion->prepare("
-                SELECT id, nombre, email, codigo_estudiante, documento
+                SELECT id, nombre, email, codigo_estudiante, documento, telefono, nombre_empresa, ciclo
                 FROM usuarios
-                WHERE rol = 'estudiante' 
+                WHERE rol = 'estudiante'
                 AND opcion_grado = 'pasantia'
                 AND estado = 'activo'
                 AND id NOT IN (
-                    SELECT estudiante_id 
-                    FROM pasantias 
-                    WHERE estado != 'finalizada' AND estado != 'rechazada'
+                    SELECT estudiante_id
+                    FROM pasantias
+                    WHERE estado != 'finalizada' AND estado != 'rechazada' -- Considerar otros estados si es necesario
                 )
                 ORDER BY nombre
             ");
             $stmt->execute();
             $estudiantes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
-            echo json_encode($estudiantes);
+
+             // Sanitizar datos antes de enviar
+             $estudiantes_sanitized = array_map(function($est) {
+                  return [
+                       'id' => (int)$est['id'], // Asegurarse que es INT
+                       'nombre' => htmlSafe($est['nombre']),
+                       'email' => htmlSafe($est['email']),
+                       'codigo_estudiante' => htmlSafe($est['codigo_estudiante'] ?? 'N/A'),
+                       'documento' => htmlSafe($est['documento'] ?? 'N/A'),
+                       'telefono' => htmlSafe($est['telefono'] ?? 'No registrado'),
+                       'nombre_empresa' => htmlSafe($est['nombre_empresa'] ?? ''),
+                       'ciclo' => htmlSafe($est['ciclo'] ?? '')
+                  ];
+             }, $estudiantes);
+
+            echo json_encode($estudiantes_sanitized);
         } catch (Exception $e) {
             http_response_code(500);
+            error_log("API Error (estudiantes_disponibles): " . $e->getMessage());
             echo json_encode(['error' => 'Error al obtener los estudiantes disponibles: ' . $e->getMessage()]);
         }
         exit;
     }
-    
+
     // API para obtener datos de estudiante
     if ($_GET['api'] === 'estudiante_info' && isset($_GET['id'])) {
         try {
+            $estudianteId = filter_var($_GET['id'], FILTER_VALIDATE_INT); // Sanitizar ID
+             if ($estudianteId === false) {
+                  http_response_code(400);
+                  echo json_encode(['error' => 'ID de estudiante no válido']);
+                  exit;
+             }
+
             $stmt = $conexion->prepare("
-                SELECT nombre, email, codigo_estudiante, documento, telefono, nombre_empresa, ciclo
+                SELECT id, nombre, email, codigo_estudiante, documento, telefono, nombre_empresa, ciclo
                 FROM usuarios
-                WHERE id = ? AND rol = 'estudiante' AND opcion_grado = 'pasantia'
+                WHERE id = ? AND rol = 'estudiante' AND opcion_grado = 'pasantia' -- Asegurarse que es estudiante de pasantía
             ");
-            $stmt->execute([$_GET['id']]);
+            $stmt->execute([$estudianteId]);
             $estudiante = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             if (!$estudiante) {
                 http_response_code(404);
-                echo json_encode(['error' => 'Estudiante no encontrado']);
+                echo json_encode(['error' => 'Estudiante no encontrado o no elegible para pasantía']);
                 exit;
             }
-            
-            echo json_encode($estudiante);
+
+             // Sanitizar datos antes de enviar
+             $response = [
+                  'id' => (int)$estudiante['id'], // Asegurarse que es INT
+                  'nombre' => htmlSafe($estudiante['nombre']),
+                  'email' => htmlSafe($estudiante['email']),
+                  'codigo_estudiante' => htmlSafe($estudiante['codigo_estudiante'] ?? 'N/A'),
+                  'documento' => htmlSafe($estudiante['documento'] ?? 'N/A'),
+                  'telefono' => htmlSafe($estudiante['telefono'] ?? 'No registrado'),
+                  'nombre_empresa' => htmlSafe($estudiante['nombre_empresa'] ?? ''),
+                  'ciclo' => htmlSafe($estudiante['ciclo'] ?? '')
+             ];
+
+            echo json_encode($response);
         } catch (Exception $e) {
             http_response_code(500);
+            error_log("API Error (estudiante_info): " . $e->getMessage());
             echo json_encode(['error' => 'Error al obtener la información del estudiante: ' . $e->getMessage()]);
         }
         exit;
     }
-    
-    // API para actualizar pasantía
+
+    // API para actualizar pasantía (ahora usa transacción)
     if ($_GET['api'] === 'actualizar' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
+             $conexion->beginTransaction(); // Iniciar transacción
+
             $data = json_decode(file_get_contents('php://input'), true);
-            
+
             if (!isset($data['id'])) {
                 http_response_code(400);
                 echo json_encode(['error' => 'ID de pasantía no proporcionado']);
+                 $conexion->rollBack(); // Revertir
                 exit;
             }
-            
+
+             $pasantiaId = filter_var($data['id'], FILTER_VALIDATE_INT);
+             if ($pasantiaId === false) {
+                  http_response_code(400);
+                  echo json_encode(['error' => 'ID de pasantía inválido']);
+                   $conexion->rollBack(); // Revertir
+                  exit;
+             }
+
+
             // Construir la consulta según los campos a actualizar
             $campos = [];
             $valores = [];
-            
+
+            // Definir campos permitidos y su tipo de sanitización/validación si es necesario
             $camposPermitidos = [
-                'titulo', 'descripcion', 'empresa', 'direccion_empresa', 
-                'contacto_empresa', 'supervisor_empresa', 'telefono_supervisor',
-                'fecha_inicio', 'fecha_fin', 'estado', 'tutor_id'
+                'titulo' => 'string',
+                'descripcion' => 'string',
+                'empresa' => 'string',
+                'direccion_empresa' => 'string',
+                'contacto_empresa' => 'string',
+                'supervisor_empresa' => 'string',
+                'telefono_supervisor' => 'string',
+                'fecha_inicio' => 'date', // Añadir validación de fecha
+                'fecha_fin' => 'date', // Añadir validación de fecha
+                'estado' => 'string', // Añadir validación de estado
+                'tutor_id' => 'int_or_null' // Añadir validación INT o NULL
             ];
-            
-            foreach ($camposPermitidos as $campo) {
+
+            foreach ($camposPermitidos as $campo => $tipo) {
                 if (isset($data[$campo])) {
-                    $campos[] = "$campo = ?";
-                    $valores[] = $data[$campo];
+                     $valor = $data[$campo];
+
+                     // Validar y sanitizar según el tipo
+                     switch ($tipo) {
+                          case 'string':
+                               // La sanitización básica ya se hace en htmlSafe, pero para DB directa no es estrictamente necesaria aquí
+                               $valores[] = $valor;
+                               break;
+                          case 'date':
+                               if ($valor !== null && !empty($valor) && !isValidDate($valor)) {
+                                    $conexion->rollBack();
+                                    http_response_code(400);
+                                    echo json_encode(['error' => "Fecha inválida para el campo {$campo}"]);
+                                    exit;
+                               }
+                               $valores[] = empty($valor) ? null : $valor; // Permite fechas nulas/vacías
+                               break;
+                          case 'int_or_null':
+                               $validated_val = filter_var($valor, FILTER_VALIDATE_INT);
+                               if ($valor !== null && $valor !== '' && $validated_val === false) {
+                                     $conexion->rollBack();
+                                     http_response_code(400);
+                                     echo json_encode(['error' => "Valor inválido para el campo {$campo}"]);
+                                     exit;
+                               }
+                               $valores[] = ($valor === '' || $valor === null) ? null : $validated_val; // Permite INT o NULL
+                               break;
+                          // Puedes añadir más tipos de validación/sanitización si es necesario
+                          default:
+                               $valores[] = $valor;
+                     }
+                    $campos[] = "`{$campo}` = ?"; // Usar comillas inversas por si el nombre del campo es una palabra reservada
                 }
             }
-            
+
             if (empty($campos)) {
+                 $conexion->rollBack(); // Revertir
                 http_response_code(400);
-                echo json_encode(['error' => 'No se proporcionaron campos para actualizar']);
+                echo json_encode(['error' => 'No se proporcionaron campos válidos para actualizar']);
                 exit;
             }
-            
-            $valores[] = $data['id'];
-            
+
+            $valores[] = $pasantiaId; // Agregar el ID al final para la cláusula WHERE
+
             $sql = "UPDATE pasantias SET " . implode(", ", $campos) . " WHERE id = ?";
-            
+
             $stmt = $conexion->prepare($sql);
-            $stmt->execute($valores);
-            
-            if ($stmt->rowCount() === 0) {
-                http_response_code(404);
-                echo json_encode(['error' => 'Pasantía no encontrada o sin cambios']);
-                exit;
+            if (!$stmt->execute($valores)) {
+                 $conexion->rollBack(); // Revertir si falla la ejecución
+                 error_log("API Error (actualizar) DB Execute Error: " . $stmt->errorInfo()[2]);
+                 throw new Exception("Error al actualizar la pasantía en la base de datos.");
             }
-            
+
+            // Confirmar transacción
+             $conexion->commit();
+
+             // Opcional: Verificar rowCount() > 0 si quieres asegurarte de que se hizo un cambio
+             // if ($stmt->rowCount() === 0) { ... error o mensaje de "sin cambios" ... }
+
+
             echo json_encode([
                 'success' => true,
                 'mensaje' => 'Pasantía actualizada correctamente'
             ]);
+
         } catch (Exception $e) {
+            if (isset($conexion) && $conexion->inTransaction()) { $conexion->rollBack(); } // Revertir transacción en caso de error
             http_response_code(500);
+            error_log("API Error (actualizar): " . $e->getMessage());
             echo json_encode(['error' => 'Error al actualizar la pasantía: ' . $e->getMessage()]);
         }
         exit;
     }
-    
-    // API para eliminar pasantía
+
+    // API para eliminar pasantía (ahora usa transacción)
     if ($_GET['api'] === 'eliminar' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
+             $conexion->beginTransaction(); // Iniciar transacción
+
             $data = json_decode(file_get_contents('php://input'), true);
-            
+
             if (!isset($data['id'])) {
                 http_response_code(400);
                 echo json_encode(['error' => 'ID de pasantía no proporcionado']);
+                 $conexion->rollBack(); // Revertir
                 exit;
             }
-            
+
+            $pasantiaId = filter_var($data['id'], FILTER_VALIDATE_INT);
+             if ($pasantiaId === false) {
+                  http_response_code(400);
+                  echo json_encode(['error' => 'ID de pasantía inválido']);
+                   $conexion->rollBack(); // Revertir
+                  exit;
+             }
+
+             // Opcional: Eliminar archivo asociado antes de eliminar la pasantía
+             $stmt_file = $conexion->prepare("SELECT archivo_documento, documento_adicional FROM pasantias WHERE id = ? FOR UPDATE"); // Bloquear para asegurar que el archivo existe antes de eliminar
+             $stmt_file->execute([$pasantiaId]);
+             $archivos = $stmt_file->fetch(PDO::FETCH_ASSOC);
+
+             if ($archivos) {
+                  $files_to_delete = [];
+                  if (!empty($archivos['archivo_documento'])) $files_to_delete[] = $archivos['archivo_documento'];
+                  if (!empty($archivos['documento_adicional'])) $files_to_delete[] = $archivos['documento_adicional'];
+
+                  foreach ($files_to_delete as $file) {
+                      $filePath = __DIR__ . '/../../uploads/pasantias/' . $file;
+                      if (file_exists($filePath)) {
+                           unlink($filePath); // Elimina el archivo físico
+                      } else {
+                          error_log("Advertencia: Archivo de pasantía no encontrado para eliminar: " . $filePath);
+                      }
+                  }
+             }
+
+
             $stmt = $conexion->prepare("DELETE FROM pasantias WHERE id = ?");
-            $stmt->execute([$data['id']]);
-            
+            if (!$stmt->execute([$pasantiaId])) {
+                 $conexion->rollBack(); // Revertir si falla la ejecución
+                  error_log("API Error (eliminar) DB Execute Error: " . $stmt->errorInfo()[2]);
+                 throw new Exception("Error al eliminar la pasantía de la base de datos.");
+            }
+
             if ($stmt->rowCount() === 0) {
+                 $conexion->rollBack(); // Revertir si no se encontró la pasantía (aunque el error 404 también aplica)
                 http_response_code(404);
                 echo json_encode(['error' => 'Pasantía no encontrada']);
                 exit;
             }
-            
+
+             $conexion->commit(); // Confirmar transacción
+
+
             echo json_encode([
                 'success' => true,
                 'mensaje' => 'Pasantía eliminada correctamente'
             ]);
+
         } catch (Exception $e) {
+             if (isset($conexion) && $conexion->inTransaction()) { $conexion->rollBack(); } // Revertir transacción en caso de error
             http_response_code(500);
+            error_log("API Error (eliminar): " . $e->getMessage());
             echo json_encode(['error' => 'Error al eliminar la pasantía: ' . $e->getMessage()]);
         }
         exit;
     }
-    
+
     // Si llegamos aquí, la API solicitada no existe
     http_response_code(404);
-    echo json_encode(['error' => 'Endpoint no encontrado']);
+    echo json_encode(['error' => 'Endpoint de API no encontrado']);
     exit;
 }
 
-// Inicializar variables
-$mensaje = '';
-$error = '';
+// --- Fin Manejo de solicitudes API ---
+
+
+// --- Procesar formularios (Acciones POST sin API) ---
+// Estas acciones son manejadas directamente por la página (no por JS fetch a un API endpoint)
+// Inicializar variables si no se han inicializado ya
+$mensaje = $mensaje ?? '';
+$error = $error ?? '';
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Administrador';
 
-// Obtener tutores para el selector
-$tutores = $conexion->query("
-    SELECT id, nombre, email 
-    FROM usuarios 
+// Obtener tutores para el selector en los formularios
+$tutoresQuery = $conexion->query("
+    SELECT id, nombre, email
+    FROM usuarios
     WHERE rol = 'tutor' AND estado = 'activo'
     ORDER BY nombre
-")->fetchAll(PDO::FETCH_ASSOC);
+");
+$tutores = $tutoresQuery ? $tutoresQuery->fetchAll(PDO::FETCH_ASSOC) : [];
 
-// Obtener estudiantes disponibles para pasantías con más información
-$estudiantes_disponibles = $conexion->query("
+
+// Obtener estudiantes disponibles para pasantías para el selector inicial
+$estudiantesDisponiblesQuery = $conexion->query("
     SELECT id, nombre, email, codigo_estudiante, documento, telefono, nombre_empresa, ciclo
     FROM usuarios
-    WHERE rol = 'estudiante' 
+    WHERE rol = 'estudiante'
     AND opcion_grado = 'pasantia'
     AND estado = 'activo'
     AND id NOT IN (
-        SELECT estudiante_id 
-        FROM pasantias 
+        SELECT estudiante_id
+        FROM pasantias
         WHERE estado != 'finalizada' AND estado != 'rechazada'
     )
     ORDER BY nombre
-")->fetchAll(PDO::FETCH_ASSOC);
+");
+$estudiantes_disponibles = $estudiantesDisponiblesQuery ? $estudiantesDisponiblesQuery->fetchAll(PDO::FETCH_ASSOC) : [];
 
-// Obtener pasantías existentes
-$pasantias = $conexion->query("
-    SELECT p.*, 
-           e.nombre as estudiante_nombre,
-           t.nombre as tutor_nombre
-    FROM pasantias p
-    LEFT JOIN usuarios e ON p.estudiante_id = e.id
-    LEFT JOIN usuarios t ON p.tutor_id = t.id
-    ORDER BY p.fecha_creacion DESC
-")->fetchAll(PDO::FETCH_ASSOC);
 
-// Procesar formularios
+// Obtener pasantías existentes para la lista principal
+$pasantiasQuery = $conexion->query("
+SELECT p.*,
+       e.nombre as estudiante_nombre,
+       t.nombre as tutor_nombre
+FROM pasantias p
+LEFT JOIN usuarios e ON p.estudiante_id = e.id
+LEFT JOIN usuarios t ON p.tutor_id = t.id
+ORDER BY p.fecha_creacion DESC
+");
+$pasantias = $pasantiasQuery ? $pasantiasQuery->fetchAll(PDO::FETCH_ASSOC) : []; // <-- Aproximadamente la línea donde ocurre el fetch.
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
     try {
+        // Iniciar transacción para las acciones de formulario POST
+        $conexion->beginTransaction();
+
         if ($_POST['accion'] === 'crear_pasantia') {
-            // Validar datos
-            if (empty($_POST['estudiante_id']) || empty($_POST['titulo']) || empty($_POST['empresa']) || 
-                empty($_POST['fecha_inicio']) || empty($_POST['fecha_fin'])) {
-                throw new Exception("Todos los campos marcados con * son obligatorios");
+            // Validar y sanitizar datos de entrada
+            $estudiante_id = filter_var($_POST['estudiante_id'] ?? null, FILTER_VALIDATE_INT);
+            $pasantia_id = filter_var($_POST['pasantia_id'] ?? 0, FILTER_VALIDATE_INT);
+            $titulo = trim($_POST['titulo'] ?? '');
+            $descripcion = trim($_POST['descripcion'] ?? '');
+            $empresa = trim($_POST['empresa'] ?? '');
+            $direccion_empresa = trim($_POST['direccion_empresa'] ?? '');
+            $contacto_empresa = trim($_POST['contacto_empresa'] ?? '');
+            $supervisor_empresa = trim($_POST['supervisor_empresa'] ?? '');
+            $telefono_supervisor = trim($_POST['telefono_supervisor'] ?? '');
+             $fecha_inicio = trim($_POST['fecha_inicio'] ?? '');
+             $fecha_fin = trim($_POST['fecha_fin'] ?? '');
+            $tutor_id = !empty($_POST['tutor_id']) ? filter_var($_POST['tutor_id'], FILTER_VALIDATE_INT) : null;
+
+
+            // Validaciones obligatorias
+            if ($estudiante_id !== null && $estudiante_id !== false) {
+                $stmt = $conexion->prepare("
+                SELECT p.*,
+                       e.nombre as estudiante_nombre,
+                       e.codigo_estudiante,
+                       e.email as estudiante_email,
+                       e.documento as estudiante_documento,
+                       e.telefono as estudiante_telefono,
+                       t.nombre as tutor_nombre,
+                       t.email as tutor_email
+                FROM pasantias p
+                LEFT JOIN usuarios e ON p.estudiante_id = e.id
+                LEFT JOIN usuarios t ON p.tutor_id = t.id
+                WHERE p.id = ?
+            ");
+                $stmt->execute([$estudiante_id]);
+                if (!$stmt->fetch()) {
+                    throw new Exception("El estudiante seleccionado no es válido o no está disponible.");
+                }
+            } else {
+                $estudiante_id = null; // Permitir pasantías sin estudiante asignado
             }
-            
+
+             // Validar formatos de fecha
+             if (!isValidDate($fecha_inicio) || !isValidDate($fecha_fin)) {
+                 throw new Exception("Las fechas de inicio y fin deben tener un formato de fecha válido.");
+             }
+             if (new DateTime($fecha_fin) < new DateTime($fecha_inicio)) {
+                  throw new Exception("La fecha de fin no puede ser anterior a la fecha de inicio.");
+             }
+
+             // Validar Tutor ID si se envió
+             if ($tutor_id !== null && $tutor_id === false) {
+                  throw new Exception("ID de tutor no válido.");
+             }
+
+
             // Procesar archivo si se ha subido
             $archivo_documento = null;
             if (isset($_FILES['archivo_documento']) && $_FILES['archivo_documento']['error'] === UPLOAD_ERR_OK) {
-                $archivo_nombre = $_FILES['archivo_documento']['name'];
-                $archivo_tmp = $_FILES['archivo_documento']['tmp_name'];
+                $archivo = $_FILES['archivo_documento'];
+                $archivo_nombre = $archivo['name'];
+                $archivo_tmp = $archivo['tmp_name'];
+                $archivo_size = $archivo['size'];
                 $archivo_extension = strtolower(pathinfo($archivo_nombre, PATHINFO_EXTENSION));
-                
+
+                 // Validar tipo de archivo
                 if (!in_array($archivo_extension, ['pdf', 'doc', 'docx'])) {
-                    throw new Exception("El archivo debe ser PDF o Word (doc/docx)");
+                     $conexion->rollBack(); // Revertir antes de lanzar excepción
+                    throw new Exception("El archivo debe ser PDF o Word (doc/docx).");
                 }
-                
+
+                 // Validar tamaño del archivo (ej: 10MB)
+                 $max_size = 10 * 1024 * 1024; // 10 MB
+                 if ($archivo_size > $max_size) {
+                      $conexion->rollBack(); // Revertir
+                      throw new Exception("El tamaño del archivo excede el límite permitido (10MB).");
+                 }
+
+
                 $archivo_nuevo_nombre = uniqid() . '_' . $archivo_nombre;
                 $ruta_destino = __DIR__ . '/../../uploads/pasantias/' . $archivo_nuevo_nombre;
-                
+
                 if (!is_dir(dirname($ruta_destino))) {
-                    mkdir(dirname($ruta_destino), 0755, true);
+                     // Asegurarse que el directorio de subida existe
+                    mkdir(dirname($ruta_destino), 0777, true); // Permisos amplios para prueba, ajustar en prod
                 }
-                
+
                 if (move_uploaded_file($archivo_tmp, $ruta_destino)) {
                     $archivo_documento = $archivo_nuevo_nombre;
                 } else {
-                    throw new Exception("Error al subir el archivo. Intente nuevamente.");
+                     $conexion->rollBack(); // Revertir si falla la subida
+                    throw new Exception("Error al mover el archivo subido. Intente nuevamente.");
                 }
-            }
-            
-            // Insertar pasantía
-            $stmt = $conexion->prepare("
-                INSERT INTO pasantias (
-                    titulo, descripcion, empresa, direccion_empresa, 
-                    contacto_empresa, supervisor_empresa, telefono_supervisor,
-                    fecha_inicio, fecha_fin, estado, estudiante_id, tutor_id, archivo_documento
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente', ?, ?, ?)
-            ");
-            
-            $stmt->execute([
-                $_POST['titulo'],
-                $_POST['descripcion'] ?? '',
-                $_POST['empresa'],
-                $_POST['direccion_empresa'] ?? '',
-                $_POST['contacto_empresa'] ?? '',
-                $_POST['supervisor_empresa'] ?? '',
-                $_POST['telefono_supervisor'] ?? '',
-                $_POST['fecha_inicio'],
-                $_POST['fecha_fin'],
-                $_POST['estudiante_id'],
-                !empty($_POST['tutor_id']) ? $_POST['tutor_id'] : null,
-                $archivo_documento
-            ]);
-            
-            $mensaje = "Pasantía creada exitosamente";
-            
-        } elseif ($_POST['accion'] === 'actualizar_pasantia') {
-            if (empty($_POST['pasantia_id'])) {
-                throw new Exception("ID de pasantía no válido");
-            }
-            
-            // Procesar archivo si se ha subido uno nuevo
-            $documento_adicional = null;
-            $archivo_actualizado = false;
-            
-            if (isset($_FILES['documento_adicional']) && $_FILES['documento_adicional']['error'] === UPLOAD_ERR_OK) {
-                $archivo_nombre = $_FILES['documento_adicional']['name'];
-                $archivo_tmp = $_FILES['documento_adicional']['tmp_name'];
-                $archivo_extension = strtolower(pathinfo($archivo_nombre, PATHINFO_EXTENSION));
-                
-                if (!in_array($archivo_extension, ['pdf', 'doc', 'docx'])) {
-                    throw new Exception("El archivo debe ser PDF o Word (doc/docx)");
-                }
-                
-                $archivo_nuevo_nombre = uniqid() . '_' . $archivo_nombre;
-                $ruta_destino = __DIR__ . '/../../uploads/pasantias/' . $archivo_nuevo_nombre;
-                
-                if (!is_dir(dirname($ruta_destino))) {
-                    mkdir(dirname($ruta_destino), 0755, true);
-                }
-                
-                if (move_uploaded_file($archivo_tmp, $ruta_destino)) {
-                    $documento_adicional = $archivo_nuevo_nombre;
-                    $archivo_actualizado = true;
-                } else {
-                    throw new Exception("Error al subir el archivo. Intente nuevamente.");
-                }
+            } elseif (isset($_FILES['archivo_documento']) && $_FILES['archivo_documento']['error'] !== UPLOAD_ERR_NO_FILE) {
+                // Manejar otros errores de subida de archivo (ej: tamaño máximo excedido por php.ini)
+                 $conexion->rollBack();
+                 $phpFileUploadErrors = array(
+                    1 => 'El archivo subido supera la directiva upload_max_filesize en php.ini',
+                    2 => 'El archivo subido supera la directiva MAX_FILE_SIZE especificada en el formulario HTML.',
+                    3 => 'El archivo subido solo se subió parcialmente.',
+                    4 => 'No se subió ningún archivo.', // Este código es para NO_FILE, pero ya lo manejamos arriba
+                    6 => 'Falta una carpeta temporal.',
+                    7 => 'No se pudo escribir el archivo en el disco.',
+                    8 => 'Una extensión de PHP detuvo la carga del archivo.',
+                 );
+                 $error_code = $_FILES['archivo_documento']['error'];
+                 $error_message = $phpFileUploadErrors[$error_code] ?? 'Error de subida desconocido';
+                 throw new Exception("Error en la subida del archivo: " . $error_message);
             }
 
-            // Actualizar pasantía
-            if ($archivo_actualizado) {
-                $stmt = $conexion->prepare("
-                    UPDATE pasantias 
-                    SET titulo = ?, descripcion = ?, empresa = ?, direccion_empresa = ?,
-                        contacto_empresa = ?, supervisor_empresa = ?, telefono_supervisor = ?,
-                        fecha_inicio = ?, fecha_fin = ?, estado = ?, tutor_id = ?, documento_adicional = ? 
-                    WHERE id = ?
-                ");
-                
-                $stmt->execute([
-                    $_POST['titulo'],
-                    $_POST['descripcion'] ?? '',
-                    $_POST['empresa'],
-                    $_POST['direccion_empresa'] ?? '',
-                    $_POST['contacto_empresa'] ?? '',
-                    $_POST['supervisor_empresa'] ?? '',
-                    $_POST['telefono_supervisor'] ?? '',
-                    $_POST['fecha_inicio'] ?: null,
-                    $_POST['fecha_fin'] ?: null,
-                    $_POST['estado'],
-                    !empty($_POST['tutor_id']) ? $_POST['tutor_id'] : null,
-                    $documento_adicional,
-                    $_POST['pasantia_id']
-                ]);
-            } else {
-                $stmt = $conexion->prepare("
-                    UPDATE pasantias 
-                    SET titulo = ?, descripcion = ?, empresa = ?, direccion_empresa = ?,
-                        contacto_empresa = ?, supervisor_empresa = ?, telefono_supervisor = ?,
-                        fecha_inicio = ?, fecha_fin = ?, estado = ?, tutor_id = ?
-                    WHERE id = ?
-                ");
-                
-                $stmt->execute([
-                    $_POST['titulo'],
-                    $_POST['descripcion'] ?? '',
-                    $_POST['empresa'],
-                    $_POST['direccion_empresa'] ?? '',
-                    $_POST['contacto_empresa'] ?? '',
-                    $_POST['supervisor_empresa'] ?? '',
-                    $_POST['telefono_supervisor'] ?? '',
-                    $_POST['fecha_inicio'] ?: null,
-                    $_POST['fecha_fin'] ?: null,
-                    $_POST['estado'],
-                    !empty($_POST['tutor_id']) ? $_POST['tutor_id'] : null,
-                    $_POST['pasantia_id']
-                ]);
+
+            // Insertar pasantía usando sentencia preparada
+            $stmt = $conexion->prepare("
+    INSERT INTO pasantias (
+        estudiante_id, titulo, descripcion, empresa, direccion_empresa,
+        contacto_empresa, supervisor_empresa, telefono_supervisor,
+        fecha_inicio, fecha_fin, estado, tutor_id, archivo_documento
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente', ?, ?)
+");
+$execute_success = $stmt->execute([
+    $estudiante_id,
+    $titulo,
+    $descripcion,
+    $empresa,
+    $direccion_empresa,
+    $contacto_empresa,
+    $supervisor_empresa,
+    $telefono_supervisor,
+    $fecha_inicio,
+    $fecha_fin,
+    $tutor_id,
+    $archivo_documento
+]);
+
+if ($execute_success) {
+    $conexion->commit();
+    echo json_encode(['success' => true, 'message' => 'Pasantía registrada exitosamente']);
+} else {
+    $conexion->rollBack();
+    throw new Exception("Error al registrar la pasantía.");
+}
+
+            // Confirmar transacción si todo fue exitoso
+            $conexion->commit();
+
+            $mensaje = "Pasantía creada exitosamente";
+
+        } elseif ($_POST['accion'] === 'actualizar_pasantia') {
+            // Validar y sanitizar datos de entrada
+             $pasantiaId = filter_var($_POST['pasantia_id'] ?? null, FILTER_VALIDATE_INT);
+            $titulo = trim($_POST['titulo'] ?? '');
+            $descripcion = trim($_POST['descripcion'] ?? '');
+            $empresa = trim($_POST['empresa'] ?? '');
+            $direccion_empresa = trim($_POST['direccion_empresa'] ?? '');
+            $contacto_empresa = trim($_POST['contacto_empresa'] ?? '');
+            $supervisor_empresa = trim($_POST['supervisor_empresa'] ?? '');
+            $telefono_supervisor = trim($_POST['telefono_supervisor'] ?? '');
+             $fecha_inicio = trim($_POST['fecha_inicio'] ?? '');
+             $fecha_fin = trim($_POST['fecha_fin'] ?? '');
+             $estado = trim($_POST['estado'] ?? '');
+            $tutor_id = !empty($_POST['tutor_id']) ? filter_var($_POST['tutor_id'], FILTER_VALIDATE_INT) : null;
+
+            // Validaciones obligatorias y de formato
+            if ($pasantia_id <= 0) {
+                throw new Exception("ID de pasantía no válido.");
             }
-            
+
+             // Validar formatos de fecha si no están vacíos
+             if (!empty($fecha_inicio) && !isValidDate($fecha_inicio)) {
+                  throw new Exception("Formato de fecha de inicio inválido.");
+             }
+             if (!empty($fecha_fin) && !isValidDate($fecha_fin)) {
+                  throw new Exception("Formato de fecha de fin inválido.");
+             }
+             if (!empty($fecha_inicio) && !empty($fecha_fin) && (new DateTime($fecha_fin) < new DateTime($fecha_inicio))) {
+                  throw new Exception("La fecha de fin no puede ser anterior a la fecha de inicio.");
+             }
+
+              // Validar Tutor ID si se envió
+             if ($tutor_id !== null && $tutor_id === false) {
+                  throw new Exception("ID de tutor no válido.");
+             }
+
+             // Validar estado
+             $estados_validos = ['pendiente', 'aprobada', 'rechazada', 'en_proceso', 'finalizada'];
+             if (!in_array($estado, $estados_validos)) {
+                  throw new Exception("Estado de pasantía no válido.");
+             }
+
+
+            // Procesar archivo adicional si se ha subido uno nuevo
+            $documento_adicional = null;
+            $archivo_adicional_actualizado = false;
+
+            if (isset($_FILES['documento_adicional']) && $_FILES['documento_adicional']['error'] === UPLOAD_ERR_OK) {
+                 $archivo = $_FILES['documento_adicional'];
+                 $archivo_nombre = $archivo['name'];
+                 $archivo_tmp = $archivo['tmp_name'];
+                 $archivo_size = $archivo['size'];
+                 $archivo_extension = strtolower(pathinfo($archivo_nombre, PATHINFO_EXTENSION));
+
+                 // Validar tipo de archivo
+                if (!in_array($archivo_extension, ['pdf', 'doc', 'docx'])) {
+                     $conexion->rollBack(); // Revertir
+                    throw new Exception("El archivo adicional debe ser PDF o Word (doc/docx).");
+                }
+
+                 // Validar tamaño del archivo (ej: 10MB)
+                 $max_size = 10 * 1024 * 1024; // 10 MB
+                 if ($archivo_size > $max_size) {
+                      $conexion->rollBack(); // Revertir
+                      throw new Exception("El tamaño del archivo adicional excede el límite permitido (10MB).");
+                 }
+
+                $archivo_nuevo_nombre = uniqid() . '_' . $archivo_nombre;
+                $ruta_destino = __DIR__ . '/../../uploads/pasantias/' . $archivo_nuevo_nombre;
+
+                if (!is_dir(dirname($ruta_destino))) {
+                    mkdir(dirname($ruta_destino), 0777, true);
+                }
+
+                if (move_uploaded_file($archivo_tmp, $ruta_destino)) {
+                    $documento_adicional = $archivo_nuevo_nombre;
+                    $archivo_adicional_actualizado = true;
+
+                     // Opcional: Eliminar el archivo adicional antiguo si se subió uno nuevo
+                     $stmt_old_file = $conexion->prepare("SELECT documento_adicional FROM pasantias WHERE id = ?");
+                     $stmt_old_file->execute([$pasantiaId]);
+                     $old_file = $stmt_old_file->fetchColumn();
+                     if ($old_file && file_exists(__DIR__ . '/../../uploads/pasantias/' . $old_file)) {
+                          unlink(__DIR__ . '/../../uploads/pasantias/' . $old_file);
+                     }
+
+                } else {
+                     $conexion->rollBack(); // Revertir
+                    throw new Exception("Error al mover el archivo adicional subido. Intente nuevamente.");
+                }
+            } elseif (isset($_FILES['documento_adicional']) && $_FILES['documento_adicional']['error'] !== UPLOAD_ERR_NO_FILE) {
+                 // Manejar otros errores de subida
+                 $conexion->rollBack();
+                 $phpFileUploadErrors = array( /* ... definir array ... */ ); // Reutiliza el array de arriba
+                 $error_code = $_FILES['documento_adicional']['error'];
+                 $error_message = $phpFileUploadErrors[$error_code] ?? 'Error de subida desconocido';
+                 throw new Exception("Error en la subida del archivo adicional: " . $error_message);
+            }
+
+
+            // Construir la consulta de actualización dinámicamente
+            $sql_update_campos = [
+                 'titulo = ?', 'descripcion = ?', 'empresa = ?', 'direccion_empresa = ?',
+                 'contacto_empresa = ?', 'supervisor_empresa = ?', 'telefono_supervisor = ?',
+                 'fecha_inicio = ?', 'fecha_fin = ?', 'estado = ?', 'tutor_id = ?'
+             ];
+             $valores_update = [
+                 $titulo,
+                 $descripcion,
+                 $empresa,
+                 $direccion_empresa,
+                 $contacto_empresa,
+                 $supervisor_empresa,
+                 $telefono_supervisor,
+                 empty($fecha_inicio) ? null : $fecha_inicio, // Guardar como NULL si está vacío
+                 empty($fecha_fin) ? null : $fecha_fin, // Guardar como NULL si está vacío
+                 $estado,
+                 $tutor_id // Puede ser null
+             ];
+
+             if ($archivo_adicional_actualizado) {
+                 $sql_update_campos[] = "documento_adicional = ?";
+                 $valores_update[] = $documento_adicional; // Puede ser null si falla la subida? No, ya se maneja arriba.
+             }
+
+             $sql = "UPDATE pasantias SET " . implode(", ", $sql_update_campos) . " WHERE id = ?";
+             $valores_update[] = $pasantiaId; // Agregar el ID al final
+
+             $stmt = $conexion->prepare($sql);
+
+             if (!$stmt->execute($valores_update)) {
+                  $conexion->rollBack(); // Revertir si falla la ejecución
+                  error_log("DB Execute Error (actualizar_pasantia): " . $stmt->errorInfo()[2]);
+                  throw new Exception("Error al actualizar la pasantía en la base de datos.");
+             }
+
+            // Confirmar transacción
+            $conexion->commit();
+
             $mensaje = "Pasantía actualizada exitosamente";
-            
+
         } elseif ($_POST['accion'] === 'eliminar_pasantia') {
-            if (empty($_POST['pasantia_id'])) {
-                throw new Exception("ID de pasantía no válido");
-            }
-            
-            // Eliminar pasantía
+             // Validar ID
+             $pasantiaId = filter_var($_POST['pasantia_id'] ?? null, FILTER_VALIDATE_INT);
+              if ($pasantiaId === false) {
+                   throw new Exception("ID de pasantía inválido para eliminar.");
+              }
+
+              $conexion->beginTransaction(); // Iniciar transacción
+
+             // Opcional: Eliminar archivo(s) asociado(s) antes de eliminar la pasantía
+             $stmt_file = $conexion->prepare("SELECT archivo_documento, documento_adicional FROM pasantias WHERE id = ? FOR UPDATE"); // Bloquear
+             $stmt_file->execute([$pasantiaId]);
+             $archivos = $stmt_file->fetch(PDO::FETCH_ASSOC);
+
+             if ($archivos) {
+                  $files_to_delete = [];
+                  if (!empty($archivos['archivo_documento'])) $files_to_delete[] = $archivos['archivo_documento'];
+                  if (!empty($archivos['documento_adicional'])) $files_to_delete[] = $archivos['documento_adicional'];
+
+                  foreach ($files_to_delete as $file) {
+                      $filePath = __DIR__ . '/../../uploads/pasantias/' . $file;
+                      if (file_exists($filePath)) {
+                           unlink($filePath); // Elimina el archivo físico
+                      } else {
+                           error_log("Advertencia: Archivo de pasantía no encontrado para eliminar: " . $filePath);
+                      }
+                  }
+             }
+
+
+             // Eliminar pasantía usando sentencia preparada
             $stmt = $conexion->prepare("DELETE FROM pasantias WHERE id = ?");
-            $stmt->execute([$_POST['pasantia_id']]);
-            
+             if (!$stmt->execute([$pasantiaId])) {
+                  $conexion->rollBack(); // Revertir si falla la ejecución
+                   error_log("DB Execute Error (eliminar_pasantia): " . $stmt->errorInfo()[2]);
+                  throw new Exception("Error al eliminar la pasantía de la base de datos.");
+             }
+
+             if ($stmt->rowCount() === 0) {
+                  $conexion->rollBack(); // Revertir si no se encontró
+                  throw new Exception("La pasantía con ID {$pasantiaId} no fue encontrada para eliminar.");
+             }
+
+            $conexion->commit(); // Confirmar transacción
+
             $mensaje = "Pasantía eliminada exitosamente";
         }
-        
-        // Recargar la página para mostrar los cambios
+
+        // Recargar la página con mensaje de éxito (Redirección POST a GET)
         header("Location: " . $_SERVER['PHP_SELF'] . "?mensaje=" . urlencode($mensaje));
         exit;
-        
+
     } catch (Exception $e) {
+        // Revertir transacción en caso de error
+        if (isset($conexion) && $conexion->inTransaction()) {
+            $conexion->rollBack();
+        }
         $error = $e->getMessage();
+        // Registrar error detallado
+        error_log("Error en gestión de pasantías (POST): " . $e->getMessage());
+        // Recargar la página con mensaje de error (Redirección POST a GET)
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
+        exit;
     }
 }
 
-// Recuperar mensaje de la URL si existe
+// --- Fin Procesar formularios ---
+
+
+// Recuperar mensaje o error de la URL si existe (después de una redirección GET)
 if (isset($_GET['mensaje'])) {
-    $mensaje = $_GET['mensaje'];
+    $mensaje = htmlSafe($_GET['mensaje']);
+} elseif (isset($_GET['error'])) {
+     $error = htmlSafe($_GET['error']);
 }
+
+// Pasar datos a JSON para usar en JavaScript (para precargar datos si es necesario, aunque la mayoría se obtiene por API)
+// Considera si realmente necesitas pasar *toda* la lista de pasantias y estudiantes a JS inicialmente,
+// o si solo necesitas los datos de tutores para los selectores y obtener los demás por API/filtrado.
+// Para la funcionalidad de filtro y búsqueda en la tabla, pasar los datos iniciales es útil.
+$pasantiasDataJSON = json_encode($pasantias);
+$tutoresDataJSON = json_encode($tutores); // Pasar datos de tutores a JS
+$estudiantesDisponiblesDataJSON = json_encode($estudiantes_disponibles); // Pasar datos de estudiantes disponibles a JS
+
 
 // Cerrar conexión
 $conexion = null;
+
 ?>
 
 <!DOCTYPE html>
@@ -496,7 +911,28 @@ $conexion = null;
                 <input type="hidden" id="estudiante_id" name="estudiante_id" class="hidden-input">
                 
                 <div class="form-group" id="seleccionEstudianteGroup">
-                    <h3>Seleccionar Estudiante *</h3>
+       <h3>Estudiante Asignado</h3>
+       <div class="form-row">
+           <div class="form-field">
+               <label for="estudiante_id">Estudiante *</label>
+               <select id="estudiante_id" name="estudiante_id" required>
+                   <option value="">Seleccione un estudiante</option>
+                   <?php
+                   $stmt = $conexion->query("
+                       SELECT id, nombre
+                       FROM usuarios
+                       WHERE rol = 'estudiante' AND opcion_grado = 'pasantia' AND estado = 'activo'
+                       ORDER BY nombre
+                   ");
+                   $estudiantes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                   foreach ($estudiantes as $estudiante) {
+                       echo "<option value=\"{$estudiante['id']}\">" . htmlspecialchars($estudiante['nombre']) . "</option>";
+                   }
+                   ?>
+               </select>
+           </div>
+       </div>
+   </div>
                     
                     <input type="text" id="estudianteSearch" class="estudiante-search" placeholder="Buscar estudiante por nombre, código o documento...">
                     

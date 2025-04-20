@@ -69,14 +69,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('El teléfono debe contener solo números');
         }
 
-        // Verificar email único
+        // Verificar email único - adaptado para PostgreSQL
         $stmt = $conexion->prepare("SELECT email FROM solicitudes_registro WHERE email = ? UNION SELECT email FROM usuarios WHERE email = ?");
         $stmt->execute([$email, $email]);
         if ($stmt->fetch()) {
             throw new Exception('El correo ya está registrado');
         }
 
-        // Verificar documento único
+        // Verificar documento único - adaptado para PostgreSQL
         $stmt = $conexion->prepare("SELECT documento FROM solicitudes_registro WHERE documento = ? UNION SELECT documento FROM usuarios WHERE documento = ?");
         $stmt->execute([$documento, $documento]);
         if ($stmt->fetch()) {
@@ -86,12 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Hash de contraseña
         $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        // Insertar en solicitudes
+        // Insertar en solicitudes - adaptado para la nueva estructura
         $stmt = $conexion->prepare("INSERT INTO solicitudes_registro (
             nombre, email, password, rol, documento,
             codigo_estudiante, codigo_institucional,
-            telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo, estado
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')");
 
         $stmt->execute([
             $nombre, $email, $hashedPassword, $rol, $documento,
@@ -251,6 +251,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="login-link">¿Ya tienes cuenta? <a href="/views/general/login.php">Iniciar sesión</a></p>
         </form>
     </div>
-    <script src="/assets/js/registro.js"></script>
+    <script src="/assets/js/general/registro.js"></script>
 </body>
 </html>
