@@ -7,6 +7,12 @@ $mensaje = '';
 $error = '';
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Administrador';
 
+// Inicializar variables de lista para evitar warnings si hay errores de DB
+$lista_estudiantes = [];
+$lista_proyectos = [];
+$lista_pasantias = [];
+$lista_seminarios = [];
+
 // Obtener métricas generales
 try {
     // Total de estudiantes activos
@@ -120,13 +126,7 @@ try {
     // Obtener los estudiantes de cada proyecto
     $lista_proyectos_con_estudiantes = [];
     foreach ($lista_proyectos as $proyecto) {
-        $stmt = $conexion->prepare("
-            SELECT u.nombre
-            FROM proyecto_estudiante pe
-            JOIN usuarios u ON pe.estudiante_id = u.id
-            WHERE pe.proyecto_id = ?
-            ORDER BY u.nombre
-        ");
+        $stmt = $conexion->prepare("SELECT u.nombre FROM estudiantes_proyecto pe JOIN usuarios u ON pe.estudiante_id = u.id WHERE pe.proyecto_id = ? ORDER BY u.nombre");
         $stmt->execute([$proyecto['id']]);
         $estudiantes = $stmt->fetchAll(PDO::FETCH_COLUMN);
         

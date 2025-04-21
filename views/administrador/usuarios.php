@@ -196,12 +196,16 @@ $conexion = null; // Cerrar conexión
 </head>
 <body>
 <header>
-        <div id="logo" onclick="toggleNav()">Logo</div>
-        <nav id="navbar">
+<div id="logo" onclick="toggleNav()">Logo</div>
+    
+    <nav id="navbar">
+        <div class="nav-header">
+            <div id="nav-logo" onclick="toggleNav()">Logo</div>
+        </div>
         <ul>
-            <li><a href="/views/administrador/inicio.php">Inicio</a></li>
+            <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
             <li><a href="/views/administrador/aprobacion.php">Aprobación de Usuarios</a></li>
-            <li><a href="/views/administrador/usuarios.php" class="active">Gestión de Usuarios</a></li>
+            <li><a href="/views/administrador/usuarios.php">Gestión de Usuarios</a></li>
             <li class="dropdown">
                 <a href="#">Gestión de Modalidades de Grado</a>
                 <ul class="dropdown-content">
@@ -211,10 +215,10 @@ $conexion = null; // Cerrar conexión
                 </ul>
             </li>
             <li><a href="/views/administrador/reportes.php">Reportes y Estadísticas</a></li>
-            <li><a href="#">Usuario: <?php echo htmlSafe($nombreUsuario); ?></a></li>
+            <li><a href="#">Rol: <?php echo htmlspecialchars($nombreUsuario); ?></a></li>
             <li><a href="/views/general/login.php">Cerrar Sesión</a></li>
         </ul>
-        </nav>
+    </nav>
     </header>
 
     <main>
@@ -422,62 +426,115 @@ $conexion = null; // Cerrar conexión
 
 
     <script>
-        // Pasa los usuarios a JavaScript para el modal de edición
-        // Asegúrate de que la variable usuarios sea un array en PHP incluso si está vacío
-        const usuariosData = <?= json_encode($usuarios); ?>;
-
-        function openEditModal(id) {
-            const user = usuariosData.find(u => u.id == id); // Comparación con == para coincidencia de tipo
-            if (user) {
-                document.getElementById('editId').value = user.id;
-                document.getElementById('editNombre').value = user.nombre || '';
-                document.getElementById('editEmail').value = user.email || '';
-                document.getElementById('editRol').value = user.rol || '';
-                document.getElementById('editDocumento').value = user.documento || '';
-                document.getElementById('editCodigo').value = user.codigo_estudiante || '';
-                document.getElementById('editTelefono').value = user.telefono || '';
-                document.getElementById('editOpcionGrado').value = user.opcion_grado || '';
-                document.getElementById('editCiclo').value = user.ciclo || '';
-                document.getElementById('editEstado').value = user.estado || 'activo'; // <-- Cargar el estado actual
-                document.getElementById('editModal').style.display = 'block';
-            } else {
-                console.error('Usuario no encontrado con ID:', id);
-                // Opcional: Mostrar un mensaje al usuario
-            }
-        }
-
-        function confirmDelete(id) {
-            document.getElementById('deleteId').value = id;
-            document.getElementById('deleteModal').style.display = 'block';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        // Cerrar el modal haciendo clic fuera de él
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = 'none';
-            }
-        }
-
-        // Función para el menú de navegación (asumiendo que existe)
         function toggleNav() {
-            const navbar = document.getElementById('navbar');
-            navbar.classList.toggle('active');
+            document.getElementById("navbar").classList.toggle("active");
+            document.querySelector("main").classList.toggle("nav-active");
+            document.querySelector("footer").classList.toggle("nav-active");
         }
+        // Pasa los usuarios a JavaScript para el modal de edición
+        // Asegúrate de que la variable usuarios sea un array en PHP incluso si está vacío
+        const usuariosData = <?= json_encode($usuarios); ?>;
 
-        // Ocultar mensaje de estado después de unos segundos
-         document.addEventListener('DOMContentLoaded', function() {
-             const mensajeElement = document.querySelector('.mensaje');
-             if (mensajeElement) {
-                 setTimeout(() => {
-                     mensajeElement.style.display = 'none';
-                 }, 5000); // Ocultar después de 5 segundos
-             }
-         });
+        function openEditModal(id) {
+            const user = usuariosData.find(u => u.id == id); // Comparación con == para coincidencia de tipo
+            if (user) {
+                document.getElementById('editId').value = user.id;
+                document.getElementById('editNombre').value = user.nombre || '';
+                document.getElementById('editEmail').value = user.email || '';
+                document.getElementById('editRol').value = user.rol || '';
+                document.getElementById('editDocumento').value = user.documento || '';
+                document.getElementById('editCodigo').value = user.codigo_estudiante || '';
+                document.getElementById('editTelefono').value = user.telefono || '';
+                document.getElementById('editOpcionGrado').value = user.opcion_grado || '';
+                document.getElementById('editCiclo').value = user.ciclo || '';
+                document.getElementById('editEstado').value = user.estado || 'activo'; // <-- Cargar el estado actual
+                document.getElementById('editModal').style.display = 'block';
+            } else {
+                console.error('Usuario no encontrado con ID:', id);
+                // Opcional: Mostrar un mensaje al usuario
+            }
+        }
 
-    </script>
+        function confirmDelete(id) {
+            document.getElementById('deleteId').value = id;
+            document.getElementById('deleteModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Cerrar el modal haciendo clic fuera de él
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Función para el menú de navegación principal (toggle sidebar)
+        function toggleNav() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+
+            // Opcional: Cerrar dropdowns si el menú principal se cierra
+            if (!navbar.classList.contains('active')) {
+                const openDropdowns = document.querySelectorAll('#navbar li.dropdown.active');
+                openDropdowns.forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+        }
+
+
+        // Lógica que se ejecuta una vez que el DOM está completamente cargado
+         document.addEventListener('DOMContentLoaded', function() {
+             // ... Código existente dentro de DOMContentLoaded ...
+
+             // Ocultar mensaje de estado después de unos segundos (código que ya tenías aquí)
+             const mensajeElement = document.querySelector('.mensaje');
+             if (mensajeElement) {
+                 setTimeout(() => {
+                     mensajeElement.style.opacity = '0'; // Iniciar la transición de opacidad
+                     // Esperar a que la transición termine antes de ocultar el elemento
+                     setTimeout(() => mensajeElement.style.display = 'none', 500); // 500ms es la duración común de una transición suave
+                 }, 5000); // 5 segundos antes de que empiece la transición de opacidad
+             }
+
+
+             // === Lógica para Dropdowns de Navegación (click para abrir/cerrar) - Código añadido ===
+             // Seleccionar todos los elementos <li> con la clase 'dropdown' dentro del #navbar
+             const dropdowns = document.querySelectorAll('#navbar li.dropdown > a');
+
+             dropdowns.forEach(dropdownLink => {
+                 // Añadir un listener de click al enlace dentro del dropdown
+                 dropdownLink.addEventListener('click', function(event) {
+                     // Prevenir el comportamiento por defecto del enlace (navegar a #)
+                     event.preventDefault();
+
+                     // El padre del enlace es el <li> con la clase 'dropdown'
+                     const parentLi = this.parentElement; // 'this' es el a, su padre es el li
+
+                     // Cerrar otros dropdowns abiertos en el mismo nivel antes de abrir el actual
+                     const allDropdowns = document.querySelectorAll('#navbar li.dropdown');
+                     allDropdowns.forEach(item => {
+                         if (item !== parentLi && item.classList.contains('active')) {
+                             item.classList.remove('active');
+                         }
+                     });
+
+
+                     // Toggle la clase 'active' en el <li> padre del enlace clickeado
+                     parentLi.classList.toggle('active');
+
+                });
+             });
+             // === Fin Lógica para Dropdowns de Navegación ===
+
+
+         });
+
+        // ... Resto del script (si hay funciones fuera de DOMContentLoaded) ...
+
+    </script>
 </body>
 </html>
