@@ -31,14 +31,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: /views/administrador/inicio.php');
                     exit();
                 case 'tutor':
-                    header('Location: /views/tutor/dashboard.php');
+                    header('Location: /views/profesores/Pasantias.php');
                     exit();
                 case 'estudiante':
-                    header('Location: /views/estudiantes/Inicio_Estudiante.php');
-                    exit();
-                default:
-                    header('Location: /');
-                    exit();
+                        // Redirección específica para estudiantes según su opción de grado
+                    switch ($usuario['opcion_grado']) {
+                        case 'pasantia':
+                        header('Location: /views/estudiantes/Pasantias.php'); // Replace with the actual path for pasantia students
+                        exit();
+                        case 'proyecto':
+                         header('Location: /views/estudiantes/Inicio_Proyecto.php'); // Replace with the actual path for proyecto students
+                        exit();
+                        case 'seminario':
+                        header('Location: /views/estudiantes/Inicio_Seminario.php'); // Replace with the actual path for seminario students
+                        exit();
+                        default:
+                        // Default redirection for students if opcion_grado is not recognized
+                        header('Location: /views/estudiantes/Inicio_Estudiante.php'); // Keep the original default
+                        exit();
+                        }
+                    break; // Important to break the outer switch after handling the student case
+                        default:
+                        header('Location: /');
+                        exit();
             }
         } else {
             $error = "Credenciales incorrectas";

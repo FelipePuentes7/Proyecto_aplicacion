@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2025 a las 01:54:05
+-- Tiempo de generación: 01-05-2025 a las 18:13:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -49,6 +49,24 @@ CREATE TABLE `comentarios_proyecto` (
   `usuario_id` int(11) DEFAULT NULL,
   `comentario` text DEFAULT NULL,
   `fecha_comentario` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `entregas_pasantia`
+--
+
+CREATE TABLE `entregas_pasantia` (
+  `id` int(11) NOT NULL,
+  `pasantia_id` int(11) NOT NULL,
+  `numero_avance` tinyint(4) NOT NULL,
+  `archivo_entregado` varchar(255) DEFAULT NULL,
+  `comentario_estudiante` text DEFAULT NULL,
+  `comentario_tutor` text DEFAULT NULL,
+  `estado` enum('pendiente','revisado','corregir','aprobado') DEFAULT 'pendiente',
+  `nota` decimal(4,2) DEFAULT NULL,
+  `fecha_entrega` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -113,7 +131,15 @@ INSERT INTO `historial_solicitudes` (`id`, `solicitud_id`, `nombre`, `email`, `d
 (9, 5, 'Felipe Puentes', '7@fet.edu.co', '0156485778', 'SOF1207871', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-20 03:50:01', 5),
 (10, 6, 'Andres Puentes', 'jsjs@fet.edu.co', '79787', '410001-18', 'tecnico', 'pasantia', NULL, 'GROK', 'estudiante', 'aprobado', NULL, '2025-04-20 20:52:28', NULL),
 (11, 7, 'css', 'asad@fet.edu.co', '784681531', 'jsjds', 'tecnico', 'pasantia', NULL, 'ss', 'estudiante', 'aprobado', NULL, '2025-04-20 21:57:50', NULL),
-(12, 8, 'Andres Felipe Puentes Rivera', '24@fet.edu.co', '577', 'SOF1207871', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-20 23:46:14', NULL);
+(12, 8, 'Andres Felipe Puentes Rivera', '24@fet.edu.co', '577', 'SOF1207871', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-20 23:46:14', NULL),
+(13, 11, 'Andres Felipe Puentes Rivera', '2@fet.edu.co', '5775445', 'SOF1207871', 'tecnico', 'pasantia', NULL, 'ujiji', 'estudiante', 'aprobado', NULL, '2025-04-25 01:54:24', 10),
+(14, 12, 'ams ms', 'lskdldks@fet.edu.co', '878786', 'mnsmsm57', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'rechazado', NULL, '2025-04-27 16:37:22', NULL),
+(15, 13, 'djjdjd', 'jdjddjjjjj@fet.edu.co', '4547', '5787', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-27 16:38:43', NULL),
+(16, 14, 'jorge', '786865@fet.edu.co', '454721', '5787', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-27 16:52:23', NULL),
+(17, 15, 'jorge', '78665@fet.edu.co', '4721', '5787', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-27 16:57:34', NULL),
+(18, 16, 'jorge', '7665@fet.edu.co', '472155', '5787', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-27 16:59:06', NULL),
+(19, 17, 'jorge', 'j7665@fet.edu.co', '4728955', '5787', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-27 17:01:40', NULL),
+(20, 18, 'jorges', 'j57665@fet.edu.co', '7897', '5787', 'tecnico', 'seminario', NULL, NULL, 'estudiante', 'aprobado', NULL, '2025-04-27 17:40:44', 10);
 
 -- --------------------------------------------------------
 
@@ -156,6 +182,22 @@ CREATE TABLE `materiales_apoyo` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mensajes_chat`
+--
+
+CREATE TABLE `mensajes_chat` (
+  `id` int(11) NOT NULL,
+  `pasantia_id` int(11) NOT NULL,
+  `emisor_id` int(11) NOT NULL,
+  `receptor_id` int(11) NOT NULL,
+  `mensaje` text DEFAULT NULL,
+  `archivo` varchar(255) DEFAULT NULL,
+  `fecha_envio` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pasantias`
 --
 
@@ -184,7 +226,8 @@ CREATE TABLE `pasantias` (
 
 INSERT INTO `pasantias` (`id`, `estudiante_id`, `titulo`, `descripcion`, `empresa`, `direccion_empresa`, `contacto_empresa`, `supervisor_empresa`, `telefono_supervisor`, `fecha_inicio`, `fecha_fin`, `estado`, `tutor_id`, `archivo_documento`, `fecha_creacion`, `documento_adicional`) VALUES
 (1, 8, 'GROK', '', 'GROK', '', '', '', '', '2025-04-23', '2025-05-01', 'pendiente', 6, NULL, '2025-04-20 20:58:37', NULL),
-(2, 9, 'jjss', '', 'ss', '', '', '', '', '2025-04-21', '2025-04-22', 'pendiente', NULL, NULL, '2025-04-20 22:23:52', NULL);
+(2, 9, 'jjss', '', 'ss', '', '', '', '', '2025-04-21', '2025-04-22', 'pendiente', NULL, NULL, '2025-04-20 22:23:52', NULL),
+(3, 11, 'gvgv', '', 'ujiji', '', '', '', '', '2025-04-24', '2025-04-28', 'pendiente', 6, NULL, '2025-04-25 01:58:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -265,6 +308,14 @@ CREATE TABLE `solicitudes_registro` (
   `fecha_solicitud` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `solicitudes_registro`
+--
+
+INSERT INTO `solicitudes_registro` (`id`, `nombre`, `email`, `password`, `rol`, `documento`, `codigo_estudiante`, `codigo_institucional`, `telefono`, `opcion_grado`, `nombre_proyecto`, `nombre_empresa`, `ciclo`, `estado`, `fecha_solicitud`) VALUES
+(9, 'djjdjd', 'jdjdd@fet.edu.co', '$2y$10$Bs.ugzHuUhtM/3aSA/R35un6HCneUcrZhEh7QQRPgoiBFNaCZgCMS', 'estudiante', '454', '5787', NULL, '5757', 'seminario', NULL, NULL, 'tecnico', 'pendiente', '2025-04-21 00:07:56'),
+(10, 'juan ', 'a@fet.edu.co', '$2y$10$RqMprkuezA6/a36d8xekp.D.AWH0utoS9/dc0y30Z72HcgcUPYEpi', 'tutor', '57876855', NULL, '', '13153453', NULL, NULL, NULL, NULL, 'pendiente', '2025-04-21 00:33:44');
+
 -- --------------------------------------------------------
 
 --
@@ -298,7 +349,9 @@ INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`, `documento`,
 (7, 'Felipe Puentes', '7@fet.edu.co', '$2y$10$OpRWcuhMg0PFUoZxCpnPEu2.gELz4wW2oLudrlYZwKk81D0emqPam', 'estudiante', '0156485778', 'SOF1207871', '3228400865', 'seminario', NULL, NULL, 'tecnico', 'activo'),
 (8, 'Andres Puentes', 'jsjs@fet.edu.co', '$2y$10$tRVw1uq/u5M5u5gTxflqOem0IoyBt2x1/IJpGwQujQbtTLIxm.SJO', 'estudiante', '79787', '410001-18', '32284005', 'pasantia', NULL, 'GROK', 'tecnico', 'activo'),
 (9, 'css', 'asad@fet.edu.co', '$2y$10$.0cFEqYtxXK9OWVuJ1wRCu4.3TVhSBRyU0h83ZtGqefW/nPyBVcc6', 'estudiante', '784681531', 'jsjds', '3465456', 'pasantia', NULL, 'ss', 'tecnico', 'activo'),
-(10, 'Andres Felipe Puentes Rivera', '24@fet.edu.co', '$2y$10$PaPjgx1ArgYZ2M1bGcqxmuul7Jxx3d.2a0Q2x47Z6xqgOFN1NXHge', 'admin', '577', 'SOF1207871', '131537', '', NULL, NULL, '', 'activo');
+(10, 'Andres Felipe Puentes Rivera', '24@fet.edu.co', '$2y$10$PaPjgx1ArgYZ2M1bGcqxmuul7Jxx3d.2a0Q2x47Z6xqgOFN1NXHge', 'admin', '577', 'SOF1207871', '131537', '', NULL, NULL, '', 'activo'),
+(11, 'Andres Felipe Puentes Rivera', '2@fet.edu.co', '$2y$10$TJW3VrQb1JlM2OKCeQgg5.3b8ZTQ0STtmFGSC7bSKmhP4i32ERCge', 'estudiante', '5775445', 'SOF1207871', '3228400865', 'pasantia', NULL, 'ujiji', 'tecnico', 'activo'),
+(20, 'jorges', 'j57665@fet.edu.co', '$2y$10$6Jkm1hBp63LXhb7ZTAWB3ONZ2YFY7kWCd8XiR4pZE3QOWbBhpF/5K', 'estudiante', '7897', '5787', '3228400865', 'seminario', NULL, NULL, 'tecnico', 'activo');
 
 --
 -- Índices para tablas volcadas
@@ -319,6 +372,13 @@ ALTER TABLE `comentarios_proyecto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `proyecto_id` (`proyecto_id`),
   ADD KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `entregas_pasantia`
+--
+ALTER TABLE `entregas_pasantia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pasantia_id` (`pasantia_id`);
 
 --
 -- Indices de la tabla `estudiantes_proyecto`
@@ -350,6 +410,13 @@ ALTER TABLE `inscripciones_seminario`
 ALTER TABLE `materiales_apoyo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `creado_por` (`creado_por`);
+
+--
+-- Indices de la tabla `mensajes_chat`
+--
+ALTER TABLE `mensajes_chat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pasantia_id` (`pasantia_id`);
 
 --
 -- Indices de la tabla `pasantias`
@@ -403,6 +470,12 @@ ALTER TABLE `comentarios_proyecto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `entregas_pasantia`
+--
+ALTER TABLE `entregas_pasantia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `estudiantes_proyecto`
 --
 ALTER TABLE `estudiantes_proyecto`
@@ -412,7 +485,7 @@ ALTER TABLE `estudiantes_proyecto`
 -- AUTO_INCREMENT de la tabla `historial_solicitudes`
 --
 ALTER TABLE `historial_solicitudes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripciones_seminario`
@@ -427,10 +500,16 @@ ALTER TABLE `materiales_apoyo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `mensajes_chat`
+--
+ALTER TABLE `mensajes_chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `pasantias`
 --
 ALTER TABLE `pasantias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos`
@@ -448,13 +527,13 @@ ALTER TABLE `seminarios`
 -- AUTO_INCREMENT de la tabla `solicitudes_registro`
 --
 ALTER TABLE `solicitudes_registro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
@@ -473,6 +552,12 @@ ALTER TABLE `avances_proyecto`
 ALTER TABLE `comentarios_proyecto`
   ADD CONSTRAINT `comentarios_proyecto_ibfk_1` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`id`),
   ADD CONSTRAINT `comentarios_proyecto_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
+
+--
+-- Filtros para la tabla `entregas_pasantia`
+--
+ALTER TABLE `entregas_pasantia`
+  ADD CONSTRAINT `entregas_pasantia_ibfk_1` FOREIGN KEY (`pasantia_id`) REFERENCES `pasantias` (`id`);
 
 --
 -- Filtros para la tabla `estudiantes_proyecto`
@@ -499,6 +584,12 @@ ALTER TABLE `inscripciones_seminario`
 --
 ALTER TABLE `materiales_apoyo`
   ADD CONSTRAINT `materiales_apoyo_ibfk_1` FOREIGN KEY (`creado_por`) REFERENCES `usuarios` (`id`);
+
+--
+-- Filtros para la tabla `mensajes_chat`
+--
+ALTER TABLE `mensajes_chat`
+  ADD CONSTRAINT `mensajes_chat_ibfk_1` FOREIGN KEY (`pasantia_id`) REFERENCES `pasantias` (`id`);
 
 --
 -- Filtros para la tabla `pasantias`
