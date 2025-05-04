@@ -85,83 +85,102 @@ body {
     background-color: #f0f0f0;
 }
 
-/*--------------------------------------------------------------*/
 
-.Bienvenido{
+/* Recordings Styles */
+.recordings-container {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.recordings-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.recordings-filter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.recordings-filter span {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.filter-button {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.filter-button.active {
+    background: #0C9F0F;
+    color: white;
+}
+
+.filter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.recordings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.recording-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.recording-card:hover {
+    transform: translateY(-5px);
+}
+
+.video-thumbnail {
+    background: #f0f0f0;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgb(8, 15, 161); /* Borde azul para identificar */
 }
 
-.Bienvenido h3{
-    font-size: 3rem;
-    font-weight: bold;
-    border: 1px solid rgb(180, 22, 90); /* Borde azul para identificar */
+.video-thumbnail i {
+    font-size: 48px;
+    color: #0C9F0F;
 }
 
-.Bienvenido img{
-    margin: 30px;
-    width: 30%;
-    
-}
-
-.Bienvenido p{
-    font-size: 1.5rem;
-    font-weight: bold;
+.recording-info {
     padding: 1rem;
-    border: 1px solid rgb(8, 15, 161); /* Borde azul para identificar */
 }
 
-.mensaje{
-    border: 1px solid rgb(8, 15, 161); /* Borde azul para identificar */
+.recording-info h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
 }
 
-.mensaje h3{
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    border: 1px solid rgb(180, 22, 90); /* Borde azul para identificar */
+.recording-info p {
+    color: #666;
 }
 
-/*--------------------------------------------------------------*/
+/*---------------------ESTILO FOOTER------------------*/
 
-
-.calendario {
-    margin: 30px;
-    border-radius: 5px;   
-    border: 1px solid rgb(39, 220, 7); /* Borde verde para identificar */
-
-}
-
-
-/*--------------------------------------------------------------*/
-
-.projects {
-    margin: 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border: 2px solid purple;
-    padding: 1rem;
-    
-}
-
-.project-item {
-    border: 2px solid gray;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    font-size: 20px;
-}
-
-.projects h3 {
-    font-size: 2rem;
-    font-weight: bold;
-
-}
-
-/*--------------------------------------------------------------*/
 
 .footer {
     display: flex;
