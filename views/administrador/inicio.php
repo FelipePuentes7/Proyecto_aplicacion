@@ -113,11 +113,14 @@ try {
     <link rel="stylesheet" href="/assets/css/inicio.css">
 </head>
 <body>
-    <div id="logo" onclick="toggleNav()">Logo</div>
+<div id="logo" onclick="toggleNav()">
+    <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
+</div>
     
     <nav id="navbar">
         <div class="nav-header">
-            <div id="nav-logo" onclick="toggleNav()">Logo</div>
+            <div id="nav-logo" onclick="toggleNav()">
+        <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
         </div>
         <ul>
             <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
@@ -307,7 +310,7 @@ try {
     </main>
     
     <footer>
-        <p>&copy; 2023 Sistema de Gestión Académica. Todos los derechos reservados.</p>
+        
     </footer>
 
     <script>

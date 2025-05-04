@@ -243,11 +243,13 @@ try {
 </head>
 <body>
     <header>
-        <div id="logo" onclick="toggleNav()">Logo</div>
+    <div id="logo" onclick="toggleNav()">
+    <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
+    </div>
         <nav id="navbar">
         <ul>
-            <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
-            <li><a href="/views/administrador/aprobacion.php">Aprobación de Usuarios</a></li>
+            <li><a href="/views/administrador/inicio.php" >Inicio</a></li>
+            <li><a href="/views/administrador/aprobacion.php" class="active">Aprobación de Usuarios</a></li>
             <li><a href="/views/administrador/usuarios.php">Gestión de Usuarios</a></li>
             <li class="dropdown">
                 <a href="#">Gestión de Modalidades de Grado</a>
@@ -258,7 +260,12 @@ try {
                 </ul>
             </li>
             <li><a href="/views/administrador/reportes.php">Reportes y Estadísticas</a></li>
-            <li><a href="#">Rol: <?php echo htmlspecialchars($nombreUsuario); ?></a></li>
+            <li><a href="#"> Rol:
+    <?php 
+    // Mostrar nombre y rol
+    echo htmlspecialchars($_SESSION['usuario']['rol'] ?? 'Sin rol');
+    ?>
+</a></li>
             <li><a href="/views/general/login.php">Cerrar Sesión</a></li>
         </ul>
         </nav>
@@ -373,14 +380,17 @@ try {
     </main>
 
     <footer>
-        <p>&copy; 2023 Sistema de Gestión Académica. Todos los derechos reservados.</p>
+        
     </footer>
 
     <script>
         function toggleNav() {
-            var navbar = document.getElementById("navbar");
-            navbar.classList.toggle("active");
-        }
+    var navbar = document.getElementById("navbar");
+    var mainContent = document.querySelector("main"); // Selecciona el elemento main
+    navbar.classList.toggle("active");
+    mainContent.classList.toggle("nav-active"); // Agrega o quita la clase nav-active
+}
+
 
         // Elementos clave
         const solicitudesTab = document.getElementById('solicitudesTab');

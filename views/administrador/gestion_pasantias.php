@@ -933,14 +933,17 @@ $estudiantesDisponiblesDataJSON = json_encode($estudiantes_disponibles);
      </head>
 <body>
 
-    <div id="logo" onclick="toggleNav()">Logo</div>
+<div id="logo" onclick="toggleNav()">
+    <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
+</div>
 
     <nav id="navbar">
-        <div class="nav-header">
-            <div id="nav-logo" onclick="toggleNav()">Logo</div>
+    <div class="nav-header">
+            <div id="nav-logo" onclick="toggleNav()">
+        <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
         </div>
         <ul>
-            <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
+            <li><a href="/views/administrador/inicio.php" >Inicio</a></li>
             <li><a href="/views/administrador/aprobacion.php">Aprobación de Usuarios</a></li>
             <li><a href="/views/administrador/usuarios.php">Gestión de Usuarios</a></li>
             <li class="dropdown">
@@ -948,7 +951,7 @@ $estudiantesDisponiblesDataJSON = json_encode($estudiantes_disponibles);
                 <ul class="dropdown-content">
                     <li><a href="/views/administrador/gestion_seminario.php">Seminario</a></li>
                     <li><a href="/views/administrador/gestion_proyectos.php">Proyectos</a></li>
-                    <li><a href="/views/administrador/gestion_pasantias.php">Pasantías</a></li>
+                    <li><a href="/views/administrador/gestion_pasantias.php" class="active">Pasantías</a></li>
                 </ul>
             </li>
             <li><a href="/views/administrador/reportes.php">Reportes y Estadísticas</a></li>
@@ -1401,7 +1404,7 @@ $estudiantesDisponiblesDataJSON = json_encode($estudiantes_disponibles);
         </div>
     </div>
     <footer>
-        <p>&copy; 2023 Sistema de Gestión Académica. Todos los derechos reservados.</p>
+        
     </footer>
     <script>
         // Variables globales (inicializadas o usadas por JS)
