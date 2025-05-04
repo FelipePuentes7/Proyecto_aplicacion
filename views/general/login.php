@@ -11,12 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     try {
-        // Buscar usuario en la base de datos
+        // Buscar usuario en la base de datos - la estructura de la tabla usuarios se mantiene similar
         $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE email = ?");
         $stmt->execute([$email]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario && password_verify($password, $usuario['password'])) {
+            // Almacenar información básica del usuario en la sesión
             $_SESSION['usuario'] = [
                 'id' => $usuario['id'],
                 'nombre' => $usuario['nombre'],
@@ -30,14 +31,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: /views/administrador/inicio.php');
                     exit();
                 case 'tutor':
-                    header('Location: /views/tutor/dashboard.php');
+                    header('Location: /views/profesores/Pasantias.php');
                     exit();
                 case 'estudiante':
-                    header('Location: /views/estudiantes/Perfil_estudiante.php');
-                    exit();
-                default:
-                    header('Location: /');
-                    exit();
+                        // Redirección específica para estudiantes según su opción de grado
+                    switch ($usuario['opcion_grado']) {
+                        case 'pasantia':
+                        header('Location: /views/estudiantes/Pasantias.php'); // Replace with the actual path for pasantia students
+                        exit();
+                        case 'proyecto':
+                         header('Location: /views/estudiantes/Inicio_Proyecto.php'); // Replace with the actual path for proyecto students
+                        exit();
+                        case 'seminario':
+                        header('Location: /views/estudiantes/Inicio_Seminario.php'); // Replace with the actual path for seminario students
+                        exit();
+                        default:
+                        // Default redirection for students if opcion_grado is not recognized
+                        header('Location: /views/estudiantes/Inicio_Estudiante.php'); // Keep the original default
+                        exit();
+                        }
+                    break; // Important to break the outer switch after handling the student case
+                        default:
+                        header('Location: /');
+                        exit();
             }
         } else {
             $error = "Credenciales incorrectas";

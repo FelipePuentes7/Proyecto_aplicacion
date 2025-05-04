@@ -7,6 +7,12 @@ $mensaje = '';
 $error = '';
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Administrador';
 
+// Inicializar variables de lista para evitar warnings si hay errores de DB
+$lista_estudiantes = [];
+$lista_proyectos = [];
+$lista_pasantias = [];
+$lista_seminarios = [];
+
 // Obtener métricas generales
 try {
     // Total de estudiantes activos
@@ -120,13 +126,7 @@ try {
     // Obtener los estudiantes de cada proyecto
     $lista_proyectos_con_estudiantes = [];
     foreach ($lista_proyectos as $proyecto) {
-        $stmt = $conexion->prepare("
-            SELECT u.nombre
-            FROM proyecto_estudiante pe
-            JOIN usuarios u ON pe.estudiante_id = u.id
-            WHERE pe.proyecto_id = ?
-            ORDER BY u.nombre
-        ");
+        $stmt = $conexion->prepare("SELECT u.nombre FROM estudiantes_proyecto pe JOIN usuarios u ON pe.estudiante_id = u.id WHERE pe.proyecto_id = ? ORDER BY u.nombre");
         $stmt->execute([$proyecto['id']]);
         $estudiantes = $stmt->fetchAll(PDO::FETCH_COLUMN);
         
@@ -189,14 +189,17 @@ $json_estudiantes_por_ciclo = json_encode($estudiantes_por_ciclo);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <div id="logo" onclick="toggleNav()">Logo</div>
+<div id="logo" onclick="toggleNav()">
+    <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
+</div>
     
     <nav id="navbar">
-        <div class="nav-header">
-            <div id="nav-logo" onclick="toggleNav()">Logo</div>
+    <div class="nav-header">
+            <div id="nav-logo" onclick="toggleNav()">
+        <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
         </div>
         <ul>
-            <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
+            <li><a href="/views/administrador/inicio.php" >Inicio</a></li>
             <li><a href="/views/administrador/aprobacion.php">Aprobación de Usuarios</a></li>
             <li><a href="/views/administrador/usuarios.php">Gestión de Usuarios</a></li>
             <li class="dropdown">
@@ -207,7 +210,7 @@ $json_estudiantes_por_ciclo = json_encode($estudiantes_por_ciclo);
                     <li><a href="/views/administrador/gestion_pasantias.php">Pasantías</a></li>
                 </ul>
             </li>
-            <li><a href="/views/administrador/reportes.php">Reportes y Estadísticas</a></li>
+            <li><a href="/views/administrador/reportes.php" class="active">Reportes y Estadísticas</a></li>
             <li><a href="#">Rol: <?php echo htmlspecialchars($nombreUsuario); ?></a></li>
             <li><a href="/views/general/login.php">Cerrar Sesión</a></li>
         </ul>
@@ -644,7 +647,7 @@ $json_estudiantes_por_ciclo = json_encode($estudiantes_por_ciclo);
     </main>
     
     <footer>
-        <p>&copy; 2023 Sistema de Gestión Académica. Todos los derechos reservados.</p>
+        
     </footer>
 
     <script>

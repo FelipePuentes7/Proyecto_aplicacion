@@ -4,19 +4,30 @@ require_once __DIR__ . '/../../config/conexion.php';
 
 // Inicializar variables
 $nombreUsuario = $_SESSION['nombreUsuario'] ?? 'Administrador';
-$usuariosPendientes = 0;
-$proyectosRecientes = [];
+$usuariosPendientesCount = 0; // Renombramos para mayor claridad si quieres mantener el conteo de usuarios 'inactivo' de la tabla usuarios
+$solicitudesPendientes = [];
 $seminariosRecientes = [];
 $pasantiasRecientes = [];
 
 try {
     // Obtener cantidad de usuarios pendientes de aprobación
     $stmt = $conexion->prepare("
-        SELECT COUNT(*) as total FROM usuarios 
-        WHERE estado = 'inactivo'
+        SELECT COUNT(*) as total FROM solicitudes_registro
+        WHERE estado = 'pendiente'
     ");
     $stmt->execute();
-    $usuariosPendientes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    $usuariosPendientesCount = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+    // Obtener la lista de solicitudes pendientes de aprobación
+    $stmt = $conexion->prepare("
+        SELECT id, nombre, email, rol, fecha_solicitud
+        FROM solicitudes_registro
+        WHERE estado = 'pendiente'
+        ORDER BY fecha_solicitud ASC
+    ");
+    $stmt->execute();
+    $solicitudesPendientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
     
     // Obtener proyectos recientes
     $stmt = $conexion->prepare("
@@ -102,11 +113,14 @@ try {
     <link rel="stylesheet" href="/assets/css/inicio.css">
 </head>
 <body>
-    <div id="logo" onclick="toggleNav()">Logo</div>
+<div id="logo" onclick="toggleNav()">
+    <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
+</div>
     
     <nav id="navbar">
         <div class="nav-header">
-            <div id="nav-logo" onclick="toggleNav()">Logo</div>
+            <div id="nav-logo" onclick="toggleNav()">
+        <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
         </div>
         <ul>
             <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
@@ -160,15 +174,15 @@ try {
         </section>
         
         <section class="dashboard-section" id="resumen-aprobaciones">
-            <h2>Usuarios Pendientes de Aprobación</h2>
-            <div class="aprobaciones-card">
-                <div class="aprobaciones-icon">🔔</div>
-                <div class="aprobaciones-info">
-                    <p><?= $usuariosPendientes ?> usuarios pendientes de aprobación</p>
-                    <a href="/views/administrador/aprobacion.php" class="btn-primary">Revisar Solicitudes</a>
-                </div>
-            </div>
-        </section>
+            <h2>Usuarios Pendientes de Aprobación</h2>
+            <div class="aprobaciones-card">
+                <div class="aprobaciones-icon">🔔</div>
+                <div class="aprobaciones-info">
+                                        <p><?= $usuariosPendientesCount ?> solicitudes pendientes de aprobación</p>
+                    <a href="/views/administrador/aprobacion.php" class="btn-primary">Revisar Solicitudes</a>
+                </div>
+            </div>
+        </section>
 
         <section class="dashboard-section" id="accesos-rapidos">
             <h2>Accesos Rápidos</h2>
@@ -296,7 +310,7 @@ try {
     </main>
     
     <footer>
-        <p>&copy; 2023 Sistema de Gestión Académica. Todos los derechos reservados.</p>
+        
     </footer>
 
     <script>

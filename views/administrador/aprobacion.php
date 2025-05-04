@@ -44,11 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     error_log("Solicitud encontrada: " . print_r($solicitud, true));
                     
                     if (isset($_POST['aprobar'])) {
-                        // Insertar en usuarios
+                        // Insertar en usuarios - adaptado a la nueva estructura
                         $sqlUsuario = "INSERT INTO usuarios (
                             nombre, email, password, rol, documento, 
-                            codigo_estudiante, telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo, estado
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo')";
+                            codigo_estudiante, telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                         
                         $stmtUsuario = $conexion->prepare($sqlUsuario);
                         $resultado = $stmtUsuario->execute([
@@ -106,25 +106,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             }
                             // ==========================================
 
-                            // Insertar en historial
+                            // Insertar en historial - adaptado a la nueva estructura
                             $sqlHistorial = "INSERT INTO historial_solicitudes (
-                                usuario_id, nombre, email, rol, documento, 
-                                codigo_estudiante, telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo, estado
-                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'aprobado')";
+                                solicitud_id, nombre, email, documento, codigo_estudiante, 
+                                ciclo, opcion_grado, nombre_proyecto, nombre_empresa, rol, 
+                                estado_final, resuelto_por
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'aprobado', ?)";
                             
                             $stmtHistorial = $conexion->prepare($sqlHistorial);
                             $resultadoHistorial = $stmtHistorial->execute([
-                                $nuevoUsuarioId,
+                                $idSolicitud,
                                 $solicitud['nombre'],
                                 $solicitud['email'],
-                                $solicitud['rol'],
                                 $solicitud['documento'],
                                 $solicitud['codigo_estudiante'] ?? null,
-                                $solicitud['telefono'] ?? null,
+                                $solicitud['ciclo'] ?? null,
                                 $solicitud['opcion_grado'] ?? null,
                                 $solicitud['nombre_proyecto'] ?? null,
                                 $solicitud['nombre_empresa'] ?? null,
-                                $solicitud['ciclo'] ?? null
+                                $solicitud['rol'],
+                                $_SESSION['usuario']['id'] ?? null
                             ]);
                             
                             // Depuración: Verificar si se insertó en el historial
@@ -137,23 +138,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             }
                         }
                     } elseif (isset($_POST['rechazar'])) {
+                        // Insertar en historial de rechazos - adaptado a la nueva estructura
                         $sqlHistorial = "INSERT INTO historial_solicitudes (
-                            nombre, email, rol, documento, 
-                            codigo_estudiante, telefono, opcion_grado, nombre_proyecto, nombre_empresa, ciclo, estado
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'rechazado')";
+                            solicitud_id, nombre, email, documento, codigo_estudiante, 
+                            ciclo, opcion_grado, nombre_proyecto, nombre_empresa, rol, 
+                            estado_final, resuelto_por
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'rechazado', ?)";
                         
                         $stmtHistorial = $conexion->prepare($sqlHistorial);
                         $resultadoHistorial = $stmtHistorial->execute([
+                            $idSolicitud,
                             $solicitud['nombre'],
                             $solicitud['email'],
-                            $solicitud['rol'],
                             $solicitud['documento'],
                             $solicitud['codigo_estudiante'] ?? null,
-                            $solicitud['telefono'] ?? null,
+                            $solicitud['ciclo'] ?? null,
                             $solicitud['opcion_grado'] ?? null,
                             $solicitud['nombre_proyecto'] ?? null,
                             $solicitud['nombre_empresa'] ?? null,
-                            $solicitud['ciclo'] ?? null
+                            $solicitud['rol'],
+                            $_SESSION['usuario']['id'] ?? null
                         ]);
                         
                         // Depuración: Verificar si se insertó en el historial
@@ -198,7 +202,7 @@ if (isset($_GET['mensaje'])) {
     $mensaje = $_GET['mensaje'];
 }
 
-// Obtener datos
+// Obtener datos - adaptado a la nueva estructura
 try {
     $solicitudes = $conexion->query("SELECT * FROM solicitudes_registro")->fetchAll();
     $historial = $conexion->query("SELECT * FROM historial_solicitudes")->fetchAll();
@@ -239,11 +243,13 @@ try {
 </head>
 <body>
     <header>
-        <div id="logo" onclick="toggleNav()">Logo</div>
+    <div id="logo" onclick="toggleNav()">
+    <img src="/assets/images/logofet.png" alt="Logo FET" class="logo-img">
+    </div>
         <nav id="navbar">
         <ul>
-            <li><a href="/views/administrador/inicio.php" class="active">Inicio</a></li>
-            <li><a href="/views/administrador/aprobacion.php">Aprobación de Usuarios</a></li>
+            <li><a href="/views/administrador/inicio.php" >Inicio</a></li>
+            <li><a href="/views/administrador/aprobacion.php" class="active">Aprobación de Usuarios</a></li>
             <li><a href="/views/administrador/usuarios.php">Gestión de Usuarios</a></li>
             <li class="dropdown">
                 <a href="#">Gestión de Modalidades de Grado</a>
@@ -254,7 +260,12 @@ try {
                 </ul>
             </li>
             <li><a href="/views/administrador/reportes.php">Reportes y Estadísticas</a></li>
-            <li><a href="#">Rol: <?php echo htmlspecialchars($nombreUsuario); ?></a></li>
+            <li><a href="#"> Rol:
+    <?php 
+    // Mostrar nombre y rol
+    echo htmlspecialchars($_SESSION['usuario']['rol'] ?? 'Sin rol');
+    ?>
+</a></li>
             <li><a href="/views/general/login.php">Cerrar Sesión</a></li>
         </ul>
         </nav>
@@ -331,7 +342,7 @@ try {
             </tbody>
         </table>
 
-        <!-- Tabla de historial -->
+        <!-- Tabla de historial - adaptada a la nueva estructura -->
         <table id="historialTable" class="user-table" style="display:none;">
             <thead>
                 <tr>
@@ -358,9 +369,9 @@ try {
                         <td><?= htmlSafe($registro['documento']) ?></td>
                         <td><?= htmlSafe($registro['codigo_estudiante']) ?></td>
                         <td><?= htmlSafe($registro['email']) ?></td>
-                        <td><?= htmlSafe($registro['fecha_registro']) ?></td>
+                        <td><?= htmlSafe($registro['fecha_resolucion']) ?></td>
                         <td><?= htmlSafe($registro['opcion_grado']) ?></td>
-                        <td><?= $registro['estado'] === 'aprobado' ? '✅ Aprobado' : '❌ Rechazado' ?></td>
+                        <td><?= $registro['estado_final'] === 'aprobado' ? '✅ Aprobado' : '❌ Rechazado' ?></td>
                     </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -369,14 +380,17 @@ try {
     </main>
 
     <footer>
-        <p>&copy; 2025 Sistema de Gestión Académica. Todos los derechos reservados.</p>
+        
     </footer>
 
     <script>
         function toggleNav() {
-            var navbar = document.getElementById("navbar");
-            navbar.classList.toggle("active");
-        }
+    var navbar = document.getElementById("navbar");
+    var mainContent = document.querySelector("main"); // Selecciona el elemento main
+    navbar.classList.toggle("active");
+    mainContent.classList.toggle("nav-active"); // Agrega o quita la clase nav-active
+}
+
 
         // Elementos clave
         const solicitudesTab = document.getElementById('solicitudesTab');
@@ -547,4 +561,3 @@ try {
     </script>
 </body>
 </html>
-
