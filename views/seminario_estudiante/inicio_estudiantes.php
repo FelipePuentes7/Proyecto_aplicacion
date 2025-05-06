@@ -5,26 +5,36 @@ session_start();
 
 require_once realpath(__DIR__ . '/../../config/conexion.php');
 
-echo "✅ Archivo cargado correctamente.<br>";
-
-if (!isset($_SESSION['user_id'])) {
-    die("❌ ERROR: No hay un usuario en sesión. <a href='/login.php'>Inicia sesión</a>");
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['usuario']['id'])) {
+    header('Location: /views/general/login.php');
+    exit();
 }
 
-echo "🔍 ID del usuario en sesión: " . $_SESSION['user_id'] . "<br>";
+// Obtener los datos del usuario desde la base de datos
+try {
+    $userId = $_SESSION['usuario']['id'];
+    $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $stmt->execute([$userId]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if (!$user) {
+        die("Error: No se encontró información del usuario.");
+    }
+    
+} catch (PDOException $e) {
+    die("Error de base de datos: " . $e->getMessage());
+}
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/Perfil_Estu.css">
+    <link rel="stylesheet" href="/assets/css/Inicio_Estu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>MissionFet - Perfil Estudiante</title>
+    <title>MissionFet - Inicio Estudiante</title>
 </head>
 
 <body>
@@ -37,7 +47,7 @@ echo "🔍 ID del usuario en sesión: " . $_SESSION['user_id'] . "<br>";
 
         <!-- Links de navegación -->
         <div class="nav-links">
-            <a href="#">Inicio</a>
+            <a href="/views/estudiantes/Inicio_Estudiante.php">Inicio</a>
             <a href="#">Material de Apoyo</a>
             <a href="#">Tutorías</a>
         </div>
@@ -50,45 +60,33 @@ echo "🔍 ID del usuario en sesión: " . $_SESSION['user_id'] . "<br>";
             <div class="dropdown">
                 <i class="fa-solid fa-user"></i> <!-- Ícono de perfil -->
                 <div class="dropdown-content">
-                    <a href="#">Editar Perfil</a>
-                    <a href="#">Cerrar Sesión</a>
+                    <a href="/views/estudiantes/Perfil_estudiante.php">Editar Perfil</a>
+                    <a href="/views/general/login.php" class="logout-btn" onclick="cerrarSesion(event)">
+                <i class="fa-solid fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
                 </div>
             </div>
         </div>
 </nav>
 
-    <div class="profile-container">
+<section class="Bienvenido">
 
-            <div class="Titulo_perfil">
-                <h2>¡Bienvenido, <?php echo htmlspecialchars($user['nombre']); ?>!</h2>
-                        <img src="/assets/images/IMAGEN_USUARIO.png" alt="Imagen_usuario" width="300" height="300" center>
-             </div>
+    <div class="mensaje">
+        <h3><strong>¡BIENVENIDO, <?php echo htmlspecialchars($user['nombre']); ?>!</strong></h3>
 
-                    <div class="profile_info">
-                        
-                        <p><strong><i class="fa-solid fa-envelope"></i>Email:</strong> <?php echo htmlspecialchars($user['email']); ?> </p>
-                        <p><strong><i class="fa-solid fa-phone"></i>Teléfono:</strong><?php echo htmlspecialchars($user['telefono']); ?> </p>
-                        <p><strong><i class="fa-solid fa-location-dot"></i>Rol:</strong> <?php echo ucfirst($user['rol']); ?> </p>
-                        <p><strong><i class="fa-solid fa-fingerprint"></i>Documento:</strong>  <?php echo ucfirst($user['documento']); ?> </p>
-                        <p><strong><i class="fa-solid fa-id-card"></i>Codigo Institucional:</strong> <?php echo htmlspecialchars($user['codigo_estudiante']); ?> </p>
-                        <p><strong><i class="fa-solid fa-graduation-cap"></i>Opcion De Grado:</strong> <?php echo htmlspecialchars($user['opcion_grado']); ?> </p>
-                
-                      </div>
-
+            <p>Organiza y Gestiona tu proyecto de manera eficiente. <br>Aqui Encontraras todo lo que necesitas para avanzar.</p>
     </div>
 
-    <div class="projects">
+    <img src="/assets/images/Imagen_principal.png" alt="Imagen_inicio">
 
-        <h3>Tus Proyectos:</h3>
-            <div class="project-item">
-                <p><strong>Proyecto 1:</strong></p>
-                <p> Avance: 50%</p>
-                <p> Fecha Limite Proximo Acance: 24/05/25</p>
-                <p> Estado: Aprobado</p>
-                <p> Tutor Asignado: Pepe Rojas</p>
-            </div>
+</section>
 
-    </div>
+<div class="calendario">
+    
+
+
+</div>
+
 
 
 
@@ -139,6 +137,8 @@ echo "🔍 ID del usuario en sesión: " . $_SESSION['user_id'] . "<br>";
             </div>
         </div>
     </footer>
+
+
 
 
     <script src="https://kit.fontawesome.com/4fac1b523f.js" crossorigin="anonymous"></script>

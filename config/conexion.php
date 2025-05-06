@@ -3,7 +3,7 @@
 
 // Configuración de la base de datos
 $host = 'localhost';
-$dbname = 'grados_fet';
+$dbname = 'proyecto';
 $username = 'root';     // Cambiar por tu usuario de MySQL
 $password = '';  // Cambiar por tu contraseña de MySQL
 
