@@ -1,51 +1,86 @@
+/* Variables de colores institucionales */
+:root {
+    --color-primary: #039708; /* Color principal de la universidad */
+    --color-primary-dark: #027305; /* Variante oscura */
+    --color-primary-light: #4CAF50; /* Variante clara */
+    --color-accent: #FFD700; /* Oro para acentos prestigiosos */
+    --color-white: #FFFFFF;
+    --color-black: #1A1A1A;
+    --color-gray-dark: #3A3A3A;
+    --color-gray: #6B7280;
+    --color-gray-light: #F7FAFC;
+    --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 8px 20px rgba(0, 0, 0, 0.15);
+    --border-radius: 12px;
+    --transition-speed: 0.3s;
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Merriweather', serif;
+}
+
 /* Estilos generales y reset */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-primary);
+    color: var(--color-black);
+    background-color: var(--color-gray-light);
     line-height: 1.6;
-    background-color: #f5f5f5;
-}
-
-/* Header y Navegación */
-header {
     position: relative;
-    padding: 10px;
-    height: 60px;
-    background: #1a4d2e;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    min-height: 100vh;
+    padding-bottom: 80px;
 }
 
+/* Logo - Estilo alineado */
 #logo {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    left: 20px;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 12px;
     z-index: 1000;
-    background: #1a4d2e;
-    color: white;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    border: 2px solid white;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    width: auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-speed);
+    border: 2px solid var(--color-primary-light);
 }
 
+#logo:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+.logo-img {
+    height: 100%;
+    width: auto;
+    max-height: 100%;
+    object-fit: contain;
+    padding: 0 8px;
+}
+
+/* Navegación - Estilo alineado y desplazamiento de contenido */
 #navbar {
     position: fixed;
     top: 0;
     left: -300px;
     width: 300px;
     height: 100%;
-    background: #1a4d2e;
-    padding: 80px 20px 20px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+    background: linear-gradient(180deg, var(--color-primary-dark), var(--color-primary));
+    color: var(--color-white);
+    transition: left var(--transition-speed) ease-in-out;
     z-index: 999;
+    box-shadow: var(--shadow-medium);
+    overflow-y: auto;
+    padding-top: 100px;
 }
 
 #navbar.active {
@@ -53,292 +88,388 @@ header {
 }
 
 #navbar ul {
-    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 #navbar ul li a {
-    color: white;
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    color: var(--color-white);
     text-decoration: none;
-    padding: 12px;
-    display: block;
-    border-radius: 4px;
-    transition: background 0.3s;
+    font-weight: 600;
+    transition: all var(--transition-speed);
+    border-left: 4px solid transparent;
 }
 
-#navbar ul li a:hover {
-    background: #245f3a;
+#navbar ul li a:hover, #navbar ul li a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-left: 4px solid var(--color-accent);
+    transform: translateX(5px);
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.2); /* Efecto sutil para destacar el estado activo */
 }
 
+/* Dropdown en la navegación */
 .dropdown-content {
     display: none;
-    padding-left: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding-left: 20px;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Contenido principal */
+.dropdown-content li a {
+    padding: 12px 24px;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+/* Contenido principal - Desplazamiento con la barra */
 main {
-    padding: 30px 20px;
-    max-width: 1200px;
-    margin: 40px auto 80px;
+    padding: 100px 30px 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    transition: margin-left var(--transition-speed) ease-in-out;
+}
+
+main.nav-active {
+    margin-left: 300px;
 }
 
 h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-primary-dark);
+    border-bottom: 4px solid var(--color-primary);
+    padding-bottom: 12px;
+    margin-bottom: 40px;
+    font-weight: 700;
     text-align: center;
-    margin-bottom: 30px;
-    color: #1a4d2e;
-    font-size: 2.2em;
+    position: relative;
 }
 
-/* Controles - Filtro y Búsqueda */
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: var(--color-primary);
+    border-radius: 2px;
+}
+
+h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--color-gray-dark);
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+    position: relative;
+    padding-left: 20px;
+}
+
+h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background: linear-gradient(var(--color-primary), var(--color-primary-light));
+    border-radius: 3px;
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+/* Controles - Filtro y Búsqueda - Estilo alineado */
 .controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
-    gap: 15px;
+    margin-bottom: 40px;
+    gap: 24px;
+    padding: 24px;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition-speed);
+}
+
+.controls:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
 }
 
 .filter {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
 }
 
 .search {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-left: auto;
+    gap: 16px;
+}
+
+.filter select, .search input {
+    padding: 12px 16px;
+    border: 2px solid var(--color-gray-light);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all var(--transition-speed);
+    background-color: var(--color-white);
+    font-family: var(--font-primary);
 }
 
 .filter select {
-    padding: 8px 12px;
-    border: 2px solid #1a4d2e;
-    border-radius: 5px;
-    background: white;
-    font-size: 14px;
+    min-width: 200px;
     cursor: pointer;
+}
+
+.filter select:focus, .search input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(3, 151, 8, 0.2);
 }
 
 .search input {
-    padding: 8px 12px;
-    border: 2px solid #1a4d2e;
-    border-radius: 5px;
-    width: 250px;
-    font-size: 14px;
+    width: 320px;
 }
 
 .search button {
-    padding: 8px 15px;
-    background-color: #1a4d2e;
-    color: white;
+    padding: 12px 24px;
+    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+    color: var(--color-white);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-.search button:hover {
-    background-color: #245f3a;
-}
-
-/* Tablas */
-.user-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.user-table th {
-    background: #1a4d2e;
-    color: white;
-    padding: 15px;
+    transition: all var(--transition-speed);
     font-weight: 600;
-    text-transform: uppercase;
-}
-
-.user-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #f0f0f0;
-    color: #333;
-}
-
-.user-table tr:hover {
-    background-color: #f8fff8;
-}
-
-/* Botones de acción */
-.aprobar, .rechazar {
-    padding: 6px 12px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.aprobar {
-    background-color: #1a4d2e;
-    color: white;
-}
-
-.aprobar:hover {
-    background-color: #245f3a;
-}
-
-.rechazar {
-    background-color: #c44d3c;
-    color: white;
-}
-
-.rechazar:hover {
-    background-color: #b34434;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #1a4d2e;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-/* Controles - Filtro y Búsqueda */
-.controls {
+    font-family: var(--font-primary);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    gap: 25px; /* Más espacio entre elementos */
-    padding: 15px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.filter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-right: auto; /* Separa del search */
-}
-
-.search {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Más espacio entre input y botón */
-}
-
-/* Tabs mejorados */
-.tabs {
-    margin-bottom: 25px;
-    display: flex;
-    gap: 15px; /* Más espacio entre botones */
-}
-
-.tabs button {
-    padding: 12px 30px;
-    cursor: pointer;
-    background-color: #ecf0f1;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    color: #1a4d2e;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: 2px solid transparent;
-}
-
-.tabs button.active {
-    background-color: #1a4d2e;
-    color: white;
-    box-shadow: 0 2px 5px rgba(26,77,46,0.3);
-    border-color: #143b25;
-}
-
-.tabs button:hover:not(.active) {
-    background-color: #d6e3d6;
-    transform: translateY(-2px);
-}
-
-/* Botones de acción en tablas */
-.aprobar, .rechazar {
-    padding: 8px 15px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    margin: 4px;
-    display: inline-flex;
     align-items: center;
     gap: 8px;
 }
 
+.search button:hover {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Tablas - Estilo alineado */
+.user-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 40px;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition-speed);
+}
+
+.user-table:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.user-table th {
+    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+    color: var(--color-white);
+    padding: 18px;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font-primary);
+}
+
+.user-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--color-gray-light);
+    color: var(--color-black);
+    transition: background-color var(--transition-speed);
+}
+
+.user-table tr:last-child td {
+    border-bottom: none;
+}
+
+.user-table tr:hover td {
+    background-color: var(--color-gray-light);
+}
+
+/* Tabs - Estilo alineado */
+.tabs {
+    margin-bottom: 40px;
+    display: flex;
+    gap: 12px;
+    background: var(--color-white);
+    padding: 12px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition-speed);
+}
+
+.tabs:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.tabs button {
+    padding: 14px 28px;
+    cursor: pointer;
+    background-color: var(--color-gray-light);
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    color: var(--color-gray-dark);
+    transition: all Rick var(--transition-speed);
+    font-family: var(--font-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabs button.active {
+    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+    color: var(--color-white);
+    box-shadow: var(--shadow-soft);
+}
+
+.tabs button:hover:not(.active) {
+    background-color: var(--color-primary-light);
+    transform: translateY(-3px);
+}
+
+/* Botones de acción - Estilo alineado */
+.aprobar, .rechazar {
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: all var(--transition-speed);
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-primary);
+}
+
 .aprobar {
-    background-color: #1a4d2e;
-    color: white;
-    border: 2px solid #143b25;
+    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+    color: var(--color-white);
 }
 
 .aprobar:hover {
-    background-color: #143b25;
-    transform: translateY(-1px);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
 }
 
 .rechazar {
-    background-color: #c44d3c;
-    color: white;
-    border: 2px solid #a34132;
+    background: linear-gradient(90deg, #DC2626, #B91C1C);
+    color: var(--color-white);
 }
 
 .rechazar:hover {
-    background-color: #a34132;
-    transform: translateY(-1px);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
 }
 
-/* Ajustes específicos para inputs */
-.filter select {
-    padding: 10px 15px;
-    min-width: 180px;
+/* Footer - Estilo alineado y desplazamiento */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: var(--color-white);
+    text-align: center;
+    padding: 20px;
+    transition: margin-left var(--transition-speed) ease-in-out;
+    font-size: 0.95rem;
+    font-family: var(--font-primary);
 }
 
-.search input {
-    padding: 10px 15px;
-    width: 300px;
-}
-
-.search button {
-    padding: 10px 20px;
-    font-weight: 600;
+footer.nav-active {
+    margin-left: 300px;
+    width: calc(100% - 300px);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .controls {
-        flex-wrap: wrap;
+    #logo {
+        width: auto;
+        max-width: 160px;
+        height: 50px;
+        top: 16px;
+        left: 16px;
     }
-    
+
+    #navbar {
+        width: 100%;
+        left: -100%;
+    }
+
+    #navbar.active {
+        left: 0;
+    }
+
+    main {
+        padding: 80px 16px 16px;
+    }
+
+    main.nav-active, footer.nav-active {
+        margin-left: 0;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+    }
+
     .filter, .search {
         width: 100%;
     }
-    
+
     .search input {
         width: 100%;
     }
-    
-    #navbar {
-        width: 250px;
-        left: -250px;
+
+    .tabs {
+        overflow-x: auto;
+        padding: 8px;
+    }
+
+    .tabs button {
+        padding: 12px 16px;
+        font-size: 0.9em;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+        padding: 90px 24px 24px;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+    }
+
+    .search input {
+        width: 280px;
     }
 }

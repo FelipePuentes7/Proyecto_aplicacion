@@ -1,0 +1,15 @@
+[20-Apr-2025 23:16:19 Europe/Berlin] PHP Warning:  Undefined array key "documento_adicional" in C:\Users\felipe\Documents\Proyecto_aplicacion\views\administrador\gestion_pasantias.php on line 89
+[20-Apr-2025 23:16:28 Europe/Berlin] PHP Warning:  Undefined array key "documento_adicional" in C:\Users\felipe\Documents\Proyecto_aplicacion\views\administrador\gestion_pasantias.php on line 89
+[20-Apr-2025 23:16:41 Europe/Berlin] PHP Warning:  Undefined array key "documento_adicional" in C:\Users\felipe\Documents\Proyecto_aplicacion\views\administrador\gestion_pasantias.php on line 89
+[20-Apr-2025 23:16:59 Europe/Berlin] PHP Warning:  Undefined array key "documento_adicional" in C:\Users\felipe\Documents\Proyecto_aplicacion\views\administrador\gestion_pasantias.php on line 89
+[20-Apr-2025 23:17:19 Europe/Berlin] Error en gestión de pasantías (POST): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'documento_adicional' in 'field list'
+[20-Apr-2025 23:17:28 Europe/Berlin] PHP Warning:  Undefined array key "documento_adicional" in C:\Users\felipe\Documents\Proyecto_aplicacion\views\administrador\gestion_pasantias.php on line 89
+[20-Apr-2025 23:17:40 Europe/Berlin] Error en gestión de pasantías (POST): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'documento_adicional' in 'field list'
+[20-Apr-2025 23:22:15 Europe/Berlin] PHP Warning:  Undefined array key "documento_adicional" in C:\Users\felipe\Documents\Proyecto_aplicacion\views\administrador\gestion_pasantias.php on line 89
+[20-Apr-2025 23:24:27 Europe/Berlin] PHP Warning:  Undefined array key "documento_adicional" in C:\Users\felipe\Documents\Proyecto_aplicacion\views\administrador\gestion_pasantias.php on line 89
+[20-Apr-2025 23:58:28 Europe/Berlin] Error en gestión de pasantías (POST): Las fechas de inicio y fin deben tener un formato de fecha válido.
+[20-Apr-2025 23:58:50 Europe/Berlin] Error en gestión de pasantías (POST): Las fechas de inicio y fin deben tener un formato de fecha válido.
+[20-Apr-2025 23:59:14 Europe/Berlin] Error en gestión de pasantías (POST): Las fechas de inicio y fin deben tener un formato de fecha válido.
+[20-Apr-2025 23:59:40 Europe/Berlin] Error en gestión de pasantías (POST): Las fechas de inicio y fin deben tener un formato de fecha válido.
+[21-Apr-2025 00:00:09 Europe/Berlin] Error en gestión de pasantías (POST): Las fechas de inicio y fin deben tener un formato de fecha válido.
+[21-Apr-2025 00:01:00 Europe/Berlin] Error en gestión de pasantías (POST): Las fechas de inicio y fin deben tener un formato de fecha válido.

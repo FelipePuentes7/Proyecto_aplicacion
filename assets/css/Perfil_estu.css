@@ -161,7 +161,199 @@ body {
 }
 
 
+<<<<<<< HEAD
 
+=======
+ /* Estilos adicionales para la sección de proyectos */
+ .projects {
+    margin: 30px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.projects h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.project-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.project-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.project-status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status-propuesto { background-color: #f1c40f; color: #000; }
+.status-en_revision { background-color: #3498db; color: #fff; }
+.status-aprobado { background-color: #2ecc71; color: #fff; }
+.status-rechazado { background-color: #e74c3c; color: #fff; }
+.status-en_proceso { background-color: #9b59b6; color: #fff; }
+.status-finalizado { background-color: #34495e; color: #fff; }
+
+.project-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    margin-bottom: 10px;
+}
+
+.detail-item strong {
+    color: #2c3e50;
+}
+
+.team-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.team-title {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.team-member {
+    background-color: #f8f9fa;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.team-member i {
+    margin-right: 5px;
+    color: #3498db;
+}
+
+.team-member.leader {
+    background-color: #e3f2fd;
+    border: 1px solid #bbdefb;
+}
+
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-action i {
+    margin-right: 5px;
+}
+
+.btn-action:hover {
+    background-color: #2980b9;
+}
+
+.no-projects {
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-projects p {
+    margin-bottom: 20px;
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 5px;
+}
+
+.avance-info {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 0 5px 5px 0;
+}
+
+.avance-info p {
+    margin: 5px 0;
+}
+
+.avance-info .avance-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #7f8c8d;
+    font-size: 0.9em;
+    margin-top: 8px;
+}
+>>>>>>> origin/Felipe
 
 /*---------------------ESTILO FOOTER------------------*/
 
