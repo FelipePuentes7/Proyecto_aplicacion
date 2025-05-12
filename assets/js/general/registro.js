@@ -424,4 +424,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Usar setTimeout para asegurar que se ejecute después de que el DOM esté completamente cargado
         setTimeout(toggleGradoFields, 500);
     }
+    // Añadir esta función al archivo JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const codigoEstudiante = document.getElementById('codigo_estudiante');
+    
+    if (codigoEstudiante) {
+        codigoEstudiante.addEventListener('input', function() {
+            const valor = this.value.trim();
+            
+            if (valor && !valor.toUpperCase().startsWith('SOF')) {
+                this.setCustomValidity('El código debe comenzar con "SOF"');
+                this.classList.add('invalid');
+            } else {
+                this.setCustomValidity('');
+                this.classList.remove('invalid');
+            }
+        });
+    }
+});
 });
