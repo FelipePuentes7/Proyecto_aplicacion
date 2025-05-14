@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     header('Location: /views/administrador/inicio.php');
                     exit();
                 case 'tutor':
-                    header('Location: /views/profesores/Pasantias.php');
+                    header('Location: /views/profesores/tutor.php');
                     exit();
                 case 'estudiante':
                     // Redirección específica para estudiantes según su opción de grado
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                             header('Location: /views/estudiantes/Pasantias.php');
                             exit();
                         case 'proyecto':
-                            header('Location: /views/estudiantes/Inicio_Proyecto.php');
+                            header('Location: /views/estudiantes/Proyectos.php');
                             exit();
                         case 'seminario':
                             header('Location: /views/estudiantes/Inicio_Seminario.php');

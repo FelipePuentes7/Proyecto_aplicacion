@@ -364,7 +364,7 @@ ul {
   padding: var(--spacing-6);
 }
 
-/* Resumen de la pasantía */
+/* Resumen del proyecto */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

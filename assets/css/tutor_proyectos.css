@@ -310,7 +310,7 @@ ul {
   color: var(--color-text);
 }
 
-/* Tabla de pasantías */
+/* Tabla de proyectos */
 .card {
   background-color: var(--color-surface);
   border-radius: var(--border-radius-lg);
@@ -444,6 +444,16 @@ select {
 .estado-finalizada {
   background-color: rgba(100, 116, 139, 0.1);
   color: var(--color-secondary-dark);
+}
+
+.estado-aprobado {
+  background-color: rgba(3, 151, 8, 0.1);
+  color: var(--color-success);
+}
+
+.estado-rechazado {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--color-error);
 }
 
 .btn-icon {
@@ -623,7 +633,16 @@ select {
   background-color: #e6c200; /* Versión más oscura del oro */
 }
 
-/* Chat - CORREGIDO */
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+/* Chat */
 .chat-container {
   display: flex;
   height: calc(100vh - 200px);
@@ -638,7 +657,7 @@ select {
   width: 300px;
   border-right: 1px solid var(--color-border);
   overflow-y: auto;
-  flex-shrink: 0; /* Evita que la lista se encoja */
+  flex-shrink: 0;
 }
 
 .chat-item {
@@ -668,7 +687,7 @@ select {
   align-items: center;
   justify-content: center;
   margin-right: var(--spacing-3);
-  flex-shrink: 0; /* Evita que el avatar se encoja */
+  flex-shrink: 0;
 }
 
 .chat-item-info {
@@ -711,8 +730,8 @@ select {
   display: flex;
   flex-direction: column;
   background-color: var(--color-background);
-  min-width: 0; /* Permite que el contenido se encoja si es necesario */
-  position: relative; /* Importante para el posicionamiento de los elementos internos */
+  min-width: 0;
+  position: relative;
 }
 
 .chat-placeholder {
@@ -734,15 +753,15 @@ select {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Asegura que ocupe toda la altura disponible */
-  min-height: 0; /* Permite que los elementos internos se encojan */
+  height: 100%;
+  min-height: 0;
 }
 
 .chat-header {
   padding: var(--spacing-4);
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  flex-shrink: 0; /* Evita que el encabezado se encoja */
+  flex-shrink: 0;
 }
 
 .chat-user-info {
@@ -765,12 +784,12 @@ select {
 .chat-messages {
   flex: 1;
   padding: var(--spacing-4);
-  overflow-y: auto; /* Permite desplazamiento vertical */
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);
-  min-height: 0; /* Crucial para permitir el desplazamiento */
-  max-height: calc(100% - 120px); /* Altura máxima para permitir espacio para el input */
+  min-height: 0;
+  max-height: calc(100% - 120px);
 }
 
 .chat-message {
@@ -792,7 +811,7 @@ select {
   padding: var(--spacing-3) var(--spacing-4);
   border-radius: var(--border-radius-lg);
   position: relative;
-  word-break: break-word; /* Evita que los mensajes largos rompan el diseño */
+  word-break: break-word;
 }
 
 .message-sent .message-content {
@@ -837,9 +856,9 @@ select {
   padding: var(--spacing-4);
   background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
-  flex-shrink: 0; /* Evita que el área de entrada se encoja */
-  position: relative; /* Asegura que permanezca en la parte inferior */
-  z-index: 5; /* Asegura que esté por encima de otros elementos */
+  flex-shrink: 0;
+  position: relative;
+  z-index: 5;
 }
 
 .chat-input form {
@@ -851,7 +870,7 @@ select {
 .chat-tools {
   display: flex;
   align-items: center;
-  flex-shrink: 0; /* Evita que las herramientas se encojan */
+  flex-shrink: 0;
 }
 
 .chat-file-label {
@@ -878,7 +897,7 @@ select {
   height: 40px;
   font-family: inherit;
   font-size: 0.9rem;
-  min-width: 0; /* Permite que el textarea se encoja si es necesario */
+  min-width: 0;
 }
 
 .chat-input textarea:focus {
@@ -899,7 +918,7 @@ select {
   justify-content: center;
   cursor: pointer;
   transition: background-color var(--transition-speed) ease;
-  flex-shrink: 0; /* Evita que el botón se encoja */
+  flex-shrink: 0;
 }
 
 .chat-send:hover {
@@ -1040,7 +1059,7 @@ select {
   opacity: 0.5;
 }
 
-/* Detalle de pasantía */
+/* Detalle de proyecto */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1239,11 +1258,11 @@ select {
 
   /* Ajustes adicionales para el chat en móvil */
   .chat-active {
-    height: 500px; /* Altura fija para móviles */
+    height: 500px;
   }
 
   .chat-messages {
-    max-height: 350px; /* Altura máxima para los mensajes en móvil */
+    max-height: 350px;
   }
 }
 
