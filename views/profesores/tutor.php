@@ -176,7 +176,7 @@ $total_notificaciones_proyectos = $proyectos_pendientes; // Solo contamos los av
                         </div>
                         <h3>Cerrar Sesión</h3>
                         <p>Salir del sistema de forma segura</p>
-                        <a href="/login.php" class="option-button logout-button">
+                        <a href="/views/general/login.php" class="option-button logout-button">
                             <i class="fas fa-power-off"></i> Salir
                         </a>
                     </div>

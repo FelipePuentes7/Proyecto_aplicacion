@@ -25,37 +25,35 @@ if (isset($_REQUEST['ajax_action'])) {
 
                 if ($proyecto_id) {
                     try {
-                        // Obtener mensajes para el proyecto, asegurando que pertenezca a este tutor
-                        $query = "SELECT m.*, u.nombre AS emisor_nombre, ep.estudiante_id AS proyecto_estudiante_id
-                                  FROM mensajes_proyecto m
-                                  INNER JOIN proyectos p ON m.proyecto_id = p.id
-                                  INNER JOIN estudiantes_proyecto ep ON p.id = ep.proyecto_id
-                                  INNER JOIN usuarios u ON m.emisor_id = u.id
-                                  WHERE m.proyecto_id = ? AND p.tutor_id = ? AND ep.rol_en_proyecto = 'líder'
-                                  ORDER BY m.fecha_envio ASC";
-                        $stmt = $conexion->prepare($query);
-                        $stmt->execute([$proyecto_id, $tutor_id]);
-                        $mensajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        $stmt->closeCursor();
-
-                        // Verificar si el proyecto existe y pertenece al tutor, incluso si no hay mensajes
-                        $estudiante_id_chat = null;
-                        $query_check_proyecto = "SELECT ep.estudiante_id 
+                        // Primero verificar si el proyecto existe y pertenece al tutor
+                        $query_check_proyecto = "SELECT p.id, ep.estudiante_id 
                                                 FROM proyectos p 
                                                 INNER JOIN estudiantes_proyecto ep ON p.id = ep.proyecto_id 
                                                 WHERE p.id = ? AND p.tutor_id = ? AND ep.rol_en_proyecto = 'líder'";
                         $stmt_check_proyecto = $conexion->prepare($query_check_proyecto);
                         $stmt_check_proyecto->execute([$proyecto_id, $tutor_id]);
-                        $proyecto_info_chat = $stmt_check_proyecto->fetch(PDO::FETCH_ASSOC);
+                        $proyecto_info = $stmt_check_proyecto->fetch(PDO::FETCH_ASSOC);
                         $stmt_check_proyecto->closeCursor();
 
-                        if (!$proyecto_info_chat) {
+                        if (!$proyecto_info) {
                             header('Content-Type: application/json');
                             echo json_encode(['success' => false, 'message' => 'Acceso no autorizado a este proyecto']);
                             exit();
                         }
 
-                        $estudiante_id_chat = $proyecto_info_chat['estudiante_id'];
+                        $estudiante_id_chat = $proyecto_info['estudiante_id'];
+
+                        // IMPORTANTE: Usamos la tabla mensajes_chat con proyecto_id en lugar de pasantia_id
+                        // Consulta adaptada para usar mensajes_chat con proyectos
+                        $query = "SELECT m.*, u.nombre AS emisor_nombre 
+                                  FROM mensajes_chat m
+                                  LEFT JOIN usuarios u ON m.emisor_id = u.id
+                                  WHERE m.pasantia_id = ? 
+                                  ORDER BY m.fecha_envio ASC";
+                        $stmt = $conexion->prepare($query);
+                        $stmt->execute([$proyecto_id]);
+                        $mensajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        $stmt->closeCursor();
 
                         header('Content-Type: application/json');
                         echo json_encode([
@@ -68,11 +66,17 @@ if (isset($_REQUEST['ajax_action'])) {
                     } catch (PDOException $e) {
                         error_log("Error fetching chat messages (tutor): " . $e->getMessage());
                         header('Content-Type: application/json');
-                        echo json_encode(['success' => false, 'message' => 'Database error fetching messages']);
+                        echo json_encode([
+                            'success' => false, 
+                            'message' => 'Database error fetching messages: ' . $e->getMessage()
+                        ]);
                     } catch (Exception $e) {
                         error_log("Error fetching chat messages (tutor, general): " . $e->getMessage());
                         header('Content-Type: application/json');
-                        echo json_encode(['success' => false, 'message' => 'Server error fetching messages']);
+                        echo json_encode([
+                            'success' => false, 
+                            'message' => 'Server error fetching messages: ' . $e->getMessage()
+                        ]);
                     }
                 } else {
                     header('Content-Type: application/json');
@@ -118,7 +122,7 @@ if (isset($_REQUEST['ajax_action'])) {
 
                     } catch (PDOException $e) {
                         error_log("Error checking proyecto details for chat send (tutor): " . $e->getMessage());
-                        $errores_chat[] = "Error de base de datos al verificar proyecto.";
+                        $errores_chat[] = "Error de base de datos al verificar proyecto: " . $e->getMessage();
                     }
                 }
 
@@ -159,34 +163,65 @@ if (isset($_REQUEST['ajax_action'])) {
 
                 if (empty($errores_chat)) {
                     try {
-                        $query = "INSERT INTO mensajes_proyecto (proyecto_id, emisor_id, receptor_id, mensaje, archivo) VALUES (?, ?, ?, ?, ?)";
+                        // Iniciar transacción
+                        $conexion->beginTransaction();
+                        
+                        // IMPORTANTE: Usamos la tabla mensajes_chat con proyecto_id en lugar de pasantia_id
+                        $query = "INSERT INTO mensajes_chat (pasantia_id, emisor_id, receptor_id, mensaje, archivo) 
+                                  VALUES (?, ?, ?, ?, ?)";
                         $stmt = $conexion->prepare($query);
                         $stmt->execute([$proyecto_id, $tutor_id, $receptor_id, trim($mensaje), $archivo_nombre]);
                         $stmt->closeCursor();
 
-                        // Actualizar timestamp de último mensaje
-                        $query_update_proyecto = "UPDATE proyectos SET last_message_at = NOW() WHERE id = ?";
-                        $stmt_update_proyecto = $conexion->prepare($query_update_proyecto);
-                        $stmt_update_proyecto->execute([$proyecto_id]);
-                        $stmt_update_proyecto->closeCursor();
+                        // Verificar si existe la columna last_message_at en la tabla proyectos
+                        $query_check_column = "SHOW COLUMNS FROM proyectos LIKE 'last_message_at'";
+                        $stmt_check_column = $conexion->prepare($query_check_column);
+                        $stmt_check_column->execute();
+                        $column_exists = $stmt_check_column->fetch(PDO::FETCH_ASSOC);
+                        $stmt_check_column->closeCursor();
+
+                        // Actualizar timestamp de último mensaje solo si la columna existe
+                        if ($column_exists) {
+                            $query_update_proyecto = "UPDATE proyectos SET last_message_at = NOW() WHERE id = ?";
+                            $stmt_update_proyecto = $conexion->prepare($query_update_proyecto);
+                            $stmt_update_proyecto->execute([$proyecto_id]);
+                            $stmt_update_proyecto->closeCursor();
+                        }
+
+                        // Confirmar la transacción
+                        $conexion->commit();
 
                         header('Content-Type: application/json');
                         echo json_encode(['success' => true, 'message' => 'Mensaje enviado']);
 
                     } catch (PDOException $e) {
+                        // Revertir la transacción en caso de error
+                        if ($conexion->inTransaction()) {
+                            $conexion->rollBack();
+                        }
                         error_log("Error DB al enviar mensaje (tutor): " . $e->getMessage());
                          if ($archivo_nombre && file_exists($upload_dir . $archivo_nombre)) {
                              unlink($upload_dir . $archivo_nombre);
                         }
                         header('Content-Type: application/json');
-                        echo json_encode(['success' => false, 'message' => 'Error en la base de datos al enviar mensaje']);
+                        echo json_encode([
+                            'success' => false, 
+                            'message' => 'Error en la base de datos al enviar mensaje: ' . $e->getMessage()
+                        ]);
                     } catch (Exception $e) {
+                        // Revertir la transacción en caso de error
+                        if ($conexion->inTransaction()) {
+                            $conexion->rollBack();
+                        }
                         error_log("Error general al enviar mensaje (tutor): " . $e->getMessage());
                          if ($archivo_nombre && file_exists($upload_dir . $archivo_nombre)) {
                              unlink($upload_dir . $archivo_nombre);
                         }
                         header('Content-Type: application/json');
-                        echo json_encode(['success' => false, 'message' => 'Error del servidor al enviar mensaje']);
+                        echo json_encode([
+                            'success' => false, 
+                            'message' => 'Error del servidor al enviar mensaje: ' . $e->getMessage()
+                        ]);
                     }
 
                 } else {
@@ -322,7 +357,7 @@ foreach ($proyectos as $proyecto) {
 $query = "SELECT COUNT(*) as total_avances
           FROM avances_proyecto a
           INNER JOIN proyectos p ON a.proyecto_id = p.id
-          WHERE p.tutor_id = ? AND a.estado IN ('aprobado', 'corregir', 'revisado')";
+          WHERE p.tutor_id = ? AND a.estado IN ('aprobado', 'corregir')";
 $stmt = $conexion->prepare($query);
 $stmt->bindParam(1, $tutor_id, PDO::PARAM_INT);
 $stmt->execute();
@@ -343,7 +378,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['calificar_avance'])) 
         $error = "La nota debe estar entre 0 y 5";
     }
 
-    $allowed_states = ['aprobado', 'corregir', 'revisado'];
+    // Modificado: Solo permitir estados 'aprobado' y 'corregir'
+    $allowed_states = ['aprobado', 'corregir'];
     if (!in_array($estado, $allowed_states)) {
         $error = "Estado de calificación inválido.";
     }
@@ -622,10 +658,6 @@ function formatearFecha($fecha) {
                     <i class="fas fa-th-large"></i>
                     <span>Dashboard</span>
                 </li>
-                <li class="nav-item" data-section="proyectos">
-                    <i class="fas fa-users"></i>
-                    <span>Proyectos Asignados</span>
-                </li>
                 <li class="nav-item" data-section="avances">
                     <i class="fas fa-tasks"></i>
                     <span>Gestión de Avances</span>
@@ -642,9 +674,9 @@ function formatearFecha($fecha) {
             </ul>
 
             <div class="sidebar-footer">
-                <a href="/logout.php" class="logout-btn">
+                <a href="/views/profesores/tutor.php" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span>Cerrar Sesión</span>
+                    <span>Cerrar</span>
                 </a>
             </div>
         </nav>
@@ -821,92 +853,6 @@ function formatearFecha($fecha) {
                 </div>
             </section>
 
-            <section id="proyectos" class="content-section">
-                <div class="section-header">
-                    <h3><i class="fas fa-users"></i> Proyectos Asignados</h3>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Lista de Proyectos</h4>
-                        <div class="card-actions">
-                            <div class="search-box">
-                                <input type="text" id="search-proyectos-list" placeholder="Buscar proyecto...">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <select id="filter-estado-list">
-                                <option value="">Todos los estados</option>
-                                <option value="propuesto">Propuesto</option>
-                                <option value="en_revision">En Revisión</option>
-                                <option value="aprobado">Aprobado</option>
-                                <option value="finalizado">Finalizado</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Estudiante</th>
-                                        <th>Código</th>
-                                        <th>Ciclo</th>
-                                        <th>Título</th>
-                                        <th>Progreso</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($proyectos as $proyecto):
-                                        // Calcular progreso para mostrar en la tabla
-                                        $query_progreso = "SELECT COUNT(*) as total_aprobados
-                                                           FROM avances_proyecto
-                                                           WHERE proyecto_id = ? AND estado = 'aprobado'";
-                                        $stmt_progreso = $conexion->prepare($query_progreso);
-                                        $stmt_progreso->bindParam(1, $proyecto['id'], PDO::PARAM_INT);
-                                        $stmt_progreso->execute();
-                                        $resultado_progreso = $stmt_progreso->fetch(PDO::FETCH_ASSOC);
-                                        $progreso = ($resultado_progreso['total_aprobados'] / 4) * 100;
-                                        $stmt_progreso->closeCursor();
-
-                                        $clase_estado_tabla = $clases_estado_tabla[$proyecto['estado']] ?? 'estado-pendiente';
-                                    ?>
-                                    <tr data-proyecto-id="<?php echo htmlspecialchars($proyecto['id']); ?>"
-                                        data-estudiante-id="<?php echo htmlspecialchars($proyecto['estudiante_id']); ?>"
-                                        data-estado="<?php echo htmlspecialchars($proyecto['estado']); ?>"
-                                        data-ciclo="<?php echo htmlspecialchars($proyecto['ciclo']); ?>">
-                                        <td><?php echo htmlspecialchars($proyecto['estudiante_nombre']); ?></td>
-                                        <td><?php echo htmlspecialchars($proyecto['codigo_estudiante']); ?></td>
-                                        <td><?php echo htmlspecialchars(ucfirst($proyecto['ciclo'])); ?></td>
-                                        <td><?php echo htmlspecialchars($proyecto['titulo']); ?></td>
-                                        <td>
-                                            <div class="progress-bar">
-                                                <div class="progress-fill" style="width: <?php echo $progreso; ?>%"></div>
-                                            </div>
-                                            <span class="progress-text"><?php echo round($progreso); ?>%</span>
-                                        </td>
-                                        <td><span class="estado <?php echo $clase_estado_tabla; ?>"><?php echo htmlspecialchars(ucfirst(str_replace('_', ' ', $proyecto['estado']))); ?></span></td>
-                                        <td>
-                                            <button class="btn-icon btn-detalle" data-proyecto-id="<?php echo htmlspecialchars($proyecto['id']); ?>" title="Ver Detalles">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button class="btn-icon btn-chat-open"
-                                                    data-proyecto-id="<?php echo htmlspecialchars($proyecto['id']); ?>"
-                                                    data-estudiante-id="<?php echo htmlspecialchars($proyecto['estudiante_id']); ?>"
-                                                    data-estudiante-nombre="<?php echo htmlspecialchars($proyecto['estudiante_nombre']); ?>"
-                                                    title="Abrir Chat">
-                                                <i class="fas fa-comments"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <section id="avances" class="content-section">
                 <div class="section-header">
                     <h3><i class="fas fa-tasks"></i> Gestión de Avances</h3>
@@ -983,9 +929,6 @@ function formatearFecha($fecha) {
                                             </button>
                                             <button type="submit" name="estado" value="corregir" class="btn btn-warning" <?php echo $avance['estado'] === 'aprobado' ? 'disabled' : ''; ?>>
                                                 <i class="fas fa-redo"></i> Solicitar Corrección
-                                            </button>
-                                            <button type="submit" name="estado" value="revisado" class="btn btn-secondary" <?php echo $avance['estado'] !== 'pendiente' ? 'disabled' : ''; ?>>
-                                                <i class="fas fa-eye"></i> Marcar Revisado
                                             </button>
                                         </div>
                                     </form>
@@ -1546,33 +1489,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('No se encontraron todos los elementos para los filtros de proyectos.');
     }
 
-    // Filtros para la sección de proyectos
-    const searchInputList = document.getElementById('search-proyectos-list');
-    const filterEstadoList = document.getElementById('filter-estado-list');
-    const tablaProyectosListBody = document.querySelector('#proyectos .table tbody');
-
-    if (searchInputList && filterEstadoList && tablaProyectosListBody) {
-        function filtrarProyectosList() {
-            const busqueda = searchInputList.value.toLowerCase();
-            const estadoFiltro = filterEstadoList.value;
-
-            const filas = tablaProyectosListBody.getElementsByTagName('tr');
-
-            Array.from(filas).forEach(fila => {
-                const filaEstado = fila.getAttribute('data-estado');
-                const estudianteText = fila.cells[0].textContent.toLowerCase();
-
-                const coincideBusqueda = estudianteText.includes(busqueda);
-                const coincideEstado = !estadoFiltro || filaEstado === estadoFiltro;
-
-                fila.style.display = coincideBusqueda && coincideEstado ? '' : 'none';
-            });
-        }
-
-        searchInputList.addEventListener('input', filtrarProyectosList);
-        filterEstadoList.addEventListener('change', filtrarProyectosList);
-    }
-
     // --- Función para ver detalle de proyecto (AJAX GET) ---
     const tablaProyectos = document.querySelector('.table');
 
@@ -1744,7 +1660,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData();
             formData.append('ajax_action', 'send_message');
             formData.append('proyecto_id', proyectoId);
-            formData.append('emisor_id', tutorId);
+            // Eliminamos esta línea para evitar el error
+            // formData.append('emisor_id', tutorId);
             formData.append('receptor_id', estudianteId);
             formData.append('mensaje', mensaje);
             if (archivo) {

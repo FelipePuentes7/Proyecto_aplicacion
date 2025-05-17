@@ -463,7 +463,7 @@ $clase_estado = isset($pasantia['estado'], $clases_estado[$pasantia['estado']]) 
             </ul>
 
             <div class="sidebar-footer">
-                <a href="/logout.php" class="logout-btn">
+                <a href="/views/general/login.php" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Cerrar Sesión</span>
                 </a>

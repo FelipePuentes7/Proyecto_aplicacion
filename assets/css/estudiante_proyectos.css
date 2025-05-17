@@ -813,19 +813,19 @@ ul {
 }
 
 .message-content {
+  background-color: var(--color-primary); 
   padding: var(--spacing-3) var(--spacing-4);
   border-radius: var(--border-radius-lg);
   position: relative;
 }
 
 .message-sent .message-content {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-primary); /* Changed from var(--color-primary-light) to the main institutional color */
   color: white;
   border-top-right-radius: 0;
 }
-
 .message-received .message-content {
-  background-color: var(--color-secondary-light);
+  background-color: var(--color-primary-light);
   color: white;
   border-top-left-radius: 0;
 }
@@ -870,20 +870,25 @@ ul {
 .chat-send {
   width: 40px;
   height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-primary); /* Changed to use the institutional color */
+  color: white; /* Ensuring text is white for contrast */
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
-  border: none;
-  color: var(--color-secondary);
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: color var(--transition-speed) ease;
+  transition: background-color var(--transition-speed) ease;
 }
 
 .chat-attachment:hover,
 .chat-send:hover {
-  color: var(--color-primary);
+  background-color: var(--color-primary-dark); /* Using the dark variant for hover state */
+}
+
+.chat-send:disabled {
+  background-color: var(--color-secondary);
+  cursor: not-allowed;
 }
 
 .chat-text {

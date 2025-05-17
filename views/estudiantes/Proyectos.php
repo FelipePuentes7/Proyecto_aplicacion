@@ -90,7 +90,8 @@ if (isset($_REQUEST['action'])) {
                 // Si no hay errores, insertar en la base de datos
                 if (empty($errores_chat)) {
                     try {
-                        $query = "INSERT INTO mensajes_proyecto (proyecto_id, emisor_id, receptor_id, mensaje, archivo) VALUES (?, ?, ?, ?, ?)";
+                        // IMPORTANTE: Usamos la tabla mensajes_chat con pasantia_id para almacenar el proyecto_id
+                        $query = "INSERT INTO mensajes_chat (pasantia_id, emisor_id, receptor_id, mensaje, archivo) VALUES (?, ?, ?, ?, ?)";
                         $stmt = $conexion->prepare($query);
                         $stmt->execute([$proyecto_id, $emisor_id, $receptor_id, trim($mensaje), $archivo_nombre]);
 
@@ -103,14 +104,14 @@ if (isset($_REQUEST['action'])) {
                             unlink($upload_dir . $archivo_nombre);
                         }
                         header('Content-Type: application/json');
-                        echo json_encode(['success' => false, 'message' => 'Error en la base de datos al enviar mensaje']);
+                        echo json_encode(['success' => false, 'message' => 'Error en la base de datos al enviar mensaje: ' . $e->getMessage()]);
                     } catch (Exception $e) {
                         error_log("Error general al enviar mensaje: " . $e->getMessage());
                         if ($archivo_nombre && file_exists($upload_dir . $archivo_nombre)) {
                             unlink($upload_dir . $archivo_nombre);
                         }
                         header('Content-Type: application/json');
-                        echo json_encode(['success' => false, 'message' => 'Error del servidor al enviar mensaje']);
+                        echo json_encode(['success' => false, 'message' => 'Error del servidor al enviar mensaje: ' . $e->getMessage()]);
                     }
 
                 } else {
@@ -321,10 +322,11 @@ function obtenerMensajesChat($conexion, $proyecto_id) {
         return [];
     }
     try {
+        // IMPORTANTE: Usamos la tabla mensajes_chat con pasantia_id para almacenar el proyecto_id
         $query = "SELECT m.*, u.nombre AS emisor_nombre
-                  FROM mensajes_proyecto m
-                  INNER JOIN usuarios u ON m.emisor_id = u.id
-                  WHERE m.proyecto_id = ?
+                  FROM mensajes_chat m
+                  LEFT JOIN usuarios u ON m.emisor_id = u.id
+                  WHERE m.pasantia_id = ?
                   ORDER BY m.fecha_envio ASC";
         $stmt = $conexion->prepare($query);
         $stmt->execute([$proyecto_id]);
@@ -368,6 +370,190 @@ $clase_estado = isset($proyecto['estado'], $clases_estado[$proyecto['estado']]) 
     <title>Sistema de Gestión de Proyectos - Estudiante</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/estudiante_proyectos.css">
+    <style>
+        /* Estilos adicionales para el chat */
+        .chat-card {
+            display: flex;
+            flex-direction: column;
+            height: 70vh;
+        }
+        
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .chat-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chat-user i {
+            font-size: 1.2rem;
+       
+        }
+        
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .status-indicator.online {
+            background-color: #4CAF50;
+        }
+        
+        .status-indicator.offline {
+            background-color: #9e9e9e;
+        }
+        
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        
+        .chat-message {
+            margin-bottom: 15px;
+            max-width: 80%;
+        }
+        
+        .message-sent {
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .message-received {
+            margin-right: auto;
+            text-align: left;
+        }
+        
+        .message-content {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .message-text {
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+ 
+        }
+        
+        .message-attachment {
+            margin-bottom: 5px;
+        }
+        
+        .message-attachment a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+        
+        .chat-footer {
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+        
+        .chat-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chat-attachment {
+            position: relative;
+        }
+        
+        .chat-file-label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            transition: background-color 0.2s;
+        }
+        
+        .chat-file-label:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .chat-text {
+            flex: 1;
+        }
+        
+        .chat-text textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            resize: none;
+            height: 40px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+
+        
+        .chat-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        
+        
+        .chat-send:disabled {
+
+            cursor: not-allowed;
+        }
+        
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #757575;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -418,7 +604,7 @@ $clase_estado = isset($proyecto['estado'], $clases_estado[$proyecto['estado']]) 
             </ul>
 
             <div class="sidebar-footer">
-                <a href="/logout.php" class="logout-btn">
+                <a href="/views/general/login.php" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Cerrar Sesión</span>
                 </a>
