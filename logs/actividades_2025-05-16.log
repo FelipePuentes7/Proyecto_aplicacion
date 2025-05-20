@@ -1,0 +1,36 @@
+[2025-05-16 19:43:40] Página actividades.php cargada
+[2025-05-16 19:43:40] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 19:43:40] Obteniendo actividades con filtro: pendientes
+[2025-05-16 19:43:40] Actividades encontradas: 1
+[2025-05-16 21:49:20] Página actividades.php cargada
+[2025-05-16 21:49:20] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 21:49:20] Obteniendo actividades con filtro: pendientes
+[2025-05-16 21:49:20] Actividades encontradas: 1
+[2025-05-16 21:55:16] Página actividades.php cargada
+[2025-05-16 21:55:16] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 21:55:16] Obteniendo actividades con filtro: pendientes
+[2025-05-16 21:55:16] Actividades encontradas: 1
+[2025-05-16 21:55:18] Página actividades.php cargada
+[2025-05-16 21:55:18] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 21:55:18] Obteniendo actividades con filtro: pendientes
+[2025-05-16 21:55:18] Actividades encontradas: 1
+[2025-05-16 21:55:18] Página actividades.php cargada
+[2025-05-16 21:55:18] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 21:55:18] Obteniendo actividades con filtro: pendientes
+[2025-05-16 21:55:18] Actividades encontradas: 1
+[2025-05-16 23:48:24] Página actividades.php cargada
+[2025-05-16 23:48:24] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 23:48:24] Obteniendo actividades con filtro: pendientes
+[2025-05-16 23:48:24] Actividades encontradas: 3
+[2025-05-16 23:48:26] Página actividades.php cargada
+[2025-05-16 23:48:26] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 23:48:26] Obteniendo actividades con filtro: pendientes
+[2025-05-16 23:48:26] Actividades encontradas: 3
+[2025-05-16 23:48:49] Página actividades.php cargada
+[2025-05-16 23:48:49] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 23:48:49] Obteniendo actividades con filtro: pendientes
+[2025-05-16 23:48:49] Actividades encontradas: 3
+[2025-05-16 23:48:51] Página actividades.php cargada
+[2025-05-16 23:48:51] Error al obtener información del estudiante: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-16 23:48:51] Obteniendo actividades con filtro: pendientes
+[2025-05-16 23:48:51] Actividades encontradas: 3

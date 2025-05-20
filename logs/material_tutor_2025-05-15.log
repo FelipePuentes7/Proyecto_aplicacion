@@ -1,0 +1,30 @@
+[2025-05-15 15:59:41] Página material_tutor.php cargada
+[2025-05-15 15:59:41] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:41] Error al obtener estudiantes: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'proyecto.asignaciones_tutor' doesn't exist
+[2025-05-15 15:59:49] Página material_tutor.php cargada
+[2025-05-15 15:59:49] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:49] Error al obtener estudiantes: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'proyecto.asignaciones_tutor' doesn't exist
+[2025-05-15 15:59:54] Página material_tutor.php cargada
+[2025-05-15 15:59:54] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:54] Error al obtener estudiantes: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'proyecto.asignaciones_tutor' doesn't exist
+[2025-05-15 15:59:54] Página material_tutor.php cargada
+[2025-05-15 15:59:54] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:54] Error al obtener estudiantes: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:56] Página material_tutor.php cargada
+[2025-05-15 15:59:56] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:56] Error al obtener estudiantes: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:58] Página material_tutor.php cargada
+[2025-05-15 15:59:58] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:58] Error al obtener estudiantes: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:58] Página material_tutor.php cargada
+[2025-05-15 15:59:58] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 15:59:58] Error al obtener estudiantes: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 16:00:00] Página material_tutor.php cargada
+[2025-05-15 16:00:00] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 16:00:00] Error al obtener estudiantes: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 16:00:00] Página material_tutor.php cargada
+[2025-05-15 16:00:00] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 16:00:00] Error al obtener estudiantes: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 16:05:02] Página material_tutor.php cargada
+[2025-05-15 16:05:02] Error al obtener información del tutor: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'
+[2025-05-15 16:05:02] Error al obtener estudiantes: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.apellido' in 'field list'

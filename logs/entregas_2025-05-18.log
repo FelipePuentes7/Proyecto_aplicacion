@@ -1,0 +1,2 @@
+[2025-05-18 21:20:47] Página entregar_actividad.php cargada
+[2025-05-18 21:20:47] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists

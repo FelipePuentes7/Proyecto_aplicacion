@@ -1,0 +1,69 @@
+[2025-05-15 02:37:49] Página calificar_entregas.php cargada
+[2025-05-15 02:37:49] Actividad ID: 57, Tutor ID: 1
+[2025-05-15 02:37:49] Entregas encontradas: 1
+[2025-05-15 02:37:55] Página calificar_entregas.php cargada
+[2025-05-15 02:37:55] Actividad ID: 57, Tutor ID: 1
+[2025-05-15 02:37:55] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [56] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-15 02:37:55] Procesando 1 calificaciones
+[2025-05-15 02:37:55] Procesando entrega ID: 56
+[2025-05-15 02:37:55] Calificación procesada: 5, Comentario: ...
+[2025-05-15 02:37:55] Calificación guardada exitosamente para entrega 56
+[2025-05-15 02:37:55] Verificación de actualización: Estado = calificado, Calificación = 5.00
+[2025-05-15 02:37:55] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-15 02:37:55] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-15 02:59:50] Página calificar_entregas.php cargada
+[2025-05-15 02:59:50] Actividad ID: 57, Tutor ID: 1
+[2025-05-15 02:59:50] Entregas encontradas: 1
+[2025-05-15 03:28:28] Página calificar_entregas.php cargada
+[2025-05-15 03:28:28] Actividad ID: 56, Tutor ID: 1
+[2025-05-15 03:28:28] Entregas encontradas: 1
+[2025-05-15 03:36:44] Página calificar_entregas.php cargada
+[2025-05-15 03:36:44] Actividad ID: 57, Tutor ID: 1
+[2025-05-15 03:36:44] Entregas encontradas: 1
+[2025-05-15 03:36:50] Página calificar_entregas.php cargada
+[2025-05-15 03:36:50] Actividad ID: 56, Tutor ID: 1
+[2025-05-15 03:36:50] Entregas encontradas: 1
+[2025-05-15 03:40:53] Página calificar_entregas.php cargada
+[2025-05-15 03:40:53] Actividad ID: 56, Tutor ID: 1
+[2025-05-15 03:40:53] Entregas encontradas: 1
+[2025-05-15 07:31:08] Página calificar_entregas.php cargada
+[2025-05-15 07:31:08] Actividad ID: 59, Tutor ID: 1
+[2025-05-15 07:31:08] Entregas encontradas: 1
+[2025-05-15 07:31:13] Página calificar_entregas.php cargada
+[2025-05-15 07:31:13] Actividad ID: 59, Tutor ID: 1
+[2025-05-15 07:31:13] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [58] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-15 07:31:13] Procesando 1 calificaciones
+[2025-05-15 07:31:13] Procesando entrega ID: 58
+[2025-05-15 07:31:13] Calificación procesada: 5, Comentario: ...
+[2025-05-15 07:31:13] Calificación guardada exitosamente para entrega 58
+[2025-05-15 07:31:13] Verificación de actualización: Estado = calificado, Calificación = 5.00
+[2025-05-15 07:31:13] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-15 07:31:13] Redirigiendo a actividades_tutor.php con éxito

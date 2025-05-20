@@ -1,0 +1,1704 @@
+[2025-05-13 01:38:44] Página calificar_entregas.php cargada
+[2025-05-13 01:38:44] Actividad ID: 31, Tutor ID: 1
+[2025-05-13 01:38:44] Entregas encontradas: 0
+[2025-05-13 01:38:50] Página calificar_entregas.php cargada
+[2025-05-13 01:38:50] Actividad ID: 31, Tutor ID: 1
+[2025-05-13 01:38:50] Entregas encontradas: 0
+[2025-05-13 01:38:59] Página calificar_entregas.php cargada
+[2025-05-13 01:38:59] Actividad ID: 30, Tutor ID: 1
+[2025-05-13 01:38:59] Entregas encontradas: 0
+[2025-05-13 01:39:03] Página calificar_entregas.php cargada
+[2025-05-13 01:39:03] Actividad ID: 30, Tutor ID: 1
+[2025-05-13 01:39:03] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 01:39:03] Procesando 1 calificaciones
+[2025-05-13 01:39:03] Ignorando entrada de prueba
+[2025-05-13 01:39:03] Transacción revertida debido a errores
+[2025-05-13 01:39:03] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-13 01:39:03] Entregas encontradas: 0
+[2025-05-13 01:39:45] Página calificar_entregas.php cargada
+[2025-05-13 01:39:45] Actividad ID: 30, Tutor ID: 1
+[2025-05-13 01:39:45] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 4.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 01:39:45] Procesando 1 calificaciones
+[2025-05-13 01:39:45] Ignorando entrada de prueba
+[2025-05-13 01:39:45] Transacción revertida debido a errores
+[2025-05-13 01:39:45] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-13 01:39:45] Entregas encontradas: 0
+[2025-05-13 01:40:31] Página calificar_entregas.php cargada
+[2025-05-13 01:40:31] Actividad ID: 30, Tutor ID: 1
+[2025-05-13 01:40:31] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 4.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 01:40:31] Procesando 1 calificaciones
+[2025-05-13 01:40:31] Ignorando entrada de prueba
+[2025-05-13 01:40:31] Transacción revertida debido a errores: 
+[2025-05-13 01:40:31] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-13 01:40:31] Entregas encontradas: 1
+[2025-05-13 01:40:34] Página calificar_entregas.php cargada
+[2025-05-13 01:40:34] Actividad ID: 31, Tutor ID: 1
+[2025-05-13 01:40:34] Entregas encontradas: 0
+[2025-05-13 01:40:36] Página calificar_entregas.php cargada
+[2025-05-13 01:40:36] Actividad ID: 25, Tutor ID: 1
+[2025-05-13 01:40:36] Entregas encontradas: 1
+[2025-05-13 01:40:40] Página calificar_entregas.php cargada
+[2025-05-13 01:40:40] Actividad ID: 25, Tutor ID: 1
+[2025-05-13 01:40:40] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [31] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 01:40:40] Procesando 1 calificaciones
+[2025-05-13 01:40:40] Procesando entrega ID: 31
+[2025-05-13 01:40:40] Calificación procesada: 5, Comentario: ...
+[2025-05-13 01:40:40] Calificación guardada exitosamente para entrega 31
+[2025-05-13 01:40:40] Verificación de actualización: Estado = calificado, Calificación = 5.00
+[2025-05-13 01:40:40] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-13 01:40:40] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-13 01:59:37] Página calificar_entregas.php cargada
+[2025-05-13 01:59:37] Actividad ID: 25, Tutor ID: 1
+[2025-05-13 01:59:37] Entregas encontradas: 1
+[2025-05-13 02:43:37] Página calificar_entregas.php cargada
+[2025-05-13 02:43:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:37] Actividad no encontrada: 0
+[2025-05-13 02:43:37] Página calificar_entregas.php cargada
+[2025-05-13 02:43:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:37] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:38] Página calificar_entregas.php cargada
+[2025-05-13 02:43:38] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:38] Actividad no encontrada: 0
+[2025-05-13 02:43:39] Página calificar_entregas.php cargada
+[2025-05-13 02:43:39] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:39] Actividad no encontrada: 0
+[2025-05-13 02:43:39] Página calificar_entregas.php cargada
+[2025-05-13 02:43:39] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:39] Actividad no encontrada: 0
+[2025-05-13 02:43:39] Página calificar_entregas.php cargada
+[2025-05-13 02:43:39] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:39] Actividad no encontrada: 0
+[2025-05-13 02:43:39] Página calificar_entregas.php cargada
+[2025-05-13 02:43:39] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:39] Actividad no encontrada: 0
+[2025-05-13 02:43:39] Página calificar_entregas.php cargada
+[2025-05-13 02:43:39] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:39] Actividad no encontrada: 0
+[2025-05-13 02:43:39] Página calificar_entregas.php cargada
+[2025-05-13 02:43:39] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:39] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:40] Página calificar_entregas.php cargada
+[2025-05-13 02:43:40] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:40] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:42] Página calificar_entregas.php cargada
+[2025-05-13 02:43:42] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:42] Actividad no encontrada: 0
+[2025-05-13 02:43:43] Página calificar_entregas.php cargada
+[2025-05-13 02:43:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:43] Actividad no encontrada: 0
+[2025-05-13 02:43:43] Página calificar_entregas.php cargada
+[2025-05-13 02:43:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:43] Actividad no encontrada: 0
+[2025-05-13 02:43:43] Página calificar_entregas.php cargada
+[2025-05-13 02:43:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:43] Actividad no encontrada: 0
+[2025-05-13 02:43:43] Página calificar_entregas.php cargada
+[2025-05-13 02:43:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:43] Actividad no encontrada: 0
+[2025-05-13 02:43:43] Página calificar_entregas.php cargada
+[2025-05-13 02:43:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:43] Actividad no encontrada: 0
+[2025-05-13 02:43:43] Página calificar_entregas.php cargada
+[2025-05-13 02:43:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:43] Actividad no encontrada: 0
+[2025-05-13 02:43:43] Página calificar_entregas.php cargada
+[2025-05-13 02:43:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:43] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:44] Página calificar_entregas.php cargada
+[2025-05-13 02:43:44] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:44] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:45] Página calificar_entregas.php cargada
+[2025-05-13 02:43:45] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:45] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:47] Página calificar_entregas.php cargada
+[2025-05-13 02:43:47] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:47] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:51] Página calificar_entregas.php cargada
+[2025-05-13 02:43:51] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:51] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:52] Página calificar_entregas.php cargada
+[2025-05-13 02:43:52] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:52] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:53] Página calificar_entregas.php cargada
+[2025-05-13 02:43:53] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:53] Actividad no encontrada: 0
+[2025-05-13 02:43:54] Página calificar_entregas.php cargada
+[2025-05-13 02:43:54] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:54] Actividad no encontrada: 0
+[2025-05-13 02:43:54] Página calificar_entregas.php cargada
+[2025-05-13 02:43:54] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:54] Actividad no encontrada: 0
+[2025-05-13 02:43:54] Página calificar_entregas.php cargada
+[2025-05-13 02:43:54] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:54] Actividad no encontrada: 0
+[2025-05-13 02:43:54] Página calificar_entregas.php cargada
+[2025-05-13 02:43:54] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:54] Actividad no encontrada: 0
+[2025-05-13 02:43:54] Página calificar_entregas.php cargada
+[2025-05-13 02:43:54] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:54] Actividad no encontrada: 0
+[2025-05-13 02:43:54] Página calificar_entregas.php cargada
+[2025-05-13 02:43:54] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:54] Actividad no encontrada: 0
+[2025-05-13 02:43:54] Página calificar_entregas.php cargada
+[2025-05-13 02:43:54] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:54] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:43:55] Página calificar_entregas.php cargada
+[2025-05-13 02:43:55] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:43:55] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:04] Página calificar_entregas.php cargada
+[2025-05-13 02:44:04] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:04] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:05] Página calificar_entregas.php cargada
+[2025-05-13 02:44:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:05] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:06] Página calificar_entregas.php cargada
+[2025-05-13 02:44:06] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:06] Actividad no encontrada: 0
+[2025-05-13 02:44:07] Página calificar_entregas.php cargada
+[2025-05-13 02:44:07] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:07] Actividad no encontrada: 0
+[2025-05-13 02:44:07] Página calificar_entregas.php cargada
+[2025-05-13 02:44:07] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:07] Actividad no encontrada: 0
+[2025-05-13 02:44:07] Página calificar_entregas.php cargada
+[2025-05-13 02:44:07] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:07] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:12] Página calificar_entregas.php cargada
+[2025-05-13 02:44:12] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:12] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:35] Página calificar_entregas.php cargada
+[2025-05-13 02:44:35] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:35] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:36] Página calificar_entregas.php cargada
+[2025-05-13 02:44:36] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:36] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:37] Página calificar_entregas.php cargada
+[2025-05-13 02:44:37] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:37] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:44:43] Página calificar_entregas.php cargada
+[2025-05-13 02:44:43] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:44:43] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:13] Página calificar_entregas.php cargada
+[2025-05-13 02:45:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:13] Actividad no encontrada: 0
+[2025-05-13 02:45:14] Página calificar_entregas.php cargada
+[2025-05-13 02:45:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:14] Actividad no encontrada: 0
+[2025-05-13 02:45:14] Página calificar_entregas.php cargada
+[2025-05-13 02:45:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:14] Actividad no encontrada: 0
+[2025-05-13 02:45:14] Página calificar_entregas.php cargada
+[2025-05-13 02:45:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:14] Actividad no encontrada: 0
+[2025-05-13 02:45:14] Página calificar_entregas.php cargada
+[2025-05-13 02:45:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:14] Actividad no encontrada: 0
+[2025-05-13 02:45:14] Página calificar_entregas.php cargada
+[2025-05-13 02:45:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:14] Actividad no encontrada: 0
+[2025-05-13 02:45:14] Página calificar_entregas.php cargada
+[2025-05-13 02:45:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:14] Actividad no encontrada: 0
+[2025-05-13 02:45:14] Página calificar_entregas.php cargada
+[2025-05-13 02:45:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:14] Actividad no encontrada: 0
+[2025-05-13 02:45:14] Página calificar_entregas.php cargada
+[2025-05-13 02:45:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:45:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:14] Actividad no encontrada: 0
+[2025-05-13 02:46:14] Página calificar_entregas.php cargada
+[2025-05-13 02:46:14] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:15] Actividad no encontrada: 0
+[2025-05-13 02:46:15] Página calificar_entregas.php cargada
+[2025-05-13 02:46:15] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:46:15] Actividad no encontrada: 0
+[2025-05-13 02:50:05] Página calificar_entregas.php cargada
+[2025-05-13 02:50:05] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:50:05] Actividad no encontrada: 0
+[2025-05-13 02:50:05] Entregas encontradas: 0
+[2025-05-13 02:50:13] Página calificar_entregas.php cargada
+[2025-05-13 02:50:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:50:13] Actividad no encontrada: 0
+[2025-05-13 02:50:13] Entregas encontradas: 0
+[2025-05-13 02:50:13] Página calificar_entregas.php cargada
+[2025-05-13 02:50:13] Actividad ID: 0, Tutor ID: 1
+[2025-05-13 02:50:13] Actividad no encontrada: 0
+[2025-05-13 02:50:13] Entregas encontradas: 0
+[2025-05-13 03:04:09] Página calificar_entregas.php cargada
+[2025-05-13 03:04:09] Actividad ID: 25, Tutor ID: 1
+[2025-05-13 03:04:09] Entregas encontradas: 1
+[2025-05-13 03:04:15] Página calificar_entregas.php cargada
+[2025-05-13 03:04:15] Actividad ID: 25, Tutor ID: 1
+[2025-05-13 03:04:15] Entregas encontradas: 1
+[2025-05-13 03:04:28] Página calificar_entregas.php cargada
+[2025-05-13 03:04:28] Actividad ID: 35, Tutor ID: 1
+[2025-05-13 03:04:28] Entregas encontradas: 0
+[2025-05-13 03:05:14] Página calificar_entregas.php cargada
+[2025-05-13 03:05:14] Actividad ID: 25, Tutor ID: 1
+[2025-05-13 03:05:14] Entregas encontradas: 1
+[2025-05-13 03:06:27] Página calificar_entregas.php cargada
+[2025-05-13 03:06:27] Actividad ID: 25, Tutor ID: 1
+[2025-05-13 03:06:27] Entregas encontradas: 1
+[2025-05-13 03:30:38] Página calificar_entregas.php cargada
+[2025-05-13 03:30:38] Actividad ID: 25, Tutor ID: 1
+[2025-05-13 03:30:38] Entregas encontradas: 1
+[2025-05-13 03:31:29] Página calificar_entregas.php cargada
+[2025-05-13 03:31:29] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 03:31:29] Entregas encontradas: 1
+[2025-05-13 03:31:44] Página calificar_entregas.php cargada
+[2025-05-13 03:31:44] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 03:31:44] Entregas encontradas: 1
+[2025-05-13 03:33:20] Página calificar_entregas.php cargada
+[2025-05-13 03:33:20] Actividad ID: 37, Tutor ID: 1
+[2025-05-13 03:33:20] Entregas encontradas: 1
+[2025-05-13 03:33:29] Página calificar_entregas.php cargada
+[2025-05-13 03:33:29] Actividad ID: 37, Tutor ID: 1
+[2025-05-13 03:33:29] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [37] => Array
+                (
+                    [calificacion] => 4.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 03:33:29] Procesando 1 calificaciones
+[2025-05-13 03:33:29] Procesando entrega ID: 37
+[2025-05-13 03:33:29] Calificación procesada: 4, Comentario: ...
+[2025-05-13 03:33:29] Calificación guardada exitosamente para entrega 37
+[2025-05-13 03:33:29] Verificación de actualización: Estado = calificado, Calificación = 4.00
+[2025-05-13 03:33:29] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-13 03:33:29] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-13 03:34:24] Página calificar_entregas.php cargada
+[2025-05-13 03:34:24] Actividad ID: 33, Tutor ID: 1
+[2025-05-13 03:34:24] Entregas encontradas: 1
+[2025-05-13 04:30:48] Página calificar_entregas.php cargada
+[2025-05-13 04:30:48] Actividad ID: 38, Tutor ID: 1
+[2025-05-13 04:30:48] Entregas encontradas: 1
+[2025-05-13 04:31:06] Página calificar_entregas.php cargada
+[2025-05-13 04:31:06] Actividad ID: 32, Tutor ID: 1
+[2025-05-13 04:31:06] Entregas encontradas: 1
+[2025-05-13 04:46:54] Página calificar_entregas.php cargada
+[2025-05-13 04:46:54] Actividad ID: 32, Tutor ID: 1
+[2025-05-13 04:46:54] Entregas encontradas: 1
+[2025-05-13 05:07:15] Página calificar_entregas.php cargada
+[2025-05-13 05:07:15] Actividad ID: 33, Tutor ID: 1
+[2025-05-13 05:07:15] Entregas encontradas: 1
+[2025-05-13 05:08:13] Página calificar_entregas.php cargada
+[2025-05-13 05:08:13] Actividad ID: 39, Tutor ID: 1
+[2025-05-13 05:08:13] Entregas encontradas: 1
+[2025-05-13 05:08:18] Página calificar_entregas.php cargada
+[2025-05-13 05:08:18] Actividad ID: 39, Tutor ID: 1
+[2025-05-13 05:08:18] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [39] => Array
+                (
+                    [calificacion] => 3.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 05:08:18] Procesando 1 calificaciones
+[2025-05-13 05:08:18] Procesando entrega ID: 39
+[2025-05-13 05:08:18] Calificación procesada: 3, Comentario: ...
+[2025-05-13 05:08:18] Calificación guardada exitosamente para entrega 39
+[2025-05-13 05:08:18] Verificación de actualización: Estado = calificado, Calificación = 3.00
+[2025-05-13 05:08:18] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-13 05:08:18] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-13 05:22:49] Página calificar_entregas.php cargada
+[2025-05-13 05:22:49] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 05:22:49] Entregas encontradas: 1
+[2025-05-13 05:28:46] Página calificar_entregas.php cargada
+[2025-05-13 05:28:46] Actividad ID: 40, Tutor ID: 1
+[2025-05-13 05:28:46] Entregas encontradas: 1
+[2025-05-13 05:29:47] Página calificar_entregas.php cargada
+[2025-05-13 05:29:47] Actividad ID: 33, Tutor ID: 1
+[2025-05-13 05:29:47] Entregas encontradas: 1
+[2025-05-13 05:29:58] Página calificar_entregas.php cargada
+[2025-05-13 05:29:58] Actividad ID: 33, Tutor ID: 1
+[2025-05-13 05:29:58] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [34] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 05:29:58] Procesando 1 calificaciones
+[2025-05-13 05:29:58] Procesando entrega ID: 34
+[2025-05-13 05:29:58] Calificación procesada: 5, Comentario: ...
+[2025-05-13 05:29:58] Calificación guardada exitosamente para entrega 34
+[2025-05-13 05:29:58] Verificación de actualización: Estado = calificado, Calificación = 5.00
+[2025-05-13 05:29:58] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-13 05:29:58] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-13 05:30:03] Página calificar_entregas.php cargada
+[2025-05-13 05:30:03] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 05:30:03] Entregas encontradas: 1
+[2025-05-13 05:30:06] Página calificar_entregas.php cargada
+[2025-05-13 05:30:06] Actividad ID: 38, Tutor ID: 1
+[2025-05-13 05:30:06] Entregas encontradas: 1
+[2025-05-13 05:30:10] Página calificar_entregas.php cargada
+[2025-05-13 05:30:10] Actividad ID: 40, Tutor ID: 1
+[2025-05-13 05:30:10] Entregas encontradas: 1
+[2025-05-13 05:54:53] Página calificar_entregas.php cargada
+[2025-05-13 05:54:53] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 05:54:53] Entregas encontradas: 1
+[2025-05-13 05:55:30] Página calificar_entregas.php cargada
+[2025-05-13 05:55:30] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 05:55:30] Entregas encontradas: 1
+[2025-05-13 05:56:31] Página calificar_entregas.php cargada
+[2025-05-13 05:56:31] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 05:56:31] Entregas encontradas: 1
+[2025-05-13 06:08:05] Página calificar_entregas.php cargada
+[2025-05-13 06:08:05] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:08:05] Entregas encontradas: 1
+[2025-05-13 06:10:02] Página calificar_entregas.php cargada
+[2025-05-13 06:10:02] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:10:02] Entregas encontradas: 1
+[2025-05-13 06:10:10] Página calificar_entregas.php cargada
+[2025-05-13 06:10:10] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:10:10] Entregas encontradas: 1
+[2025-05-13 06:10:32] Página calificar_entregas.php cargada
+[2025-05-13 06:10:32] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:10:32] Entregas encontradas: 1
+[2025-05-13 06:10:47] Página calificar_entregas.php cargada
+[2025-05-13 06:10:47] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:10:47] Entregas encontradas: 1
+[2025-05-13 06:11:05] Página calificar_entregas.php cargada
+[2025-05-13 06:11:05] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:11:05] Entregas encontradas: 1
+[2025-05-13 06:13:24] Página calificar_entregas.php cargada
+[2025-05-13 06:13:24] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:13:24] Entregas encontradas: 1
+[2025-05-13 06:14:32] Página calificar_entregas.php cargada
+[2025-05-13 06:14:32] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:14:32] Entregas encontradas: 1
+[2025-05-13 06:14:52] Página calificar_entregas.php cargada
+[2025-05-13 06:14:52] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:14:52] Entregas encontradas: 1
+[2025-05-13 06:14:53] Página calificar_entregas.php cargada
+[2025-05-13 06:14:53] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:14:53] Entregas encontradas: 1
+[2025-05-13 06:14:53] Página calificar_entregas.php cargada
+[2025-05-13 06:14:53] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:14:53] Entregas encontradas: 1
+[2025-05-13 06:14:53] Página calificar_entregas.php cargada
+[2025-05-13 06:14:53] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:14:53] Entregas encontradas: 1
+[2025-05-13 06:14:54] Página calificar_entregas.php cargada
+[2025-05-13 06:14:54] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:14:54] Entregas encontradas: 1
+[2025-05-13 06:15:04] Página calificar_entregas.php cargada
+[2025-05-13 06:15:04] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:15:04] Entregas encontradas: 1
+[2025-05-13 06:15:05] Página calificar_entregas.php cargada
+[2025-05-13 06:15:05] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:15:05] Entregas encontradas: 1
+[2025-05-13 06:15:05] Página calificar_entregas.php cargada
+[2025-05-13 06:15:05] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:15:05] Entregas encontradas: 1
+[2025-05-13 06:15:19] Página calificar_entregas.php cargada
+[2025-05-13 06:15:19] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:15:19] Entregas encontradas: 1
+[2025-05-13 06:16:25] Página calificar_entregas.php cargada
+[2025-05-13 06:16:25] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:16:25] Entregas encontradas: 1
+[2025-05-13 06:19:52] Página calificar_entregas.php cargada
+[2025-05-13 06:19:52] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:19:52] Entregas encontradas: 1
+[2025-05-13 06:20:02] Página calificar_entregas.php cargada
+[2025-05-13 06:20:02] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:20:02] Entregas encontradas: 1
+[2025-05-13 06:20:13] Página calificar_entregas.php cargada
+[2025-05-13 06:20:13] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:20:13] Entregas encontradas: 1
+[2025-05-13 06:20:18] Página calificar_entregas.php cargada
+[2025-05-13 06:20:18] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:20:18] Entregas encontradas: 1
+[2025-05-13 06:23:22] Página calificar_entregas.php cargada
+[2025-05-13 06:23:22] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:23:22] Entregas encontradas: 1
+[2025-05-13 06:24:10] Página calificar_entregas.php cargada
+[2025-05-13 06:24:10] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:24:10] Entregas encontradas: 1
+[2025-05-13 06:24:17] Página calificar_entregas.php cargada
+[2025-05-13 06:24:17] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:24:17] Entregas encontradas: 1
+[2025-05-13 06:25:13] Página calificar_entregas.php cargada
+[2025-05-13 06:25:13] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:25:13] Entregas encontradas: 1
+[2025-05-13 06:25:26] Página calificar_entregas.php cargada
+[2025-05-13 06:25:26] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:25:26] Entregas encontradas: 1
+[2025-05-13 06:25:30] Página calificar_entregas.php cargada
+[2025-05-13 06:25:30] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:25:30] Entregas encontradas: 1
+[2025-05-13 06:25:54] Página calificar_entregas.php cargada
+[2025-05-13 06:25:54] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:25:54] Entregas encontradas: 1
+[2025-05-13 06:26:54] Página calificar_entregas.php cargada
+[2025-05-13 06:26:54] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:26:54] Entregas encontradas: 1
+[2025-05-13 06:28:27] Página calificar_entregas.php cargada
+[2025-05-13 06:28:27] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:28:27] Entregas encontradas: 1
+[2025-05-13 06:28:46] Página calificar_entregas.php cargada
+[2025-05-13 06:28:46] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:28:46] Entregas encontradas: 1
+[2025-05-13 06:28:58] Página calificar_entregas.php cargada
+[2025-05-13 06:28:58] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:28:58] Entregas encontradas: 1
+[2025-05-13 06:29:39] Página calificar_entregas.php cargada
+[2025-05-13 06:29:39] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:29:39] Entregas encontradas: 1
+[2025-05-13 06:29:48] Página calificar_entregas.php cargada
+[2025-05-13 06:29:48] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:29:48] Entregas encontradas: 1
+[2025-05-13 06:33:25] Página calificar_entregas.php cargada
+[2025-05-13 06:33:25] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:33:25] Entregas encontradas: 1
+[2025-05-13 06:33:30] Página calificar_entregas.php cargada
+[2025-05-13 06:33:30] Actividad ID: 34, Tutor ID: 1
+[2025-05-13 06:33:30] Entregas encontradas: 1
+[2025-05-13 06:35:52] Página calificar_entregas.php cargada
+[2025-05-13 06:35:52] Actividad ID: 38, Tutor ID: 1
+[2025-05-13 06:35:52] Entregas encontradas: 1
+[2025-05-13 07:01:33] Página calificar_entregas.php cargada
+[2025-05-13 07:01:33] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:01:33] Entregas encontradas: 1
+[2025-05-13 07:01:45] Página calificar_entregas.php cargada
+[2025-05-13 07:01:45] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:01:45] Entregas encontradas: 1
+[2025-05-13 07:01:55] Página calificar_entregas.php cargada
+[2025-05-13 07:01:55] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:01:55] Entregas encontradas: 1
+[2025-05-13 07:02:50] Página calificar_entregas.php cargada
+[2025-05-13 07:02:50] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:02:50] Entregas encontradas: 1
+[2025-05-13 07:03:03] Página calificar_entregas.php cargada
+[2025-05-13 07:03:03] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:03:03] Entregas encontradas: 1
+[2025-05-13 07:03:15] Página calificar_entregas.php cargada
+[2025-05-13 07:03:15] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:03:15] Entregas encontradas: 1
+[2025-05-13 07:03:22] Página calificar_entregas.php cargada
+[2025-05-13 07:03:22] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:03:22] Entregas encontradas: 1
+[2025-05-13 07:03:26] Página calificar_entregas.php cargada
+[2025-05-13 07:03:26] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:03:26] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [43] => Array
+                (
+                    [calificacion] => 4.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 07:03:26] Procesando 1 calificaciones
+[2025-05-13 07:03:26] Procesando entrega ID: 43
+[2025-05-13 07:03:26] Calificación procesada: 4, Comentario: ...
+[2025-05-13 07:03:26] Calificación guardada exitosamente para entrega 43
+[2025-05-13 07:03:26] Verificación de actualización: Estado = calificado, Calificación = 4.00
+[2025-05-13 07:03:26] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-13 07:03:26] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-13 07:03:31] Página calificar_entregas.php cargada
+[2025-05-13 07:03:31] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:03:31] Entregas encontradas: 1
+[2025-05-13 07:03:35] Página calificar_entregas.php cargada
+[2025-05-13 07:03:35] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:03:35] Entregas encontradas: 1
+[2025-05-13 07:06:58] Página calificar_entregas.php cargada
+[2025-05-13 07:06:58] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:06:58] Entregas encontradas: 1
+[2025-05-13 07:07:22] Página calificar_entregas.php cargada
+[2025-05-13 07:07:22] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:07:22] Entregas encontradas: 1
+[2025-05-13 07:07:29] Página calificar_entregas.php cargada
+[2025-05-13 07:07:29] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:07:29] Entregas encontradas: 1
+[2025-05-13 07:07:48] Página calificar_entregas.php cargada
+[2025-05-13 07:07:48] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:07:48] Entregas encontradas: 1
+[2025-05-13 07:07:52] Página calificar_entregas.php cargada
+[2025-05-13 07:07:52] Actividad ID: 45, Tutor ID: 1
+[2025-05-13 07:07:52] Entregas encontradas: 1
+[2025-05-13 07:08:00] Página calificar_entregas.php cargada
+[2025-05-13 07:08:00] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:08:00] Entregas encontradas: 1
+[2025-05-13 07:08:12] Página calificar_entregas.php cargada
+[2025-05-13 07:08:12] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:08:12] Entregas encontradas: 1
+[2025-05-13 07:08:25] Página calificar_entregas.php cargada
+[2025-05-13 07:08:25] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:08:25] Entregas encontradas: 1
+[2025-05-13 07:08:30] Página calificar_entregas.php cargada
+[2025-05-13 07:08:30] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:08:30] Entregas encontradas: 1
+[2025-05-13 07:09:08] Página calificar_entregas.php cargada
+[2025-05-13 07:09:08] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:09:08] Entregas encontradas: 1
+[2025-05-13 07:10:31] Página calificar_entregas.php cargada
+[2025-05-13 07:10:31] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:10:31] Entregas encontradas: 1
+[2025-05-13 07:10:56] Página calificar_entregas.php cargada
+[2025-05-13 07:10:56] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:10:56] Entregas encontradas: 1
+[2025-05-13 07:11:06] Página calificar_entregas.php cargada
+[2025-05-13 07:11:06] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:11:06] Entregas encontradas: 1
+[2025-05-13 07:11:10] Página calificar_entregas.php cargada
+[2025-05-13 07:11:10] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:11:10] Entregas encontradas: 1
+[2025-05-13 07:11:19] Página calificar_entregas.php cargada
+[2025-05-13 07:11:19] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:11:19] Entregas encontradas: 1
+[2025-05-13 07:11:28] Página calificar_entregas.php cargada
+[2025-05-13 07:11:28] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:11:28] Entregas encontradas: 1
+[2025-05-13 07:11:33] Página calificar_entregas.php cargada
+[2025-05-13 07:11:33] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:11:33] Entregas encontradas: 1
+[2025-05-13 07:11:33] Página calificar_entregas.php cargada
+[2025-05-13 07:11:33] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:11:33] Entregas encontradas: 1
+[2025-05-13 07:11:44] Página calificar_entregas.php cargada
+[2025-05-13 07:11:44] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:11:44] Entregas encontradas: 1
+[2025-05-13 07:12:02] Página calificar_entregas.php cargada
+[2025-05-13 07:12:02] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:12:02] Entregas encontradas: 1
+[2025-05-13 07:12:07] Página calificar_entregas.php cargada
+[2025-05-13 07:12:07] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:12:07] Entregas encontradas: 1
+[2025-05-13 07:12:11] Página calificar_entregas.php cargada
+[2025-05-13 07:12:11] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:12:11] Entregas encontradas: 1
+[2025-05-13 07:12:18] Página calificar_entregas.php cargada
+[2025-05-13 07:12:18] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:12:18] Entregas encontradas: 1
+[2025-05-13 07:13:41] Página calificar_entregas.php cargada
+[2025-05-13 07:13:41] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:13:41] Entregas encontradas: 1
+[2025-05-13 07:13:50] Página calificar_entregas.php cargada
+[2025-05-13 07:13:50] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:13:50] Entregas encontradas: 1
+[2025-05-13 07:14:05] Página calificar_entregas.php cargada
+[2025-05-13 07:14:05] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:14:05] Entregas encontradas: 1
+[2025-05-13 07:15:26] Página calificar_entregas.php cargada
+[2025-05-13 07:15:26] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:15:26] Entregas encontradas: 1
+[2025-05-13 07:15:39] Página calificar_entregas.php cargada
+[2025-05-13 07:15:39] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:15:39] Entregas encontradas: 1
+[2025-05-13 07:15:43] Página calificar_entregas.php cargada
+[2025-05-13 07:15:43] Actividad ID: 45, Tutor ID: 1
+[2025-05-13 07:15:43] Entregas encontradas: 1
+[2025-05-13 07:15:51] Página calificar_entregas.php cargada
+[2025-05-13 07:15:51] Actividad ID: 45, Tutor ID: 1
+[2025-05-13 07:15:51] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [44] => Array
+                (
+                    [calificacion] => 1.0
+                    [comentario] => asdad
+                )
+
+        )
+
+)
+
+[2025-05-13 07:15:51] Procesando 1 calificaciones
+[2025-05-13 07:15:51] Procesando entrega ID: 44
+[2025-05-13 07:15:51] Calificación procesada: 1, Comentario: asdad...
+[2025-05-13 07:15:51] Calificación guardada exitosamente para entrega 44
+[2025-05-13 07:15:51] Verificación de actualización: Estado = calificado, Calificación = 1.00
+[2025-05-13 07:15:51] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-13 07:15:51] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-13 07:15:54] Página calificar_entregas.php cargada
+[2025-05-13 07:15:54] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:15:54] Entregas encontradas: 1
+[2025-05-13 07:15:58] Página calificar_entregas.php cargada
+[2025-05-13 07:15:58] Actividad ID: 45, Tutor ID: 1
+[2025-05-13 07:15:58] Entregas encontradas: 1
+[2025-05-13 07:16:01] Página calificar_entregas.php cargada
+[2025-05-13 07:16:01] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:16:01] Entregas encontradas: 1
+[2025-05-13 07:16:56] Página calificar_entregas.php cargada
+[2025-05-13 07:16:56] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:16:56] Entregas encontradas: 1
+[2025-05-13 07:17:02] Página calificar_entregas.php cargada
+[2025-05-13 07:17:02] Actividad ID: 45, Tutor ID: 1
+[2025-05-13 07:17:02] Entregas encontradas: 1
+[2025-05-13 07:23:07] Página calificar_entregas.php cargada
+[2025-05-13 07:23:07] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:23:07] Entregas encontradas: 1
+[2025-05-13 07:32:30] Página calificar_entregas.php cargada
+[2025-05-13 07:32:30] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:32:30] Entregas encontradas: 1
+[2025-05-13 07:32:41] Página calificar_entregas.php cargada
+[2025-05-13 07:32:41] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:32:41] Entregas encontradas: 1
+[2025-05-13 07:33:31] Página calificar_entregas.php cargada
+[2025-05-13 07:33:31] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:33:31] Entregas encontradas: 1
+[2025-05-13 07:33:32] Página calificar_entregas.php cargada
+[2025-05-13 07:33:32] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:33:32] Entregas encontradas: 1
+[2025-05-13 07:33:37] Página calificar_entregas.php cargada
+[2025-05-13 07:33:37] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:33:37] Entregas encontradas: 1
+[2025-05-13 07:33:38] Página calificar_entregas.php cargada
+[2025-05-13 07:33:38] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:33:38] Entregas encontradas: 1
+[2025-05-13 07:33:38] Página calificar_entregas.php cargada
+[2025-05-13 07:33:38] Actividad ID: 43, Tutor ID: 1
+[2025-05-13 07:33:38] Entregas encontradas: 1
+[2025-05-13 07:33:40] Página calificar_entregas.php cargada
+[2025-05-13 07:33:40] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:33:40] Entregas encontradas: 1
+[2025-05-13 07:33:51] Página calificar_entregas.php cargada
+[2025-05-13 07:33:51] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:33:51] Entregas encontradas: 1
+[2025-05-13 07:33:51] Página calificar_entregas.php cargada
+[2025-05-13 07:33:51] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:33:51] Entregas encontradas: 1
+[2025-05-13 07:34:36] Página calificar_entregas.php cargada
+[2025-05-13 07:34:36] Actividad ID: 44, Tutor ID: 1
+[2025-05-13 07:34:36] Entregas encontradas: 1
+[2025-05-13 22:20:30] Página calificar_entregas.php cargada
+[2025-05-13 22:20:30] Actividad ID: 47, Tutor ID: 1
+[2025-05-13 22:20:30] Entregas encontradas: 1
+[2025-05-13 22:20:38] Página calificar_entregas.php cargada
+[2025-05-13 22:20:38] Actividad ID: 47, Tutor ID: 1
+[2025-05-13 22:20:38] Entregas encontradas: 1
+[2025-05-13 22:21:00] Página calificar_entregas.php cargada
+[2025-05-13 22:21:00] Actividad ID: 46, Tutor ID: 1
+[2025-05-13 22:21:00] Entregas encontradas: 1
+[2025-05-13 22:21:04] Página calificar_entregas.php cargada
+[2025-05-13 22:21:04] Actividad ID: 46, Tutor ID: 1
+[2025-05-13 22:21:04] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [46] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 22:21:04] Procesando 1 calificaciones
+[2025-05-13 22:21:04] Procesando entrega ID: 46
+[2025-05-13 22:21:04] Calificación procesada: 5, Comentario: ...
+[2025-05-13 22:21:04] Calificación guardada exitosamente para entrega 46
+[2025-05-13 22:21:04] Verificación de actualización: Estado = calificado, Calificación = 5.00
+[2025-05-13 22:21:04] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-13 22:21:04] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-13 22:23:09] Página calificar_entregas.php cargada
+[2025-05-13 22:23:09] Actividad ID: 46, Tutor ID: 1
+[2025-05-13 22:23:09] Entregas encontradas: 1
+[2025-05-13 22:30:51] Página calificar_entregas.php cargada
+[2025-05-13 22:30:51] Actividad ID: 47, Tutor ID: 1
+[2025-05-13 22:30:51] Entregas encontradas: 1
+[2025-05-13 22:30:54] Página calificar_entregas.php cargada
+[2025-05-13 22:30:54] Actividad ID: 48, Tutor ID: 1
+[2025-05-13 22:30:54] Entregas encontradas: 1
+[2025-05-13 22:30:59] Página calificar_entregas.php cargada
+[2025-05-13 22:30:59] Actividad ID: 48, Tutor ID: 1
+[2025-05-13 22:30:59] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [47] => Array
+                (
+                    [calificacion] => 3.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-13 22:30:59] Procesando 1 calificaciones
+[2025-05-13 22:30:59] Procesando entrega ID: 47
+[2025-05-13 22:30:59] Calificación procesada: 3, Comentario: ...
+[2025-05-13 22:30:59] Calificación guardada exitosamente para entrega 47
+[2025-05-13 22:30:59] Verificación de actualización: Estado = calificado, Calificación = 3.00
+[2025-05-13 22:30:59] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-13 22:30:59] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-13 22:31:29] Página calificar_entregas.php cargada
+[2025-05-13 22:31:29] Actividad ID: 49, Tutor ID: 1
+[2025-05-13 22:31:29] Entregas encontradas: 1
+[2025-05-13 22:31:33] Página calificar_entregas.php cargada
+[2025-05-13 22:31:33] Actividad ID: 47, Tutor ID: 1
+[2025-05-13 22:31:33] Entregas encontradas: 1
+[2025-05-13 22:32:14] Página calificar_entregas.php cargada
+[2025-05-13 22:32:14] Actividad ID: 49, Tutor ID: 1
+[2025-05-13 22:32:14] Entregas encontradas: 1
