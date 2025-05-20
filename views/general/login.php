@@ -53,8 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     header('Location: /views/administrador/inicio.php');
                     exit();
                 case 'tutor':
-                    header('Location: /views/profesores/tutor.php');
-                    exit();
+                    switch ($usuario['opcion_grado']) {
+                        case 'seminario':
+                            header('Location: /views/seminario_tutor/inicio_tutor.php');
+                            exit();
+                        default:
+                            header('Location: /views/profesores/tutor.php');
+                            exit();
+                    }
+                    break;
                 case 'estudiante':
                     // Redirección específica para estudiantes según su opción de grado
                     switch ($usuario['opcion_grado']) {
@@ -65,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                             header('Location: /views/estudiantes/Proyectos.php');
                             exit();
                         case 'seminario':
-                            header('Location: /views/estudiantes/Inicio_Seminario.php');
+                            header('Location: /views/seminario_estudiante/inicio_estudiantes.php');
                             exit();
                         default:
                             header('Location: /views/estudiantes/Inicio_Estudiante.php');
