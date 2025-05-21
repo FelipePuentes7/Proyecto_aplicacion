@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailHint = document.querySelector('.email-hint');
     const termsCheckbox = document.getElementById('terms');
     const submitButton = document.querySelector('.btn-registro');
+    const codigoEstudiante = document.getElementById('codigo_estudiante');
 
     // Crear contenedor para mensajes emergentes
     const createTooltip = () => {
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailTooltip = createTooltip();
     const passwordStrengthTooltip = createTooltip();
     const passwordMatchTooltip = createTooltip();
+    const codigoEstudianteTooltip = createTooltip();
 
     // Función para mostrar tooltip
     const showTooltip = (element, tooltip, message, isError = true) => {
@@ -96,6 +98,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     isValid = false;
                 }
             });
+            
+            // Verificar que el código de estudiante comience con SOF (solo para estudiantes)
+            if (codigoEstudiante && codigoEstudiante.value) {
+                if (!codigoEstudiante.value.toUpperCase().startsWith('SOF')) {
+                    isValid = false;
+                }
+            }
             
             // Verificar campos específicos por opción de grado
             if (opcionGradoSelect.value === 'proyecto') {
@@ -243,6 +252,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Actualizar validez del formulario después de cambiar los campos
         setTimeout(checkFormValidity, 400);
+        
+        // Actualizar la validación del código de estudiante según el rol
+        if (codigoEstudiante) {
+            if (isEstudiante) {
+                // Activar validación para estudiantes
+                validateCodigoEstudiante();
+            } else {
+                // Desactivar validación para tutores
+                codigoEstudiante.setCustomValidity('');
+                codigoEstudiante.classList.remove('invalid');
+            }
+        }
     };
 
     // Validación de fortaleza de contraseña
@@ -301,6 +322,31 @@ document.addEventListener('DOMContentLoaded', function() {
         checkFormValidity();
     };
 
+    // Función para validar el código de estudiante
+    const validateCodigoEstudiante = () => {
+        if (!codigoEstudiante) return;
+        
+        const valor = codigoEstudiante.value.trim();
+        const isEstudiante = rolSelect.value === 'estudiante';
+        
+        // Solo validar si es estudiante y hay un valor
+        if (isEstudiante && valor) {
+            if (!valor.toUpperCase().startsWith('SOF')) {
+                codigoEstudiante.setCustomValidity('El código debe comenzar con "SOF"');
+                codigoEstudiante.classList.add('invalid');
+                showTooltip(codigoEstudiante, codigoEstudianteTooltip, 'El código debe comenzar con "SOF"', true);
+            } else {
+                codigoEstudiante.setCustomValidity('');
+                codigoEstudiante.classList.remove('invalid');
+                showTooltip(codigoEstudiante, codigoEstudianteTooltip, 'Código válido', false);
+            }
+        } else {
+            // Si no es estudiante o no hay valor, no validar
+            codigoEstudiante.setCustomValidity('');
+            codigoEstudiante.classList.remove('invalid');
+        }
+    };
+
     // Validación en tiempo real de contraseña
     password.addEventListener('input', () => {
         checkPasswordStrength(password.value);
@@ -346,6 +392,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         checkFormValidity();
     });
+
+    // Validación del código de estudiante
+    if (codigoEstudiante) {
+        codigoEstudiante.addEventListener('input', () => {
+            validateCodigoEstudiante();
+            checkFormValidity();
+        });
+    }
 
     // Verificar términos y condiciones
     termsCheckbox.addEventListener('change', checkFormValidity);
@@ -394,6 +448,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Validar campos específicos según opción de grado
         if (rolSelect.value === 'estudiante') {
+            // Validar que el código de estudiante comience con SOF (solo para estudiantes)
+            if (codigoEstudiante && codigoEstudiante.value) {
+                if (!codigoEstudiante.value.toUpperCase().startsWith('SOF')) {
+                    e.preventDefault();
+                    alert('El código de estudiante debe comenzar con "SOF"');
+                }
+            }
+            
             if (opcionGradoSelect.value === 'proyecto') {
                 const nombreProyecto = document.getElementById('nombre_proyecto');
                 if (!nombreProyecto.value) {
