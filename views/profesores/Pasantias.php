@@ -15,6 +15,7 @@ $tutor_id = $_SESSION['usuario']['id'];
 $nombre_tutor = $_SESSION['usuario']['nombre'];
 
 // --- Lógica para manejar solicitudes AJAX ---
+// --- Lógica para manejar solicitudes AJAX ---
 if (isset($_REQUEST['ajax_action'])) {
     $ajax_action = $_REQUEST['ajax_action'];
 
@@ -260,8 +261,230 @@ if (isset($_REQUEST['ajax_action'])) {
                 echo json_encode(['success' => false, 'message' => 'Solicitud inválida para obtener detalle']);
             }
             exit();
+
+        case 'get_proyectos':
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                try {
+                    // Registrar información de depuración
+                    error_log("Iniciando get_proyectos para tutor_id: $tutor_id");
+                    
+                    // Primero verificar si hay estudiantes asignados a este tutor
+                    $query_check_estudiantes = "SELECT COUNT(*) as total_estudiantes FROM pasantias WHERE tutor_id = ?";
+                    $stmt_check = $conexion->prepare($query_check_estudiantes);
+                    $stmt_check->execute([$tutor_id]);
+                    $result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
+                    $stmt_check->closeCursor();
+                    
+                    if ($result_check['total_estudiantes'] == 0) {
+                        error_log("No hay estudiantes asignados al tutor_id: $tutor_id");
+                        header('Content-Type: application/json');
+                        echo json_encode([
+                            'success' => true, 
+                            'proyectos' => [],
+                            'debug_info' => "No hay estudiantes asignados a este tutor"
+                        ]);
+                        exit();
+                    }
+                    
+                    error_log("El tutor tiene {$result_check['total_estudiantes']} estudiantes asignados");
+                    
+                    // Consulta para obtener proyectos a través de estudiantes asignados al tutor
+                    $query_proyectos = "SELECT DISTINCT p.* 
+                                       FROM proyectos p
+                                       INNER JOIN estudiantes_proyecto ep ON p.id = ep.proyecto_id
+                                       INNER JOIN pasantias pa ON ep.estudiante_id = pa.estudiante_id
+                                       WHERE pa.tutor_id = ?
+                                       ORDER BY p.fecha_creacion DESC";
+                    
+                    error_log("SQL Query: " . $query_proyectos);
+                    $stmt_proyectos = $conexion->prepare($query_proyectos);
+                    $stmt_proyectos->execute([$tutor_id]);
+                    $proyectos = $stmt_proyectos->fetchAll(PDO::FETCH_ASSOC);
+                    $stmt_proyectos->closeCursor();
+                    
+                    error_log("Encontrados " . count($proyectos) . " proyectos para el tutor_id: $tutor_id");
+                    
+                    // Para cada proyecto, obtener los estudiantes y avances
+                    foreach ($proyectos as &$proyecto) {
+                        // Obtener avances aprobados
+                        $query_avances_aprobados = "SELECT COUNT(*) as total 
+                                                   FROM avances_proyecto 
+                                                   WHERE proyecto_id = ? AND estado = 'aprobado'";
+                        $stmt_avances = $conexion->prepare($query_avances_aprobados);
+                        $stmt_avances->execute([$proyecto['id']]);
+                        $avances_result = $stmt_avances->fetch(PDO::FETCH_ASSOC);
+                        $stmt_avances->closeCursor();
+                        
+                        $proyecto['avances_aprobados'] = $avances_result['total'] ?? 0;
+                        
+                        // Obtener estudiantes del proyecto
+                        $query_estudiantes = "SELECT u.id, u.nombre, u.codigo_estudiante, u.email, ep.rol_en_proyecto
+                                             FROM usuarios u
+                                             INNER JOIN estudiantes_proyecto ep ON u.id = ep.estudiante_id
+                                             WHERE ep.proyecto_id = ?";
+                        $stmt_estudiantes = $conexion->prepare($query_estudiantes);
+                        $stmt_estudiantes->execute([$proyecto['id']]);
+                        $proyecto['estudiantes'] = $stmt_estudiantes->fetchAll(PDO::FETCH_ASSOC);
+                        $stmt_estudiantes->closeCursor();
+                        
+                        error_log("Proyecto ID {$proyecto['id']} tiene " . count($proyecto['estudiantes']) . " estudiantes");
+                        
+                        // Calcular el avance actual (1-4)
+                        $query_avance = "SELECT MAX(numero_avance) as ultimo_avance
+                                        FROM avances_proyecto
+                                        WHERE proyecto_id = ?";
+                        $stmt_avance = $conexion->prepare($query_avance);
+                        $stmt_avance->execute([$proyecto['id']]);
+                        $avance_result = $stmt_avance->fetch(PDO::FETCH_ASSOC);
+                        $stmt_avance->closeCursor();
+                        
+                        $proyecto['avance_actual'] = $avance_result['ultimo_avance'] ?? 0;
+                        
+                        // Calcular progreso
+                        $proyecto['progreso'] = ($proyecto['avances_aprobados'] / 4) * 100; // Asumiendo 4 avances totales
+                    }
+                    
+                    header('Content-Type: application/json');
+                    echo json_encode([
+                        'success' => true, 
+                        'proyectos' => $proyectos,
+                        'debug_info' => "Consulta exitosa: " . count($proyectos) . " proyectos encontrados"
+                    ]);
+                    
+                } catch (PDOException $e) {
+                    error_log("Error PDO en get_proyectos: " . $e->getMessage());
+                    header('Content-Type: application/json');
+                    echo json_encode([
+                        'success' => false, 
+                        'message' => 'Error de base de datos al obtener proyectos',
+                        'debug_info' => $e->getMessage()
+                    ]);
+                } catch (Exception $e) {
+                    error_log("Error general en get_proyectos: " . $e->getMessage());
+                    header('Content-Type: application/json');
+                    echo json_encode([
+                        'success' => false, 
+                        'message' => 'Error del servidor al obtener proyectos',
+                        'debug_info' => $e->getMessage()
+                    ]);
+                }
+            } else {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+            }
+            exit();
+            
+        case 'get_detalle_proyecto':
+            if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+                $proyecto_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+                if ($proyecto_id) {
+                    try {
+                        // Verificar primero si el tutor tiene acceso a este proyecto
+                        $query_check = "SELECT COUNT(*) as tiene_acceso
+                                       FROM estudiantes_proyecto ep
+                                       INNER JOIN pasantias pa ON ep.estudiante_id = pa.estudiante_id
+                                       WHERE ep.proyecto_id = ? AND pa.tutor_id = ?";
+                        $stmt_check = $conexion->prepare($query_check);
+                        $stmt_check->execute([$proyecto_id, $tutor_id]);
+                        $check_result = $stmt_check->fetch(PDO::FETCH_ASSOC);
+                        $stmt_check->closeCursor();
+                        
+                        if (!$check_result || $check_result['tiene_acceso'] == 0) {
+                            header('Content-Type: application/json');
+                            echo json_encode(['success' => false, 'message' => 'No tienes acceso a este proyecto']);
+                            exit();
+                        }
+                        
+                        // Obtener detalles del proyecto
+                        $query_proyecto = "SELECT p.*, 
+                                          (SELECT nombre FROM usuarios WHERE id = (
+                                              SELECT tutor_id FROM pasantias WHERE estudiante_id IN (
+                                                  SELECT estudiante_id FROM estudiantes_proyecto WHERE proyecto_id = p.id
+                                              ) LIMIT 1
+                                          )) as tutor_nombre
+                                          FROM proyectos p
+                                          WHERE p.id = ?";
+                        $stmt_proyecto = $conexion->prepare($query_proyecto);
+                        $stmt_proyecto->execute([$proyecto_id]);
+                        $proyecto = $stmt_proyecto->fetch(PDO::FETCH_ASSOC);
+                        $stmt_proyecto->closeCursor();
+                        
+                        if ($proyecto) {
+                            try {
+                                // Obtener estudiantes del proyecto
+                                $query_estudiantes = "SELECT u.id, u.nombre, u.codigo_estudiante, u.email, ep.rol_en_proyecto
+                                                     FROM usuarios u
+                                                     INNER JOIN estudiantes_proyecto ep ON u.id = ep.estudiante_id
+                                                     WHERE ep.proyecto_id = ?";
+                                $stmt_estudiantes = $conexion->prepare($query_estudiantes);
+                                $stmt_estudiantes->execute([$proyecto_id]);
+                                $proyecto['estudiantes'] = $stmt_estudiantes->fetchAll(PDO::FETCH_ASSOC);
+                                $stmt_estudiantes->closeCursor();
+                            } catch (PDOException $e) {
+                                error_log("Error al obtener estudiantes para detalle de proyecto ID {$proyecto_id}: " . $e->getMessage());
+                                $proyecto['estudiantes'] = [];
+                            }
+                            
+                            try {
+                                // Obtener avances del proyecto
+                                $query_avances = "SELECT * FROM avances_proyecto
+                                                 WHERE proyecto_id = ?
+                                                 ORDER BY numero_avance ASC";
+                                $stmt_avances = $conexion->prepare($query_avances);
+                                $stmt_avances->execute([$proyecto_id]);
+                                $proyecto['avances'] = $stmt_avances->fetchAll(PDO::FETCH_ASSOC);
+                                $stmt_avances->closeCursor();
+                            } catch (PDOException $e) {
+                                error_log("Error al obtener avances para detalle de proyecto ID {$proyecto_id}: " . $e->getMessage());
+                                $proyecto['avances'] = [];
+                            }
+                            
+                            header('Content-Type: application/json');
+                            echo json_encode(['success' => true, 'proyecto' => $proyecto]);
+                        } else {
+                            header('Content-Type: application/json');
+                            echo json_encode(['success' => false, 'message' => 'Proyecto no encontrado']);
+                        }
+                    } catch (PDOException $e) {
+                        error_log("Error fetching proyecto detail (tutor): " . $e->getMessage());
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => false, 'message' => 'Error de base de datos al obtener detalle: ' . $e->getMessage()]);
+                    } catch (Exception $e) {
+                        error_log("Error general fetching proyecto detail (tutor): " . $e->getMessage());
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => false, 'message' => 'Error del servidor al obtener detalle: ' . $e->getMessage()]);
+                    }
+                } else {
+                    header('Content-Type: application/json');
+                    echo json_encode(['success' => false, 'message' => 'ID de proyecto inválido']);
+                }
+            } else {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Solicitud inválida para obtener detalle']);
+            }
+            exit();
+
+        default:
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => 'Acción AJAX no reconocida']);
+            exit();
     }
 }
+
+
+            
+
+
+
+
+
+
+
+
+
+    
+
 
 // --- Lógica PHP para la carga inicial de la página ---
 $query = "SELECT p.*, u.id AS estudiante_id, u.nombre AS estudiante_nombre, u.codigo_estudiante, u.email AS estudiante_email, u.ciclo
@@ -613,6 +836,17 @@ function formatearFecha($fecha) {
                     <i class="fas fa-users"></i>
                     <span>Pasantías Asignadas</span>
                 </li>
+
+
+
+                <li class="nav-item" data-section="proyectos">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Proyectos Aplicación</span>
+                </li>
+
+
+
+
                 <li class="nav-item" data-section="avances">
                     <i class="fas fa-tasks"></i>
                     <span>Gestión de Avances</span>
@@ -807,6 +1041,126 @@ function formatearFecha($fecha) {
                     </div>
                 </div>
             </section>
+
+
+
+
+
+
+
+
+            <section id="proyectos" class="content-section">
+    <div class="section-header">
+        <h3><i class="fas fa-laptop-code"></i> Proyectos de Aplicación</h3>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+                <h4>Total Proyectos</h4>
+                <p class="stat-value" id="total-proyectos">0</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+                <h4>Finalizados</h4>
+                <p class="stat-value" id="proyectos-finalizados">0</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon warning">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-info">
+                <h4>En Curso</h4>
+                <p class="stat-value" id="proyectos-en-curso">0</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon danger">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-info">
+                <h4>Con Retraso</h4>
+                <p class="stat-value" id="proyectos-retrasados">0</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>Proyectos Asignados</h4>
+            <div class="card-actions">
+                <div class="search-box">
+                    <input type="text" id="search-proyectos" placeholder="Buscar proyecto...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <select id="filter-estado-proyectos">
+                    <option value="">Todos los estados</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="en_proceso">En Proceso</option>
+                    <option value="aprobado">Aprobado</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+                <select id="filter-avance-proyectos">
+                    <option value="">Todos los avances</option>
+                    <option value="1">Avance 1</option>
+                    <option value="2">Avance 2</option>
+                    <option value="3">Avance 3</option>
+                    <option value="4">Avance 4</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="tabla-proyectos">
+                    <thead>
+                        <tr>
+                            <th>Proyecto</th>
+                            <th>Estudiantes</th>
+                            <th>Avance Actual</th>
+                            <th>Progreso</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los proyectos se cargarán dinámicamente aquí -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="detalle-proyecto" class="content-section">
+    <div class="section-header">
+        <h3><i class="fas fa-info-circle"></i> Detalle de Proyecto</h3>
+    </div>
+    <div id="detalle-proyecto-contenido">
+        <div class="empty-state">
+            <i class="fas fa-info-circle"></i>
+            <p>Selecciona un proyecto de la lista para ver los detalles.</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
 
             <section id="pasantias" class="content-section">
                 <div class="section-header">
@@ -1818,6 +2172,484 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+
+
+
+
+
+// --- Funcionalidad para Proyectos de Aplicación ---
+
+function cargarProyectos() {
+    console.log("Iniciando carga de proyectos...");
+    
+    // Actualizar estadísticas con ceros inicialmente
+    document.getElementById('total-proyectos').textContent = '0';
+    document.getElementById('proyectos-finalizados').textContent = '0';
+    document.getElementById('proyectos-en-curso').textContent = '0';
+    document.getElementById('proyectos-retrasados').textContent = '0';
+    
+    // Mostrar mensaje de carga
+    const tablaProyectos = document.querySelector('#tabla-proyectos tbody');
+    if (tablaProyectos) {
+        tablaProyectos.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center">
+                    <div class="empty-state">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Cargando proyectos...</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+    
+    // Usar la URL actual del script para las solicitudes AJAX
+    const currentScriptPath = window.location.pathname;
+    const url = `${currentScriptPath}?ajax_action=get_proyectos`;
+    console.log("URL de solicitud:", url);
+    
+    fetch(url)
+        .then(response => {
+            console.log("Respuesta recibida:", response.status, response.statusText);
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Datos recibidos:", data);
+            
+            if (data.success && data.proyectos) {
+                console.log(`Se encontraron ${data.proyectos.length} proyectos`);
+                
+                if (!tablaProyectos) {
+                    console.error("No se encontró el elemento tabla-proyectos tbody");
+                    return;
+                }
+                
+                tablaProyectos.innerHTML = '';
+                
+                let proyectosFinalizados = 0;
+                let proyectosEnCurso = 0;
+                let proyectosRetrasados = 0;
+                
+                if (data.proyectos.length === 0) {
+                    console.log("No hay proyectos para mostrar");
+                    tablaProyectos.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <div class="empty-state">
+                                    <i class="fas fa-folder-open"></i>
+                                    <p>No hay proyectos asignados actualmente</p>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    
+                    // Actualizar estadísticas
+                    document.getElementById('total-proyectos').textContent = '0';
+                    document.getElementById('proyectos-finalizados').textContent = '0';
+                    document.getElementById('proyectos-en-curso').textContent = '0';
+                    document.getElementById('proyectos-retrasados').textContent = '0';
+                    
+                    return;
+                }
+                
+                data.proyectos.forEach((proyecto, index) => {
+                    console.log(`Procesando proyecto ${index + 1}:`, proyecto.id, proyecto.titulo);
+                    
+                    if (proyecto.estado === 'finalizado') proyectosFinalizados++;
+                    if (proyecto.estado === 'en_proceso') proyectosEnCurso++;
+                    // Lógica para determinar retrasos
+                    if (proyecto.estado === 'en_proceso' && proyecto.avance_actual < 2) proyectosRetrasados++;
+                    
+                    const fila = document.createElement('tr');
+                    fila.setAttribute('data-proyecto-id', proyecto.id);
+                    fila.setAttribute('data-estado', proyecto.estado || 'pendiente');
+                    fila.setAttribute('data-avance', proyecto.avance_actual || 0);
+                    
+                    // Definir clase para el estado
+                    const claseEstado = {
+                        'pendiente': 'estado-pendiente',
+                        'en_proceso': 'estado-proceso',
+                        'aprobado': 'estado-aprobado',
+                        'finalizado': 'estado-finalizada'
+                    }[proyecto.estado || 'pendiente'] || 'estado-pendiente';
+                    
+                    // Asegurarse de que todos los campos existan
+                    const titulo = proyecto.titulo || 'Sin título';
+                    const estudiantes = proyecto.estudiantes || [];
+                    const avanceActual = proyecto.avance_actual || 0;
+                    const progreso = proyecto.progreso || 0;
+                    const estado = proyecto.estado || 'pendiente';
+                    
+                    console.log(`Proyecto ${index + 1} - Estudiantes:`, estudiantes.length);
+                    
+                    fila.innerHTML = `
+                        <td>${htmlspecialchars_js(titulo)}</td>
+                        <td>
+                            ${estudiantes.length > 0 ? 
+                                estudiantes.map(est => `
+                                    <span class="estudiante-tag">${htmlspecialchars_js(est.nombre || 'Sin nombre')}</span>
+                                `).join('') : 
+                                '<span class="text-muted">Sin estudiantes asignados</span>'
+                            }
+                        </td>
+                        <td>Avance ${avanceActual} de 4</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progreso}%"></div>
+                            </div>
+                            <span class="progress-text">${Math.round(progreso)}%</span>
+                        </td>
+                        <td><span class="estado ${claseEstado}">${htmlspecialchars_js(estado.replace('_', ' ')).charAt(0).toUpperCase() + htmlspecialchars_js(estado.replace('_', ' ')).slice(1)}</span></td>
+                        <td>
+                            <button class="btn-icon btn-detalle-proyecto" data-proyecto-id="${proyecto.id}" title="Ver Detalles">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-icon btn-chat-proyecto" 
+                                    data-proyecto-id="${proyecto.id}" 
+                                    title="Chat del Proyecto">
+                                <i class="fas fa-comments"></i>
+                            </button>
+                            <button class="btn-icon btn-avances-proyecto" 
+                                    data-proyecto-id="${proyecto.id}" 
+                                    title="Gestionar Avances">
+                                <i class="fas fa-tasks"></i>
+                            </button>
+                        </td>
+                    `;
+                    
+                    tablaProyectos.appendChild(fila);
+                });
+                
+                console.log("Estadísticas:", {
+                    total: data.proyectos.length,
+                    finalizados: proyectosFinalizados,
+                    enCurso: proyectosEnCurso,
+                    retrasados: proyectosRetrasados
+                });
+                
+                // Actualizar estadísticas
+                document.getElementById('total-proyectos').textContent = data.proyectos.length;
+                document.getElementById('proyectos-finalizados').textContent = proyectosFinalizados;
+                document.getElementById('proyectos-en-curso').textContent = proyectosEnCurso;
+                document.getElementById('proyectos-retrasados').textContent = proyectosRetrasados;
+                
+                // Agregar eventos a los botones
+                document.querySelectorAll('.btn-detalle-proyecto').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const proyectoId = this.getAttribute('data-proyecto-id');
+                        console.log("Click en ver detalle del proyecto:", proyectoId);
+                        mostrarDetalleProyecto(proyectoId);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-chat-proyecto').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const proyectoId = this.getAttribute('data-proyecto-id');
+                        console.log("Click en chat del proyecto:", proyectoId);
+                        alert('Funcionalidad de chat para proyecto ' + proyectoId + ' (en desarrollo)');
+                    });
+                });
+                
+                document.querySelectorAll('.btn-avances-proyecto').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const proyectoId = this.getAttribute('data-proyecto-id');
+                        console.log("Click en avances del proyecto:", proyectoId);
+                        mostrarAvancesProyecto(proyectoId);
+                    });
+                });
+                
+                console.log("Carga de proyectos completada con éxito");
+            } else {
+                console.error('Error al cargar proyectos:', data);
+                if (tablaProyectos) {
+                    tablaProyectos.innerHTML = `
+                        <tr>
+                            <td colspan="6">
+                                <div class="empty-state">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <p>Error al cargar proyectos: ${data.message || 'Error desconocido'}</p>
+                                    <small>${data.debug_info || ''}</small>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }
+                
+                // Actualizar estadísticas con ceros
+                document.getElementById('total-proyectos').textContent = '0';
+                document.getElementById('proyectos-finalizados').textContent = '0';
+                document.getElementById('proyectos-en-curso').textContent = '0';
+                document.getElementById('proyectos-retrasados').textContent = '0';
+            }
+        })
+        .catch(error => {
+            console.error('Error en fetch cargarProyectos:', error);
+            if (tablaProyectos) {
+                tablaProyectos.innerHTML = `
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>Error de conexión al cargar proyectos: ${error.message}</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }
+            
+            // Actualizar estadísticas con ceros
+            document.getElementById('total-proyectos').textContent = '0';
+            document.getElementById('proyectos-finalizados').textContent = '0';
+            document.getElementById('proyectos-en-curso').textContent = '0';
+            document.getElementById('proyectos-retrasados').textContent = '0';
+        });
+}
+
+function mostrarDetalleProyecto(proyectoId) {
+    // Usar la URL actual del script para las solicitudes AJAX
+    const currentScriptPath = window.location.pathname;
+    
+    fetch(`${currentScriptPath}?ajax_action=get_detalle_proyecto&id=${encodeURIComponent(proyectoId)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const detalleContenido = document.getElementById('detalle-proyecto-contenido');
+            if (!detalleContenido) return;
+            
+            if (data.success && data.proyecto) {
+                const proyecto = data.proyecto;
+                
+                // Generar HTML para el detalle
+                detalleContenido.innerHTML = `
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>${htmlspecialchars_js(proyecto.titulo)}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-grid">
+                                <div class="info-group">
+                                    <h5>Información del Proyecto</h5>
+                                    <p><strong>Título:</strong> ${htmlspecialchars_js(proyecto.titulo)}</p>
+                                    <p><strong>Descripción:</strong> ${htmlspecialchars_js(proyecto.descripcion || 'No disponible')}</p>
+                                    <p><strong>Fecha Inicio:</strong> ${proyecto.fecha_inicio ? new Date(proyecto.fecha_inicio).toLocaleDateString() : 'No definida'}</p>
+                                    <p><strong>Fecha Fin:</strong> ${proyecto.fecha_fin ? new Date(proyecto.fecha_fin).toLocaleDateString() : 'No definida'}</p>
+                                    <p><strong>Estado:</strong> <span class="estado ${getEstadoClassTutor(proyecto.estado)}">${htmlspecialchars_js(proyecto.estado.replace('_', ' ')).charAt(0).toUpperCase() + htmlspecialchars_js(proyecto.estado.replace('_', ' ')).slice(1)}</span></p>
+                                </div>
+
+                                <div class="info-group">
+                                    <h5>Estudiantes</h5>
+                                    ${proyecto.estudiantes && proyecto.estudiantes.length > 0 ? 
+                                        proyecto.estudiantes.map(est => `
+                                            <div class="estudiante-item">
+                                                <p><strong>${htmlspecialchars_js(est.nombre)}</strong> ${est.rol_en_proyecto === 'lider' ? '<span class="badge-lider">Líder</span>' : ''}</p>
+                                                <p>Código: ${htmlspecialchars_js(est.codigo_estudiante || 'No disponible')}</p>
+                                                <p>Email: ${htmlspecialchars_js(est.email || 'No disponible')}</p>
+                                            </div>
+                                        `).join('<hr>') :
+                                        '<p>No hay estudiantes asignados a este proyecto</p>'
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="avances-timeline">
+                                <h5>Avances del Proyecto</h5>
+                                ${proyecto.avances && proyecto.avances.length > 0 ? `
+                                    <div class="timeline">
+                                        ${proyecto.avances.map(avance => `
+                                            <div class="timeline-item">
+                                                <div class="timeline-marker ${getEstadoClassTimeline(avance.estado)}">
+                                                    <i class="${getEstadoIconTimeline(avance.estado)}"></i>
+                                                </div>
+                                                <div class="timeline-content">
+                                                    <h6>Avance ${avance.numero_avance}: ${htmlspecialchars_js(avance.titulo || 'Sin título')}</h6>
+                                                    <p class="timeline-date">${avance.fecha_entrega ? new Date(avance.fecha_entrega).toLocaleDateString() : 'Pendiente'}</p>
+                                                    <p class="estado ${getEstadoClassTimeline(avance.estado)}">${htmlspecialchars_js(avance.estado.replace('_', ' ')).charAt(0).toUpperCase() + htmlspecialchars_js(avance.estado.replace('_', ' ')).slice(1)}</p>
+                                                    ${avance.nota !== null ? `<p class="nota">Nota: ${htmlspecialchars_js(avance.nota)}</p>` : ''}
+                                                    ${avance.comentario_tutor ? `<div class="comentario-tutor"><strong>Comentario:</strong> ${nl2br_js(htmlspecialchars_js(avance.comentario_tutor))}</div>` : ''}
+                                                    ${avance.archivo_entregado ? `
+                                                        <a href="../../uploads/proyectos/entregas/${encodeURIComponent(avance.archivo_entregado)}" target="_blank" class="btn-download">
+                                                            <i class="fas fa-file-pdf"></i> Ver entrega
+                                                        </a>
+                                                    ` : ''}
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                ` : '<p class="text-muted">No hay avances registrados</p>'}
+                            </div>
+                            
+                            ${proyecto.estado === 'en_proceso' ? `
+                                <div class="acta-final">
+                                    <h5>Finalizar Proyecto</h5>
+                                    <form method="POST" enctype="multipart/form-data" class="form-acta">
+                                        <input type="hidden" name="proyecto_id" value="${proyecto.id}">
+                                        <input type="hidden" name="finalizar_proyecto" value="1">
+
+                                        <div class="form-group">
+                                            <label>Subir Acta Final (PDF):</label>
+                                            <input type="file" name="archivo_acta" accept=".pdf" required>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fas fa-check-circle"></i> Finalizar Proyecto
+                                        </button>
+                                    </form>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                // Mostrar la sección de detalle
+                showSection('detalle-proyecto');
+            } else {
+                console.error('Error al cargar detalle del proyecto:', data.message);
+                detalleContenido.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Error al cargar detalle del proyecto: ${data.message || 'Error desconocido'}</p>
+                    </div>
+                `;
+                showSection('detalle-proyecto');
+            }
+        })
+        .catch(error => {
+            console.error('Error en fetch mostrarDetalleProyecto:', error);
+            const detalleContenido = document.getElementById('detalle-proyecto-contenido');
+            if (detalleContenido) {
+                detalleContenido.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Error de conexión al cargar detalle del proyecto</p>
+                    </div>
+                `;
+                showSection('detalle-proyecto');
+            }
+        });
+}
+
+function mostrarAvancesProyecto(proyectoId) {
+    alert('Funcionalidad de gestión de avances para proyecto ' + proyectoId + ' (en desarrollo)');
+}
+
+// Función auxiliar para sanitizar texto en HTML
+function htmlspecialchars_js(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#039;');
+}
+
+// Función auxiliar para convertir saltos de línea en <br>
+function nl2br_js(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/\n/g, '<br>');
+}
+
+// Asegurarse de que la función se ejecute cuando se carga la sección de proyectos
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM cargado, configurando eventos para la sección de proyectos");
+    
+    // Verificar si estamos en la sección de proyectos al cargar la página
+    const proyectosSection = document.getElementById('proyectos');
+    const isProyectosSectionActive = proyectosSection && proyectosSection.classList.contains('active');
+    
+    if (isProyectosSectionActive) {
+        console.log("Sección de proyectos activa al cargar la página, cargando proyectos...");
+        cargarProyectos();
+    }
+    
+    // Configurar evento para cargar proyectos cuando se hace clic en la pestaña
+    const proyectosTab = document.querySelector('.nav-item[data-section="proyectos"]');
+    if (proyectosTab) {
+        console.log("Tab de proyectos encontrado, configurando evento de clic");
+        proyectosTab.addEventListener('click', function() {
+            console.log("Clic en tab de proyectos, cargando proyectos...");
+            cargarProyectos();
+        });
+    } else {
+        console.error("No se encontró el tab de proyectos");
+    }
+    
+    // Configurar filtros
+    const searchProyectos = document.getElementById('search-proyectos');
+    const filterEstadoProyectos = document.getElementById('filter-estado-proyectos');
+    const filterAvanceProyectos = document.getElementById('filter-avance-proyectos');
+    
+    if (searchProyectos) {
+        searchProyectos.addEventListener('input', filtrarProyectos);
+    }
+    
+    if (filterEstadoProyectos) {
+        filterEstadoProyectos.addEventListener('change', filtrarProyectos);
+    }
+    
+    if (filterAvanceProyectos) {
+        filterAvanceProyectos.addEventListener('change', filtrarProyectos);
+    }
+});
+
+function filtrarProyectos() {
+    console.log("Filtrando proyectos...");
+    const busqueda = document.getElementById('search-proyectos')?.value.toLowerCase() || '';
+    const filtroEstado = document.getElementById('filter-estado-proyectos')?.value || '';
+    const filtroAvance = document.getElementById('filter-avance-proyectos')?.value || '';
+    
+    console.log("Filtros:", { busqueda, filtroEstado, filtroAvance });
+    
+    const filas = document.querySelectorAll('#tabla-proyectos tbody tr');
+    let filasVisibles = 0;
+    
+    filas.forEach(fila => {
+        if (fila.querySelector('td:first-child')) {
+            const titulo = fila.querySelector('td:first-child').textContent.toLowerCase() || '';
+            const estado = fila.getAttribute('data-estado') || '';
+            const avance = fila.getAttribute('data-avance') || '';
+            
+            const coincideTitulo = titulo.includes(busqueda);
+            const coincideEstado = filtroEstado === '' || estado === filtroEstado;
+            const coincideAvance = filtroAvance === '' || avance === filtroAvance;
+            
+            if (coincideTitulo && coincideEstado && coincideAvance) {
+                fila.style.display = '';
+                filasVisibles++;
+            } else {
+                fila.style.display = 'none';
+            }
+        }
+    });
+    
+    console.log(`Filtrado completado: ${filasVisibles} filas visibles de ${filas.length} totales`);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
