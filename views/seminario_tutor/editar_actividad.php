@@ -215,8 +215,8 @@ function formatearTamano($tamano) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         :root {
-            --primary: #00a63d;
-            --primary-light: #00c44b;
+            --primary: #039708;
+            --primary-light: #039708;
             --secondary: #f8f9fa;
         }
         
@@ -232,6 +232,17 @@ function formatearTamano($tamano) {
             position: fixed;
             width: 250px;
             z-index: 1000;
+        }
+
+          .sidebar {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #039708; /* o tu color verde institucional */
+        }
+
+        .logout-btn:hover {
+        color: white;
         }
         
         .main-content {
@@ -365,7 +376,7 @@ function formatearTamano($tamano) {
     <aside class="sidebar">
         <div class="p-4 sidebar-header">
             <h3 style="background: none; box-shadow: none; padding: 0; margin: 0;">
-                <i class="fas fa-graduation-cap mr-2"></i>FET
+                <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
             </h3>
             <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
                 <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
@@ -406,6 +417,14 @@ function formatearTamano($tamano) {
                 </a>
             </li>
         </ul>
+
+
+            <!-- Botón de cerrar sesión fijo abajo -->
+                <a href="/views/general/login.php" class="logout-btn" style="margin-top: auto; padding: 15px 20px; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Cerrar sesión
+                </a>
+
+
     </aside>
 
     <!-- Main Content -->

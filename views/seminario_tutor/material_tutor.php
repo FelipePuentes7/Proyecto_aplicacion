@@ -606,8 +606,8 @@ function getVideoThumbnail($url, $platform) {
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00a63d;
-            --primary-light: #00c44b;
+            --primary: #039708;
+            --primary-light: #039708;
             --secondary: #f8f9fa;
             --success: #28a745;
             --danger: #dc3545;
@@ -675,6 +675,17 @@ function getVideoThumbnail($url, $platform) {
             margin-right: 10px;
             width: 20px;
             text-align: center;
+        }
+
+          .sidebar {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #039708; /* o tu color verde institucional */
+        }
+
+        .logout-btn:hover {
+        color: white;
         }
         
         .main-content {
@@ -1380,8 +1391,7 @@ function getVideoThumbnail($url, $platform) {
             <aside class="sidebar">
                 <div class="sidebar-header">
                     <h3>
-                        <i class="fas fa-graduation-cap"></i>
-                        FET
+                       <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
                     </h3>
                     <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
                         <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
@@ -1406,6 +1416,14 @@ function getVideoThumbnail($url, $platform) {
                     <li><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
                     <li><a href="material_tutor.php" class="active"><i class="fas fa-book"></i> Material de Apoyo</a></li>
                 </ul>
+
+
+            <!-- Botón de cerrar sesión fijo abajo -->
+                <a href="/views/general/login.php" class="logout-btn" style="margin-top: auto; padding: 15px 20px; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Cerrar sesión
+                </a>
+
+
             </aside>
         </div>
 

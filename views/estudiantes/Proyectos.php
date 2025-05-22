@@ -559,8 +559,8 @@ $clase_estado = isset($proyecto['estado'], $clases_estado[$proyecto['estado']]) 
     <div class="wrapper">
         <nav class="sidebar">
             <div class="sidebar-header">
-                <i class="fas fa-university logo"></i>
-                <h3>Portal Proyectos</h3>
+                <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+
             </div>
 
             <div class="user-info">
@@ -569,7 +569,7 @@ $clase_estado = isset($proyecto['estado'], $clases_estado[$proyecto['estado']]) 
                 </div>
                 <div class="user-details">
                     <p class="user-name"><?php echo htmlspecialchars($nombre_estudiante); ?></p>
-                    <p class="user-role"><?php echo htmlspecialchars($carrera); ?></p>
+                    <p class="user-role">Estudiante</p>
                 </div>
             </div>
 

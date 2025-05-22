@@ -848,8 +848,8 @@ function formatearFecha($fecha) {
     <div class="wrapper">
         <nav class="sidebar">
             <div class="sidebar-header">
-                <i class="fas fa-chalkboard-teacher logo"></i>
-                <h3>Portal del Tutor</h3>
+                <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+
             </div>
 
             <div class="user-info">

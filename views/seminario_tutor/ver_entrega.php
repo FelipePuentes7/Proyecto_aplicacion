@@ -105,8 +105,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a3b8b;
-            --primary-light: #2a4c9c;
+            --primary: #039708;
+            --primary-light: #039708;
             --secondary: #f8f9fa;
             --success: #28a745;
             --danger: #dc3545;
@@ -178,6 +178,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
             margin-right: 10px;
             width: 20px;
             text-align: center;
+        }
+
+          .sidebar {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #039708; /* o tu color verde institucional */
+        }
+
+        .logout-btn:hover {
+        color: white;
         }
         
         .main-content {
@@ -430,15 +441,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <h3><img src="../../assets/img/logofet.png" alt="FET Logo"> FET</h3>
+            <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
         </div>
         
-        <ul>z
+        <ul>
             <li><a href="inicio_tutor.php"><i class="fas fa-home"></i> Inicio</a></li>
             <li><a href="actividades_tutor.php" class="active"><i class="fas fa-tasks"></i> Actividades</a></li>
             <li><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
             <li><a href="material_tutor.php"><i class="fas fa-book"></i> Material de Apoyo</a></li>
         </ul>
+
+
+        
     </div>
     
     <!-- Main Content -->

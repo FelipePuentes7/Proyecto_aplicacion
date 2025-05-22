@@ -90,8 +90,8 @@ $total_notificaciones_proyectos = $proyectos_pendientes; // Solo contamos los av
     <div class="wrapper">
         <header class="top-header">
             <div class="header-logo">
-                <i class="fas fa-university"></i>
-                <h1>Portal Académico</h1>
+                <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+
             </div>
             <div class="user-info">
                 <div class="user-avatar">
