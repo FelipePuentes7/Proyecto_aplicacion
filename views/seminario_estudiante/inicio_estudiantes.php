@@ -903,7 +903,7 @@ function entregaCalificada($db, $actividad_id, $usuario_id) {
         <!-- Progreso del curso -->
         <section class="course-progress mb-4">
             <div class="progress-header">
-                <h2 class="progress-title">Seminario - Base de Datos Relacionales</h2>
+                <h2 class="progress-title">Desarrollo Del Seminario</h2>
                 <span class="progress-percentage"><?php echo round($porcentaje_progreso); ?>%</span>
             </div>
             <div class="progress">
@@ -1098,16 +1098,15 @@ function entregaCalificada($db, $actividad_id, $usuario_id) {
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
-                <h3>Fundación Escuela Tecnológica de Neiva</h3>
-                <p>Email: soporte@universidad.edu</p>
-                <p>Dirección: Calle 123, Neiva</p>
-                <p>Teléfono: +57 123 456 7890</p>
+                <p>Email: direccion_software@fet.edu.co</p>
+                <p>Dirección: Kilómetro 12, via Neiva – Rivera</p>
+                <p>Teléfono: 6088674935 – (+57) 3223041567</p>
                 
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/YoSoyFet" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/yosoyfet" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/fetneiva" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/channel/UCv647ftA-d--0F02AqF7eng" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             

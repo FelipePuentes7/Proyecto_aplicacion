@@ -705,9 +705,9 @@ function formatearFecha($fecha) {
                         </div>
                         <div style="color: #fff;">
                             <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
-                                <?php echo isset($tutor_nombre) && $tutor_nombre ? htmlspecialchars($tutor_nombre) : 'Derek Agmeth Quevedo'; ?>
+
                             </div>
-                            <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+                            <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
                         </div>
                     </div>
                 </div>

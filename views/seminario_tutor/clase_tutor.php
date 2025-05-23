@@ -773,15 +773,8 @@ function formatearFecha($fecha) {
                     <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
                 </div>
                 <div>
-                    <div class="tutor-name">
-                        <?php
-                            $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
-                                ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
-                                : 'Derek Agmeth Quevedo';
-                            echo $nombre_tutor;
-                        ?>
-                    </div>
-                    <div class="tutor-role">Tutor Académico</div>
+
+                    <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
                 </div>
             </div>
         </div>

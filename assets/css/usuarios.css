@@ -556,18 +556,17 @@ h1::after {
 }
 
 .form-actions button[type="submit"] {
-    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+    background: linear-gradient(90deg, #DC2626, #B91C1C);
     color: var(--color-white);
 }
 
 .form-actions button[type="submit"]:hover {
-    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
     transform: translateY(-3px);
     box-shadow: var(--shadow-medium);
 }
 
 .form-actions button.cancel {
-    background: linear-gradient(90deg, #DC2626, #B91C1C);
+    background: linear-gradient(90deg, #039708,#039708);
     color: var(--color-white);
 }
 

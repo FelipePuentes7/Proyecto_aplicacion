@@ -1,0 +1,46 @@
+[2025-05-23 04:33:56] Página entregar_actividad.php cargada
+[2025-05-23 04:37:19] Página entregar_actividad.php cargada
+[2025-05-23 04:39:20] Página entregar_actividad.php cargada
+[2025-05-23 04:39:44] Página entregar_actividad.php cargada
+[2025-05-23 04:39:45] Página entregar_actividad.php cargada
+[2025-05-23 04:41:35] Página entregar_actividad.php cargada
+[2025-05-23 04:41:48] Página entregar_actividad.php cargada
+[2025-05-23 04:41:48] Formulario recibido: Array
+(
+    [actividad_id] => 1
+    [comentario] => epa
+)
+
+[2025-05-23 04:41:48] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => DOCUMENTO - METODOLOGIA.docx
+            [full_path] => DOCUMENTO - METODOLOGIA.docx
+            [type] => application/vnd.openxmlformats-officedocument.wordprocessingml.document
+            [tmp_name] => C:\xampp\tmp\php6A8C.tmp
+            [error] => 0
+            [size] => 248155
+        )
+
+)
+
+[2025-05-23 04:41:48] Procesando entrega para actividad ID: 1, estudiante ID: 27
+[2025-05-23 04:41:48] Actividad encontrada: Array
+(
+    [id] => 1
+    [titulo] => Introduccion a HTML
+)
+
+[2025-05-23 04:41:48] Iniciando transacción para nueva entrega
+[2025-05-23 04:41:48] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :usuario_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-23 04:41:48] Resultado de la inserción: Éxito
+[2025-05-23 04:41:48] ID de entrega creada: 1
+[2025-05-23 04:41:48] Intentando mover archivo de C:\xampp\tmp\php6A8C.tmp a ../../uploads/entregas/1/682fe06ceb5c5_DOCUMENTO - METODOLOGIA.docx
+[2025-05-23 04:41:48] Archivo movido exitosamente
+[2025-05-23 04:41:48] Información del archivo guardada en la base de datos
+[2025-05-23 04:41:48] Transacción confirmada exitosamente
+[2025-05-23 05:50:13] Página entregar_actividad.php cargada

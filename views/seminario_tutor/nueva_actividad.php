@@ -228,15 +228,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
                 </div>
                 <div style="color: #fff;">
-                    <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
-                        <?php
-                            $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
-                                ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
-                                : 'Derek Agmeth Quevedo';
-                            echo $nombre_tutor;
-                        ?>
-                    </div>
-                    <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+
+                <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
                 </div>
             </div>
         </div>

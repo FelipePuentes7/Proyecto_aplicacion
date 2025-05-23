@@ -132,16 +132,64 @@ function obtenerIcono($tipo) {
             font-family: 'Roboto', sans-serif;
         }
 
-        .sidebar {
+.sidebar {
             background-color: var(--primary);
             color: white;
             height: 100vh;
             position: fixed;
             width: 250px;
             z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-header img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar ul li {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar ul li a {
+            color: white;
+            padding: 15px 20px;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar ul li a:hover, .sidebar ul li a.active {
+            background-color: var(--primary-light);
+            border-left: 4px solid white;
+        }
+        
+        .sidebar ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
         }
 
-          .sidebar {
+  .sidebar {
         display: flex;
         flex-direction: column;
         height: 100vh;
@@ -151,12 +199,12 @@ function obtenerIcono($tipo) {
         .logout-btn:hover {
         color: white;
         }
-
+        
         .main-content {
             margin-left: 250px;
             padding: 20px;
+            transition: all 0.3s;
         }
-
         .card {
             border: none;
             border-radius: 10px;
@@ -340,7 +388,7 @@ function obtenerIcono($tipo) {
 
         .status-graded {
             background-color: rgba(40, 167, 69, 0.2);
-            color: #28a745;
+            color: #039708;
         }
 
         .empty-state {
@@ -367,27 +415,20 @@ function obtenerIcono($tipo) {
             <h3 style="background: none; box-shadow: none; padding: 0; margin: 0;">
                 <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
             </h3>
-            <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
+            <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; border-radius: 8px; padding: 10px 12px;">
                 <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
                     <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
                 </div>
                 <div style="color: #fff;">
-                    <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
-                        <?php
-                            $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
-                                ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
-                                : 'Derek Agmeth Quevedo';
-                            echo $nombre_tutor;
-                        ?>
-                    </div>
-                    <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+
+                        <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
                 </div>
             </div>
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a href="inicio_tutor.php" class="nav-link text-white">
-                    <i class="fas fa-home mr-2"></i>Inicio
+                    <i class="fas fa-home"></i>Inicio
                 </a>
             </li>
             <li class="nav-item">
@@ -533,7 +574,7 @@ function obtenerIcono($tipo) {
                                         <span class="submission-status status-graded">Calificado: <?php echo $entrega['calificacion']; ?></span>
                                     <?php endif; ?>
                                     
-                                    <a href="ver_entrega.php?id=<?php echo $entrega['id']; ?>" class="btn btn-sm btn-primary">
+                                        <a href="calificar_entregas.php?id=<?php echo $actividad['id']; ?>" class="btn btn-sm btn-primary">
                                         <i class="fas fa-eye mr-1"></i> Ver
                                     </a>
                                 </li>
