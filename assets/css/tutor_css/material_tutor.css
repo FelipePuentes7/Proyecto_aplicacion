@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Base Styles & Variables */
 :root {
     /* Color System */
@@ -114,6 +115,11 @@ button {
 :root {
     --primary: #039708;
     --primary-light: #039708;
+=======
+:root {
+    --primary: #00a63d;
+    --primary-light: #00c44b;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     --secondary: #f8f9fa;
     --success: #28a745;
     --danger: #dc3545;
@@ -194,12 +200,16 @@ body {
     margin-right: 10px;
     width: 20px;
     text-align: center;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .logo {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
     gap: var(--space-1);
 }
@@ -236,6 +246,8 @@ body {
 .sidebar-nav ul li a i {
     margin-right: var(--space-1);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .logo i {
@@ -278,11 +290,15 @@ body {
 
 .sidebar-nav ul li a i {
     margin-right: 10px;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     width: 20px;
     text-align: center;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .sidebar-nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -404,6 +420,8 @@ body {
     text-align: center;
     height: 100%;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 .sidebar-footer {
     padding: 20px;
     background-color: rgba(0,0,0,0.1);
@@ -490,11 +508,15 @@ body {
     align-items: center;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .category-card:hover {
     transform: translateY(-5px);
+<<<<<<< HEAD
 <<<<<<< HEAD
     box-shadow: var(--shadow-lg);
 }
@@ -510,6 +532,8 @@ body {
     justify-content: center;
     margin-bottom: var(--space-2);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     box-shadow: 0 5px 15px rgba(0,166,61,0.15); /* verde claro */
 }
 
@@ -523,7 +547,10 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .category-icon i {
@@ -531,6 +558,7 @@ body {
 }
 
 .category-card h4 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     font-size: 1.2rem;
     font-weight: 500;
@@ -542,6 +570,8 @@ body {
     color: var(--text-medium);
     font-size: 0.9rem;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     margin: 0 0 10px 0;
     color: var(--primary);
 }
@@ -550,11 +580,15 @@ body {
     margin: 0;
     text-align: center;
     color: #6c757d;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 /* Upload Container */
 .upload-container {
+<<<<<<< HEAD
 <<<<<<< HEAD
     background-color: var(--bg-white);
     border-radius: var(--radius-lg);
@@ -575,6 +609,8 @@ body {
     align-items: center;
     gap: var(--space-1);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     background-color: white;
     border-radius: 10px;
     padding: 20px;
@@ -594,7 +630,10 @@ body {
 
 .upload-header h3 i {
     margin-right: 10px;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 /* Progress Steps */
@@ -602,18 +641,23 @@ body {
     display: flex;
     align-items: center;
 <<<<<<< HEAD
+<<<<<<< HEAD
     justify-content: center;
     padding: var(--space-3) var(--space-2);
     background-color: var(--bg-light);
 =======
     margin-bottom: 30px;
 >>>>>>> origin/Master
+=======
+    margin-bottom: 30px;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .step {
     display: flex;
     flex-direction: column;
     align-items: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
     position: relative;
     z-index: 1;
@@ -626,6 +670,8 @@ body {
     background-color: var(--bg-white);
     border: 2px solid var(--border-color);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     flex: 1;
 }
 
@@ -635,11 +681,15 @@ body {
     border-radius: 50%;
     background-color: #e9ecef;
     color: #6c757d;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 500;
+<<<<<<< HEAD
 <<<<<<< HEAD
     margin-bottom: 0.5rem;
     transition: all var(--transition-normal);
@@ -668,6 +718,8 @@ body {
 .step.completed .step-label {
     color: var(--text-dark);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     margin-bottom: 10px;
     transition: all 0.3s;
 }
@@ -680,12 +732,16 @@ body {
 .step.completed .step-number {
     background-color: var(--success);
     color: white;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .step-line {
     flex: 1;
     height: 2px;
+<<<<<<< HEAD
 <<<<<<< HEAD
     background-color: var(--border-color);
     margin: 0 0.5rem;
@@ -698,6 +754,8 @@ body {
 .step-content {
     padding: var(--space-3);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     background-color: #e9ecef;
     margin: 0 10px;
 }
@@ -714,7 +772,10 @@ body {
 
 .step.completed .step-label {
     color: var(--success);
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 /* Form Styles */
@@ -725,14 +786,19 @@ body {
 
 .form-group {
 <<<<<<< HEAD
+<<<<<<< HEAD
     margin-bottom: var(--space-3);
 =======
     margin-bottom: 20px;
 >>>>>>> origin/Master
+=======
+    margin-bottom: 20px;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .form-group label {
     display: block;
+<<<<<<< HEAD
 <<<<<<< HEAD
     font-weight: 500;
     margin-bottom: 0.5rem;
@@ -741,6 +807,8 @@ body {
 .required {
     color: var(--danger-color);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     margin-bottom: 5px;
     font-weight: 500;
     color: #495057;
@@ -748,7 +816,10 @@ body {
 
 .required {
     color: var(--danger);
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 input[type="text"],
@@ -757,6 +828,7 @@ textarea,
 select {
     width: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
     padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
@@ -764,17 +836,23 @@ select {
     font-size: 1rem;
     transition: border-color var(--transition-fast);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 5px;
     transition: border-color 0.3s;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 input[type="text"]:focus,
 input[type="url"]:focus,
 textarea:focus,
 select:focus {
+<<<<<<< HEAD
 <<<<<<< HEAD
     outline: none;
     border-color: var(--accent-color);
@@ -795,6 +873,8 @@ select:focus {
     text-align: center;
     transition: all var(--transition-fast);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     border-color: var(--primary);
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(0, 166, 61, 0.25);
@@ -812,11 +892,15 @@ select:focus {
     padding: 30px;
     text-align: center;
     transition: all 0.3s;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     cursor: pointer;
 }
 
 .file-upload-container.highlight {
+<<<<<<< HEAD
 <<<<<<< HEAD
     border-color: var(--accent-color);
     background-color: rgba(63, 131, 248, 0.05);
@@ -824,6 +908,10 @@ select:focus {
     border-color: var(--primary);
     background-color: rgba(0,166,61,0.05);
 >>>>>>> origin/Master
+=======
+    border-color: var(--primary);
+    background-color: rgba(0,166,61,0.05);
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .upload-message {
@@ -831,13 +919,17 @@ select:focus {
     flex-direction: column;
     align-items: center;
 <<<<<<< HEAD
+<<<<<<< HEAD
     gap: var(--space-1);
 =======
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .upload-message i {
     font-size: 2.5rem;
+<<<<<<< HEAD
 <<<<<<< HEAD
     color: var(--text-medium);
     margin-bottom: var(--space-1);
@@ -858,6 +950,8 @@ select:focus {
 .file-select-btn:hover {
     background-color: var(--primary-dark);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     color: #6c757d;
     margin-bottom: 15px;
 }
@@ -875,12 +969,16 @@ select:focus {
 
 .file-select-btn:hover {
     background-color: var(--primary-light);
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .file-preview {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
     gap: var(--space-2);
     padding: var(--space-1);
@@ -888,10 +986,13 @@ select:focus {
     border-radius: var(--radius-md);
 =======
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .file-preview i {
     font-size: 2rem;
+<<<<<<< HEAD
 <<<<<<< HEAD
     color: var(--primary-color);
 }
@@ -899,17 +1000,23 @@ select:focus {
 .file-info {
     flex: 1;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     margin-right: 15px;
     color: var(--primary);
 }
 
 .file-info {
     flex-grow: 1;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     text-align: left;
 }
 
 .file-name {
+<<<<<<< HEAD
 <<<<<<< HEAD
     font-weight: 500;
     display: block;
@@ -981,6 +1088,8 @@ select:focus {
 .btn-success:hover {
     background-color: #2ea15a;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
@@ -998,21 +1107,29 @@ select:focus {
     color: var(--danger);
     cursor: pointer;
     font-size: 1.2rem;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 /* Students List */
 .search-container {
     position: relative;
 <<<<<<< HEAD
+<<<<<<< HEAD
     margin-bottom: var(--space-2);
 =======
     margin-bottom: 15px;
 >>>>>>> origin/Master
+=======
+    margin-bottom: 15px;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .search-icon {
     position: absolute;
+<<<<<<< HEAD
 <<<<<<< HEAD
     left: 0.75rem;
     top: 50%;
@@ -1030,6 +1147,8 @@ select:focus {
     max-height: 400px;
     overflow-y: auto;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -1046,12 +1165,16 @@ select:focus {
     border: 1px solid #ced4da;
     border-radius: 5px;
     margin-bottom: 15px;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .student-item {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
     padding: var(--space-1) var(--space-2);
     border-bottom: 1px solid var(--border-color);
@@ -1060,12 +1183,17 @@ select:focus {
     padding: 15px;
     border-bottom: 1px solid #ced4da;
 >>>>>>> origin/Master
+=======
+    padding: 15px;
+    border-bottom: 1px solid #ced4da;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .student-item:last-child {
     border-bottom: none;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 .student-item:hover {
     background-color: var(--bg-light);
@@ -1078,11 +1206,16 @@ select:focus {
     height: 20px;
     margin-right: var(--space-2);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 .student-checkbox {
     position: relative;
     display: block;
     margin-right: 15px;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .student-checkbox input {
@@ -1090,10 +1223,13 @@ select:focus {
     opacity: 0;
     cursor: pointer;
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 0;
     width: 0;
 =======
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .checkmark {
@@ -1102,6 +1238,7 @@ select:focus {
     left: 0;
     height: 20px;
     width: 20px;
+<<<<<<< HEAD
 <<<<<<< HEAD
     background-color: var(--bg-white);
     border: 2px solid var(--border-color);
@@ -1117,6 +1254,8 @@ select:focus {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     background-color: #eee;
     border-radius: 4px;
 }
@@ -1127,7 +1266,10 @@ select:focus {
 
 .student-checkbox input:checked ~ .checkmark {
     background-color: var(--primary);
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .checkmark:after {
@@ -1142,12 +1284,17 @@ select:focus {
 
 .student-checkbox .checkmark:after {
 <<<<<<< HEAD
+<<<<<<< HEAD
     left: 6px;
     top: 2px;
 =======
     left: 7px;
     top: 3px;
 >>>>>>> origin/Master
+=======
+    left: 7px;
+    top: 3px;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     width: 5px;
     height: 10px;
     border: solid white;
@@ -1160,23 +1307,32 @@ select:focus {
     height: 40px;
     border-radius: 50%;
 <<<<<<< HEAD
+<<<<<<< HEAD
     margin-right: var(--space-2);
 =======
     margin-right: 15px;
 >>>>>>> origin/Master
+=======
+    margin-right: 15px;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     object-fit: cover;
 }
 
 .student-info {
 <<<<<<< HEAD
+<<<<<<< HEAD
     flex: 1;
 =======
     flex-grow: 1;
 >>>>>>> origin/Master
+=======
+    flex-grow: 1;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .student-name {
     font-weight: 500;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -1191,6 +1347,8 @@ select:focus {
     color: var(--text-medium);
     text-align: right;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     margin-bottom: 5px;
 }
 
@@ -1203,11 +1361,15 @@ select:focus {
     text-align: right;
     color: #6c757d;
     font-size: 0.9rem;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 /* Review Section */
 .review-section {
+<<<<<<< HEAD
 <<<<<<< HEAD
     background-color: var(--bg-light);
     border-radius: var(--radius-md);
@@ -1233,6 +1395,8 @@ select:focus {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     margin-bottom: 30px;
 }
 
@@ -1251,11 +1415,15 @@ select:focus {
     margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .review-item {
     display: flex;
+<<<<<<< HEAD
 <<<<<<< HEAD
     margin-bottom: 0.5rem;
 }
@@ -1283,6 +1451,8 @@ select:focus {
     margin-right: 0.5rem;
     color: var(--text-medium);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     margin-bottom: 10px;
 }
 
@@ -1302,11 +1472,15 @@ select:focus {
 
 .review-value a:hover {
     text-decoration: underline;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .selected-students {
     display: flex;
+<<<<<<< HEAD
 <<<<<<< HEAD
     flex-direction: column;
     gap: 0.5rem;
@@ -1314,11 +1488,16 @@ select:focus {
     flex-wrap: wrap;
     gap: 15px;
 >>>>>>> origin/Master
+=======
+    flex-wrap: wrap;
+    gap: 15px;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .selected-student {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
     padding: 0.5rem;
     background-color: var(--bg-white);
@@ -1415,6 +1594,8 @@ select:focus {
     color: var(--primary-color);
     font-weight: 500;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     background-color: #f8f9fa;
     padding: 10px;
     border-radius: 5px;
@@ -1479,7 +1660,10 @@ select:focus {
     margin-top: 10px;
     color: var(--primary);
     text-decoration: none;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .video-link:hover {
@@ -1488,12 +1672,15 @@ select:focus {
 
 .document-file {
 <<<<<<< HEAD
+<<<<<<< HEAD
     font-size: 0.875rem;
     display: flex;
     align-items: center;
     gap: 0.25rem;
     color: var(--text-medium);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     color: #6c757d;
     margin-top: 10px;
 }
@@ -1547,11 +1734,15 @@ select:focus {
 
 .btn-success:hover {
     background-color: #218838;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 /* Footer */
 .main-footer {
+<<<<<<< HEAD
 <<<<<<< HEAD
     margin-top: var(--space-4);
     padding-top: var(--space-3);
@@ -1573,6 +1764,8 @@ select:focus {
     color: var(--text-medium);
     margin-bottom: 0.5rem;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     background-color: white;
     padding: 20px;
     text-align: center;
@@ -1592,12 +1785,16 @@ select:focus {
 
 a:hover, a:focus, .video-link:hover, .review-value a:hover {
     text-decoration: none !important;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 .social-links {
     display: flex;
     justify-content: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
     gap: var(--space-1);
 }
@@ -1652,6 +1849,8 @@ a:hover, a:focus, .video-link:hover, .review-value a:hover {
     .sidebar.active {
         transform: translateX(0);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     gap: 15px;
 }
 
@@ -1673,11 +1872,15 @@ a:hover, a:focus, .video-link:hover, .review-value a:hover {
     
     .sidebar.active {
         margin-left: 0;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     }
     
     .main-content {
         margin-left: 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
     }
     
@@ -1693,6 +1896,8 @@ a:hover, a:focus, .video-link:hover, .review-value a:hover {
         flex-direction: column-reverse;
         gap: var(--space-2);
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         width: 100%;
     }
     
@@ -1738,13 +1943,17 @@ a:hover, a:focus, .video-link:hover, .review-value a:hover {
     .form-actions {
         flex-direction: column;
         gap: 10px;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     }
     
     .btn {
         width: 100%;
         justify-content: center;
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     
     .progress-steps {
@@ -1803,6 +2012,8 @@ a:hover, a:focus, .video-link:hover, .review-value a:hover {
     }
 }
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 
 @media (max-width: 768px) {
@@ -1819,4 +2030,7 @@ a:hover, a:focus, .video-link:hover, .review-value a:hover {
     }
 }
 
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

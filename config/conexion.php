@@ -81,9 +81,12 @@ try {
     
 } catch(PDOException $e) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     die("Error de conexión: " . $e->getMessage());
 }
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     // En producción, es mejor registrar el error que mostrarlo
     error_log("Error de conexión: " . $e->getMessage());
     die("No se pudo conectar a la base de datos. Por favor, contacte al administrador.");
@@ -111,5 +114,9 @@ if (!function_exists('formatearFecha')) {
         return "$dia_semana $dia de $mes";
     }
 }
+<<<<<<< HEAD
 ?>
 >>>>>>> origin/Master
+=======
+?>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

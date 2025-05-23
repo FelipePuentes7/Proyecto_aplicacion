@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Start session management
 session_start();
 
@@ -183,6 +184,8 @@ function formatDateSpanish($date) {
 }
 ?>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 // Incluir archivo de conexión a la base de datos
 require_once '../../config/conexion.php';
 
@@ -359,12 +362,16 @@ function formatearFecha($fecha) {
 }
 ?>
 
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title>FET - Panel de Tutor</title>
     <link rel="stylesheet" href="/assets/css/tutor_css/inicio_tutor.css">
@@ -382,15 +389,24 @@ function formatearFecha($fecha) {
                     <h1>FET</h1>
 =======
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     <title>FET - Inicio Tutor</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<<<<<<< HEAD
 >>>>>>> origin/Master
     <style>
         :root {
             --primary: #039708;
             --primary-light: #039708;
+=======
+    <style>
+        :root {
+            --primary: #00a63d;
+            --primary-light: #00c44b;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             --secondary: #f8f9fa;
             --success: #28a745;
             --danger: #dc3545;
@@ -505,6 +521,7 @@ function formatearFecha($fecha) {
             width: 20px;
             text-align: center;
         }
+<<<<<<< HEAD
 
   .sidebar {
         display: flex;
@@ -516,6 +533,8 @@ function formatearFecha($fecha) {
         .logout-btn:hover {
         color: white;
         }
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         
         .main-content {
             margin-left: 250px;
@@ -900,7 +919,12 @@ function formatearFecha($fecha) {
             <aside class="sidebar">
                 <div class="sidebar-header">
                     <h3 style="background: none; box-shadow: none; padding: 0; margin: 0;">
+<<<<<<< HEAD
                         <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+=======
+                        <i class="fas fa-graduation-cap"></i>
+                        FET
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                     </h3>
                     <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
                         <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
@@ -909,11 +933,16 @@ function formatearFecha($fecha) {
                         <div style="color: #fff;">
                             <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <?php echo htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido']); ?>
+=======
+                                <?php echo isset($tutor_nombre) && $tutor_nombre ? htmlspecialchars($tutor_nombre) : 'Derek Agmeth Quevedo'; ?>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                             </div>
                             <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
                         </div>
                     </div>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
                 </div>
             </div>
@@ -957,6 +986,8 @@ function formatearFecha($fecha) {
                             <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
                         </div>
                     </div>
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
                 <ul>
                     <li><a href="inicio_tutor.php" class="active"><i class="fas fa-home"></i> Inicio</a></li>
@@ -964,6 +995,7 @@ function formatearFecha($fecha) {
                     <li><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
                     <li><a href="material_tutor.php"><i class="fas fa-book"></i> Material de Apoyo</a></li>
                 </ul>
+<<<<<<< HEAD
 >>>>>>> origin/Master
 
             <!-- Botón de cerrar sesión fijo abajo -->
@@ -971,17 +1003,24 @@ function formatearFecha($fecha) {
                     <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Cerrar sesión
                 </a>
 
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             </aside>
             
             <!-- Main Content -->
             <main class="main-content">
                 <div class="header">
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <h1>Bienvenido, <?php echo htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido']); ?></h1>
 =======
                     <h1>Panel de Control</h1>
                     
 >>>>>>> origin/Master
+=======
+                    <h1>Panel de Control</h1>
+                    
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
                 
                 <!-- Stats -->
@@ -994,6 +1033,7 @@ function formatearFecha($fecha) {
                             <h3><?php echo $total_estudiantes; ?></h3>
                             <p>Estudiantes</p>
                         </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Stashed changes
                     </div>
@@ -1034,6 +1074,8 @@ function formatearFecha($fecha) {
                                 <span class="stat-label">Materiales</span>
                             </div>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                     </div>
                     
                     <div class="stat-card">
@@ -1053,11 +1095,15 @@ function formatearFecha($fecha) {
                         <div class="stat-info">
                             <h3><?php echo $actividades_pendientes; ?></h3>
                             <p>Pendientes de calificar</p>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                         </div>
                     </div>
                 </div>
                 
+<<<<<<< HEAD
 <<<<<<< HEAD
                 <!-- Upcoming Classes -->
                 <div class="dashboard-card classes-card">
@@ -1579,6 +1625,8 @@ function formatearFecha($fecha) {
             document.querySelector('.main-header').prepend(menuToggle);
             
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 <div class="row">
     <div class="col-lg-8 mb-4">
         <!-- Next Class -->
@@ -1700,7 +1748,10 @@ function formatearFecha($fecha) {
         document.addEventListener('DOMContentLoaded', function() {           
             
             // Toggle sidebar on button click
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             menuToggle.addEventListener('click', function() {
                 document.querySelector('.sidebar').classList.toggle('active');
             });
@@ -1716,6 +1767,7 @@ function formatearFecha($fecha) {
                     sidebar.classList.remove('active');
                 }
             });
+<<<<<<< HEAD
 <<<<<<< HEAD
             
             // Set min date for date inputs to today
@@ -1734,13 +1786,18 @@ function formatearFecha($fecha) {
                 e.preventDefault();
                 alert('Esta funcionalidad te permitirá enviar notificaciones a los estudiantes.');
             });
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         });
     </script>
 </body>
 </html>
+<<<<<<< HEAD
 =======
         });
     </script>
 </body>
 </html>
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

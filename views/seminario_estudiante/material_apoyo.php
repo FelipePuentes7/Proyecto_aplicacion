@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 $categories = ['videos', 'documentation', 'tools', 'motivation'];
 $activeCategory = isset($_GET['category']) ? $_GET['category'] : 'videos';
 
@@ -27,6 +28,8 @@ $courses = [
 ];
 
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 session_start();
 require_once '../../config/conexion.php';
 
@@ -93,7 +96,10 @@ $documentation = [
 ];
 
 // Datos de herramientas
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 $tools = [
     [
         'name' => 'Visual Studio Code',
@@ -112,6 +118,7 @@ $tools = [
     ]
 ];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $motivationalVideos = [
     [
@@ -125,6 +132,8 @@ $motivationalVideos = [
 ];
 =======
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 ?>
 
 <!DOCTYPE html>
@@ -133,6 +142,7 @@ $motivationalVideos = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FET - Material de Apoyo</title>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <link rel="stylesheet" href="../../assets/css/material_apoyo.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -203,6 +213,8 @@ $motivationalVideos = [
                         </div>
                     </div>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -1045,12 +1057,16 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
                     <?php endforeach; ?>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             <?php elseif ($activeCategory === 'tools'): ?>
                 <div class="tools-grid">
                     <?php foreach ($tools as $tool): ?>
                         <div class="tool-card">
+<<<<<<< HEAD
 <<<<<<< HEAD
                             <h3><?php echo $tool['name']; ?></h3>
                             <p><?php echo $tool['description']; ?></p>
@@ -1067,6 +1083,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <h3><?php echo $video['title']; ?></h3>
                                 <button class="btn btn-red">Ver video</button>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                             <div class="tool-image">
                                 <img src="../../assets/images/tools/<?php echo strtolower(str_replace(' ', '_', $tool['name'])); ?>.jpg" 
                                      alt="<?php echo htmlspecialchars($tool['name']); ?>"
@@ -1078,12 +1096,16 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <a href="<?php echo htmlspecialchars($tool['link']); ?>" class="material-button" target="_blank">
                                     <i class="fas fa-download"></i> Descargar
                                 </a>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
+<<<<<<< HEAD
 <<<<<<< HEAD
         </div>
     </main>
@@ -1112,12 +1134,15 @@ document.addEventListener('DOMContentLoaded', function() {
 </body>
 </html>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 </div>
     </main>
     
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
+<<<<<<< HEAD
                <p>Email: direccion_software@fet.edu.co</p>
                 <p>Dirección: Kilómetro 12, via Neiva – Rivera</p>
                 <p>Teléfono: 6088674935 – (+57) 3223041567</p>
@@ -1127,6 +1152,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     <a href="https://twitter.com/yosoyfet" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.instagram.com/fetneiva" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.youtube.com/channel/UCv647ftA-d--0F02AqF7eng" target="_blank"><i class="fab fa-youtube"></i></a>
+=======
+                <h3>Fundación Escuela Tecnológica de Neiva</h3>
+                <p>Email: soporte@universidad.edu</p>
+                <p>Dirección: Calle 123, Bogotá</p>
+                <p>Teléfono: +57 123 456 7890</p>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
             
@@ -1135,4 +1172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </footer>
 </body>
 </html>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

@@ -1,0 +1,431 @@
+[2025-05-12 05:01:48] Página calificar_entregas.php cargada
+[2025-05-12 05:01:48] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 05:01:54] Página calificar_entregas.php cargada
+[2025-05-12 05:01:54] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 05:01:54] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 5
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 05:01:54] Procesando 1 calificaciones
+[2025-05-12 05:01:54] Ignorando entrada de prueba
+[2025-05-12 05:01:54] Transacción confirmada exitosamente
+[2025-05-12 05:01:54] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 05:02:03] Página calificar_entregas.php cargada
+[2025-05-12 05:02:03] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 05:02:03] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 05:02:03] Procesando 1 calificaciones
+[2025-05-12 05:02:03] Ignorando entrada de prueba
+[2025-05-12 05:02:03] Transacción confirmada exitosamente
+[2025-05-12 05:02:03] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 05:02:08] Página calificar_entregas.php cargada
+[2025-05-12 05:02:08] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 05:02:08] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 5,0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 05:02:08] Procesando 1 calificaciones
+[2025-05-12 05:02:08] Ignorando entrada de prueba
+[2025-05-12 05:02:08] Transacción confirmada exitosamente
+[2025-05-12 05:02:08] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 05:11:07] Página calificar_entregas.php cargada
+[2025-05-12 05:11:07] Actividad ID: 14, Tutor ID: 1
+[2025-05-12 05:11:07] Entregas encontradas: 0
+[2025-05-12 05:11:38] Página calificar_entregas.php cargada
+[2025-05-12 05:11:38] Actividad ID: 14, Tutor ID: 1
+[2025-05-12 05:11:38] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => sadsada
+                )
+
+        )
+
+)
+
+[2025-05-12 05:11:38] Procesando 1 calificaciones
+[2025-05-12 05:11:38] Ignorando entrada de prueba
+[2025-05-12 05:11:38] Transacción revertida debido a errores
+[2025-05-12 05:11:38] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 05:11:38] Entregas encontradas: 0
+[2025-05-12 05:11:50] Página calificar_entregas.php cargada
+[2025-05-12 05:11:50] Actividad ID: 14, Tutor ID: 1
+[2025-05-12 05:11:50] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 05:11:50] Procesando 1 calificaciones
+[2025-05-12 05:11:50] Ignorando entrada de prueba
+[2025-05-12 05:11:50] Transacción revertida debido a errores
+[2025-05-12 05:11:50] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 05:11:50] Entregas encontradas: 0
+[2025-05-12 05:12:04] Página calificar_entregas.php cargada
+[2025-05-12 05:12:04] Actividad ID: 14, Tutor ID: 1
+[2025-05-12 05:12:04] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 4.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 05:12:04] Procesando 1 calificaciones
+[2025-05-12 05:12:04] Ignorando entrada de prueba
+[2025-05-12 05:12:04] Transacción revertida debido a errores
+[2025-05-12 05:12:04] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 05:12:04] Entregas encontradas: 0
+[2025-05-12 05:13:15] Página calificar_entregas.php cargada
+[2025-05-12 05:13:15] Actividad ID: 14, Tutor ID: 1
+[2025-05-12 05:13:15] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 4.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 05:13:15] Procesando 1 calificaciones
+[2025-05-12 05:13:15] Ignorando entrada de prueba
+[2025-05-12 05:13:15] Transacción revertida debido a errores
+[2025-05-12 05:13:15] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 05:13:15] Entregas encontradas: 0
+[2025-05-12 05:13:19] Página calificar_entregas.php cargada
+[2025-05-12 05:13:19] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 05:13:19] Entregas encontradas: 0
+[2025-05-12 05:16:24] Página calificar_entregas.php cargada
+[2025-05-12 05:16:24] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 05:16:24] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 1.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 05:16:24] Procesando 1 calificaciones
+[2025-05-12 05:16:24] Ignorando entrada de prueba
+[2025-05-12 05:16:24] Transacción revertida debido a errores
+[2025-05-12 05:16:24] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 05:16:24] Entregas encontradas: 0
+[2025-05-12 06:00:09] Página calificar_entregas.php cargada
+[2025-05-12 06:00:09] Actividad ID: 13, Tutor ID: 1
+[2025-05-12 06:00:09] Entregas encontradas: 0
+[2025-05-12 06:09:21] Página calificar_entregas.php cargada
+[2025-05-12 06:09:21] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 06:09:21] Error al cargar las entregas: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.id_usuario' in 'on clause'
+[2025-05-12 06:13:42] Página calificar_entregas.php cargada
+[2025-05-12 06:13:42] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 06:13:42] Error al cargar las entregas: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.id_usuario' in 'on clause'
+[2025-05-12 06:13:51] Página calificar_entregas.php cargada
+[2025-05-12 06:13:51] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 06:13:51] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [test] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 06:13:51] Procesando 1 calificaciones
+[2025-05-12 06:13:51] Ignorando entrada de prueba
+[2025-05-12 06:13:51] Transacción revertida debido a errores: 
+[2025-05-12 06:13:51] Mostrando mensaje de error: No se pudieron guardar las calificaciones. Asegúrate de ingresar valores válidos entre 0.0 y 5.0.
+[2025-05-12 06:13:51] Error al cargar las entregas: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.id_usuario' in 'on clause'
+[2025-05-12 06:19:05] Página calificar_entregas.php cargada
+[2025-05-12 06:19:05] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 06:19:05] Entregas encontradas: 1
+[2025-05-12 06:19:31] Página calificar_entregas.php cargada
+[2025-05-12 06:19:31] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 06:19:31] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [24] => Array
+                (
+                    [calificacion] => 5.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 06:19:31] Procesando 1 calificaciones
+[2025-05-12 06:19:31] Procesando entrega ID: 24
+[2025-05-12 06:19:31] Calificación procesada: 5, Comentario: ...
+[2025-05-12 06:19:31] Calificación guardada exitosamente para entrega 24
+[2025-05-12 06:19:31] Verificación de actualización: Estado = calificado, Calificación = 5.00
+[2025-05-12 06:19:31] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-12 06:19:31] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-12 06:20:00] Página calificar_entregas.php cargada
+[2025-05-12 06:20:00] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 06:20:00] Entregas encontradas: 1
+[2025-05-12 06:20:16] Página calificar_entregas.php cargada
+[2025-05-12 06:20:16] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 06:20:16] Entregas encontradas: 1
+[2025-05-12 14:09:40] Página calificar_entregas.php cargada
+[2025-05-12 14:09:40] Actividad ID: 15, Tutor ID: 1
+[2025-05-12 14:09:40] Entregas encontradas: 0
+[2025-05-12 14:09:52] Página calificar_entregas.php cargada
+[2025-05-12 14:09:52] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 14:09:52] Entregas encontradas: 1
+[2025-05-12 14:12:54] Página calificar_entregas.php cargada
+[2025-05-12 14:12:54] Actividad ID: 16, Tutor ID: 1
+[2025-05-12 14:12:54] Entregas encontradas: 0
+[2025-05-12 14:44:55] Página calificar_entregas.php cargada
+[2025-05-12 14:44:55] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 14:44:55] Entregas encontradas: 1
+[2025-05-12 14:47:11] Página calificar_entregas.php cargada
+[2025-05-12 14:47:11] Actividad ID: 14, Tutor ID: 1
+[2025-05-12 14:47:11] Entregas encontradas: 1
+[2025-05-12 14:47:19] Página calificar_entregas.php cargada
+[2025-05-12 14:47:19] Actividad ID: 14, Tutor ID: 1
+[2025-05-12 14:47:19] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [27] => Array
+                (
+                    [calificacion] => 4.6
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 14:47:19] Procesando 1 calificaciones
+[2025-05-12 14:47:19] Procesando entrega ID: 27
+[2025-05-12 14:47:19] Calificación procesada: 4.6, Comentario: ...
+[2025-05-12 14:47:19] Calificación guardada exitosamente para entrega 27
+[2025-05-12 14:47:19] Verificación de actualización: Estado = calificado, Calificación = 4.60
+[2025-05-12 14:47:19] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-12 14:47:19] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-12 22:08:04] Página calificar_entregas.php cargada
+[2025-05-12 22:08:04] Actividad ID: 15, Tutor ID: 1
+[2025-05-12 22:08:04] Entregas encontradas: 0
+[2025-05-12 23:04:55] Página calificar_entregas.php cargada
+[2025-05-12 23:04:55] Actividad ID: 16, Tutor ID: 1
+[2025-05-12 23:04:55] Entregas encontradas: 0
+[2025-05-12 23:26:37] Página calificar_entregas.php cargada
+[2025-05-12 23:26:37] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 23:26:37] Entregas encontradas: 1
+[2025-05-12 23:26:43] Página calificar_entregas.php cargada
+[2025-05-12 23:26:43] Actividad ID: 19, Tutor ID: 1
+[2025-05-12 23:26:43] Entregas encontradas: 0
+[2025-05-12 23:26:53] Página calificar_entregas.php cargada
+[2025-05-12 23:26:53] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 23:26:53] Entregas encontradas: 1
+[2025-05-12 23:26:56] Página calificar_entregas.php cargada
+[2025-05-12 23:26:56] Actividad ID: 16, Tutor ID: 1
+[2025-05-12 23:26:56] Entregas encontradas: 0
+[2025-05-12 23:27:01] Página calificar_entregas.php cargada
+[2025-05-12 23:27:01] Actividad ID: 16, Tutor ID: 1
+[2025-05-12 23:27:01] Entregas encontradas: 0
+[2025-05-12 23:27:31] Página calificar_entregas.php cargada
+[2025-05-12 23:27:31] Actividad ID: 11, Tutor ID: 1
+[2025-05-12 23:27:31] Entregas encontradas: 1
+[2025-05-12 23:27:34] Página calificar_entregas.php cargada
+[2025-05-12 23:27:34] Actividad ID: 14, Tutor ID: 1
+[2025-05-12 23:27:34] Entregas encontradas: 1
+[2025-05-12 23:27:38] Página calificar_entregas.php cargada
+[2025-05-12 23:27:38] Actividad ID: 15, Tutor ID: 1
+[2025-05-12 23:27:38] Entregas encontradas: 0
+[2025-05-12 23:31:32] Página calificar_entregas.php cargada
+[2025-05-12 23:31:32] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:31:32] Entregas encontradas: 0
+[2025-05-12 23:31:39] Página calificar_entregas.php cargada
+[2025-05-12 23:31:39] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:31:39] Entregas encontradas: 0
+[2025-05-12 23:31:40] Página calificar_entregas.php cargada
+[2025-05-12 23:31:40] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:31:40] Entregas encontradas: 0
+[2025-05-12 23:31:44] Página calificar_entregas.php cargada
+[2025-05-12 23:31:44] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:31:44] Entregas encontradas: 0
+[2025-05-12 23:31:49] Página calificar_entregas.php cargada
+[2025-05-12 23:31:49] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:31:49] Entregas encontradas: 0
+[2025-05-12 23:32:29] Página calificar_entregas.php cargada
+[2025-05-12 23:32:29] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:32:29] Entregas encontradas: 0
+[2025-05-12 23:33:23] Página calificar_entregas.php cargada
+[2025-05-12 23:33:23] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:33:23] Entregas encontradas: 0
+[2025-05-12 23:35:30] Página calificar_entregas.php cargada
+[2025-05-12 23:35:30] Actividad ID: 21, Tutor ID: 1
+[2025-05-12 23:35:30] Entregas encontradas: 0
+[2025-05-12 23:45:31] Página calificar_entregas.php cargada
+[2025-05-12 23:45:31] Actividad ID: 21, Tutor ID: 1
+[2025-05-12 23:45:31] Entregas encontradas: 0
+[2025-05-12 23:46:18] Página calificar_entregas.php cargada
+[2025-05-12 23:46:18] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:46:18] Entregas encontradas: 1
+[2025-05-12 23:46:35] Página calificar_entregas.php cargada
+[2025-05-12 23:46:35] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:46:35] Entregas encontradas: 1
+[2025-05-12 23:47:06] Página calificar_entregas.php cargada
+[2025-05-12 23:47:06] Actividad ID: 22, Tutor ID: 1
+[2025-05-12 23:47:06] Entregas encontradas: 1
+[2025-05-12 23:47:15] Página calificar_entregas.php cargada
+[2025-05-12 23:47:15] Actividad ID: 22, Tutor ID: 1
+[2025-05-12 23:47:15] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [29] => Array
+                (
+                    [calificacion] => 2.0
+                    [comentario] => asdas
+                )
+
+        )
+
+)
+
+[2025-05-12 23:47:15] Procesando 1 calificaciones
+[2025-05-12 23:47:15] Procesando entrega ID: 29
+[2025-05-12 23:47:15] Calificación procesada: 2, Comentario: asdas...
+[2025-05-12 23:47:15] Calificación guardada exitosamente para entrega 29
+[2025-05-12 23:47:15] Verificación de actualización: Estado = calificado, Calificación = 2.00
+[2025-05-12 23:47:15] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-12 23:47:15] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-12 23:47:20] Página calificar_entregas.php cargada
+[2025-05-12 23:47:20] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:47:20] Entregas encontradas: 1
+[2025-05-12 23:47:51] Página calificar_entregas.php cargada
+[2025-05-12 23:47:51] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:47:51] Entregas encontradas: 1
+[2025-05-12 23:48:44] Página calificar_entregas.php cargada
+[2025-05-12 23:48:44] Actividad ID: 23, Tutor ID: 1
+[2025-05-12 23:48:44] Entregas encontradas: 1
+[2025-05-12 23:49:00] Página calificar_entregas.php cargada
+[2025-05-12 23:49:00] Actividad ID: 23, Tutor ID: 1
+[2025-05-12 23:49:00] Entregas encontradas: 1
+[2025-05-12 23:49:16] Página calificar_entregas.php cargada
+[2025-05-12 23:49:16] Actividad ID: 23, Tutor ID: 1
+[2025-05-12 23:49:16] Formulario POST recibido: Array
+(
+    [calificar] => 1
+    [calificaciones] => Array
+        (
+            [30] => Array
+                (
+                    [calificacion] => 4.0
+                    [comentario] => 
+                )
+
+        )
+
+)
+
+[2025-05-12 23:49:16] Procesando 1 calificaciones
+[2025-05-12 23:49:16] Procesando entrega ID: 30
+[2025-05-12 23:49:16] Calificación procesada: 4, Comentario: ...
+[2025-05-12 23:49:16] Calificación guardada exitosamente para entrega 30
+[2025-05-12 23:49:16] Verificación de actualización: Estado = calificado, Calificación = 4.00
+[2025-05-12 23:49:16] Transacción confirmada exitosamente. 1 entregas calificadas.
+[2025-05-12 23:49:16] Redirigiendo a actividades_tutor.php con éxito
+[2025-05-12 23:58:06] Página calificar_entregas.php cargada
+[2025-05-12 23:58:06] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:58:06] Entregas encontradas: 1
+[2025-05-12 23:58:12] Página calificar_entregas.php cargada
+[2025-05-12 23:58:12] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:58:12] Entregas encontradas: 1
+[2025-05-12 23:58:36] Página calificar_entregas.php cargada
+[2025-05-12 23:58:36] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:58:36] Entregas encontradas: 1
+[2025-05-12 23:58:48] Página calificar_entregas.php cargada
+[2025-05-12 23:58:48] Actividad ID: 22, Tutor ID: 1
+[2025-05-12 23:58:48] Entregas encontradas: 1
+[2025-05-12 23:58:57] Página calificar_entregas.php cargada
+[2025-05-12 23:58:57] Actividad ID: 20, Tutor ID: 1
+[2025-05-12 23:58:57] Entregas encontradas: 1
+[2025-05-12 23:59:04] Página calificar_entregas.php cargada
+[2025-05-12 23:59:04] Actividad ID: 22, Tutor ID: 1
+[2025-05-12 23:59:04] Entregas encontradas: 1
+[2025-05-12 23:59:15] Página calificar_entregas.php cargada
+[2025-05-12 23:59:15] Actividad ID: 22, Tutor ID: 1
+[2025-05-12 23:59:15] Entregas encontradas: 1

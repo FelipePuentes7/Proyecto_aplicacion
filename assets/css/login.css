@@ -289,14 +289,20 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .form-container {
     animation: fadeIn 0.5s ease-out;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 @media (max-width: 480px) {
     .modal-content {
         width: 95%;
         padding: 20px;
         margin: 15% auto;
     }
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }

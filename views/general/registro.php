@@ -28,6 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $documento = filter_var($_POST['documento'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         
+        // Añadir después de esta línea:
+$codigo = filter_var($_POST['codigo_estudiante'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+// Añadir esta validación:
+if (!preg_match('/^SOF/i', $codigo)) {
+    throw new Exception('El código de estudiante debe comenzar con "SOF"');
+}
         // Validar documento (solo números)
         if (!preg_match('/^[0-9]+$/', $documento)) {
             throw new Exception('El documento debe contener solo números');

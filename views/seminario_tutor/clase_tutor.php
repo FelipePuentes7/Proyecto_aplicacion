@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Start session management
 session_start();
 
@@ -97,6 +98,8 @@ function getStepStatus($step, $currentStep) {
 }
 ?>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 session_start(); // Mantener por compatibilidad futura
 
 require_once '../../config/conexion.php';
@@ -401,12 +404,16 @@ function formatearFecha($fecha) {
 }
 ?>
 
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title>FET - Subir Videos para Estudiantes</title>
     <link rel="stylesheet" href="../../assets/css/tutor_css/clase_tutor.css">
@@ -640,14 +647,21 @@ function formatearFecha($fecha) {
                                     <a href="#" class="btn btn-primary">Volver al inicio</a>
                                 </div>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     <title>FET - Aula Virtual</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+<<<<<<< HEAD
             --primary: #039708;
             --primary-light: #039708;
+=======
+            --primary: #00a63d;
+            --primary-light: #00c44b;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             --secondary: #f8f9fa;
             --success: #28a745;
             --danger: #dc3545;
@@ -723,6 +737,7 @@ function formatearFecha($fecha) {
             width: 20px;
             text-align: center;
         }
+<<<<<<< HEAD
 
           .sidebar {
         display: flex;
@@ -734,6 +749,8 @@ function formatearFecha($fecha) {
         .logout-btn:hover {
         color: white;
         }
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         
         .main-content {
             margin-left: 250px;
@@ -1098,15 +1115,32 @@ function formatearFecha($fecha) {
     <aside class="sidebar">
         <div class="sidebar-header">
             <h3>
+<<<<<<< HEAD
                <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+=======
+                <i class="fas fa-graduation-cap"></i>
+                FET
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             </h3>
             <div class="tutor-profile">
                 <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
                     <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
                 </div>
                 <div>
+<<<<<<< HEAD
 
                     <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
+=======
+                    <div class="tutor-name">
+                        <?php
+                            $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
+                                ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
+                                : 'Derek Agmeth Quevedo';
+                            echo $nombre_tutor;
+                        ?>
+                    </div>
+                    <div class="tutor-role">Tutor Académico</div>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
         </div>
@@ -1117,6 +1151,7 @@ function formatearFecha($fecha) {
             <li><a href="../seminario_tutor/clase_tutor.php" class="active"><i class="fas fa-video"></i> Aula Virtual</a></li>
             <li><a href="../seminario_tutor/material_tutor.php"><i class="fas fa-book"></i> Material de Apoyo</a></li>
         </ul>
+<<<<<<< HEAD
 
 
             <!-- Botón de cerrar sesión fijo abajo -->
@@ -1125,6 +1160,8 @@ function formatearFecha($fecha) {
                 </a>
 
 
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     </aside>
     
     <!-- Main Content -->
@@ -1182,11 +1219,15 @@ function formatearFecha($fecha) {
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaClaseModal">
                                     <i class="fas fa-plus-circle mr-2"></i> Programar Clase
                                 </button>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                             </div>
                         <?php endif; ?>
                     </div>
                 </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
             </section>
              
@@ -1334,6 +1375,8 @@ function formatearFecha($fecha) {
                         } else {
                             item.style.display = 'none';
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-plus-circle mr-2"></i> Acciones Rápidas
@@ -1995,12 +2038,16 @@ function formatearFecha($fecha) {
                             container.parentNode.insertBefore(customInput, container.nextSibling);
                         } else if (this.value !== 'Otra' && customInput && customInput.classList.contains('custom-platform')) {
                             customInput.remove();
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                         }
                     });
                 });
             }
             
+<<<<<<< HEAD
 <<<<<<< HEAD
             // Update selected students count
             const checkboxes = document.querySelectorAll('input[name="selected_students[]"]');
@@ -2041,6 +2088,8 @@ function formatearFecha($fecha) {
                     !menuToggle.contains(event.target)) {
                     sidebar.classList.remove('active');
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             // Generar modales al cargar la página
             generarModales();
             
@@ -2151,7 +2200,10 @@ function formatearFecha($fecha) {
                     setTimeout(function() {
                         $('#eliminarGrabacionModal').modal('show');
                     }, 200);
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 }
             });
         });

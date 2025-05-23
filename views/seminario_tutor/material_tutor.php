@@ -3,6 +3,7 @@
 session_start();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Mock data for students
 $students = [
     [
@@ -37,6 +38,8 @@ $students = [
     ]
 ];
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 // Include database connection
 require_once '../../config/conexion.php';
 
@@ -63,7 +66,10 @@ try {
 } catch (PDOException $e) {
     $students = [];
 }
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 
 // Mock data for material categories
 $categories = [
@@ -75,6 +81,7 @@ $categories = [
 $currentStep = isset($_GET['step']) ? intval($_GET['step']) : 1;
 $category = isset($_GET['category']) ? $_GET['category'] : '';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // Process form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -112,6 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: material_tutor.php?step=4&category=' . $_SESSION['material']['category']);
         exit;
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 // Variables para manejo de errores y éxito
 $errors = [];
 $success = false;
@@ -544,7 +553,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Si no es AJAX, mostrar error en la página
         $errors['database'] = "Error al guardar el material: " . $e->getMessage();
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     }
 }
 
@@ -552,13 +564,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $materialData = $_SESSION['material'] ?? [];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 // Set default values if not present
 if (!isset($materialData['category']) && isset($_GET['category'])) {
     $materialData['category'] = $_GET['category'];
 }
 
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 // Get selected students data
 $selectedStudents = [];
 if (isset($materialData['selected_students'])) {
@@ -594,10 +612,14 @@ function getPlatformIcon($platform) {
         'other' => 'fas fa-link'
     ];
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 
 >>>>>>> origin/Master
+=======
+
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     return $icons[$platform] ?? $icons['other'];
 }
 
@@ -605,10 +627,14 @@ function getPlatformIcon($platform) {
 function getDocumentIcon($filename) {
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 
 >>>>>>> origin/Master
+=======
+
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     $icons = [
         'pdf' => 'fas fa-file-pdf',
         'doc' => 'fas fa-file-word',
@@ -626,10 +652,13 @@ function getDocumentIcon($filename) {
         'gif' => 'fas fa-file-image'
     ];
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     return $icons[strtolower($extension)] ?? 'fas fa-file';
 }
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 
     return $icons[strtolower($extension)] ?? 'fas fa-file';
 }
@@ -683,7 +712,10 @@ function getVideoThumbnail($url, $platform) {
     // Default placeholder
     return "https://via.placeholder.com/640x360.png?text=Video+Thumbnail";
 }
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -691,6 +723,7 @@ function getVideoThumbnail($url, $platform) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FET - Material de Apoyo</title>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <link rel="stylesheet" href="/assets/css/tutor_css/material_tutor.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -849,14 +882,21 @@ function getVideoThumbnail($url, $platform) {
                                                             <span class="file-name"><?php echo htmlspecialchars($materialData['filename']); ?></span>
                                                             <span class="file-size"><?php echo htmlspecialchars($materialData['filesize']); ?></span>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     <link rel="stylesheet" href="../../assets/css/tutor_css/material_tutor.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+<<<<<<< HEAD
             --primary: #039708;
             --primary-light: #039708;
+=======
+            --primary: #00a63d;
+            --primary-light: #00c44b;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             --secondary: #f8f9fa;
             --success: #28a745;
             --danger: #dc3545;
@@ -925,6 +965,7 @@ function getVideoThumbnail($url, $platform) {
             width: 20px;
             text-align: center;
         }
+<<<<<<< HEAD
 
           .sidebar {
         display: flex;
@@ -936,6 +977,8 @@ function getVideoThumbnail($url, $platform) {
         .logout-btn:hover {
         color: white;
         }
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         
         .main-content {
             margin-left: 250px;
@@ -1640,15 +1683,32 @@ function getVideoThumbnail($url, $platform) {
             <aside class="sidebar">
                 <div class="sidebar-header">
                     <h3>
+<<<<<<< HEAD
                        <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+=======
+                        <i class="fas fa-graduation-cap"></i>
+                        FET
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                     </h3>
                     <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
                         <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
                             <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
                         </div>
                         <div style="color: #fff;">
+<<<<<<< HEAD
 
                             <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
+=======
+                            <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+                                <?php
+                                    $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
+                                        ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
+                                        : 'Derek Agmeth Quevedo';
+                                    echo $nombre_tutor;
+                                ?>
+                            </div>
+                            <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                         </div>
                     </div>
                 </div>
@@ -1658,6 +1718,7 @@ function getVideoThumbnail($url, $platform) {
                     <li><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
                     <li><a href="material_tutor.php" class="active"><i class="fas fa-book"></i> Material de Apoyo</a></li>
                 </ul>
+<<<<<<< HEAD
 
 
             <!-- Botón de cerrar sesión fijo abajo -->
@@ -1666,6 +1727,8 @@ function getVideoThumbnail($url, $platform) {
                 </a>
 
 
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             </aside>
         </div>
 
@@ -2034,12 +2097,16 @@ function getVideoThumbnail($url, $platform) {
                                                         <div class="file-info">
                                                             <span class="file-name">${file.name}</span>
                                                             <span class="file-size">${fileSize}</span>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                                                         </div>
                                                         <button type="button" class="remove-file" id="remove-file">
                                                             <i class="fas fa-times"></i>
                                                         </button>
                                                     </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
                                                     <input type="hidden" name="filename" value="<?php echo htmlspecialchars($materialData['filename']); ?>">
                                                     <input type="hidden" name="filesize" value="<?php echo htmlspecialchars($materialData['filesize']); ?>">
@@ -2250,6 +2317,8 @@ function getVideoThumbnail($url, $platform) {
             </footer>
         </main>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                                                     <input type="hidden" name="filename" value="${file.name}">
                                                     <input type="hidden" name="filesize" value="${fileSize}">
                                                 `;
@@ -2310,7 +2379,10 @@ function getVideoThumbnail($url, $platform) {
                 </section>
             </main>
         </div>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     </div>
 
     <script>
@@ -2319,6 +2391,7 @@ function getVideoThumbnail($url, $platform) {
             const dropzone = document.getElementById('dropzone');
             const fileInput = document.getElementById('document-file');
             const removeFileBtn = document.getElementById('remove-file');
+<<<<<<< HEAD
 <<<<<<< HEAD
             
             if (fileInput) {
@@ -2481,6 +2554,8 @@ function getVideoThumbnail($url, $platform) {
                             item.style.display = 'none';
                         }
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             const videoUrlInput = document.getElementById('video_url');
             const platformSelect = document.getElementById('platform');
             const thumbnailPreview = document.getElementById('thumbnail_preview');
@@ -2619,11 +2694,15 @@ function getVideoThumbnail($url, $platform) {
                         setTimeout(() => {
                             errorMessage.remove();
                         }, 5000);
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                     });
                 });
             }
             
+<<<<<<< HEAD
 <<<<<<< HEAD
             // Update selected students count
             const checkboxes = document.querySelectorAll('input[name="selected_students[]"]');
@@ -2669,6 +2748,10 @@ function getVideoThumbnail($url, $platform) {
             // Resto del código existente...
             // ... existing code ...
 >>>>>>> origin/Master
+=======
+            // Resto del código existente...
+            // ... existing code ...
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         });
     </script>
 </body>

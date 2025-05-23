@@ -122,8 +122,13 @@ function obtenerIcono($tipo) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         :root {
+<<<<<<< HEAD
             --primary: #039708;
             --primary-light: #039708;
+=======
+            --primary: #00a63d;
+            --primary-light: #00c44b;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             --secondary: #f8f9fa;
         }
 
@@ -132,13 +137,18 @@ function obtenerIcono($tipo) {
             font-family: 'Roboto', sans-serif;
         }
 
+<<<<<<< HEAD
 .sidebar {
+=======
+        .sidebar {
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             background-color: var(--primary);
             color: white;
             height: 100vh;
             position: fixed;
             width: 250px;
             z-index: 1000;
+<<<<<<< HEAD
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
             transition: all 0.3s;
         }
@@ -205,6 +215,15 @@ function obtenerIcono($tipo) {
             padding: 20px;
             transition: all 0.3s;
         }
+=======
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         .card {
             border: none;
             border-radius: 10px;
@@ -388,7 +407,11 @@ function obtenerIcono($tipo) {
 
         .status-graded {
             background-color: rgba(40, 167, 69, 0.2);
+<<<<<<< HEAD
             color: #039708;
+=======
+            color: #28a745;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         }
 
         .empty-state {
@@ -413,22 +436,44 @@ function obtenerIcono($tipo) {
     <aside class="sidebar">
         <div class="p-4 sidebar-header">
             <h3 style="background: none; box-shadow: none; padding: 0; margin: 0;">
+<<<<<<< HEAD
                 <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
             </h3>
             <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; border-radius: 8px; padding: 10px 12px;">
+=======
+                <i class="fas fa-graduation-cap mr-2"></i>FET
+            </h3>
+            <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
                     <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
                 </div>
                 <div style="color: #fff;">
+<<<<<<< HEAD
 
                         <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
+=======
+                    <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+                        <?php
+                            $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
+                                ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
+                                : 'Derek Agmeth Quevedo';
+                            echo $nombre_tutor;
+                        ?>
+                    </div>
+                    <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a href="inicio_tutor.php" class="nav-link text-white">
+<<<<<<< HEAD
                     <i class="fas fa-home"></i>Inicio
+=======
+                    <i class="fas fa-home mr-2"></i>Inicio
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </a>
             </li>
             <li class="nav-item">
@@ -447,6 +492,7 @@ function obtenerIcono($tipo) {
                 </a>
             </li>
         </ul>
+<<<<<<< HEAD
 
 
             <!-- Botón de cerrar sesión fijo abajo -->
@@ -455,6 +501,8 @@ function obtenerIcono($tipo) {
                 </a>
 
 
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     </aside>
 
     <!-- Main Content -->
@@ -574,7 +622,11 @@ function obtenerIcono($tipo) {
                                         <span class="submission-status status-graded">Calificado: <?php echo $entrega['calificacion']; ?></span>
                                     <?php endif; ?>
                                     
+<<<<<<< HEAD
                                         <a href="calificar_entregas.php?id=<?php echo $actividad['id']; ?>" class="btn btn-sm btn-primary">
+=======
+                                    <a href="ver_entrega.php?id=<?php echo $entrega['id']; ?>" class="btn btn-sm btn-primary">
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                                         <i class="fas fa-eye mr-1"></i> Ver
                                     </a>
                                 </li>

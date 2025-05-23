@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 <?php
 // Incluir archivo de conexión
 require_once '../../config/conexion.php';
@@ -331,12 +334,16 @@ foreach ($grabaciones as &$grabacion) {
 }
 ?>
 
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title>Grabaciones de Clases - FET</title>
     <link rel="stylesheet" href="../../assets/css/aula_virtual.css">
@@ -430,6 +437,8 @@ foreach ($grabaciones as &$grabacion) {
                     <h3>Título de la clase:</h3>
                     <p>Fecha:</p>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     <title>FET - Aula Virtual</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1031,11 +1040,15 @@ foreach ($grabaciones as &$grabacion) {
                 </div>
                 <div id="videoWrapper">
                     <!-- El contenido del video se insertará aquí dinámicamente -->
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
         </div>
     </main>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     <footer class="bg-green-600 text-white p-4 mt-8">
@@ -1062,10 +1075,13 @@ foreach ($grabaciones as &$grabacion) {
 </body>
 </html>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
+<<<<<<< HEAD
                 <p>Email: direccion_software@fet.edu.co</p>
                 <p>Dirección: Kilómetro 12, via Neiva – Rivera</p>
                 <p>Teléfono: 6088674935 – (+57) 3223041567</p>
@@ -1075,6 +1091,18 @@ foreach ($grabaciones as &$grabacion) {
                     <a href="https://twitter.com/yosoyfet" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.instagram.com/fetneiva" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.youtube.com/channel/UCv647ftA-d--0F02AqF7eng" target="_blank"><i class="fab fa-youtube"></i></a>
+=======
+                <h3>Fundación Escuela Tecnológica de Neiva</h3>
+                <p>Email: soporte@universidad.edu</p>
+                <p>Dirección: Calle 123, Bogotá</p>
+                <p>Teléfono: +57 123 456 7890</p>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
             
@@ -1385,4 +1413,7 @@ foreach ($grabaciones as &$grabacion) {
     </script>
 </body>
 </html>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

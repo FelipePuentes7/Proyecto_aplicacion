@@ -376,8 +376,13 @@ $entregas_pendientes_mostrar = array_filter($entregas, function($entrega) use ($
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
         <style>
             :root {
+<<<<<<< HEAD
                 --primary: #039708;
                 --primary-light: #039708;
+=======
+                --primary: #00a63d;
+                --primary-light: #00c44b;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 --primary-dark: #008f34;
                 --secondary: #f8f9fa;
                 --success: #28a745;
@@ -452,6 +457,7 @@ $entregas_pendientes_mostrar = array_filter($entregas, function($entrega) use ($
                 width: 20px;
                 text-align: center;
             }
+<<<<<<< HEAD
 
               .sidebar {
         display: flex;
@@ -463,6 +469,8 @@ $entregas_pendientes_mostrar = array_filter($entregas, function($entrega) use ($
         .logout-btn:hover {
         color: white;
         }
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             
             .main-content {
                 margin-left: 250px;
@@ -1192,15 +1200,32 @@ $entregas_pendientes_mostrar = array_filter($entregas, function($entrega) use ($
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h3>
+<<<<<<< HEAD
                 <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+=======
+                    <i class="fas fa-graduation-cap"></i>
+                    FET
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </h3>
                 <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
     <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
         <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
     </div>
     <div style="color: #fff;">
+<<<<<<< HEAD
 
      <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
+=======
+        <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+            <?php
+                $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
+                    ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
+                    : 'Derek Agmeth Quevedo';
+                echo $nombre_tutor;
+            ?>
+        </div>
+        <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     </div>
 </div>
             </div>
@@ -1211,6 +1236,7 @@ $entregas_pendientes_mostrar = array_filter($entregas, function($entrega) use ($
                 <li><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
                 <li><a href="material_tutor.php"><i class="fas fa-book"></i> Material de Apoyo</a></li>
             </ul>
+<<<<<<< HEAD
 
 
             <!-- Botón de cerrar sesión fijo abajo -->
@@ -1218,6 +1244,8 @@ $entregas_pendientes_mostrar = array_filter($entregas, function($entrega) use ($
                     <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Cerrar sesión
                 </a>
 
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         </aside>
         
         <!-- Main Content -->

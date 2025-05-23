@@ -207,3 +207,15 @@ CREATE TABLE notificacion_seminario (
     FOREIGN KEY (usuario_id) REFERENCES usuarios_seminario(id) ON DELETE CASCADE
 );
 
+<<<<<<< HEAD
+=======
+CREATE TABLE IF NOT EXISTS entregas_actividad (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    actividad_id INT NOT NULL,
+    estudiante_id INT NOT NULL,
+    comentario TEXT,
+    calificacion DECIMAL(5,2) DEFAULT NULL,
+    estado ENUM('pendiente', 'revisado', 'calificado') DEFAULT 'pendiente',
+    fecha_entrega TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

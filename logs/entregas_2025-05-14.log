@@ -1,0 +1,288 @@
+[2025-05-14 00:07:47] Página entregar_actividad.php cargada
+[2025-05-14 00:07:47] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 00:07:54] Página entregar_actividad.php cargada
+[2025-05-14 00:07:54] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 00:07:54] Formulario recibido: Array
+(
+    [actividad_id] => 50
+    [comentario] => asdsadasdasdasdasd
+)
+
+[2025-05-14 00:07:54] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => images (1) (1).jpeg
+            [full_path] => images (1) (1).jpeg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php5E1F.tmp
+            [error] => 0
+            [size] => 5242
+        )
+
+)
+
+[2025-05-14 00:07:54] Procesando entrega para actividad ID: 50, estudiante ID: 1
+[2025-05-14 00:07:54] Actividad encontrada: Array
+(
+    [id] => 50
+    [titulo] => Investigación 
+)
+
+[2025-05-14 00:07:54] Iniciando transacción para nueva entrega
+[2025-05-14 00:07:54] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-14 00:07:54] Resultado de la inserción: Éxito
+[2025-05-14 00:07:54] ID de entrega creada: 49
+[2025-05-14 00:07:54] Intentando mover archivo de C:\xampp\tmp\php5E1F.tmp a ../../uploads/entregas/49/6823c2baa0ad0_images (1) (1).jpeg
+[2025-05-14 00:07:54] Archivo movido exitosamente
+[2025-05-14 00:07:54] Información del archivo guardada en la base de datos
+[2025-05-14 00:07:54] Transacción confirmada exitosamente
+[2025-05-14 00:20:48] Página entregar_actividad.php cargada
+[2025-05-14 00:20:48] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 00:20:49] Página entregar_actividad.php cargada
+[2025-05-14 00:20:49] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 00:20:49] Formulario recibido: Array
+(
+    [actividad_id] => 47
+    [comentario] => 
+)
+
+[2025-05-14 00:20:49] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+
+)
+
+[2025-05-14 00:20:49] Procesando entrega para actividad ID: 47, estudiante ID: 1
+[2025-05-14 00:20:49] Actividad encontrada: Array
+(
+    [id] => 47
+    [titulo] => Taildwinds quiz
+)
+
+[2025-05-14 00:20:49] Iniciando transacción para nueva entrega
+[2025-05-14 00:20:49] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-14 00:20:49] Resultado de la inserción: Éxito
+[2025-05-14 00:20:49] ID de entrega creada: 50
+[2025-05-14 00:20:49] No se subió ningún archivo o hubo un error: 4
+[2025-05-14 00:20:49] Transacción confirmada exitosamente
+[2025-05-14 00:34:44] Página entregar_actividad.php cargada
+[2025-05-14 00:34:44] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 00:34:45] Página entregar_actividad.php cargada
+[2025-05-14 00:34:45] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 00:34:45] Formulario recibido: Array
+(
+    [actividad_id] => 46
+    [comentario] => 
+)
+
+[2025-05-14 00:34:45] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+
+)
+
+[2025-05-14 00:34:45] Procesando entrega para actividad ID: 46, estudiante ID: 1
+[2025-05-14 00:34:45] Actividad encontrada: Array
+(
+    [id] => 46
+    [titulo] => Claves Primarias y Foráneas 
+)
+
+[2025-05-14 00:34:45] Iniciando transacción para nueva entrega
+[2025-05-14 00:34:45] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-14 00:34:45] Resultado de la inserción: Éxito
+[2025-05-14 00:34:45] ID de entrega creada: 51
+[2025-05-14 00:34:45] No se subió ningún archivo o hubo un error: 4
+[2025-05-14 00:34:45] Transacción confirmada exitosamente
+[2025-05-14 01:02:10] Página entregar_actividad.php cargada
+[2025-05-14 01:02:10] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 01:02:14] Página entregar_actividad.php cargada
+[2025-05-14 01:02:14] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 01:02:14] Formulario recibido: Array
+(
+    [actividad_id] => 52
+    [comentario] => 
+)
+
+[2025-05-14 01:02:14] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => images (1) (1).jpeg
+            [full_path] => images (1) (1).jpeg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php1A3E.tmp
+            [error] => 0
+            [size] => 5242
+        )
+
+)
+
+[2025-05-14 01:02:14] Procesando entrega para actividad ID: 52, estudiante ID: 1
+[2025-05-14 01:02:14] Actividad encontrada: Array
+(
+    [id] => 52
+    [titulo] => asdasd
+)
+
+[2025-05-14 01:02:14] Iniciando transacción para nueva entrega
+[2025-05-14 01:02:14] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-14 01:02:14] Resultado de la inserción: Éxito
+[2025-05-14 01:02:14] ID de entrega creada: 52
+[2025-05-14 01:02:14] Intentando mover archivo de C:\xampp\tmp\php1A3E.tmp a ../../uploads/entregas/52/6823cf760e582_images (1) (1).jpeg
+[2025-05-14 01:02:14] Archivo movido exitosamente
+[2025-05-14 01:02:14] Información del archivo guardada en la base de datos
+[2025-05-14 01:02:14] Transacción confirmada exitosamente
+[2025-05-14 01:05:47] Página entregar_actividad.php cargada
+[2025-05-14 01:05:47] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 01:05:50] Página entregar_actividad.php cargada
+[2025-05-14 01:05:50] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 01:05:50] Formulario recibido: Array
+(
+    [actividad_id] => 53
+    [comentario] => 
+)
+
+[2025-05-14 01:05:50] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => images (1) (1).jpeg
+            [full_path] => images (1) (1).jpeg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php69B8.tmp
+            [error] => 0
+            [size] => 5242
+        )
+
+)
+
+[2025-05-14 01:05:50] Procesando entrega para actividad ID: 53, estudiante ID: 1
+[2025-05-14 01:05:50] Actividad encontrada: Array
+(
+    [id] => 53
+    [titulo] => Actividad 
+)
+
+[2025-05-14 01:05:50] Iniciando transacción para nueva entrega
+[2025-05-14 01:05:50] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-14 01:05:51] Resultado de la inserción: Éxito
+[2025-05-14 01:05:51] ID de entrega creada: 53
+[2025-05-14 01:05:51] Intentando mover archivo de C:\xampp\tmp\php69B8.tmp a ../../uploads/entregas/53/6823d04f00c54_images (1) (1).jpeg
+[2025-05-14 01:05:51] Archivo movido exitosamente
+[2025-05-14 01:05:51] Información del archivo guardada en la base de datos
+[2025-05-14 01:05:51] Transacción confirmada exitosamente
+[2025-05-14 01:12:04] Página entregar_actividad.php cargada
+[2025-05-14 01:12:04] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 01:12:13] Página entregar_actividad.php cargada
+[2025-05-14 01:12:13] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 01:12:13] Formulario recibido: Array
+(
+    [actividad_id] => 54
+    [comentario] => comentario
+)
+
+[2025-05-14 01:12:13] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => images (1) (1).jpeg
+            [full_path] => images (1) (1).jpeg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php3F7F.tmp
+            [error] => 0
+            [size] => 5242
+        )
+
+)
+
+[2025-05-14 01:12:13] Procesando entrega para actividad ID: 54, estudiante ID: 1
+[2025-05-14 01:12:13] Actividad encontrada: Array
+(
+    [id] => 54
+    [titulo] => COSO
+)
+
+[2025-05-14 01:12:13] Iniciando transacción para nueva entrega
+[2025-05-14 01:12:13] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-14 01:12:13] Resultado de la inserción: Éxito
+[2025-05-14 01:12:13] ID de entrega creada: 54
+[2025-05-14 01:12:13] Intentando mover archivo de C:\xampp\tmp\php3F7F.tmp a ../../uploads/entregas/54/6823d1cd65582_images (1) (1).jpeg
+[2025-05-14 01:12:13] Archivo movido exitosamente
+[2025-05-14 01:12:13] Información del archivo guardada en la base de datos
+[2025-05-14 01:12:13] Transacción confirmada exitosamente
+[2025-05-14 08:25:55] Página entregar_actividad.php cargada
+[2025-05-14 08:25:56] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 08:25:57] Página entregar_actividad.php cargada
+[2025-05-14 08:25:57] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-14 08:25:57] Formulario recibido: Array
+(
+    [actividad_id] => 58
+    [comentario] => 
+)
+
+[2025-05-14 08:25:57] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+
+)
+
+[2025-05-14 08:25:57] Procesando entrega para actividad ID: 58, estudiante ID: 1
+[2025-05-14 08:25:57] Actividad encontrada: Array
+(
+    [id] => 58
+    [titulo] => vencido
+)
+
+[2025-05-14 08:25:57] Iniciando transacción para nueva entrega
+[2025-05-14 08:25:57] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-14 08:25:57] Resultado de la inserción: Éxito
+[2025-05-14 08:25:57] ID de entrega creada: 55
+[2025-05-14 08:25:57] No se subió ningún archivo o hubo un error: 4
+[2025-05-14 08:25:57] Transacción confirmada exitosamente

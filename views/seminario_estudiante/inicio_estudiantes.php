@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
@@ -28,6 +29,10 @@ try {
 =======
 // Incluir archivo de conexión
 require_once realpath(__DIR__ . '/../../config/conexion.php');
+=======
+// Incluir archivo de conexión
+require_once '../../config/conexion.php';
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 
 // Iniciar sesión
 session_start();
@@ -248,11 +253,15 @@ function entregaCalificada($db, $actividad_id, $usuario_id) {
     $stmt->bindParam(':usuario_id', $usuario_id);
     $stmt->execute();
     return $stmt->fetchColumn() !== false;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 ?>
 
 <!DOCTYPE html>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <html lang="en">
 <head>
@@ -372,6 +381,8 @@ function entregaCalificada($db, $actividad_id, $usuario_id) {
 </body>
 </html>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -1050,7 +1061,11 @@ function entregaCalificada($db, $actividad_id, $usuario_id) {
         <!-- Progreso del curso -->
         <section class="course-progress mb-4">
             <div class="progress-header">
+<<<<<<< HEAD
                 <h2 class="progress-title">Desarrollo Del Seminario</h2>
+=======
+                <h2 class="progress-title">Seminario - Base de Datos Relacionales</h2>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 <span class="progress-percentage"><?php echo round($porcentaje_progreso); ?>%</span>
             </div>
             <div class="progress">
@@ -1245,6 +1260,7 @@ function entregaCalificada($db, $actividad_id, $usuario_id) {
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
+<<<<<<< HEAD
                 <p>Email: direccion_software@fet.edu.co</p>
                 <p>Dirección: Kilómetro 12, via Neiva – Rivera</p>
                 <p>Teléfono: 6088674935 – (+57) 3223041567</p>
@@ -1254,6 +1270,18 @@ function entregaCalificada($db, $actividad_id, $usuario_id) {
                     <a href="https://twitter.com/yosoyfet" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.instagram.com/fetneiva" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.youtube.com/channel/UCv647ftA-d--0F02AqF7eng" target="_blank"><i class="fab fa-youtube"></i></a>
+=======
+                <h3>Fundación Escuela Tecnológica de Neiva</h3>
+                <p>Email: soporte@universidad.edu</p>
+                <p>Dirección: Calle 123, Neiva</p>
+                <p>Teléfono: +57 123 456 7890</p>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
             
@@ -1313,4 +1341,7 @@ function entregaCalificada($db, $actividad_id, $usuario_id) {
 </script>
 </body>
 </html>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

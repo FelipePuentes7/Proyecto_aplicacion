@@ -105,8 +105,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+<<<<<<< HEAD
             --primary: #039708;
             --primary-light: #039708;
+=======
+            --primary: #1a3b8b;
+            --primary-light: #2a4c9c;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             --secondary: #f8f9fa;
             --success: #28a745;
             --danger: #dc3545;
@@ -179,6 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
             width: 20px;
             text-align: center;
         }
+<<<<<<< HEAD
 
           .sidebar {
         display: flex;
@@ -190,6 +196,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         .logout-btn:hover {
         color: white;
         }
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         
         .main-content {
             margin-left: 250px;
@@ -441,18 +449,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
+<<<<<<< HEAD
             <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
         </div>
         
         <ul>
+=======
+            <h3><img src="../../assets/img/logofet.png" alt="FET Logo"> FET</h3>
+        </div>
+        
+        <ul>z
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             <li><a href="inicio_tutor.php"><i class="fas fa-home"></i> Inicio</a></li>
             <li><a href="actividades_tutor.php" class="active"><i class="fas fa-tasks"></i> Actividades</a></li>
             <li><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
             <li><a href="material_tutor.php"><i class="fas fa-book"></i> Material de Apoyo</a></li>
         </ul>
+<<<<<<< HEAD
 
 
         
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     </div>
     
     <!-- Main Content -->

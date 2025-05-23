@@ -1,12 +1,17 @@
 :root {
     /* Color System */
 <<<<<<< HEAD
+<<<<<<< HEAD
     --primary-color: #1e3c8c;
     --primary-dark: #15295e;
 =======
     --primary-color: #039708;
     --primary-dark: #039708;
 >>>>>>> origin/Master
+=======
+    --primary-color: #1e3c8c;
+    --primary-dark: #15295e;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     --primary-light: #2a50b1;
     --secondary-color: #f8f9fa;
     --accent-color: #3f83f8;

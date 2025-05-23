@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Iniciar sesión
 session_start();
 
@@ -171,6 +172,8 @@ function formatDateSpanish($date) {
     
     return "$day de $month de $year";
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 // Incluir archivo de conexión
 require_once '../../config/conexion.php';
 
@@ -396,7 +399,10 @@ function formatearFecha($fecha) {
     $mes = $meses[date('n', $timestamp) - 1];
     
     return "$dia_semana $dia de $mes";
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 ?>
 
@@ -405,6 +411,7 @@ function formatearFecha($fecha) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title>FET - Actividades del Tutor</title>
     <link rel="stylesheet" href="/assets/css/tutor_css/actividades_tutor.css">
@@ -929,14 +936,21 @@ function formatearFecha($fecha) {
                 input.min = today;
             });
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     <title>FET - Actividades Tutor</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+<<<<<<< HEAD
             --primary: #039708;
             --primary-light: #039708;
+=======
+            --primary: #00a63d;
+            --primary-light: #00c44b;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             --secondary: #f8f9fa;
             --success: #28a745;
             --danger: #dc3545;
@@ -1009,6 +1023,7 @@ function formatearFecha($fecha) {
             width: 20px;
             text-align: center;
         }
+<<<<<<< HEAD
 
           .sidebar {
         display: flex;
@@ -1020,6 +1035,8 @@ function formatearFecha($fecha) {
         .logout-btn:hover {
         color: white;
         }
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         
         .main-content {
             margin-left: 250px;
@@ -1323,8 +1340,11 @@ function formatearFecha($fecha) {
             }
         }
 
+<<<<<<< HEAD
 
         
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     </style>
 </head>
 <body>
@@ -1332,17 +1352,34 @@ function formatearFecha($fecha) {
     <aside class="sidebar">
         <div class="sidebar-header">
             <h3 style="background: none; box-shadow: none; padding: 0; margin: 0;">
+<<<<<<< HEAD
                 <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
 
                
+=======
+                <i class="fas fa-graduation-cap"></i>
+                FET
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             </h3>
             <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
                 <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
                     <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
                 </div>
                 <div style="color: #fff;">
+<<<<<<< HEAD
         
                     <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
+=======
+                    <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+                        <?php
+                            $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
+                                ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
+                                : 'Derek Agmeth Quevedo';
+                            echo $nombre_tutor;
+                        ?>
+                    </div>
+                    <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
         </div>
@@ -1353,6 +1390,7 @@ function formatearFecha($fecha) {
             <li><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
             <li><a href="material_tutor.php"><i class="fas fa-book"></i> Material de Apoyo</a></li>
         </ul>
+<<<<<<< HEAD
 
 
             <!-- Botón de cerrar sesión fijo abajo -->
@@ -1361,6 +1399,8 @@ function formatearFecha($fecha) {
                 </a>
 
 
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     </aside>
     
     <!-- Main Content -->
@@ -1708,11 +1748,15 @@ function formatearFecha($fecha) {
             }
             
             return true;
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         });
     </script>
 </body>
 </html>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 ## Archivo de Configuración para la Conexión a la Base de Datos
@@ -1720,3 +1764,5 @@ function formatearFecha($fecha) {
 Para completar la integración, aquí está el archivo de configuración actualizado para la conexión a la base de datos:
 =======
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

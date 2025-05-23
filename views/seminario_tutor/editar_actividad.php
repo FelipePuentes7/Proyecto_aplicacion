@@ -215,8 +215,13 @@ function formatearTamano($tamano) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         :root {
+<<<<<<< HEAD
             --primary: #039708;
             --primary-light: #039708;
+=======
+            --primary: #00a63d;
+            --primary-light: #00c44b;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             --secondary: #f8f9fa;
         }
         
@@ -233,6 +238,7 @@ function formatearTamano($tamano) {
             width: 250px;
             z-index: 1000;
         }
+<<<<<<< HEAD
 
           .sidebar {
         display: flex;
@@ -244,6 +250,8 @@ function formatearTamano($tamano) {
         .logout-btn:hover {
         color: white;
         }
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
         
         .main-content {
             margin-left: 250px;
@@ -376,7 +384,11 @@ function formatearTamano($tamano) {
     <aside class="sidebar">
         <div class="p-4 sidebar-header">
             <h3 style="background: none; box-shadow: none; padding: 0; margin: 0;">
+<<<<<<< HEAD
                 <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+=======
+                <i class="fas fa-graduation-cap mr-2"></i>FET
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             </h3>
             <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
                 <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
@@ -384,9 +396,20 @@ function formatearTamano($tamano) {
                 </div>
                 <div style="color: #fff;">
                     <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+<<<<<<< HEAD
                         
                     </div>
                     <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
+=======
+                        <?php
+                            $nombre_tutor = isset($tutor['nombre']) && isset($tutor['apellido'])
+                                ? htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido'])
+                                : 'Derek Agmeth Quevedo';
+                            echo $nombre_tutor;
+                        ?>
+                    </div>
+                    <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
         </div>
@@ -412,6 +435,7 @@ function formatearTamano($tamano) {
                 </a>
             </li>
         </ul>
+<<<<<<< HEAD
 
 
             <!-- Botón de cerrar sesión fijo abajo -->
@@ -420,6 +444,8 @@ function formatearTamano($tamano) {
                 </a>
 
 
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     </aside>
 
     <!-- Main Content -->

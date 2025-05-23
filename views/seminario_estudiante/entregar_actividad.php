@@ -525,9 +525,15 @@ function obtenerIconoActividad($tipo) {
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+<<<<<<< HEAD
             --primary: #039708;
             --primary-light: #039708;
             --primary-dark: #039708;
+=======
+            --primary: #00a63d;
+            --primary-light: #00c44b;
+            --primary-dark: #008f34;
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             --secondary: #f8f9fa;
             --success: #28a745;
             --danger: #dc3545;
@@ -1424,7 +1430,32 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     
+<<<<<<< HEAD
             
+=======
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <i class="fas fa-question-circle"></i> ¿Necesitas ayuda?
+                        </div>
+                        <div class="card-body">
+                            <p>Si tienes problemas para realizar la entrega o dudas sobre la actividad, puedes contactar a tu tutor:</p>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="mr-3">
+                                    <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Tutor" class="rounded-circle" width="50" height="50">
+                                </div>
+                                <div>
+                                    <strong><?php echo htmlspecialchars($actividad['tutor_nombre'] ?? 'Tutor'); ?></strong>
+                                    <div class="small text-muted">Tutor del curso</div>
+                                </div>
+                            </div>
+                            
+                            <a href="mailto:tutor@example.com" class="btn btn-outline-primary btn-block">
+                                <i class="fas fa-envelope mr-1"></i> Contactar por correo
+                            </a>
+                        </div>
+                    </div>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
         <?php else: ?>
@@ -1446,6 +1477,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
+<<<<<<< HEAD
                <p>Email: direccion_software@fet.edu.co</p>
                 <p>Dirección: Kilómetro 12, via Neiva – Rivera</p>
                 <p>Teléfono: 6088674935 – (+57) 3223041567</p>
@@ -1455,6 +1487,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     <a href="https://twitter.com/yosoyfet" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.instagram.com/fetneiva" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.youtube.com/channel/UCv647ftA-d--0F02AqF7eng" target="_blank"><i class="fab fa-youtube"></i></a>
+=======
+                <h3>Fundación Escuela Tecnológica de Neiva</h3>
+                <p>Email: soporte@universidad.edu</p>
+                <p>Dirección: Calle 123, Bogotá</p>
+                <p>Teléfono: +57 123 456 7890</p>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
             

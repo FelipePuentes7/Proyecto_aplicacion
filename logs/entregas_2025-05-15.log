@@ -1,0 +1,178 @@
+[2025-05-15 02:30:27] Página entregar_actividad.php cargada
+[2025-05-15 02:30:27] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 02:37:38] Página entregar_actividad.php cargada
+[2025-05-15 02:37:38] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 02:37:40] Página entregar_actividad.php cargada
+[2025-05-15 02:37:40] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 02:37:40] Formulario recibido: Array
+(
+    [actividad_id] => 57
+    [comentario] => 
+)
+
+[2025-05-15 02:37:40] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+
+)
+
+[2025-05-15 02:37:40] Procesando entrega para actividad ID: 57, estudiante ID: 1
+[2025-05-15 02:37:40] Actividad encontrada: Array
+(
+    [id] => 57
+    [titulo] => calificado
+)
+
+[2025-05-15 02:37:40] Iniciando transacción para nueva entrega
+[2025-05-15 02:37:40] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-15 02:37:40] Resultado de la inserción: Éxito
+[2025-05-15 02:37:40] ID de entrega creada: 56
+[2025-05-15 02:37:40] No se subió ningún archivo o hubo un error: 4
+[2025-05-15 02:37:40] Transacción confirmada exitosamente
+[2025-05-15 03:26:12] Página entregar_actividad.php cargada
+[2025-05-15 03:26:12] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 03:28:17] Página entregar_actividad.php cargada
+[2025-05-15 03:28:17] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 03:28:22] Página entregar_actividad.php cargada
+[2025-05-15 03:28:22] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 03:28:22] Formulario recibido: Array
+(
+    [actividad_id] => 56
+    [comentario] => dsdsf
+)
+
+[2025-05-15 03:28:22] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+
+)
+
+[2025-05-15 03:28:22] Procesando entrega para actividad ID: 56, estudiante ID: 1
+[2025-05-15 03:28:22] Actividad encontrada: Array
+(
+    [id] => 56
+    [titulo] => pendiente por calificar
+)
+
+[2025-05-15 03:28:22] Iniciando transacción para nueva entrega
+[2025-05-15 03:28:22] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-15 03:28:22] Resultado de la inserción: Éxito
+[2025-05-15 03:28:22] ID de entrega creada: 57
+[2025-05-15 03:28:22] No se subió ningún archivo o hubo un error: 4
+[2025-05-15 03:28:22] Transacción confirmada exitosamente
+[2025-05-15 07:30:27] Página entregar_actividad.php cargada
+[2025-05-15 07:30:27] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 07:30:37] Página entregar_actividad.php cargada
+[2025-05-15 07:30:37] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 07:30:45] Página entregar_actividad.php cargada
+[2025-05-15 07:30:45] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 07:30:45] Formulario recibido: Array
+(
+    [actividad_id] => 59
+    [comentario] => asd
+)
+
+[2025-05-15 07:30:45] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => images (1) (1).jpeg
+            [full_path] => images (1) (1).jpeg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php3365.tmp
+            [error] => 0
+            [size] => 5242
+        )
+
+)
+
+[2025-05-15 07:30:45] Procesando entrega para actividad ID: 59, estudiante ID: 1
+[2025-05-15 07:30:45] Actividad encontrada: Array
+(
+    [id] => 59
+    [titulo] => Actividad 
+)
+
+[2025-05-15 07:30:45] Iniciando transacción para nueva entrega
+[2025-05-15 07:30:45] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-15 07:30:45] Resultado de la inserción: Éxito
+[2025-05-15 07:30:45] ID de entrega creada: 58
+[2025-05-15 07:30:45] Intentando mover archivo de C:\xampp\tmp\php3365.tmp a ../../uploads/entregas/58/68257c05166ef_images (1) (1).jpeg
+[2025-05-15 07:30:45] Archivo movido exitosamente
+[2025-05-15 07:30:45] Información del archivo guardada en la base de datos
+[2025-05-15 07:30:45] Transacción confirmada exitosamente
+[2025-05-15 07:30:52] Página entregar_actividad.php cargada
+[2025-05-15 07:30:52] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 07:30:59] Página entregar_actividad.php cargada
+[2025-05-15 07:30:59] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 07:30:59] Formulario recibido: Array
+(
+    [actividad_id] => 61
+    [comentario] => asd
+)
+
+[2025-05-15 07:30:59] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => images (1) (1).jpeg
+            [full_path] => images (1) (1).jpeg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php6BEB.tmp
+            [error] => 0
+            [size] => 5242
+        )
+
+)
+
+[2025-05-15 07:30:59] Procesando entrega para actividad ID: 61, estudiante ID: 1
+[2025-05-15 07:30:59] Actividad encontrada: Array
+(
+    [id] => 61
+    [titulo] => Pendiente por entregar
+)
+
+[2025-05-15 07:30:59] Iniciando transacción para nueva entrega
+[2025-05-15 07:30:59] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :estudiante_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-15 07:30:59] Resultado de la inserción: Éxito
+[2025-05-15 07:30:59] ID de entrega creada: 59
+[2025-05-15 07:30:59] Intentando mover archivo de C:\xampp\tmp\php6BEB.tmp a ../../uploads/entregas/59/68257c138f0fd_images (1) (1).jpeg
+[2025-05-15 07:30:59] Archivo movido exitosamente
+[2025-05-15 07:30:59] Información del archivo guardada en la base de datos
+[2025-05-15 07:30:59] Transacción confirmada exitosamente
+[2025-05-15 07:31:44] Página entregar_actividad.php cargada
+[2025-05-15 07:31:44] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 07:44:31] Página entregar_actividad.php cargada
+[2025-05-15 07:44:31] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 14:58:02] Página entregar_actividad.php cargada
+[2025-05-15 14:58:02] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-15 15:25:19] Página entregar_actividad.php cargada
+[2025-05-15 15:25:19] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists

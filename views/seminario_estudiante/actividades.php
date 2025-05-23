@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Iniciar sesión
 session_start();
 
@@ -87,6 +88,8 @@ function calcularTiempoRestante($fecha_limite, $hora_limite) {
         'minutos' => $minutos
     ];
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 // Incluir archivo de conexión
 require_once '../../config/conexion.php';
 
@@ -414,7 +417,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actividad_id'])) {
         escribirLog("Error al entregar actividad: " . $e->getMessage());
         $error_mensaje = "Error al entregar la actividad: " . $e->getMessage();
     }
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
 }
 ?>
 
@@ -423,6 +429,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actividad_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title>Gestión de Actividades - FET</title>
     <link rel="stylesheet" href="../../assets/css/actividades.css">
@@ -530,6 +537,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actividad_id'])) {
                             <?php elseif (isset($actividad['entrega_id']) && $actividad['estado'] === 'pendiente'): ?>
                                 <a href="ver_entrega.php?id=<?php echo $actividad['entrega_id']; ?>" class="view-button">Ver Entrega</a>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     <title>FET - Actividades</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1350,17 +1359,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actividad_id'])) {
                                         </a>
                                     </div>
                                 </div>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                             <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <div class="no-activities">
                     <i class="fas fa-info-circle"></i>
                     <p>No hay actividades <?php echo $filtro !== 'todas' ? 'en esta categoría' : ''; ?> en este momento.</p>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 <div class="empty-state">
                     <?php if ($filtro === 'pendientes'): ?>
                         <i class="fas fa-check-circle"></i>
@@ -1379,11 +1394,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actividad_id'])) {
                         <h3>No hay actividades disponibles</h3>
                         <p>Aún no se han asignado actividades para este curso.</p>
                     <?php endif; ?>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             <?php endif; ?>
         </div>
     </main>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     <footer class="bg-green-600 text-white p-4 mt-8">
@@ -1449,10 +1468,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actividad_id'])) {
 </body>
 </html>
 =======
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
     
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
+<<<<<<< HEAD
               <p>Email: direccion_software@fet.edu.co</p>
                 <p>Dirección: Kilómetro 12, via Neiva – Rivera</p>
                 <p>Teléfono: 6088674935 – (+57) 3223041567</p>
@@ -1462,6 +1484,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actividad_id'])) {
                     <a href="https://twitter.com/yosoyfet" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.instagram.com/fetneiva" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.youtube.com/channel/UCv647ftA-d--0F02AqF7eng" target="_blank"><i class="fab fa-youtube"></i></a>
+=======
+                <h3>Fundación Escuela Tecnológica de Neiva</h3>
+                <p>Email: soporte@universidad.edu</p>
+                <p>Dirección: Calle 123, Bogotá</p>
+                <p>Teléfono: +57 123 456 7890</p>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                 </div>
             </div>
             
@@ -1525,4 +1559,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actividad_id'])) {
 </script>
 </body>
 </html>
+<<<<<<< HEAD
 >>>>>>> origin/Master
+=======
+>>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1

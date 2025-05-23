@@ -1,0 +1,44 @@
+[2025-05-19 03:58:09] Página entregar_actividad.php cargada
+[2025-05-19 03:58:09] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-19 03:58:34] Página entregar_actividad.php cargada
+[2025-05-19 03:58:34] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
+[2025-05-19 03:58:34] Formulario recibido: Array
+(
+    [actividad_id] => 60
+    [comentario] => dasdadasdad
+)
+
+[2025-05-19 03:58:34] Archivos recibidos: Array
+(
+    [archivo] => Array
+        (
+            [name] => material_diagnostics.php
+            [full_path] => material_diagnostics.php
+            [type] => application/octet-stream
+            [tmp_name] => C:\xampp\tmp\phpEB2C.tmp
+            [error] => 0
+            [size] => 11819
+        )
+
+)
+
+[2025-05-19 03:58:34] Procesando entrega para actividad ID: 60, estudiante ID: 7
+[2025-05-19 03:58:34] Actividad encontrada: Array
+(
+    [id] => 60
+    [titulo] => pendiente por calificar
+)
+
+[2025-05-19 03:58:34] Iniciando transacción para nueva entrega
+[2025-05-19 03:58:34] SQL a ejecutar: 
+                    INSERT INTO entregas_actividad (id_actividad, id_estudiante, comentario, estado, fecha_entrega)
+                    VALUES (:actividad_id, :usuario_id, :comentario, 'pendiente', NOW())
+                
+[2025-05-19 03:58:34] Resultado de la inserción: Éxito
+[2025-05-19 03:58:34] ID de entrega creada: 62
+[2025-05-19 03:58:34] Intentando mover archivo de C:\xampp\tmp\phpEB2C.tmp a ../../uploads/entregas/62/682a904a6e2c3_material_diagnostics.php
+[2025-05-19 03:58:34] Archivo movido exitosamente
+[2025-05-19 03:58:34] Información del archivo guardada en la base de datos
+[2025-05-19 03:58:34] Transacción confirmada exitosamente
+[2025-05-19 03:58:41] Página entregar_actividad.php cargada
+[2025-05-19 03:58:41] Error al verificar/crear tablas: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP FOREIGN KEY `entregas_actividad_ibfk_1`; check that it exists
