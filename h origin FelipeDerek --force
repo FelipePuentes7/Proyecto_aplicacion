@@ -1,0 +1,226 @@
+[33mcommit b24b5afb8a306c938aba8cae3fd9754a007bcdee[m[33m ([m[1;31morigin/Derek[m[33m)[m
+Author: Derek-fet <Derek_quevedosa@fet.edu.co>
+Date:   Mon May 5 23:16:47 2025 -0500
+
+    Descripción de los cambios
+
+[33mcommit 4fa69f35aa00a553e239dd4efe18b725e130cafd[m
+Merge: 9ddadc5 5099e17
+Author: Derek-fet <Derek_quevedosa@fet.edu.co>
+Date:   Sat Apr 12 20:02:10 2025 -0500
+
+    Merge remote-tracking branch 'origin/MENDEZ' into Derek
+
+[33mcommit 9ddadc5a8a4f619cb3b61d838ef225cb33cf4c9f[m
+Merge: c9aaa40 2f783e2
+Author: Derek-fet <Derek_quevedosa@fet.edu.co>
+Date:   Sat Apr 12 19:59:59 2025 -0500
+
+    Resolviendo conflictos
+
+[33mcommit 5099e17885be66a85872806bf7a0468abfa6fecc[m
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Sat Apr 12 19:58:10 2025 -0500
+
+    API Y ACTUALIZACION
+
+[33mcommit c9aaa40fa8871ac4ef26857b681f4d634db54fc4[m
+Author: Derek-fet <Derek_quevedosa@fet.edu.co>
+Date:   Sat Apr 12 19:55:13 2025 -0500
+
+    21/04/2025
+
+[33mcommit 2c50efc6ca5f0ddda73b68f27269bd5c80524283[m
+Merge: 2f783e2 963d6fb
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Sat Apr 12 18:50:11 2025 -0500
+
+    Resolviendo conflictos
+
+[33mcommit 2f783e2e8a0e3fd19bdb499aad9401a61e20da12[m
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Sat Apr 12 18:44:46 2025 -0500
+
+    Descripción de los cambios
+
+[33mcommit 963d6fbe1465863471dcd4cc53939be639bcb121[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Apr 6 09:13:45 2025 -0500
+
+    API solicitudes
+
+[33mcommit 319ddb3119b386cf094b756d7396649ed6b90071[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Apr 6 08:41:28 2025 -0500
+
+    API solicitudes
+
+[33mcommit 1b0ec586ae09253e584b48868658d098b2f9b993[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Apr 6 01:31:03 2025 -0500
+
+    API solicitud
+
+[33mcommit 3d0fad3342c76ff2e3ecf9709380ad4b4ddf1b3c[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Apr 6 01:27:39 2025 -0500
+
+    API solicitud
+
+[33mcommit 2f5399076b5d00f2adeaa664b16f8c99ebefacf6[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Apr 6 01:20:15 2025 -0500
+
+    API para solicitudes
+
+[33mcommit 1740b92507d399866ab351f266cf6e68d85ff668[m
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Thu Mar 27 18:54:28 2025 -0500
+
+    error de 6 horas
+
+[33mcommit 835d777e98e75df1ba20d87d4e2658c1051b9fd5[m
+Author: Derek-fet <Derek_quevedosa@fet.edu.co>
+Date:   Thu Mar 27 07:38:29 2025 -0500
+
+    Actualizcion de Seminario
+
+[33mcommit 6721f5396f06fc176bb34d2f32e36967c59e4245[m
+Merge: f02c232 1c58306
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Mon Mar 24 13:16:27 2025 -0500
+
+    Merge remote-tracking branch 'origin/Felipe' into MENDEZ :wq
+
+[33mcommit f02c232c2dfff222c103edd11e67e2fb08d4ac5b[m
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Mon Mar 24 13:05:57 2025 -0500
+
+    24/03
+
+[33mcommit 97a2614c93ed024ebe7705881a5fb5d37b93044e[m
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Sun Mar 16 19:43:16 2025 -0500
+
+    Domingo - 7:45
+
+[33mcommit 1c58306e004c781f24b53f1b70c5dee609e0a0da[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sat Mar 15 23:03:25 2025 -0500
+
+    gestion de proyectos
+
+[33mcommit 920c75d9e1d4e3f1a3d66e4274725367866c2b8b[m
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Sat Mar 15 20:57:28 2025 -0500
+
+    x-x-x-x
+
+[33mcommit ac5124a397c5441be8be776dc8cdbbd033dd26af[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Mar 9 22:00:45 2025 -0500
+
+    funcionalida de aprobacion y gestion de usuarios
+
+[33mcommit 6f4322c9005ac9f983785e629ac34dec5d4709c3[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Feb 23 21:28:28 2025 -0500
+
+    ventana de inicio y aprobacion
+
+[33mcommit cc906bc2826a18b9d6ad12101e32bf0bdeb237ce[m
+Author: Derek-fet <Derek_quevedosa@fet.edu.co>
+Date:   Sat Feb 15 17:51:09 2025 -0500
+
+    asd
+
+[33mcommit eac8e59722b84d21eaed7fc74cc7fc884d666939[m
+Author: Derek-fet <Derek_quevedosa@fet.edu.co>
+Date:   Sat Feb 15 17:33:12 2025 -0500
+
+    asdasd
+
+[33mcommit 375be10e64d273f9757a905bf4222cf747300ac3[m
+Author: Derek-fet <Derek_quevedosa@fet.edu.co>
+Date:   Wed Feb 12 11:48:04 2025 -0500
+
+    Text
+
+[33mcommit 77a5da960ad41b7220c424c473e1d77c49a6d87e[m
+Author: Derek-fet <derek_quevedosa@fet.edu.co>
+Date:   Wed Jan 29 21:11:42 2025 -0500
+
+    Borrador de ESTUDIANTES DE PROYECTOS
+
+[33mcommit 967a9f3afce89097755905e816598a5721131941[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Jan 26 19:02:35 2025 -0500
+
+    aprobar usuarios con admin
+
+[33mcommit c805b855cab2f3059eb09b70f7f098fe94ea56d3[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sun Jan 26 18:40:31 2025 -0500
+
+    base de datos
+
+[33mcommit 7706737bf8f20d9d22a40ddffd1a288941d653a4[m
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Sun Jan 26 16:22:21 2025 -0500
+
+    INICIO DE NAVEGADOR Y FOOTER
+
+[33mcommit da34207cfba0c71e38ab18914275d2a38bbe4ab0[m
+Merge: 019812d 9beb415
+Author: Derek-fet <derek_quevedosa@fet.edu.co>
+Date:   Sat Jan 18 21:31:34 2025 -0500
+
+    Descripción
+
+[33mcommit 0f830817cc0acf2ff376516090e4083908742bfc[m
+Author: JDMENDEZ777 <jesusdavidmendezmendez@gmail.com>
+Date:   Mon Jan 6 20:32:21 2025 -0500
+
+    prueba de los cambios
+
+[33mcommit 9beb4154f32dbc129accc47285336fd6b0d5e53e[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Mon Jan 6 17:15:33 2025 -0500
+
+    interfaz de login y registro
+
+[33mcommit 4173edc1226ea089656104e3a6cefd0190ec0cec[m
+Author: Derek-fet <derek_quevedosa@fet.edu.co>
+Date:   Sat Dec 7 19:06:22 2024 -0500
+
+    first commit
+
+[33mcommit fff4d312d9771ff75dfffea54804fe6cb2a6f204[m
+Author: Derek-fet <derek_quevedosa@fet.edu.co>
+Date:   Sat Dec 7 18:52:43 2024 -0500
+
+    coso
+
+[33mcommit 019812d6e39ef1c0bb33a87b19ca8004b34f642f[m
+Author: Derek-fet <derek_quevedosa@fet.edu.co>
+Date:   Sat Dec 7 18:49:09 2024 -0500
+
+    desc
+
+[33mcommit 0a355580000e747f6389a4f61371da7c3a71977e[m
+Author: Derek-fet <derek_quevedosa@fet.edu.co>
+Date:   Sat Dec 7 18:39:36 2024 -0500
+
+    first commit
+
+[33mcommit 3989d0145c232bd782baf64646e9f48859416998[m
+Author: Derek-fet <derek_quevedosa@fet.edu.co>
+Date:   Sat Dec 7 18:37:12 2024 -0500
+
+    first commit
+
+[33mcommit 6f09c9f0bb0c2bbcc7b92bc74d31fda2b62bcd93[m
+Author: Felipe Puentes <fpuentesrivera@gmail.com>
+Date:   Sat Dec 7 18:04:16 2024 -0500
+
+    j

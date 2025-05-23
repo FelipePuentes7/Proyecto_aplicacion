@@ -2,6 +2,7 @@
 // Start session management
 session_start();
 
+<<<<<<< Updated upstream
 // Mock data for upcoming classes
 $upcomingClasses = [
     [
@@ -35,6 +36,48 @@ $upcomingClasses = [
         'description' => 'Análisis y aplicación de algoritmos de búsqueda.'
     ]
 ];
+=======
+// Iniciar sesión
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['usuario']['id'])) {
+    // Si no hay sesión, redirigir al login
+    header("Location: /views/general/login.php");
+    exit();
+}
+
+// Obtener ID del usuario de la sesión
+$tutor_id = $_SESSION['usuario']['id'];
+
+// Obtener información del tutor
+try {
+    $stmt = $pdo->prepare("
+        SELECT u.id, u.nombre, u.apellido, u.email, u.avatar
+        FROM usuarios u
+        WHERE u.id = :tutor_id
+    ");
+    $stmt->bindParam(':tutor_id', $tutor_id);
+    $stmt->execute();
+    $tutor = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($tutor) {
+        // Actualizar el avatar en la sesión si es diferente al de la base de datos
+        if (isset($tutor['avatar']) && (!isset($_SESSION['usuario']['avatar']) || $_SESSION['usuario']['avatar'] !== $tutor['avatar'])) {
+            $_SESSION['usuario']['avatar'] = $tutor['avatar'];
+        }
+    }
+} catch (PDOException $e) {
+    // Si hay un error, usar datos de ejemplo
+    $tutor = [
+        'id' => $tutor_id,
+        'nombre' => $_SESSION['usuario']['nombre'],
+        'apellido' => $_SESSION['usuario']['apellido'],
+        'email' => $_SESSION['usuario']['email'],
+        'avatar' => $_SESSION['usuario']['avatar'] ?? null
+    ];
+}
+>>>>>>> Stashed changes
 
 // Mock data for assigned tasks
 $assignedTasks = [
@@ -146,6 +189,7 @@ function formatDateSpanish($date) {
     <title>FET - Panel de Tutor</title>
     <link rel="stylesheet" href="/assets/css/tutor_css/inicio_tutor.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -156,6 +200,534 @@ function formatDateSpanish($date) {
                 <div class="logo">
                     <i class="fas fa-graduation-cap"></i>
                     <h1>FET</h1>
+=======
+    <style>
+        :root {
+            --primary: #039708;
+            --primary-light: #039708;
+            --secondary: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --dark: #343a40;
+            --light: #f8f9fa;
+        }
+
+        .sidebar {
+            background-color: var(--primary);
+        }
+        .sidebar-header h3,
+        .header h1,
+        .section-title i,
+        .card-header,
+        .btn-primary,
+        .btn-primary:focus,
+        .btn-primary:active,
+        .btn-primary:visited,
+        .class-platform,
+        .class-link,
+        .activity-icon,
+        .view-all {
+            background-color: var(--primary) !important;
+            color: #fff !important;
+            border-color: var(--primary) !important;
+        }
+        .btn-primary:hover,
+        .class-link:hover {
+            background-color: var(--primary-light) !important;
+            border-color: var(--primary-light) !important;
+            color: #fff !important;
+        }
+        .sidebar ul li a:hover, .sidebar ul li a.active {
+            background-color: var(--primary-light) !important;
+            border-left: 4px solid white;
+        }
+        .activity-icon {
+            background-color: rgba(0, 166, 61, 0.1) !important;
+            color: var(--primary) !important;
+        }
+        .view-all {
+            color: var(--primary) !important;
+            background-color: #f8f9fa !important;
+        }
+        .view-all:hover {
+            background-color: #e9ecef !important;
+            color: var(--primary) !important;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar {
+            background-color: var(--primary);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            width: 250px;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-header img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar ul li {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar ul li a {
+            color: white;
+            padding: 15px 20px;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar ul li a:hover, .sidebar ul li a.active {
+            background-color: var(--primary-light);
+            border-left: 4px solid white;
+        }
+        
+        .sidebar ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+  .sidebar {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #039708; /* o tu color verde institucional */
+        }
+
+        .logout-btn:hover {
+        color: white;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .header h1 {
+            color: #222 !important;
+            background: none !important;
+            box-shadow: none !important;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .user-profile span {
+            font-weight: 500;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .stat-icon.students {
+            background-color: rgba(23, 162, 184, 0.2);
+            color: var(--info);
+        }
+        
+        .stat-icon.activities {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+        }
+        
+        .stat-icon.pending {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: var(--warning);
+        }
+        
+        .stat-info h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .stat-info p {
+            margin: 5px 0 0;
+            color: #6c757d;
+        }
+        
+        .section-title {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+            padding: 15px 20px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .next-class {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .class-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .class-title {
+            font-weight: 500;
+            color: var(--dark);
+            margin: 0;
+        }
+        
+        .class-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .class-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .class-platform {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 15px;
+        }
+        
+        .class-time {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .class-link {
+            display: block;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .class-link:hover {
+            background-color: var(--primary-light);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .activity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(26, 59, 139, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .activity-info {
+            flex-grow: 1;
+        }
+        
+        .activity-title {
+            font-weight: 500;
+            color: var(--dark);
+            margin: 0 0 5px;
+        }
+        
+        .activity-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .activity-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            border-color: var(--primary-light);
+        }
+        
+        .submission-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .submission-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .submission-item:last-child {
+            border-bottom: none;
+        }
+        
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .submission-info {
+            flex-grow: 1;
+        }
+        
+        .student-name {
+            font-weight: 500;
+            color: var (--dark);
+            margin: 0 0 5px;
+        }
+        
+        .submission-activity {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .submission-status {
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-graded {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+        }
+        
+        .submission-actions {
+            margin-left: 10px;
+        }
+        
+        .view-all {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .view-all:hover {
+            background-color: #e9ecef;
+            text-decoration: none;
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+            
+            .sidebar.active {
+                margin-left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                background: none;
+                border: none;
+                color: var(--primary);
+                font-size: 1.5rem;
+                cursor: pointer;
+                z-index: 1001;
+            }
+            
+            .main-header {
+                padding-left: 60px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .sidebar-header {
+            background: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3 style="background: none; box-shadow: none; padding: 0; margin: 0;">
+                        <img src="/assets/images/logofet.png" alt="FET Logo" style="width: 100px;">
+                    </h3>
+                    <div class="tutor-profile" style="margin-top: 15px; display: flex; align-items: center; background: var(--primary); border-radius: 8px; padding: 10px 12px;">
+                        <div style="background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                            <i class="fas fa-user-tie" style="color: var(--primary); font-size: 1.5rem;"></i>
+                        </div>
+                        <div style="color: #fff;">
+                            <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+                                <?php echo htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido']); ?>
+                            </div>
+                            <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
+                        </div>
+                    </div>
+>>>>>>> Stashed changes
                 </div>
             </div>
             
@@ -166,6 +738,7 @@ function formatDateSpanish($date) {
                     <li ><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
                     <li><a href="material_tutor.php"><i class="fas fa-file-alt"></i> Material de Apoyo</a></li>
                 </ul>
+<<<<<<< Updated upstream
             </nav>
 
             <div class="sidebar-footer">
@@ -190,6 +763,32 @@ function formatDateSpanish($date) {
                 <div class="dashboard-card stats-card">
                     <div class="card-header">
                         <h3>Resumen</h3>
+=======
+
+            <!-- Botón de cerrar sesión fijo abajo -->
+                <a href="/views/general/login.php" class="logout-btn" style="margin-top: auto; padding: 15px 20px; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Cerrar sesión
+                </a>
+
+            </aside>
+            
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="header">
+                    <h1>Bienvenido, <?php echo htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido']); ?></h1>
+                </div>
+                
+                <!-- Stats -->
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon students">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3><?php echo $total_estudiantes; ?></h3>
+                            <p>Estudiantes</p>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
                     <div class="stats-container">
                         <div class="stat-item">
