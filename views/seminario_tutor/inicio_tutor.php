@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // Start session management
 session_start();
 
@@ -181,11 +182,190 @@ function formatDateSpanish($date) {
     return "$day de $month de $year";
 }
 ?>
+=======
+// Incluir archivo de conexión a la base de datos
+require_once '../../config/conexion.php';
+
+// Obtener el ID del tutor
+$tutor_id = 1; // En un sistema real, esto vendría de la sesión
+
+// Obtener estadísticas
+try {
+    // Total de estudiantes asignados al tutor (método correcto)
+    // Buscamos estudiantes matriculados en actividades de este tutor
+    $stmt = $pdo->prepare("
+        SELECT COUNT(DISTINCT id) as total 
+        FROM usuarios 
+        WHERE rol = 'estudiante' AND 
+        id IN (
+            SELECT DISTINCT id_estudiante 
+            FROM entregas_actividad ea 
+            JOIN actividades a ON ea.id_actividad = a.id 
+            WHERE a.tutor_id = :tutor_id
+        )
+    ");
+    $stmt->bindParam(':tutor_id', $tutor_id);
+    $stmt->execute();
+    $total_estudiantes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    
+    // Si no hay estudiantes, establecer un valor predeterminado
+    if (!$total_estudiantes) {
+        $total_estudiantes = 0;
+    }
+    
+    // Total de actividades creadas por este tutor
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*) as total
+        FROM actividades
+        WHERE tutor_id = :tutor_id
+    ");
+    $stmt->bindParam(':tutor_id', $tutor_id);
+    $stmt->execute();
+    $total_actividades = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    
+    // Actividades pendientes de calificar
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*) as total
+        FROM entregas_actividad ea
+        JOIN actividades a ON ea.id_actividad = a.id
+        WHERE a.tutor_id = :tutor_id AND ea.estado = 'pendiente'
+    ");
+    $stmt->bindParam(':tutor_id', $tutor_id);
+    $stmt->execute();
+    $actividades_pendientes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    
+    // Próxima clase
+    $stmt = $pdo->prepare("
+        SELECT id, titulo, fecha, hora, duracion, plataforma, enlace
+        FROM clases_virtuales
+        WHERE tutor_id = :tutor_id AND fecha >= CURDATE()
+        ORDER BY fecha ASC, hora ASC
+        LIMIT 1
+    ");
+    $stmt->bindParam(':tutor_id', $tutor_id);
+    $stmt->execute();
+    $proxima_clase = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+} catch (PDOException $e) {
+    // Si hay un error, registrar el error para depuración y usar datos de ejemplo
+    error_log("Error en las estadísticas: " . $e->getMessage());
+    $total_estudiantes = 0;
+    $total_actividades = 0;
+    $actividades_pendientes = 0;
+    $proxima_clase = null;
+}
+
+// Obtener últimas entregas
+try {
+    $stmt = $pdo->prepare("
+        SELECT ea.id, ea.fecha_entrega, ea.comentario, ea.calificacion,
+               a.titulo as actividad_titulo,
+               e.nombre as estudiante_nombre, e.avatar as estudiante_avatar
+        FROM entregas_actividad ea
+        JOIN actividades a ON ea.actividad_id = a.id
+        JOIN estudiantes e ON ea.estudiante_id = e.id
+        WHERE a.tutor_id = :tutor_id
+        ORDER BY ea.fecha_entrega DESC
+        LIMIT 5
+    ");
+    $stmt->bindParam(':tutor_id', $tutor_id);
+    $stmt->execute();
+    $ultimas_entregas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+} catch (PDOException $e) {
+    // Si hay un error, usar datos de ejemplo
+    $ultimas_entregas = [
+        [
+            'id' => 1,
+            'fecha_entrega' => date('Y-m-d H:i:s', strtotime('-1 day')),
+            'comentario' => 'Aquí está mi entrega',
+            'calificacion' => null,
+            'actividad_titulo' => 'Diseño de Base de Datos',
+            'estudiante_nombre' => 'Ana García',
+            'estudiante_avatar' => 'https://randomuser.me/api/portraits/women/1.jpg'
+        ],
+        [
+            'id' => 2,
+            'fecha_entrega' => date('Y-m-d H:i:s', strtotime('-2 days')),
+            'comentario' => 'Completé todas las consultas',
+            'calificacion' => 4.5,
+            'actividad_titulo' => 'Consultas SQL',
+            'estudiante_nombre' => 'Carlos Rodríguez',
+            'estudiante_avatar' => 'https://randomuser.me/api/portraits/men/2.jpg'
+        ],
+        [
+            'id' => 3,
+            'fecha_entrega' => date('Y-m-d H:i:s', strtotime('-3 days')),
+            'comentario' => 'Adjunto mi trabajo de normalización',
+            'calificacion' => null,
+            'actividad_titulo' => 'Normalización',
+            'estudiante_nombre' => 'María López',
+            'estudiante_avatar' => 'https://randomuser.me/api/portraits/women/3.jpg'
+        ]
+    ];
+}
+
+// Obtener próximas actividades
+try {
+    $stmt = $pdo->prepare("
+        SELECT id, titulo, descripcion, fecha_limite, hora_limite
+        FROM actividades
+        WHERE tutor_id = :tutor_id AND fecha_limite >= CURDATE()
+        ORDER BY fecha_limite ASC, hora_limite ASC
+        LIMIT 3
+    ");
+    $stmt->bindParam(':tutor_id', $tutor_id);
+    $stmt->execute();
+    $proximas_actividades = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+} catch (PDOException $e) {
+    // Si hay un error, usar datos de ejemplo
+    $proximas_actividades = [
+        [
+            'id' => 1,
+            'titulo' => 'Diseño de Base de Datos',
+            'descripcion' => 'Crear un diagrama ER para un sistema de gestión de biblioteca',
+            'fecha_limite' => date('Y-m-d', strtotime('+3 days')),
+            'hora_limite' => '23:59:00'
+        ],
+        [
+            'id' => 2,
+            'titulo' => 'Consultas SQL Básicas',
+            'descripcion' => 'Realizar consultas SELECT con filtros y ordenamiento',
+            'fecha_limite' => date('Y-m-d', strtotime('+5 days')),
+            'hora_limite' => '23:59:00'
+        ],
+        [
+            'id' => 3,
+            'titulo' => 'Normalización',
+            'descripcion' => 'Aplicar las formas normales a un esquema de base de datos',
+            'fecha_limite' => date('Y-m-d', strtotime('+7 days')),
+            'hora_limite' => '23:59:00'
+        ]
+    ];
+}
+
+// Formatear fecha para mostrar
+function formatearFecha($fecha) {
+    $timestamp = strtotime($fecha);
+    $dias_semana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    $meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    
+    $dia_semana = $dias_semana[date('w', $timestamp)];
+    $dia = date('j', $timestamp);
+    $mes = $meses[date('n', $timestamp) - 1];
+    
+    return "$dia_semana $dia de $mes";
+}
+?>
+
+>>>>>>> origin/Master
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>FET - Panel de Tutor</title>
     <link rel="stylesheet" href="/assets/css/tutor_css/inicio_tutor.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -201,6 +381,12 @@ function formatDateSpanish($date) {
                     <i class="fas fa-graduation-cap"></i>
                     <h1>FET</h1>
 =======
+=======
+    <title>FET - Inicio Tutor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+>>>>>>> origin/Master
     <style>
         :root {
             --primary: #039708;
@@ -722,6 +908,7 @@ function formatDateSpanish($date) {
                         </div>
                         <div style="color: #fff;">
                             <div style="font-weight: 500; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+<<<<<<< HEAD
                                 <?php echo htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido']); ?>
                             </div>
                             <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Académico</div>
@@ -764,6 +951,20 @@ function formatDateSpanish($date) {
                     <div class="card-header">
                         <h3>Resumen</h3>
 =======
+=======
+
+                            </div>
+                            <div style="font-size: 0.95em; color: #e0e0e0;">Tutor Seminario</div>
+                        </div>
+                    </div>
+                </div>
+                <ul>
+                    <li><a href="inicio_tutor.php" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="actividades_tutor.php"><i class="fas fa-tasks"></i> Actividades</a></li>
+                    <li><a href="clase_tutor.php"><i class="fas fa-video"></i> Aula Virtual</a></li>
+                    <li><a href="material_tutor.php"><i class="fas fa-book"></i> Material de Apoyo</a></li>
+                </ul>
+>>>>>>> origin/Master
 
             <!-- Botón de cerrar sesión fijo abajo -->
                 <a href="/views/general/login.php" class="logout-btn" style="margin-top: auto; padding: 15px 20px; color: rgba(255, 255, 255, 0.8); text-decoration: none; display: flex; align-items: center;">
@@ -775,7 +976,12 @@ function formatDateSpanish($date) {
             <!-- Main Content -->
             <main class="main-content">
                 <div class="header">
+<<<<<<< HEAD
                     <h1>Bienvenido, <?php echo htmlspecialchars($tutor['nombre'] . ' ' . $tutor['apellido']); ?></h1>
+=======
+                    <h1>Panel de Control</h1>
+                    
+>>>>>>> origin/Master
                 </div>
                 
                 <!-- Stats -->
@@ -788,6 +994,7 @@ function formatDateSpanish($date) {
                             <h3><?php echo $total_estudiantes; ?></h3>
                             <p>Estudiantes</p>
                         </div>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
                     </div>
                     <div class="stats-container">
@@ -826,10 +1033,32 @@ function formatDateSpanish($date) {
                                 <span class="stat-value">12</span>
                                 <span class="stat-label">Materiales</span>
                             </div>
+=======
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon activities">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3><?php echo $total_actividades; ?></h3>
+                            <p>Actividades</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3><?php echo $actividades_pendientes; ?></h3>
+                            <p>Pendientes de calificar</p>
+>>>>>>> origin/Master
                         </div>
                     </div>
                 </div>
                 
+<<<<<<< HEAD
                 <!-- Upcoming Classes -->
                 <div class="dashboard-card classes-card">
                     <div class="card-header">
@@ -1349,6 +1578,129 @@ function formatDateSpanish($date) {
             menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             document.querySelector('.main-header').prepend(menuToggle);
             
+=======
+                <div class="row">
+    <div class="col-lg-8 mb-4">
+        <!-- Next Class -->
+        <div class="card-body">
+    <?php if ($proxima_clase): ?>
+        <div class="next-class">
+            <div class="class-header">
+                <h5 class="class-title"><?php echo htmlspecialchars($proxima_clase['titulo']); ?></h5>
+                <span class="class-date">
+                    <?php echo formatearFecha($proxima_clase['fecha']); ?>
+                </span>
+            </div>
+            <div class="class-info" style="display: flex; flex-wrap: wrap; gap: 15px;">
+                <span class="class-platform">
+                    <i class="fas fa-video"></i> <?php echo htmlspecialchars($proxima_clase['plataforma']); ?>
+                </span>
+                <span class="class-time">
+                    <i class="far fa-clock"></i>
+                    <?php echo date('H:i', strtotime($proxima_clase['hora'])); ?> -
+                    <?php
+                        $inicio = strtotime($proxima_clase['hora']);
+                        $fin = $inicio + ($proxima_clase['duracion'] * 60);
+                        echo date('H:i', $fin);
+                    ?>
+                    (<?php echo $proxima_clase['duracion']; ?> min)
+                </span>
+                <span class="class-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <?php echo date('d/m/Y', strtotime($proxima_clase['fecha'])); ?>
+                </span>
+            </div>
+            <div style="margin-top: 10px;">
+                <a href="<?php echo htmlspecialchars($proxima_clase['enlace']); ?>" class="class-link" target="_blank">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Iniciar clase
+                </a>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="next-class">
+            <div class="class-header">
+                <h5 class="class-title">No hay clases programadas</h5>
+            </div>
+            <p class="text-muted">No tienes clases programadas próximamente.</p>
+            <a href="clase_tutor.php" class="class-link">
+                <i class="fas fa-plus mr-2"></i> Programar una clase
+            </a>
+        </div>
+    <?php endif; ?>
+</div>
+        <!-- Próximas Actividades -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-calendar-alt mr-2"></i> Próximas Actividades
+            </div>
+            <div class="card-body">
+    <?php if (count($proximas_actividades) > 0): ?>
+        <ul class="activity-list">
+            <?php foreach ($proximas_actividades as $actividad): ?>
+                <li class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="activity-info">
+                        <h5 class="activity-title"><?php echo htmlspecialchars($actividad['titulo']); ?></h5>
+                        <span class="activity-date">
+                            Fecha límite: <?php echo date('d/m/Y', strtotime($actividad['fecha_limite'])); ?>
+                        </span>
+                    </div>
+                    <div class="activity-actions">
+                        <a href="ver_actividad.php?id=<?php echo $actividad['id']; ?>" class="btn btn-sm btn-primary">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <a href="actividades_tutor.php" class="view-all mt-3">
+            Ver todas las actividades
+        </a>
+    <?php else: ?>
+        <p class="text-center text-muted">No hay actividades próximas.</p>
+    <?php endif; ?>
+</div>
+        </div>
+    </div>
+    <!-- Acciones rápidas a la derecha en una columna más pequeña -->
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <i class="fas fa-bolt mr-2"></i> Acciones Rápidas
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="actividades_tutor.php" class="btn btn-primary btn-block">
+                            <i class="fas fa-plus mr-2"></i> Nueva Actividad
+                        </a>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <a href="clase_tutor.php" class="btn btn-primary btn-block">
+                            <i class="fas fa-video mr-2"></i> Programar Clase
+                        </a>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <a href="material_tutor.php" class="btn btn-primary btn-block">
+                            <i class="fas fa-book mr-2"></i> Compartir Material
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            </main>
+        </div>
+    </div>
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {           
+            
+            // Toggle sidebar on button click
+>>>>>>> origin/Master
             menuToggle.addEventListener('click', function() {
                 document.querySelector('.sidebar').classList.toggle('active');
             });
@@ -1364,6 +1716,7 @@ function formatDateSpanish($date) {
                     sidebar.classList.remove('active');
                 }
             });
+<<<<<<< HEAD
             
             // Set min date for date inputs to today
             const today = new Date().toISOString().split('T')[0];
@@ -1385,3 +1738,9 @@ function formatDateSpanish($date) {
     </script>
 </body>
 </html>
+=======
+        });
+    </script>
+</body>
+</html>
+>>>>>>> origin/Master

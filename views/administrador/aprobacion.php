@@ -381,10 +381,14 @@ try {
 
     <footer>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <p>&copy; 2025 Sistema de Gestión Académica. Todos los derechos reservados.</p>
 =======
         
 >>>>>>> origin/Felipe
+=======
+        
+>>>>>>> origin/Master
     </footer>
 
     <script>

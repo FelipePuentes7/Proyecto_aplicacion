@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Base Styles & Variables */
 :root {
     /* Color System */
@@ -109,11 +110,97 @@ button {
 .sidebar-header {
     padding: var(--space-2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+=======
+:root {
+    --primary: #039708;
+    --primary-light: #039708;
+    --secondary: #f8f9fa;
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --info: #00c44b;
+    --dark: #343a40;
+    --light: #f8f9fa;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: var(--primary);
+    color: white;
+    height: 100vh;
+    position: fixed;
+    width: 250px;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0,166,61,0.08); /* verde muy claro */
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background-color: rgba(0,166,61,0.08);
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-header img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar ul li a {
+    color: white;
+    padding: 15px 20px;
+    display: block;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.sidebar ul li a:hover, .sidebar ul li a.active {
+    background-color: var(--primary);
+    border-left: 4px solid white;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+>>>>>>> origin/Master
 }
 
 .logo {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     gap: var(--space-1);
 }
 
@@ -148,10 +235,55 @@ button {
 
 .sidebar-nav ul li a i {
     margin-right: var(--space-1);
+=======
+}
+
+.logo i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 15px 0;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav ul li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-nav ul li a {
+    color: white;
+    padding: 15px 20px;
+    display: block;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.sidebar-nav ul li a:hover, .sidebar-nav ul li.active a {
+    background-color: var(--primary);
+    border-left: 4px solid white;
+}
+
+.sidebar-nav ul li a i {
+    margin-right: 10px;
+>>>>>>> origin/Master
     width: 20px;
     text-align: center;
 }
 
+<<<<<<< HEAD
 .sidebar-nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -271,10 +403,99 @@ button {
     align-items: center;
     text-align: center;
     height: 100%;
+=======
+.sidebar-footer {
+    padding: 20px;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.logout-btn {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logout-btn i {
+    margin-right: 10px;
+}
+
+/* Main Content Styles */
+.main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    transition: all 0.3s;
+}
+
+.main-header {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,166,61,0.08); /* verde muy claro */
+}
+
+.main-header h2 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+.subtitle {
+    color: #6c757d;
+    margin: 0;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.notification-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.content-section {
+    padding: 20px;
+}
+
+/* Category Cards */
+.material-categories {
+    margin-bottom: 30px;
+}
+
+.material-categories h3 {
+    margin-bottom: 20px;
+    color: var(--dark);
+}
+
+.category-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.category-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1;
+    min-width: 250px;
+    text-decoration: none;
+    color: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+>>>>>>> origin/Master
 }
 
 .category-card:hover {
     transform: translateY(-5px);
+<<<<<<< HEAD
     box-shadow: var(--shadow-lg);
 }
 
@@ -288,6 +509,21 @@ button {
     align-items: center;
     justify-content: center;
     margin-bottom: var(--space-2);
+=======
+    box-shadow: 0 5px 15px rgba(0,166,61,0.15); /* verde claro */
+}
+
+.category-icon {
+    background-color: var(--primary);
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+>>>>>>> origin/Master
 }
 
 .category-icon i {
@@ -295,6 +531,7 @@ button {
 }
 
 .category-card h4 {
+<<<<<<< HEAD
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: var(--space-1);
@@ -304,10 +541,21 @@ button {
 .category-card p {
     color: var(--text-medium);
     font-size: 0.9rem;
+=======
+    margin: 0 0 10px 0;
+    color: var(--primary);
+}
+
+.category-card p {
+    margin: 0;
+    text-align: center;
+    color: #6c757d;
+>>>>>>> origin/Master
 }
 
 /* Upload Container */
 .upload-container {
+<<<<<<< HEAD
     background-color: var(--bg-white);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
@@ -326,21 +574,47 @@ button {
     display: flex;
     align-items: center;
     gap: var(--space-1);
+=======
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,166,61,0.08); /* verde muy claro */
+}
+
+.upload-header {
+    margin-bottom: 20px;
+}
+
+.upload-header h3 {
+    margin: 0;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+}
+
+.upload-header h3 i {
+    margin-right: 10px;
+>>>>>>> origin/Master
 }
 
 /* Progress Steps */
 .progress-steps {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     justify-content: center;
     padding: var(--space-3) var(--space-2);
     background-color: var(--bg-light);
+=======
+    margin-bottom: 30px;
+>>>>>>> origin/Master
 }
 
 .step {
     display: flex;
     flex-direction: column;
     align-items: center;
+<<<<<<< HEAD
     position: relative;
     z-index: 1;
 }
@@ -351,10 +625,22 @@ button {
     border-radius: 50%;
     background-color: var(--bg-white);
     border: 2px solid var(--border-color);
+=======
+    flex: 1;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    color: #6c757d;
+>>>>>>> origin/Master
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 500;
+<<<<<<< HEAD
     margin-bottom: 0.5rem;
     transition: all var(--transition-normal);
 }
@@ -381,11 +667,26 @@ button {
 .step.active .step-label,
 .step.completed .step-label {
     color: var(--text-dark);
+=======
+    margin-bottom: 10px;
+    transition: all 0.3s;
+}
+
+.step.active .step-number {
+    background-color: var(--primary);
+    color: white;
+}
+
+.step.completed .step-number {
+    background-color: var(--success);
+    color: white;
+>>>>>>> origin/Master
 }
 
 .step-line {
     flex: 1;
     height: 2px;
+<<<<<<< HEAD
     background-color: var(--border-color);
     margin: 0 0.5rem;
     position: relative;
@@ -396,6 +697,24 @@ button {
 /* Step Content */
 .step-content {
     padding: var(--space-3);
+=======
+    background-color: #e9ecef;
+    margin: 0 10px;
+}
+
+.step-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.step.active .step-label {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.step.completed .step-label {
+    color: var(--success);
+>>>>>>> origin/Master
 }
 
 /* Form Styles */
@@ -405,17 +724,31 @@ button {
 }
 
 .form-group {
+<<<<<<< HEAD
     margin-bottom: var(--space-3);
+=======
+    margin-bottom: 20px;
+>>>>>>> origin/Master
 }
 
 .form-group label {
     display: block;
+<<<<<<< HEAD
     font-weight: 500;
     margin-bottom: 0.5rem;
 }
 
 .required {
     color: var(--danger-color);
+=======
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.required {
+    color: var(--danger);
+>>>>>>> origin/Master
 }
 
 input[type="text"],
@@ -423,18 +756,26 @@ input[type="url"],
 textarea,
 select {
     width: 100%;
+<<<<<<< HEAD
     padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     font-family: var(--font-family);
     font-size: 1rem;
     transition: border-color var(--transition-fast);
+=======
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+>>>>>>> origin/Master
 }
 
 input[type="text"]:focus,
 input[type="url"]:focus,
 textarea:focus,
 select:focus {
+<<<<<<< HEAD
     outline: none;
     border-color: var(--accent-color);
     box-shadow: 0 0 0 2px rgba(63, 131, 248, 0.1);
@@ -453,23 +794,51 @@ select:focus {
     padding: var(--space-3);
     text-align: center;
     transition: all var(--transition-fast);
+=======
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 166, 61, 0.25);
+}
+
+.form-help {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.file-upload-container {
+    border: 2px dashed #ced4da;
+    border-radius: 5px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s;
+>>>>>>> origin/Master
     cursor: pointer;
 }
 
 .file-upload-container.highlight {
+<<<<<<< HEAD
     border-color: var(--accent-color);
     background-color: rgba(63, 131, 248, 0.05);
+=======
+    border-color: var(--primary);
+    background-color: rgba(0,166,61,0.05);
+>>>>>>> origin/Master
 }
 
 .upload-message {
     display: flex;
     flex-direction: column;
     align-items: center;
+<<<<<<< HEAD
     gap: var(--space-1);
+=======
+>>>>>>> origin/Master
 }
 
 .upload-message i {
     font-size: 2.5rem;
+<<<<<<< HEAD
     color: var(--text-medium);
     margin-bottom: var(--space-1);
 }
@@ -488,28 +857,60 @@ select:focus {
 
 .file-select-btn:hover {
     background-color: var(--primary-dark);
+=======
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.file-select-btn {
+    background-color: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.file-select-btn:hover {
+    background-color: var(--primary-light);
+>>>>>>> origin/Master
 }
 
 .file-preview {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     gap: var(--space-2);
     padding: var(--space-1);
     background-color: var(--bg-light);
     border-radius: var(--radius-md);
+=======
+>>>>>>> origin/Master
 }
 
 .file-preview i {
     font-size: 2rem;
+<<<<<<< HEAD
     color: var(--primary-color);
 }
 
 .file-info {
     flex: 1;
+=======
+    margin-right: 15px;
+    color: var(--primary);
+}
+
+.file-info {
+    flex-grow: 1;
+>>>>>>> origin/Master
     text-align: left;
 }
 
 .file-name {
+<<<<<<< HEAD
     font-weight: 500;
     display: block;
     margin-bottom: 0.25rem;
@@ -579,16 +980,40 @@ select:focus {
 
 .btn-success:hover {
     background-color: #2ea15a;
+=======
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.file-size {
+    display: block;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.remove-file {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 1.2rem;
+>>>>>>> origin/Master
 }
 
 /* Students List */
 .search-container {
     position: relative;
+<<<<<<< HEAD
     margin-bottom: var(--space-2);
+=======
+    margin-bottom: 15px;
+>>>>>>> origin/Master
 }
 
 .search-icon {
     position: absolute;
+<<<<<<< HEAD
     left: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
@@ -604,20 +1029,44 @@ select:focus {
     border-radius: var(--radius-md);
     max-height: 400px;
     overflow-y: auto;
+=======
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+#student-search {
+    padding-left: 35px;
+}
+
+.students-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 15px;
+>>>>>>> origin/Master
 }
 
 .student-item {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     padding: var(--space-1) var(--space-2);
     border-bottom: 1px solid var(--border-color);
     transition: background-color var(--transition-fast);
+=======
+    padding: 15px;
+    border-bottom: 1px solid #ced4da;
+>>>>>>> origin/Master
 }
 
 .student-item:last-child {
     border-bottom: none;
 }
 
+<<<<<<< HEAD
 .student-item:hover {
     background-color: var(--bg-light);
 }
@@ -628,14 +1077,23 @@ select:focus {
     width: 20px;
     height: 20px;
     margin-right: var(--space-2);
+=======
+.student-checkbox {
+    position: relative;
+    display: block;
+    margin-right: 15px;
+>>>>>>> origin/Master
 }
 
 .student-checkbox input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
+<<<<<<< HEAD
     height: 0;
     width: 0;
+=======
+>>>>>>> origin/Master
 }
 
 .checkmark {
@@ -644,6 +1102,7 @@ select:focus {
     left: 0;
     height: 20px;
     width: 20px;
+<<<<<<< HEAD
     background-color: var(--bg-white);
     border: 2px solid var(--border-color);
     border-radius: 4px;
@@ -657,6 +1116,18 @@ select:focus {
 .student-checkbox input:checked ~ .checkmark {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+=======
+    background-color: #eee;
+    border-radius: 4px;
+}
+
+.student-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.student-checkbox input:checked ~ .checkmark {
+    background-color: var(--primary);
+>>>>>>> origin/Master
 }
 
 .checkmark:after {
@@ -670,8 +1141,13 @@ select:focus {
 }
 
 .student-checkbox .checkmark:after {
+<<<<<<< HEAD
     left: 6px;
     top: 2px;
+=======
+    left: 7px;
+    top: 3px;
+>>>>>>> origin/Master
     width: 5px;
     height: 10px;
     border: solid white;
@@ -683,16 +1159,25 @@ select:focus {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+<<<<<<< HEAD
     margin-right: var(--space-2);
+=======
+    margin-right: 15px;
+>>>>>>> origin/Master
     object-fit: cover;
 }
 
 .student-info {
+<<<<<<< HEAD
     flex: 1;
+=======
+    flex-grow: 1;
+>>>>>>> origin/Master
 }
 
 .student-name {
     font-weight: 500;
+<<<<<<< HEAD
 }
 
 .student-email {
@@ -705,10 +1190,25 @@ select:focus {
     font-size: 0.875rem;
     color: var(--text-medium);
     text-align: right;
+=======
+    margin-bottom: 5px;
+}
+
+.student-email {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.selected-count {
+    text-align: right;
+    color: #6c757d;
+    font-size: 0.9rem;
+>>>>>>> origin/Master
 }
 
 /* Review Section */
 .review-section {
+<<<<<<< HEAD
     background-color: var(--bg-light);
     border-radius: var(--radius-md);
     padding: var(--space-3);
@@ -732,10 +1232,31 @@ select:focus {
     margin-bottom: var(--space-1);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+=======
+    margin-bottom: 30px;
+}
+
+.review-section h4 {
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.review-group {
+    margin-bottom: 30px;
+}
+
+.review-group h5 {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+>>>>>>> origin/Master
 }
 
 .review-item {
     display: flex;
+<<<<<<< HEAD
     margin-bottom: 0.5rem;
 }
 
@@ -761,17 +1282,44 @@ select:focus {
 .review-value i {
     margin-right: 0.5rem;
     color: var(--text-medium);
+=======
+    margin-bottom: 10px;
+}
+
+.review-label {
+    width: 120px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.review-value {
+    flex-grow: 1;
+}
+
+.review-value a {
+    color: var(--primary);
+}
+
+.review-value a:hover {
+    text-decoration: underline;
+>>>>>>> origin/Master
 }
 
 .selected-students {
     display: flex;
+<<<<<<< HEAD
     flex-direction: column;
     gap: 0.5rem;
+=======
+    flex-wrap: wrap;
+    gap: 15px;
+>>>>>>> origin/Master
 }
 
 .selected-student {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     padding: 0.5rem;
     background-color: var(--bg-white);
     border-radius: var(--radius-md);
@@ -866,6 +1414,72 @@ select:focus {
     gap: 0.25rem;
     color: var(--primary-color);
     font-weight: 500;
+=======
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 200px;
+}
+
+/* Success Message */
+.upload-success {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.success-message {
+    margin-bottom: 30px;
+}
+
+.success-message i {
+    font-size: 5rem;
+    color: var(--success);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.success-message h4 {
+    color: var(--success);
+    margin-bottom: 10px;
+}
+
+.shared-content {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.shared-video, .shared-document {
+    display: flex;
+    align-items: flex-start;
+}
+
+.video-platform-icon, .document-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.video-info, .document-info {
+    flex-grow: 1;
+}
+
+.video-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--primary);
+    text-decoration: none;
+>>>>>>> origin/Master
 }
 
 .video-link:hover {
@@ -873,15 +1487,72 @@ select:focus {
 }
 
 .document-file {
+<<<<<<< HEAD
     font-size: 0.875rem;
     display: flex;
     align-items: center;
     gap: 0.25rem;
     color: var(--text-medium);
+=======
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+/* Button Styles */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-success {
+    background-color: var(--success);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+>>>>>>> origin/Master
 }
 
 /* Footer */
 .main-footer {
+<<<<<<< HEAD
     margin-top: var(--space-4);
     padding-top: var(--space-3);
     border-top: 1px solid var(--border-color);
@@ -901,11 +1572,33 @@ select:focus {
     font-size: 0.875rem;
     color: var(--text-medium);
     margin-bottom: 0.5rem;
+=======
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0,166,61,0.08); /* verde muy claro */
+    margin-top: 30px;
+}
+
+.institution-info h4 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.institution-info p {
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+a:hover, a:focus, .video-link:hover, .review-value a:hover {
+    text-decoration: none !important;
+>>>>>>> origin/Master
 }
 
 .social-links {
     display: flex;
     justify-content: center;
+<<<<<<< HEAD
     gap: var(--space-1);
 }
 
@@ -958,10 +1651,34 @@ select:focus {
     
     .sidebar.active {
         transform: translateX(0);
+=======
+    gap: 15px;
+}
+
+.social-links a {
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--primary-light);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+    
+    .sidebar.active {
+        margin-left: 0;
+>>>>>>> origin/Master
     }
     
     .main-content {
         margin-left: 0;
+<<<<<<< HEAD
     }
     
     .menu-toggle {
@@ -975,12 +1692,60 @@ select:focus {
     .form-actions {
         flex-direction: column-reverse;
         gap: var(--space-2);
+=======
+        width: 100%;
+    }
+    
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-right: 15px;
+    }
+    
+    .header-actions {
+        display: flex;
+        align-items: center;
+    }
+    
+    .progress-steps {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .step {
+        flex-direction: row;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .step-line {
+        display: none;
+    }
+    
+    .step-number {
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+    
+    .category-cards {
+        flex-direction: column;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+>>>>>>> origin/Master
     }
     
     .btn {
         width: 100%;
         justify-content: center;
     }
+<<<<<<< HEAD
     
     .progress-steps {
         padding: var(--space-2) var(--space-1);
@@ -1037,3 +1802,21 @@ select:focus {
         border: 1px solid #ccc;
     }
 }
+=======
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+    
+    .sidebar.active {
+        margin-left: 0;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+>>>>>>> origin/Master

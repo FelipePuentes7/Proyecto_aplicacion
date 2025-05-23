@@ -36,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Campos específicos por rol
         if ($rol === 'estudiante') {
             $codigo = filter_var($_POST['codigo_estudiante'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            // Validar que el código de estudiante comience con SOF (solo para estudiantes)
+            if (!preg_match('/^SOF/i', $codigo)) {
+                throw new Exception('El código de estudiante debe comenzar con "SOF"');
+            }
+            
             $opcion_grado = filter_var($_POST['opcion_grado'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $ciclo = filter_var($_POST['ciclo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);

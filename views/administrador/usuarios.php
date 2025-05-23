@@ -1,15 +1,21 @@
 <?php
 session_start();
 <<<<<<< HEAD
+<<<<<<< HEAD
 require_once __DIR__ . '/../../config/conexion.php'; // si config.php está un nivel arriba de la carpeta administrador
 =======
+=======
+>>>>>>> origin/Master
 // Activar la visualización de errores para depuración (útil durante el desarrollo)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once __DIR__ . '/../../config/conexion.php';
+<<<<<<< HEAD
 >>>>>>> origin/Felipe
+=======
+>>>>>>> origin/Master
 
 // Verificar si la sesión de usuario está establecida y tiene el ID
 if (!isset($_SESSION['usuario']['id'])) {
