@@ -53,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     header('Location: /views/administrador/inicio.php');
                     exit();
                 case 'tutor':
-<<<<<<< HEAD
                     switch ($usuario['opcion_grado']) {
                         case 'seminario':
                             header('Location: /views/seminario_tutor/inicio_tutor.php');
@@ -64,35 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     }
                     break;
                 case 'estudiante':
-<<<<<<< HEAD
-                        // Redirección específica para estudiantes según su opción de grado
-=======
-                    header('Location: /views/profesores/tutor.php');
-                    exit();
-                case 'estudiante':
-                    // Redirección específica para estudiantes según su opción de grado
->>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
-                    switch ($usuario['opcion_grado']) {
-                        case 'pasantia':
-                            header('Location: /views/estudiantes/Pasantias.php');
-                            exit();
-                        case 'proyecto':
-                            header('Location: /views/estudiantes/Proyectos.php');
-                            exit();
-                        case 'seminario':
-                            header('Location: /views/seminario_estudiante/inicio_estudiantes.php');
-                            exit();
-                        default:
-<<<<<<< HEAD
-                        // Default redirection for students if opcion_grado is not recognized
-                        header('Location: /views/estudiantes/Inicio_Estudiante.php'); // Keep the original default
-                        exit();
-                        }
-                    break; // Important to break the outer switch after handling the student case
-                        default:
-                        header('Location: /');
-                        exit();
-=======
                     // Redirección específica para estudiantes según su opción de grado
                     switch ($usuario['opcion_grado']) {
                         case 'pasantia':
@@ -105,8 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                             header('Location: /views/seminario_estudiante/inicio_estudiantes.php');
                             exit();
                         default:
-=======
->>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
                             header('Location: /views/estudiantes/Inicio_Estudiante.php');
                             exit();
                     }
@@ -114,10 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 default:
                     header('Location: /');
                     exit();
-<<<<<<< HEAD
->>>>>>> origin/Master
-=======
->>>>>>> 60287c4c61215831ef3fe72e1027661b15aa6bf1
             }
         } else {
             $error = "Credenciales incorrectas";
